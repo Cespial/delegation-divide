@@ -18,6 +18,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parents[1]
 REGISTRO = RAIZ / "scoring" / "salidas" / "llm-llamadas.jsonl"
 CLI_VERSION = None
+SISTEMA = "You are an expert rater of occupational tasks. Follow the user instructions exactly."  # fijo; su SHA va al registro
 
 
 def version_cli():
@@ -90,6 +91,8 @@ def llamar(prompt, modelo=None, timeout=600, reintentos=3, etiqueta=""):
     Si el CLI reporta límite de uso, duerme hasta el restablecimiento sin gastar reintentos (hasta 24 h)."""
     _contar()
     cmd = ["claude", "-p", "--output-format", "json"]
+    if os.environ.get("ADI_CLI_MINIMO", "1") == "1":   # sin herramientas ni prompt de sistema de Claude Code (≈10× menos cuota)
+        cmd += ["--tools", "", "--strict-mcp-config", "--no-session-persistence", "--system-prompt", SISTEMA]
     if modelo:
         cmd += ["--model", modelo]
     h = hashlib.sha256(prompt.encode()).hexdigest()[:16]

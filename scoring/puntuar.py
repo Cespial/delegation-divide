@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 
 RAIZ = Path(__file__).resolve().parents[1]
 RUBRICA = RAIZ / "scoring/prompts/rubrica_v1.md"
+LOTE = RAIZ / "scoring/prompts/lote_v1.md"   # envoltorio por lotes (la rúbrica va intacta delante)
 load_dotenv(Path.home() / ".config/adi/.env")
 PROVEEDOR = {"claude-": "anthropic", "gpt": "openai", "o3": "openai", "o4": "openai", "gemini": "google",
              "deepseek": "deepseek", "kimi": "kimi", "moonshot": "kimi"}
@@ -85,14 +86,62 @@ def main():
     ap.add_argument("--banco", default="onet", choices=["onet", "esco"]); ap.add_argument("--pausa", type=float, default=0.1)
     ap.add_argument("--repetir", type=int, default=1, help="pasadas por tarea (test-retest); la salida lleva sufijo _rN")
     ap.add_argument("--n", type=int, help="limita a las primeras n tareas pendientes (para el piloto)")
+    ap.add_argument("--lote", type=int, default=1, help="tareas por llamada (1 = individual)")
+    ap.add_argument("--particion", default="0/1", help="k/K: procesa solo task_id %% K == k (procesos en paralelo)")
+    ap.add_argument("--salida", help="subcarpeta de scoring/salidas (por defecto piloto o main)")
     a = ap.parse_args(); sha = candado(a.piloto)
     sys.path.insert(0, str(RAIZ / "scoring"))
     tareas = pd.read_parquet(RAIZ / "datos/tareas_unicas.parquet")
     if a.piloto: tareas = tareas.sample(a.piloto, random_state=20261020)
-    sal = RAIZ / "scoring/salidas" / ("piloto" if a.piloto else a.banco); sal.mkdir(parents=True, exist_ok=True)
+    k, K = map(int, a.particion.split("/")); tareas = tareas[tareas.task_id % K == k]
+    sal = RAIZ / "scoring/salidas" / (a.salida or ("piloto" if a.piloto else "main")); sal.mkdir(parents=True, exist_ok=True)
+    suf = f".p{k}" if K > 1 else ""
     for rep in range(1, a.repetir + 1):
-        out = sal / (f"{a.modelo}.jsonl" if rep == 1 else f"{a.modelo}_r{rep}.jsonl")
-        correr(a, out, tareas, sha)
+        out = sal / (f"{a.modelo}{suf}.jsonl" if rep == 1 else f"{a.modelo}{suf}_r{rep}.jsonl")
+        (correr_lote if a.lote > 1 else correr)(a, out, tareas, sha)
+
+
+def correr_lote(a, out, tareas, sha):
+    """Lotes de a.lote tareas en orden aleatorio (semilla fija). Las que falten o no validen vuelven a la cola (máx. 5 intentos
+    por tarea); tras el 5.º intento se prueban individualmente una vez y, si fallan, se registran con error."""
+    sha_lote = hashlib.sha256(LOTE.read_bytes()).hexdigest()[:16]
+    hechos = {json.loads(l)["task_id"] for l in open(out) if l.strip() and "error" not in l} if out.exists() else set()
+    base = prompt_de(RUBRICA.read_text()).format(occupation_title="(see TASKS list below)", task_text="(see TASKS list below)")
+    envol = LOTE.read_text(); prov, cli = cliente(a.modelo)
+    pend = tareas[~tareas.task_id.isin(hechos)].sample(frac=1, random_state=20261020 + len(hechos))
+    if a.n: pend = pend.head(a.n)
+    info = {int(t.task_id): t for t in pend.itertuples()}; cola = list(info); intentos = {i: 0 for i in cola}
+    print(f"{a.modelo} → {out.name}: {len(hechos)} hechas, {len(cola)} pendientes, lotes de {a.lote}")
+    escribir = lambda f, fila: (fila.update(modelo=a.modelo, rubrica_sha=sha[:16], lote_sha=sha_lote, lote=a.lote,
+                                           ts=datetime.now().isoformat(timespec="seconds")), f.write(json.dumps(fila) + "\n"), f.flush())
+    with open(out, "a") as f:
+        nlote = 0
+        while cola:
+            ids, cola = cola[:a.lote], cola[a.lote:]; nlote += 1
+            lista = "\n".join(f"[{i}] OCCUPATION: {info[i].titulo} | TASK: {info[i].texto}" for i in ids)
+            texto = base + "\n\n" + envol.format(n=len(ids), lista=lista)
+            buenos = {}
+            try:
+                crudo = llamar(prov, cli, a.modelo, texto)
+                arr = json.loads(crudo[crudo.index("["): crudo.rindex("]") + 1])
+                for o in arr:
+                    try:
+                        i = int(o["task_id"])
+                        if i in ids and i not in buenos: buenos[i] = validar(json.dumps(o))
+                    except Exception: pass
+            except Exception as e:
+                print(f"  lote {nlote} falló: {str(e)[:120]}")
+            for i in ids:
+                if i in buenos: escribir(f, {"task_id": i, **buenos[i]}); continue
+                intentos[i] += 1
+                if intentos[i] < 5: cola.append(i); continue
+                t = info[i]; fila = {"task_id": i, "error": "lote agotado"}
+                try:
+                    fila = {"task_id": i, **validar(llamar(prov, cli, a.modelo, prompt_de(RUBRICA.read_text()).format(occupation_title=t.titulo, task_text=t.texto))), "individual": True}
+                except Exception as e: fila["error"] += f"; individual: {str(e)[:120]}"
+                escribir(f, fila)
+            if nlote % 20 == 0: print(f"  lote {nlote}: quedan {len(cola)}")
+    print("listo", out)
 
 
 def correr(a, out, tareas, sha):
