@@ -13,4 +13,4 @@
 - Embargo hasta 2027-01-31; aprobación pendiente (correo a los admins o automática a las 48 h)
 - Enmiendas antes de registrar: modelos = Claude Sonnet 5.5 + Haiku 5.5 por `claude -p` en modo neutro (sin herramientas, prompt de
   sistema fijo de una línea), una tarea por llamada; lotes descartados (κ 0,60/0,56 < 0,80); sensibilidad al envoltorio de Claude Code
-  sobre las 1.500 de validación; D1 pesos GEIH. Pendiente: agregar a Santiago.
+  sobre las 1.500 de validación; D1 pesos GEIH. Santiago agregado el 21-oct 13:20 como administrador del proyecto hpk4c y del registro 9zntf (perfil osf.io/2tfjk, cuenta enlazada a ORCID); debe aprobar el embargo por el correo de OSF. El DOI aún no resuelve (404) mientras la aprobación esté pendiente.
