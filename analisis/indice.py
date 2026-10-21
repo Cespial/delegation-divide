@@ -181,20 +181,29 @@ def main():
     paises = pd.read_parquet(DATOS / "atlas/paises.parquet"); meta = pd.read_csv(DATOS / "atlas/paises_meta.csv")
     paises = paises[paises.empleo > 0]
     ciso = sorted(paises.iso3.unique())
+    # D1 (docs/DESVIACIONES.md): pesos 4 díg. por grupo de ingreso — alto: BLS OES 2024 (EE. UU.) por el mismo puente;
+    # medio-alto, medio-bajo y bajo: GEIH Colombia. Sensibilidades: GEIH para todos y pesos iguales.
+    oes = pd.read_csv(DATOS / "oes/oes_isco.csv", dtype={"isco08": str})
+    v_oes = oes.set_index(oes.isco08.str.zfill(4)).empleo.reindex(isco).fillna(0).values
+    claim("cobertura.oes.isco", int((v_oes > 0).sum()))
+    ingreso_de = meta.set_index("iso3").ingreso_id.to_dict()
+    v_ingreso = lambda c: v_oes if ingreso_de.get(c) == "HIC" else v_geih
     def matriz(v):
-        """M[c,u] = (e_cg / E_c) · v_u / V_g ; grupos sin ocupaciones con ADI quedan fuera; V_g = 0 → pesos iguales en el grupo."""
+        """M[c,u] = (e_cg / E_c) · v_u / V_g ; v es un vector o una función país → vector; V_g = 0 → pesos iguales en el grupo."""
         M = np.zeros((len(ciso), len(isco))); E = np.zeros(len(ciso))
         for ci, (c, d) in enumerate(paises.groupby("iso3")):
+            vc = v(c) if callable(v) else v
             for g, e in zip(d.grupo, d.empleo):
                 u = np.flatnonzero(np.char.startswith(isco.astype(str), g))
                 if not len(u): continue
-                vu = v[u] if v[u].sum() > 0 else np.ones(len(u))
+                vu = vc[u] if vc[u].sum() > 0 else np.ones(len(u))
                 M[ci, u] += e * vu / vu.sum(); E[ci] += e
         return M / E[:, None], E
-    M, E = matriz(v_geih); Mi, _ = matriz(np.ones(len(isco)))
-    C = M @ O[:, :3]; Ci = Mi @ O[:, :3]; CB = np.einsum("cu,buk->bck", M, OB)       # (B, países, 3)
+    M, E = matriz(v_ingreso); Mi, _ = matriz(np.ones(len(isco))); Mg, _ = matriz(v_geih)
+    C = M @ O[:, :3]; Ci = Mi @ O[:, :3]; Cg = Mg @ O[:, :3]; CB = np.einsum("cu,buk->bck", M, OB)       # (B, países, 3)
     pa = pd.DataFrame({"iso3": ciso, "adi_l2": C[:, 0], "adi_l3": C[:, 1], "adi_share": 100 * C[:, 2], "empleo_total": E,
                        "adi_l2_iguales": Ci[:, 0], "adi_l3_iguales": Ci[:, 1], "adi_share_iguales": 100 * Ci[:, 2],
+                       "adi_l2_geih": Cg[:, 0], "adi_l3_geih": Cg[:, 1],
                        "l2_lo": np.percentile(CB[:, :, 0], 2.5, 0), "l2_hi": np.percentile(CB[:, :, 0], 97.5, 0)})
     pa = pa.merge(meta[["iso3", "pais", "ingreso", "anio", "resolucion", "pib_pc_ppp", "region", "informalidad_pct"]], on="iso3", how="left")
     pa["ingreso"] = pa.ingreso.map(INGRESO)
@@ -209,6 +218,7 @@ def main():
         claim(f"titular.global.{c}", 100 * float(wE @ C[:, k]))
         claim(f"titular.global.{c}.lo", 100 * np.percentile(glob_b[:, k], 2.5)); claim(f"titular.global.{c}.hi", 100 * np.percentile(glob_b[:, k], 97.5))
     claim("titular.global.l2.iguales", 100 * float(wE @ Ci[:, 0])); claim("titular.global.l3.iguales", 100 * float(wE @ Ci[:, 1]))
+    claim("titular.global.l2.geih", 100 * float(wE @ Cg[:, 0])); claim("titular.global.l3.geih", 100 * float(wE @ Cg[:, 1]))
     claim("titular.global.l2.sin_ponderar", 100 * pa.adi_l2.mean())
     Ou = ocup(np.ones_like(w), X[:, :1]); claim("titular.global.l2.pesos_uniformes", 100 * float(wE @ (M @ Ou[:, 0])))   # tareas con igual peso
     Mx, Ex = matriz(v_geih * ~occ.imputado.values.astype(bool)); claim("titular.global.l2.sin_imputados", 100 * float((Ex / Ex.sum()) @ (Mx @ O[:, 0])))
@@ -245,6 +255,7 @@ def main():
         claim(f"h1.dif.{CORTO[k]}_alto", r2.params[k]); claim(f"h1.dif.{CORTO[k]}_alto.p", stats.t.cdf(r2.params[k] / r2.bse[k], r2.df_resid))
     claim("h1.dif.bajo_alto", r2.params["low"]); claim("h1.dummies.r2", r2.rsquared)
     r1i = sm.OLS(100 * h.adi_l2_iguales, sm.add_constant(h.lpib)).fit(); claim("h1.pendiente.iguales", r1i.params.lpib)
+    r1g = sm.OLS(100 * h.adi_l2_geih, sm.add_constant(h.lpib)).fit(); claim("h1.pendiente.geih", r1g.params.lpib)
     r1s = sm.OLS(h.adi_share, sm.add_constant(h.lpib)).fit(); claim("h1.pendiente.share", r1s.params.lpib)
     r1r = sm.OLS(h.y, sm.add_constant(h.lpib)).fit(cov_type="HC1"); claim("h1.se.hc1", r1r.bse.lpib)
     reg = {"h1a": {"coef": r1.params.to_dict(), "se": r1.bse.to_dict(), "p_una_cola": {"lpib": p1}, "n": int(r1.nobs), "r2": r1.rsquared},

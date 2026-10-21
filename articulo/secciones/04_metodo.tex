@@ -60,7 +60,7 @@ The country index is the employment-weighted mean over the occupational groups $
   \label{eq:adi_c}
 \end{equation}
 where $e_{cg}$ is ILOSTAT employment and $g$ runs over two-digit sub-major groups if the country reports them for a year from 2019 onward and over one-digit major groups otherwise.
-Within a reported group, unit-group indices are averaged with employment weights pooled from the countries in the same World Bank income group that report finer detail; equal weights within the group are the preregistered sensitivity check.
+Within a reported group, unit-group indices are averaged with employment weights from microdata of a country in the same World Bank income group, as preregistered. No country publishes employment at the four-digit level in ILOSTAT, so we borrow the within-group structure from two sources mapped through the same bridge as the tasks: United States Occupational Employment and Wage Statistics for May 2024 \citep{bls2025oes} for high-income countries, and Colombia's household survey (GEIH, 2024--2026) \citep{dane2026geih} for middle- and low-income countries. The second is a stated loan for lower-middle and low-income countries, where no four-digit microdata were available to us. Two sensitivity checks are reported: equal weights within each group (preregistered) and GEIH weights for every country.
 The world headline is the employment-weighted mean of $\mathrm{ADI}_c$ over the \cifra{diseno.atlas.paises} included countries, and the income-group figures are the same mean within each group.
 
 \subsection{Human validation}
