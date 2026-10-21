@@ -1,0 +1,25 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}\usepackage{graphicx,booktabs,hyperref,amsmath,siunitx}\usepackage[numbers]{natbib}
+% Cifras: solo por \cifra{id}, generadas desde salidas/claims.jsonl (patrón del paper del sismo)
+\InputIfFileExists{cifras.tex}{}{\newcommand{\cifra}[1]{\textbf{[#1]}}}
+\title{The Delegation Divide: An Open Index of AI-Agent Delegability for 436 Occupations and 190 Countries}
+\author{Cristian Espinal Maya\thanks{Universidad Nacional de Colombia, Facultad de Minas. ORCID 0009-0000-1009-8388. Corresponding author.}
+  \and Santiago Jim\'enez Londo\~no\thanks{Universidad EAFIT. ORCID 0009-0007-9862-7133.}}
+\date{\today}
+\begin{document}\maketitle
+\begin{abstract}\input{secciones/00_abstract}\end{abstract}
+\input{secciones/01_intro}
+\input{secciones/02_delegacion}
+\input{secciones/03_datos}
+\input{secciones/04_metodo}
+\input{secciones/05_indice}
+\input{secciones/06_atlas}
+\input{secciones/07_validacion}
+\input{secciones/08_limites}
+\input{secciones/09_conclusion}
+\bibliographystyle{plainnat}\bibliography{referencias}
+\appendix
+\input{secciones/A_rubrica}
+\input{secciones/B_crosswalk}
+\input{secciones/F_citar}
+\end{document}

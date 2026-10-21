@@ -5,3 +5,13 @@ datos/microdatos/*
 scoring/salidas/*.jsonl
 *.log
 .env*
+# Datos crudos: se reproducen con noche/noche.sh y quedan trazados en datos/MANIFIESTO.jsonl
+datos/onet/
+datos/esco/
+datos/ilostat/
+datos/comparadores/
+datos/worldbank/*.json
+datos/crosswalks/occupation_task_matrix.parquet
+datos/crosswalks/ibs/*.zip
+datos/*.parquet
+validacion/hoja_E*.xlsx
