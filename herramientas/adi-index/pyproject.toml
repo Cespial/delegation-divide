@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "adi-index"
 version = "2026.1.dev0"
-description = "Agent Delegability Index (ADI): lookup, search and citation of AI-agent delegability for 436 ISCO-08 occupations and 190 countries."
+description = "Agent Delegability Index (ADI): lookup, search and citation of AI-agent delegability for 433 ISCO-08 occupations and 146 countries."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"

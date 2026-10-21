@@ -1,0 +1,31 @@
+{
+ "type": "country",
+ "id": "PAN",
+ "iso3": "PAN",
+ "pais": "Panama",
+ "ingreso": "high",
+ "anio": 2025,
+ "resolucion": "isco08_2d",
+ "adi_l2": 0.3436,
+ "adi_l3": 0.0235,
+ "adi_share": 29.13,
+ "empleo_total": 1966101,
+ "l2_lo": 0.332,
+ "l2_hi": 0.3568,
+ "adi_l2_iguales": 0.3425,
+ "adi_l3_iguales": 0.0261,
+ "adi_share_iguales": 29.12,
+ "region": "Latin America & Caribbean",
+ "pib_pc_ppp": 37516.1796,
+ "rank_l2": 87,
+ "n_countries": 146,
+ "version": "v2026.1",
+ "license": "CC-BY-4.0",
+ "cite": {
+  "bibtex": "@article{espinal2026delegation,\n  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},\n  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n  journal = {arXiv preprint},\n  year    = {2026},\n  url     = {https://github.com/Cespial/delegation-divide},\n  note    = {Agent Delegability Index (ADI) v2026.1. Preregistration: doi:10.17605/OSF.IO/9ZNTF}\n}",
+  "bibtex_key": "espinal2026delegation",
+  "text": "Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries. arXiv preprint. https://github.com/Cespial/delegation-divide",
+  "preregistration_doi": "10.17605/OSF.IO/9ZNTF",
+  "preregistration_url": "https://doi.org/10.17605/OSF.IO/9ZNTF"
+ }
+}

@@ -45,8 +45,9 @@ If `adi-mcp` is not on PATH, use the interpreter: `"command": "/path/to/.venv/bi
 | `cite` | `format` `bibtex`/`apa`/`text` | `citation_text`, `bibtex_key` |
 
 Every response includes `citation` (short BibTeX, key `espinal2026delegation`) and
-`data_version`. While the bundled data is a placeholder (column `sintetico=true`), every
-response also includes `warning: "SYNTHETIC/PLACEHOLDER data ..."` — do not cite those numbers.
+`data_version`. The bundled data is the real ADI v2026.1 (433 ISCO-08 unit groups, 146
+countries); a `warning: "SYNTHETIC/PLACEHOLDER data ..."` appears only if the package is pointed
+at placeholder CSVs — do not cite those numbers.
 
 ## Smoke test
 

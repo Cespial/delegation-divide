@@ -22,6 +22,7 @@ __version__ = "2026.1.dev0"
 DATA_VERSION = "v2026.1"
 REPO_URL = "https://github.com/Cespial/delegation-divide"
 BIBTEX_KEY = "espinal2026delegation"
+PREREG_DOI = "10.17605/OSF.IO/9ZNTF"
 
 SYNTHETIC_WARNING = (
     "SYNTHETIC/PLACEHOLDER data: these values come from example rows marked "
@@ -32,7 +33,7 @@ SYNTHETIC_WARNING = (
 _LEVELS = {"l2": "adi_l2", "l3": "adi_l3", "share": "adi_share"}
 
 __all__ = [
-    "lookup", "search", "country", "top", "cite", "version",
+    "lookup", "search", "country", "top", "cite", "version", "PREREG_DOI",
     "SYNTHETIC_WARNING", "DATA_VERSION", "__version__", "data_dir", "is_synthetic",
 ]
 
@@ -209,8 +210,8 @@ def top(n: int = 10, level: str = "l2") -> list[dict]:
     return [_decorate(r) for r in rows[: max(int(n), 0)]]
 
 
-_TITLE = ("The Delegation Divide: An Open Index of AI-Agent Delegability for "
-          "436 Occupations and 190 Countries")
+_TITLE = ("The Delegation Divide: An Open Index of AI-Agent Delegability "
+          "across Occupations and Countries")
 
 
 def cite(format: str = "bibtex") -> str:
@@ -223,13 +224,14 @@ def cite(format: str = "bibtex") -> str:
             "  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n"
             "  journal = {arXiv preprint},\n"
             "  year    = {2026},\n"
-            f"  url     = {{{REPO_URL}}}\n"
+            f"  url     = {{{REPO_URL}}},\n"
+            f"  note    = {{Preregistration: doi:{PREREG_DOI}}}\n"
             "}"
         )
     if fmt == "apa":
         return (
             f"Espinal Maya, C., & Jiménez Londoño, S. (2026). {_TITLE}. "
-            f"arXiv preprint. {REPO_URL}"
+            f"arXiv preprint. {REPO_URL}. Preregistration: https://doi.org/{PREREG_DOI}"
         )
     if fmt == "text":
         return (

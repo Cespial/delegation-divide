@@ -1,10 +1,29 @@
 cff-version: 1.2.0
-message: "If you use ADI, please cite the paper below."
-title: "The Delegation Divide: An Open Index of AI-Agent Delegability for 436 Occupations and 190 Countries"
+message: "If you use ADI (data, rubric, tools or figures), please cite the paper below."
+type: dataset
+title: "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries"
+abstract: >-
+  Agent Delegability Index (ADI) v2026.1: 18,796 O*NET 30.2 task statements rated on a frozen,
+  preregistered four-level rubric (L0 no role, L1 augmentation, L2 partial delegation, L3 full
+  delegation) by Claude Sonnet 5.5 and Claude Haiku 5.5, aggregated to 433 ISCO-08 unit groups and
+  weighted by ILOSTAT employment for 146 countries. 35.2% of task time in world employment is at
+  least partly delegable to AI agents in 2026; 2.5% can be handed over in full.
 version: "2026.1"
 date-released: "2026-12-15"
 license: "CC-BY-4.0"
 repository-code: "https://github.com/Cespial/delegation-divide"
+url: "https://github.com/Cespial/delegation-divide"
+keywords:
+  - AI agents
+  - delegation
+  - automation
+  - labour economics
+  - ISCO-08
+  - O*NET
+  - ILOSTAT
+  - occupations
+  - delegation divide
+  - Model Context Protocol
 authors:
   - family-names: "Espinal Maya"
     given-names: "Cristian"
@@ -14,13 +33,34 @@ authors:
     given-names: "Santiago"
     orcid: "https://orcid.org/0009-0007-9862-7133"
     affiliation: "Universidad EAFIT"
+identifiers:
+  - type: doi
+    value: "10.17605/OSF.IO/9ZNTF"
+    description: "Preregistration (OSF Registries)"
+references:
+  - type: generic
+    title: "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries (preregistration)"
+    authors:
+      - family-names: "Espinal Maya"
+        given-names: "Cristian"
+      - family-names: "Jiménez Londoño"
+        given-names: "Santiago"
+    doi: "10.17605/OSF.IO/9ZNTF"
+    url: "https://doi.org/10.17605/OSF.IO/9ZNTF"
+    publisher:
+      name: "OSF Registries"
+    year: 2026
 preferred-citation:
   type: article
-  title: "The Delegation Divide: An Open Index of AI-Agent Delegability for 436 Occupations and 190 Countries"
+  title: "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries"
   journal: "arXiv preprint"
   year: 2026
+  url: "https://github.com/Cespial/delegation-divide"
+  notes: "Preregistration: doi:10.17605/OSF.IO/9ZNTF"
   authors:
     - family-names: "Espinal Maya"
       given-names: "Cristian"
+      orcid: "https://orcid.org/0009-0000-1009-8388"
     - family-names: "Jiménez Londoño"
       given-names: "Santiago"
+      orcid: "https://orcid.org/0009-0007-9862-7133"

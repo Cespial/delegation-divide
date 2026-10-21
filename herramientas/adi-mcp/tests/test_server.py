@@ -49,3 +49,12 @@ def test_country_and_top_and_cite():
     z = _payload(_run(server.mcp.call_tool("cite", {"format": "apa"})))
     assert z["citation_text"].startswith("Espinal Maya, C.")
     assert z["bibtex_key"] == "espinal2026delegation"
+
+
+def test_no_synthetic_warning_with_real_data():
+    if adi.is_synthetic():
+        return
+    p = _payload(_run(server.mcp.call_tool("country_profile", {"iso3": "COL"})))
+    assert "warning" not in p and "warning" not in p["profile"]
+    z = _payload(_run(server.mcp.call_tool("cite", {})))
+    assert z["preregistration_doi"] == "10.17605/OSF.IO/9ZNTF"

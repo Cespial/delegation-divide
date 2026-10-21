@@ -1,0 +1,9 @@
+{"id": "robustez.esco.n.skills", "valor": 8229, "t": "2026-10-21T12:30:25", "sintetico": false}
+{"id": "robustez.esco.n.isco", "valor": 424, "t": "2026-10-21T12:30:25", "sintetico": false}
+{"id": "robustez.esco.cobertura.pct", "valor": 8.615870701178759, "t": "2026-10-21T12:30:25", "sintetico": false}
+{"id": "robustez.esco.h1.pendiente", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
+{"id": "robustez.esco.h1.p", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
+{"id": "robustez.esco.h1.n", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
+{"id": "robustez.esco.titular.l2", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
+{"id": "robustez.esco.r.isco", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
+{"id": "robustez.esco.h1.pendiente.gg6", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}

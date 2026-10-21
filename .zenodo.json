@@ -1,0 +1,50 @@
+{
+  "title": "ADI v2026.1 — The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries (data, code and MCP server)",
+  "upload_type": "dataset",
+  "version": "v2026.1",
+  "language": "eng",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "description": "<p><strong>Agent Delegability Index (ADI) v2026.1.</strong> 35.2% of task time in world employment is at least partly delegable to AI agents (L2 or L3) in 2026; only 2.5% can be handed over in full (L3). Delegable employment rises with income, from 22.5% in low-income to 48.7% in high-income countries (the <em>delegation divide</em>: 7.23 percentage points per log point of GDP per capita).</p><p>18,796 O*NET 30.2 task statements rated on a frozen, preregistered four-level rubric (L0 no meaningful role, L1 augmentation, L2 partial delegation, L3 full delegation) plus four barriers (physical, accountability, trust, access) by Claude Sonnet 5.5 and Claude Haiku 5.5; aggregated to 433 ISCO-08 unit groups and weighted by ILOSTAT employment for 146 countries.</p><p>Contents: <code>release/v2026.1/</code> (adi_isco, adi_pais, adi_tarea as CSV and Parquet; claims.jsonl with every number in the paper; raw model ratings; DATA_DICTIONARY.md; SHA256SUMS), static JSON API (<code>api/isco/&lt;code&gt;.json</code>, <code>api/country/&lt;ISO3&gt;.json</code>), Python package <code>adi-index</code> and MCP server <code>adi-mcp</code>.</p><p>Data, figures and rubric: CC BY 4.0. Code: MIT. O*NET task statements reproduced under CC BY 4.0 (USDOL/ETA). Preregistration: <a href=\"https://doi.org/10.17605/OSF.IO/9ZNTF\">doi:10.17605/OSF.IO/9ZNTF</a>.</p>",
+  "creators": [
+    {
+      "name": "Espinal Maya, Cristian",
+      "affiliation": "Universidad Nacional de Colombia, Facultad de Minas",
+      "orcid": "0009-0000-1009-8388"
+    },
+    {
+      "name": "Jiménez Londoño, Santiago",
+      "affiliation": "Universidad EAFIT",
+      "orcid": "0009-0007-9862-7133"
+    }
+  ],
+  "keywords": [
+    "AI agents",
+    "delegation",
+    "automation",
+    "labour economics",
+    "ISCO-08",
+    "O*NET",
+    "ILOSTAT",
+    "occupations",
+    "country atlas",
+    "delegation divide",
+    "large language models",
+    "Model Context Protocol"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.17605/OSF.IO/9ZNTF",
+      "relation": "isDocumentedBy",
+      "resource_type": "other",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://github.com/Cespial/delegation-divide",
+      "relation": "isSupplementTo",
+      "resource_type": "software",
+      "scheme": "url"
+    }
+  ],
+  "notes": "Paper: arXiv identifier pending (add {\"identifier\": \"arXiv:XXXX.XXXXX\", \"relation\": \"isSupplementTo\", \"resource_type\": \"publication-preprint\", \"scheme\": \"arxiv\"} to related_identifiers once assigned). Preregistered at OSF: 10.17605/OSF.IO/9ZNTF."
+}

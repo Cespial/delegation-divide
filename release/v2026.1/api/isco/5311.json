@@ -1,0 +1,32 @@
+{
+ "type": "isco08_unit_group",
+ "id": "5311",
+ "isco08": "5311",
+ "titulo": "Child care workers",
+ "adi_l2": 0.2304,
+ "adi_l3": 0.0064,
+ "adi_share": 24.21,
+ "n_tareas": 119,
+ "barrera_fisica": 0.8262,
+ "barrera_responsabilidad": 0.289,
+ "barrera_confianza": 0.7717,
+ "barrera_acceso": 0.3442,
+ "ic_lo": 19.87,
+ "ic_hi": 29.34,
+ "imputado": false,
+ "l2_lo": 0.1491,
+ "l2_hi": 0.331,
+ "l3_lo": 0.0,
+ "l3_hi": 0.0169,
+ "rank_l2": 279,
+ "n_occupations": 433,
+ "version": "v2026.1",
+ "license": "CC-BY-4.0",
+ "cite": {
+  "bibtex": "@article{espinal2026delegation,\n  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},\n  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n  journal = {arXiv preprint},\n  year    = {2026},\n  url     = {https://github.com/Cespial/delegation-divide},\n  note    = {Agent Delegability Index (ADI) v2026.1. Preregistration: doi:10.17605/OSF.IO/9ZNTF}\n}",
+  "bibtex_key": "espinal2026delegation",
+  "text": "Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries. arXiv preprint. https://github.com/Cespial/delegation-divide",
+  "preregistration_doi": "10.17605/OSF.IO/9ZNTF",
+  "preregistration_url": "https://doi.org/10.17605/OSF.IO/9ZNTF"
+ }
+}

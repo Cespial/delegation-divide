@@ -1,7 +1,7 @@
 # adi-index
 
 Python package and CLI for the **Agent Delegability Index (ADI)** — AI-agent delegability
-for 436 ISCO-08 occupations and 190 countries (*The Delegation Divide*, Espinal Maya &
+for 433 ISCO-08 occupations and 146 countries (*The Delegation Divide*, Espinal Maya &
 Jiménez Londoño, 2026). Data is bundled; no network access.
 
 ```bash
@@ -22,9 +22,10 @@ adi.top(5, level="l2")
 print(adi.cite("bibtex"))
 ```
 
-Every record carries `citation` (BibTeX, key `espinal2026delegation`) and `version`. While the
-bundled CSVs are placeholders (`sintetico=true`) every response also carries a `warning`
-field: **do not cite placeholder values**.
+Every record carries `citation` (BibTeX, key `espinal2026delegation`, with the preregistration
+DOI 10.17605/OSF.IO/9ZNTF) and `version`. The bundled data is the real ADI v2026.1
+(`sintetico=false`). Only if `ADI_DATA_DIR` points at CSVs with `sintetico=true` rows do responses
+carry a `warning` field: **do not cite placeholder values**.
 
 Columns: `adi_l2` share of tasks at level ≥ L2 (partial delegation), `adi_l3` share at L3 (full
 delegation), `adi_share` percent of working time delegable, `barrera_*` share of tasks with each

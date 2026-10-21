@@ -1,0 +1,32 @@
+{
+ "type": "isco08_unit_group",
+ "id": "2320",
+ "isco08": "2320",
+ "titulo": "Vocational education teachers",
+ "adi_l2": 0.5349,
+ "adi_l3": 0.0,
+ "adi_share": 42.43,
+ "n_tareas": 84,
+ "barrera_fisica": 0.5822,
+ "barrera_responsabilidad": 0.4079,
+ "barrera_confianza": 0.6592,
+ "barrera_acceso": 0.6053,
+ "ic_lo": 38.23,
+ "ic_hi": 46.64,
+ "imputado": false,
+ "l2_lo": 0.417,
+ "l2_hi": 0.6438,
+ "l3_lo": 0.0,
+ "l3_hi": 0.0,
+ "rank_l2": 174,
+ "n_occupations": 433,
+ "version": "v2026.1",
+ "license": "CC-BY-4.0",
+ "cite": {
+  "bibtex": "@article{espinal2026delegation,\n  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},\n  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n  journal = {arXiv preprint},\n  year    = {2026},\n  url     = {https://github.com/Cespial/delegation-divide},\n  note    = {Agent Delegability Index (ADI) v2026.1. Preregistration: doi:10.17605/OSF.IO/9ZNTF}\n}",
+  "bibtex_key": "espinal2026delegation",
+  "text": "Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries. arXiv preprint. https://github.com/Cespial/delegation-divide",
+  "preregistration_doi": "10.17605/OSF.IO/9ZNTF",
+  "preregistration_url": "https://doi.org/10.17605/OSF.IO/9ZNTF"
+ }
+}

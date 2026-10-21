@@ -113,3 +113,13 @@ def test_cli_entry_point_subprocess():
     r = subprocess.run([sys.executable, "-m", "adi.cli", "version"],
                        capture_output=True, text=True, env={**os.environ, "PYTHONIOENCODING": "utf-8"})
     assert r.returncode == 0 and '"data_version": "v2026.1"' in r.stdout
+
+
+def test_bundled_data_is_real():
+    """El paquete distribuido lleva el índice real (v2026.1), no filas de ejemplo."""
+    if os.environ.get("ADI_DATA_DIR"):
+        pytest.skip("ADI_DATA_DIR apunta a otros CSV")
+    assert adi.is_synthetic() is False
+    assert "warning" not in adi.version()
+    assert len(adi._isco_rows()) == 433 and len(adi._pais_rows()) == 146
+    assert "doi:10.17605/OSF.IO/9ZNTF" in adi.cite("bibtex")

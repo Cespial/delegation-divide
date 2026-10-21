@@ -1,151 +1,147 @@
 iso3,pais,ingreso,anio,resolucion,adi_l2,adi_l3,adi_share,empleo_total,sintetico
-AFG,Afghanistan,low,2021,isco08_2d,0.4621,0.1806,44.74,7211272,true
-AGO,Angola,lower-middle,2025,isco08_2d,0.4783,0.1854,46.22,13616490,true
-ALB,Albania,upper-middle,2024,isco08_2d,0.5167,0.2222,48.8,1166123,true
-ARE,United Arab Emirates,high,2025,isco08_2d,0.5093,0.2077,48.65,10348990,true
-ARG,Argentina,upper-middle,2025,isco08_2d,0.5327,0.2181,50.82,12578113,true
-AUS,Australia,high,2025,isco08_2d,0.5882,0.2484,53.76,14572906,true
-AUT,Austria,high,2025,isco08_2d,0.5693,0.2362,52.62,4488390,true
-BDI,Burundi,low,2020,isco08_2d,0.4126,0.143,41.12,4951053,true
-BEL,Belgium,high,2024,isco08_2d,0.5737,0.2435,52.96,5043818,true
-BEN,Benin,lower-middle,2022,isco08_2d,0.5095,0.2205,48.4,5435231,true
-BFA,Burkina Faso,low,2025,isco08_2d,0.4718,0.1802,45.71,7576379,true
-BGD,Bangladesh,lower-middle,2024,isco08_2d,0.5131,0.2302,48.43,67828949,true
-BGR,Bulgaria,high,2024,isco08_2d,0.5416,0.2166,50.72,2909556,true
-BHS,"Bahamas, The",high,2024,isco08_2d,0.5416,0.2156,50.8,175187,true
-BIH,Bosnia and Herzegovina,upper-middle,2025,isco08_2d,0.526,0.2085,49.67,1331200,true
-BLR,Belarus,upper-middle,2025,isco08_2d,0.56,0.2317,51.84,4780723,true
-BLZ,Belize,upper-middle,2025,isco08_1d,0.5166,0.2111,49.4,175383,true
-BOL,Bolivia,lower-middle,2025,isco08_2d,0.5159,0.2138,48.95,5233936,true
-BRA,Brazil,upper-middle,2025,isco08_2d,0.5237,0.2139,49.88,101317101,true
-BRB,Barbados,high,2024,isco08_1d,0.5559,0.2259,51.63,124145,true
-BRN,Brunei Darussalam,high,2025,isco08_2d,0.5594,0.2267,52.1,212714,true
-BWA,Botswana,upper-middle,2024,isco08_2d,0.4997,0.1977,47.93,857493,true
-CHE,Switzerland,high,2025,isco08_2d,0.5929,0.2519,54.15,4774583,true
-CHL,Chile,high,2022,isco08_2d,0.5275,0.2096,49.89,9093245,true
-CIV,Cote d'Ivoire,lower-middle,2022,isco08_1d,0.5262,0.2427,49.47,11410381,true
-CMR,Cameroon,lower-middle,2021,isco08_1d,0.557,0.2559,51.24,9174745,true
-COD,"Congo, Dem. Rep.",low,2020,isco08_2d,0.4997,0.2239,47.09,30581573,true
-COL,Colombia,upper-middle,2025,isco08_2d,0.5169,0.2122,49.31,23807444,true
-COM,Comoros,lower-middle,2021,isco08_1d,0.5261,0.2427,49.48,171139,true
-CPV,Cabo Verde,upper-middle,2019,isco08_1d,0.5013,0.2032,48.29,205932,true
-CRI,Costa Rica,high,2025,isco08_2d,0.5172,0.2008,49.29,2186549,true
-CUW,Curacao,high,2020,isco08_1d,0.5752,0.2373,53.0,51110,true
-CYP,Cyprus,high,2024,isco08_2d,0.5565,0.2332,51.99,479958,true
-CZE,Czechia,high,2024,isco08_2d,0.5504,0.2244,51.22,5187690,true
-DEU,Germany,high,2024,isco08_2d,0.5752,0.2407,53.14,42265926,true
-DNK,Denmark,high,2024,isco08_2d,0.5805,0.2426,53.4,2982938,true
-DOM,Dominican Republic,upper-middle,2025,isco08_2d,0.5126,0.2056,49.05,5098256,true
-ECU,Ecuador,upper-middle,2025,isco08_2d,0.4922,0.2054,47.38,8295912,true
-EGY,"Egypt, Arab Rep.",lower-middle,2024,isco08_2d,0.534,0.2255,50.2,29927562,true
-ESP,Spain,high,2024,isco08_2d,0.5468,0.2209,51.14,21558113,true
-EST,Estonia,high,2024,isco08_2d,0.5621,0.2359,52.05,701475,true
-ETH,Ethiopia,low,2021,isco08_2d,0.4637,0.1805,44.83,36491526,true
-FIN,Finland,high,2024,isco08_2d,0.5703,0.2391,52.56,2576824,true
-FJI,Fiji,upper-middle,2024,isco08_2d,0.5226,0.2263,49.37,319042,true
-FRA,France,high,2024,isco08_2d,0.576,0.2433,53.03,28545487,true
-GAB,Gabon,upper-middle,2024,isco08_2d,0.5146,0.2101,49.23,480517,true
-GBR,United Kingdom,high,2025,isco08_2d,0.6087,0.2607,54.91,34055476,true
-GEO,Georgia,upper-middle,2025,isco08_2d,0.521,0.2148,49.02,1734406,true
-GHA,Ghana,lower-middle,2025,isco08_2d,0.5263,0.2322,49.47,13927320,true
-GIN,Guinea,lower-middle,2019,isco08_2d,0.4882,0.1888,46.99,3156814,true
-GMB,"Gambia, The",low,2025,isco08_2d,0.5074,0.2065,48.58,680936,true
-GNB,Guinea-Bissau,low,2022,isco08_2d,0.4404,0.1648,43.61,704161,true
-GNQ,Equatorial Guinea,upper-middle,2023,isco08_2d,0.5052,0.2131,48.17,536222,true
-GRC,Greece,high,2025,isco08_2d,0.5571,0.2266,51.86,4273309,true
-GRD,Grenada,upper-middle,2023,isco08_1d,0.4657,0.1862,46.02,50180,true
-GTM,Guatemala,upper-middle,2025,isco08_2d,0.4799,0.1904,46.89,7862391,true
-GUY,Guyana,high,2024,isco08_2d,0.5036,0.1941,48.21,366676,true
-HKG,"Hong Kong SAR, China",high,2025,isco08_1d,0.5956,0.2551,54.27,2748419,true
-HND,Honduras,lower-middle,2025,isco08_2d,0.4863,0.1954,47.27,4041178,true
-HRV,Croatia,high,2024,isco08_2d,0.5587,0.23,51.94,1659976,true
-HUN,Hungary,high,2024,isco08_2d,0.5556,0.2271,51.66,4691763,true
-IDN,Indonesia,upper-middle,2023,isco08_2d,0.5091,0.2143,48.61,137411936,true
-IND,India,lower-middle,2025,isco08_2d,0.4956,0.2171,47.37,476557088,true
-IRL,Ireland,high,2024,isco08_2d,0.5936,0.2514,54.07,2726573,true
-IRN,"Iran, Islamic Rep.",upper-middle,2024,isco08_2d,0.517,0.2122,49.03,24075554,true
-IRQ,Iraq,upper-middle,2021,isco08_2d,0.5285,0.2118,50.06,8019546,true
-ISL,Iceland,high,2023,isco08_2d,0.5893,0.2473,53.69,219529,true
-ISR,Israel,high,2024,isco08_2d,0.5999,0.2575,54.62,4024289,true
-ITA,Italy,high,2024,isco08_2d,0.5506,0.2237,51.54,23697750,true
-JAM,Jamaica,upper-middle,2024,isco08_2d,0.5381,0.2282,50.54,1410783,true
-JOR,Jordan,upper-middle,2023,isco08_2d,0.5281,0.214,50.37,2753709,true
-JPN,Japan,high,2025,isco08_1d,0.5655,0.2326,52.5,70550000,true
-KEN,Kenya,lower-middle,2021,isco08_1d,0.5043,0.2281,47.93,19354590,true
-KGZ,Kyrgyz Republic,lower-middle,2023,isco08_2d,0.5277,0.2164,49.61,2591815,true
-KHM,Cambodia,lower-middle,2025,isco08_2d,0.4936,0.2105,47.47,10008069,true
-KIR,Kiribati,lower-middle,2023,isco08_2d,0.5046,0.1921,48.2,41118,true
-KOR,"Korea, Rep.",high,2025,isco08_1d,0.5613,0.2315,51.91,28768897,true
-LAO,Lao PDR,lower-middle,2022,isco08_1d,0.5258,0.2578,49.0,3444083,true
-LBN,Lebanon,lower-middle,2019,isco08_2d,0.5197,0.2091,49.55,1513651,true
-LCA,St. Lucia,upper-middle,2025,isco08_1d,0.5419,0.2255,51.02,98110,true
-LKA,Sri Lanka,upper-middle,2024,isco08_2d,0.5053,0.2103,48.31,7783617,true
-LSO,Lesotho,lower-middle,2024,isco08_2d,0.4265,0.1587,43.1,799963,true
-LTU,Lithuania,high,2024,isco08_2d,0.5672,0.2379,52.34,1458280,true
-LUX,Luxembourg,high,2024,isco08_2d,0.621,0.2776,56.14,315190,true
-LVA,Latvia,high,2024,isco08_2d,0.5669,0.235,52.25,872321,true
-MDA,Moldova,upper-middle,2025,isco08_1d,0.5343,0.2514,49.69,1408823,true
-MDG,Madagascar,low,2022,isco08_2d,0.4354,0.1757,43.19,11830384,true
-MDV,Maldives,upper-middle,2019,isco08_2d,0.5432,0.2189,50.69,189155,true
-MEX,Mexico,upper-middle,2025,isco08_2d,0.5159,0.2087,49.13,58953988,true
-MHL,Marshall Islands,upper-middle,2021,isco08_2d,0.5447,0.2266,50.98,12354,true
-MKD,North Macedonia,upper-middle,2025,isco08_2d,0.5479,0.2306,51.28,693183,true
-MLI,Mali,low,2022,isco08_2d,0.4921,0.216,46.82,6736187,true
-MLT,Malta,high,2025,isco08_1d,0.5849,0.2447,53.55,327620,true
-MMR,Myanmar,lower-middle,2020,isco08_2d,0.5216,0.2284,49.07,22262054,true
-MNE,Montenegro,upper-middle,2024,isco08_2d,0.572,0.2367,52.89,280596,true
-MNG,Mongolia,upper-middle,2025,isco08_2d,0.5517,0.2405,51.03,1359148,true
-MOZ,Mozambique,low,2022,isco08_2d,0.4282,0.1507,42.37,12176036,true
-MUS,Mauritius,upper-middle,2024,isco08_2d,0.5425,0.2258,51.16,546614,true
-MWI,Malawi,low,2024,isco08_2d,0.5082,0.2099,48.26,4979629,true
-NAM,Namibia,lower-middle,2023,isco08_1d,0.5278,0.225,49.79,558092,true
-NER,Niger,low,2022,isco08_1d,0.5275,0.2632,49.08,9247118,true
-NGA,Nigeria,lower-middle,2024,isco08_2d,0.5096,0.2124,48.36,71406934,true
-NLD,Netherlands,high,2024,isco08_2d,0.599,0.258,54.61,9744515,true
-NOR,Norway,high,2024,isco08_2d,0.5874,0.249,53.76,2849590,true
-NPL,Nepal,lower-middle,2022,isco08_2d,0.4981,0.1973,48.01,6655809,true
-NRU,Naoero,high,2024,isco08_2d,0.5413,0.2146,51.0,2433,true
-PAK,Pakistan,lower-middle,2025,isco08_2d,0.5029,0.2161,47.92,77608612,true
-PAN,Panama,high,2025,isco08_2d,0.5074,0.1959,48.39,1966101,true
-PER,Peru,upper-middle,2025,isco08_2d,0.5075,0.2115,48.47,17717437,true
-PHL,Philippines,upper-middle,2024,isco08_2d,0.5086,0.2111,48.64,47432088,true
-PLW,Palau,high,2020,isco08_2d,0.5454,0.2216,51.18,9460,true
-PNG,Papua New Guinea,lower-middle,2022,isco08_2d,0.5181,0.226,49.11,3989337,true
-POL,Poland,high,2025,isco08_2d,0.566,0.2366,52.28,17005906,true
-PRI,Puerto Rico (US),high,2020,isco08_1d,0.5816,0.2424,53.43,1028644,true
-PRT,Portugal,high,2025,isco08_2d,0.5589,0.23,52.0,5229196,true
-PRY,Paraguay,upper-middle,2025,isco08_1d,0.5118,0.2102,48.91,3174995,true
-PSE,West Bank and Gaza,lower-middle,2025,isco08_2d,0.5184,0.2064,49.18,686705,true
-QAT,Qatar,high,2024,isco08_1d,0.5111,0.1969,48.48,2240506,true
-ROU,Romania,high,2024,isco08_2d,0.5211,0.2032,49.18,7807822,true
-RUS,Russian Federation,high,2025,isco08_2d,0.5567,0.2296,51.6,73457373,true
-RWA,Rwanda,low,2025,isco08_2d,0.4347,0.1685,43.41,6416466,true
-SDN,Sudan,low,2022,isco08_2d,0.4868,0.1963,46.85,7961215,true
-SEN,Senegal,lower-middle,2025,isco08_2d,0.4685,0.1774,46.1,1686534,true
-SGP,Singapore,high,2025,isco08_2d,0.6229,0.2776,56.16,2266655,true
-SLV,El Salvador,upper-middle,2025,isco08_2d,0.4979,0.2018,48.14,2975467,true
-SOM,"Somalia, Fed. Rep.",low,2019,isco08_2d,0.5894,0.2431,53.04,1010469,true
-SRB,Serbia,upper-middle,2025,isco08_2d,0.5424,0.2284,50.75,3045928,true
-SUR,Suriname,upper-middle,2022,isco08_1d,0.722,0.3265,62.14,253549,true
-SVK,Slovak Republic,high,2023,isco08_2d,0.5543,0.2246,51.67,2593491,true
-SVN,Slovenia,high,2024,isco08_2d,0.5527,0.225,51.44,984804,true
-SWE,Sweden,high,2024,isco08_2d,0.5977,0.2573,54.4,5275498,true
-SWZ,Eswatini,lower-middle,2025,isco08_2d,0.5206,0.2192,49.53,306372,true
-SYC,Seychelles,high,2025,isco08_2d,0.5522,0.2252,51.31,49162,true
-TCD,Chad,low,2022,isco08_1d,0.5257,0.2581,49.01,3984611,true
-TGO,Togo,lower-middle,2022,isco08_2d,0.5089,0.2088,48.32,3348445,true
-THA,Thailand,upper-middle,2025,isco08_2d,0.5242,0.2287,49.51,39463731,true
-TLS,Timor-Leste,lower-middle,2022,isco08_2d,0.4869,0.2065,46.62,354302,true
-TON,Tonga,upper-middle,2025,isco08_2d,0.5058,0.2043,48.24,34866,true
-TUN,Tunisia,lower-middle,2021,isco08_2d,0.4991,0.201,48.07,5440683,true
-TUR,Turkiye,upper-middle,2025,isco08_2d,0.5326,0.224,50.21,32566337,true
-TUV,Tuvalu,upper-middle,2022,isco08_2d,0.588,0.2492,53.56,2946,true
-TZA,Tanzania,lower-middle,2025,isco08_2d,0.4845,0.2347,46.67,32545979,true
-UGA,Uganda,low,2021,isco08_2d,0.4587,0.1791,44.57,17917807,true
-URY,Uruguay,high,2025,isco08_2d,0.5171,0.2031,49.38,1754035,true
-USA,United States,high,2025,isco08_2d,0.5893,0.2472,53.81,163492865,true
-VNM,Viet Nam,upper-middle,2024,isco08_2d,0.4833,0.1983,46.94,53436105,true
-VUT,Vanuatu,lower-middle,2025,isco08_2d,0.4734,0.1891,45.76,144929,true
-WSM,Samoa,upper-middle,2022,isco08_2d,0.5187,0.2101,48.86,52466,true
-ZMB,Zambia,lower-middle,2024,isco08_2d,0.4567,0.1745,44.57,7126220,true
-ZWE,Zimbabwe,lower-middle,2025,isco08_2d,0.455,0.172,44.49,5765763,true
+AFG,Afghanistan,low,2021,isco08_2d,0.2289,0.0107,22.07,7211272,false
+AGO,Angola,lower-middle,2025,isco08_2d,0.2737,0.0167,24.96,13616490,false
+ALB,Albania,upper-middle,2024,isco08_2d,0.3151,0.0155,26.88,1166123,false
+ARE,United Arab Emirates,high,2025,isco08_2d,0.4295,0.029,33.2,10348990,false
+ARG,Argentina,upper-middle,2025,isco08_2d,0.4345,0.0433,34.45,12578113,false
+AUS,Australia,high,2025,isco08_2d,0.5174,0.0356,38.85,14572906,false
+AUT,Austria,high,2025,isco08_2d,0.4977,0.0395,38.13,4488390,false
+BDI,Burundi,low,2020,isco08_2d,0.147,0.0035,17.31,4951053,false
+BEL,Belgium,high,2024,isco08_2d,0.5067,0.0373,38.45,5043818,false
+BEN,Benin,lower-middle,2022,isco08_2d,0.2812,0.0193,25.6,5435231,false
+BFA,Burkina Faso,low,2025,isco08_2d,0.2554,0.0152,23.66,7576379,false
+BGD,Bangladesh,lower-middle,2024,isco08_2d,0.2776,0.0176,25.21,67828949,false
+BGR,Bulgaria,high,2024,isco08_2d,0.4258,0.0306,33.89,2909556,false
+BHS,"Bahamas, The",high,2024,isco08_2d,0.4216,0.0347,33.5,175187,false
+BIH,Bosnia and Herzegovina,upper-middle,2025,isco08_2d,0.3893,0.0279,31.73,1331200,false
+BLR,Belarus,upper-middle,2025,isco08_2d,0.4496,0.0234,34.9,4780723,false
+BLZ,Belize,upper-middle,2025,isco08_1d,0.3796,0.0306,30.99,175383,false
+BOL,Bolivia,lower-middle,2025,isco08_2d,0.3113,0.0214,27.19,5233936,false
+BRA,Brazil,upper-middle,2025,isco08_2d,0.3985,0.0346,32.29,101317101,false
+BRB,Barbados,high,2024,isco08_1d,0.4476,0.0375,35.13,124145,false
+BRN,Brunei Darussalam,high,2025,isco08_2d,0.4624,0.037,36.08,212714,false
+BWA,Botswana,upper-middle,2024,isco08_2d,0.3197,0.0202,27.47,857493,false
+CHE,Switzerland,high,2025,isco08_2d,0.5404,0.0408,40.47,4774583,false
+CHL,Chile,high,2022,isco08_2d,0.3998,0.0269,32.11,9093245,false
+CIV,Cote d'Ivoire,lower-middle,2022,isco08_1d,0.2843,0.021,25.76,11410381,false
+CMR,Cameroon,lower-middle,2021,isco08_1d,0.3825,0.0191,30.24,9174745,false
+COD,"Congo, Dem. Rep.",low,2020,isco08_2d,0.2432,0.0109,23.0,30581573,false
+COL,Colombia,upper-middle,2025,isco08_2d,0.3828,0.0286,31.04,23807444,false
+CPV,Cabo Verde,upper-middle,2019,isco08_1d,0.3432,0.0261,28.82,205932,false
+CRI,Costa Rica,high,2025,isco08_2d,0.3775,0.0327,31.23,2186549,false
+CUW,Curacao,high,2020,isco08_1d,0.4854,0.0398,37.29,51110,false
+CYP,Cyprus,high,2024,isco08_2d,0.497,0.0425,37.8,479958,false
+CZE,Czechia,high,2024,isco08_2d,0.4541,0.0325,35.74,5187690,false
+DEU,Germany,high,2024,isco08_2d,0.507,0.0444,38.97,42265926,false
+DNK,Denmark,high,2024,isco08_2d,0.5063,0.0374,38.62,2982938,false
+DOM,Dominican Republic,upper-middle,2025,isco08_2d,0.3716,0.033,30.51,5098256,false
+ECU,Ecuador,upper-middle,2025,isco08_2d,0.2928,0.019,26.15,8295912,false
+EGY,"Egypt, Arab Rep.",lower-middle,2024,isco08_2d,0.3621,0.0224,30.04,29927562,false
+ESP,Spain,high,2024,isco08_2d,0.4447,0.0362,34.97,21558113,false
+EST,Estonia,high,2024,isco08_2d,0.4881,0.0329,37.29,701475,false
+ETH,Ethiopia,low,2021,isco08_2d,0.2058,0.0089,21.25,36491526,false
+FIN,Finland,high,2024,isco08_2d,0.4764,0.03,36.7,2576824,false
+FJI,Fiji,upper-middle,2024,isco08_2d,0.371,0.0287,30.56,319042,false
+FRA,France,high,2024,isco08_2d,0.5068,0.036,38.36,28545487,false
+GAB,Gabon,upper-middle,2024,isco08_2d,0.3481,0.027,29.54,480517,false
+GBR,United Kingdom,high,2025,isco08_2d,0.5494,0.0348,40.32,34055476,false
+GEO,Georgia,upper-middle,2025,isco08_2d,0.3473,0.0199,29.06,1734406,false
+GHA,Ghana,lower-middle,2025,isco08_2d,0.3035,0.0199,26.77,13927320,false
+GIN,Guinea,lower-middle,2019,isco08_2d,0.2878,0.0189,25.95,3156814,false
+GMB,"Gambia, The",low,2025,isco08_2d,0.3319,0.0218,28.37,680936,false
+GNB,Guinea-Bissau,low,2022,isco08_2d,0.2204,0.0113,22.22,704161,false
+GNQ,Equatorial Guinea,upper-middle,2023,isco08_2d,0.3084,0.0208,27.14,536222,false
+GRC,Greece,high,2025,isco08_2d,0.4528,0.0405,35.69,4273309,false
+GRD,Grenada,upper-middle,2023,isco08_1d,0.297,0.0212,25.88,50180,false
+GTM,Guatemala,upper-middle,2025,isco08_2d,0.3028,0.0239,26.84,7862391,false
+GUY,Guyana,high,2024,isco08_2d,0.3332,0.0249,28.75,366676,false
+HND,Honduras,lower-middle,2025,isco08_2d,0.3087,0.0209,27.02,4041178,false
+HRV,Croatia,high,2024,isco08_2d,0.4706,0.035,36.51,1659976,false
+HUN,Hungary,high,2024,isco08_2d,0.4608,0.0356,36.04,4691763,false
+IDN,Indonesia,upper-middle,2023,isco08_2d,0.314,0.0243,27.53,137411936,false
+IND,India,lower-middle,2025,isco08_2d,0.2781,0.0173,25.09,476557088,false
+IRL,Ireland,high,2024,isco08_2d,0.5288,0.0363,39.42,2726573,false
+IRN,"Iran, Islamic Rep.",upper-middle,2024,isco08_2d,0.36,0.0256,30.03,24075554,false
+IRQ,Iraq,upper-middle,2021,isco08_2d,0.3683,0.0223,30.58,8019546,false
+ISL,Iceland,high,2023,isco08_2d,0.5027,0.0267,37.94,219529,false
+ISR,Israel,high,2024,isco08_2d,0.5434,0.0366,40.52,4024289,false
+ITA,Italy,high,2024,isco08_2d,0.4593,0.0425,36.19,23697750,false
+JAM,Jamaica,upper-middle,2024,isco08_2d,0.4047,0.0344,32.3,1410783,false
+JOR,Jordan,upper-middle,2023,isco08_2d,0.3597,0.0261,30.2,2753709,false
+JPN,Japan,high,2025,isco08_1d,0.4374,0.0502,35.65,70550000,false
+KEN,Kenya,lower-middle,2021,isco08_1d,0.2959,0.0143,25.47,19354590,false
+KGZ,Kyrgyz Republic,lower-middle,2023,isco08_2d,0.3341,0.0195,28.49,2591815,false
+KHM,Cambodia,lower-middle,2025,isco08_2d,0.267,0.0185,24.58,10008069,false
+KIR,Kiribati,lower-middle,2023,isco08_2d,0.325,0.0195,28.13,41118,false
+KOR,"Korea, Rep.",high,2025,isco08_1d,0.4757,0.0432,37.24,28768897,false
+LAO,Lao PDR,lower-middle,2022,isco08_1d,0.2593,0.0147,24.05,3444083,false
+LBN,Lebanon,lower-middle,2019,isco08_2d,0.3965,0.026,31.53,1513651,false
+LCA,St. Lucia,upper-middle,2025,isco08_1d,0.4243,0.034,33.58,98110,false
+LKA,Sri Lanka,upper-middle,2024,isco08_2d,0.3333,0.0227,28.44,7783617,false
+LSO,Lesotho,lower-middle,2024,isco08_2d,0.2052,0.0089,20.74,799963,false
+LTU,Lithuania,high,2024,isco08_2d,0.4941,0.029,37.36,1458280,false
+LUX,Luxembourg,high,2024,isco08_2d,0.635,0.0417,45.4,315190,false
+LVA,Latvia,high,2024,isco08_2d,0.4874,0.0313,37.12,872321,false
+MDA,Moldova,upper-middle,2025,isco08_1d,0.3135,0.0167,26.92,1408823,false
+MDG,Madagascar,low,2022,isco08_2d,0.1968,0.0088,20.48,11830384,false
+MDV,Maldives,upper-middle,2019,isco08_2d,0.4342,0.0327,34.2,189155,false
+MEX,Mexico,upper-middle,2025,isco08_2d,0.3676,0.0278,30.32,58953988,false
+MHL,Marshall Islands,upper-middle,2021,isco08_2d,0.4087,0.0273,32.76,12354,false
+MKD,North Macedonia,upper-middle,2025,isco08_2d,0.4215,0.0292,33.61,693183,false
+MLI,Mali,low,2022,isco08_2d,0.2329,0.0135,22.61,6736187,false
+MLT,Malta,high,2025,isco08_1d,0.5073,0.0376,38.53,327620,false
+MMR,Myanmar,lower-middle,2020,isco08_2d,0.2884,0.0226,26.22,22262054,false
+MNE,Montenegro,upper-middle,2024,isco08_2d,0.4976,0.0409,37.92,280596,false
+MNG,Mongolia,upper-middle,2025,isco08_2d,0.3876,0.0197,31.2,1359148,false
+MOZ,Mozambique,low,2022,isco08_2d,0.179,0.0071,19.22,12176036,false
+MUS,Mauritius,upper-middle,2024,isco08_2d,0.4366,0.0374,34.38,546614,false
+MWI,Malawi,low,2024,isco08_2d,0.3253,0.014,27.69,4979629,false
+NAM,Namibia,lower-middle,2023,isco08_1d,0.3948,0.0256,31.43,558092,false
+NER,Niger,low,2022,isco08_1d,0.2347,0.0138,22.75,9247118,false
+NGA,Nigeria,lower-middle,2024,isco08_2d,0.2964,0.0204,26.36,71406934,false
+NLD,Netherlands,high,2024,isco08_2d,0.5479,0.0386,40.76,9744515,false
+NOR,Norway,high,2024,isco08_2d,0.5093,0.0317,38.61,2849590,false
+NPL,Nepal,lower-middle,2022,isco08_2d,0.3478,0.0219,28.88,6655809,false
+NRU,Naoero,high,2024,isco08_2d,0.4491,0.043,35.57,2433,false
+PAK,Pakistan,lower-middle,2025,isco08_2d,0.289,0.0187,25.84,77608612,false
+PAN,Panama,high,2025,isco08_2d,0.3436,0.0235,29.13,1966101,false
+PER,Peru,upper-middle,2025,isco08_2d,0.3302,0.0239,28.63,17717437,false
+PHL,Philippines,upper-middle,2024,isco08_2d,0.3528,0.0318,29.69,47432088,false
+PLW,Palau,high,2020,isco08_2d,0.4431,0.0366,34.93,9460,false
+PNG,Papua New Guinea,lower-middle,2022,isco08_2d,0.3221,0.0195,28.36,3989337,false
+POL,Poland,high,2025,isco08_2d,0.4956,0.0361,37.8,17005906,false
+PRI,Puerto Rico (US),high,2020,isco08_1d,0.4989,0.0487,38.68,1028644,false
+PRT,Portugal,high,2025,isco08_2d,0.4798,0.0383,36.93,5229196,false
+PRY,Paraguay,upper-middle,2025,isco08_1d,0.3623,0.0271,29.92,3174995,false
+PSE,West Bank and Gaza,lower-middle,2025,isco08_2d,0.3637,0.0211,30.05,686705,false
+QAT,Qatar,high,2024,isco08_1d,0.3794,0.0313,31.51,2240506,false
+ROU,Romania,high,2024,isco08_2d,0.3774,0.0255,31.11,7807822,false
+RUS,Russian Federation,high,2025,isco08_2d,0.4567,0.0246,35.68,73457373,false
+RWA,Rwanda,low,2025,isco08_2d,0.2175,0.0102,21.66,6416466,false
+SDN,Sudan,low,2022,isco08_2d,0.2788,0.015,25.4,7961215,false
+SGP,Singapore,high,2025,isco08_2d,0.6424,0.0457,45.51,2266655,false
+SLV,El Salvador,upper-middle,2025,isco08_2d,0.3362,0.0273,28.62,2975467,false
+SOM,"Somalia, Fed. Rep.",low,2019,isco08_2d,0.3919,0.0168,32.09,1010469,false
+SRB,Serbia,upper-middle,2025,isco08_2d,0.4159,0.0313,33.29,3045928,false
+SVK,Slovak Republic,high,2023,isco08_2d,0.4526,0.0372,35.83,2593491,false
+SVN,Slovenia,high,2024,isco08_2d,0.4573,0.0336,35.77,984804,false
+SWE,Sweden,high,2024,isco08_2d,0.548,0.0353,40.75,5275498,false
+SWZ,Eswatini,lower-middle,2025,isco08_2d,0.3391,0.0218,29.02,306372,false
+SYC,Seychelles,high,2025,isco08_2d,0.4358,0.028,34.08,49162,false
+TCD,Chad,low,2022,isco08_1d,0.242,0.0146,23.18,3984611,false
+TGO,Togo,lower-middle,2022,isco08_2d,0.3005,0.0209,26.64,3348445,false
+THA,Thailand,upper-middle,2025,isco08_2d,0.3297,0.0256,28.41,39463731,false
+TLS,Timor-Leste,lower-middle,2022,isco08_2d,0.265,0.017,24.34,354302,false
+TON,Tonga,upper-middle,2025,isco08_2d,0.3311,0.0209,28.37,34866,false
+TUN,Tunisia,lower-middle,2021,isco08_2d,0.3161,0.0213,27.36,5440683,false
+TUR,Turkiye,upper-middle,2025,isco08_2d,0.3826,0.0282,31.24,32566337,false
+TUV,Tuvalu,upper-middle,2022,isco08_2d,0.5068,0.0354,38.31,2946,false
+TZA,Tanzania,lower-middle,2025,isco08_2d,0.1981,0.0094,20.19,32545979,false
+UGA,Uganda,low,2021,isco08_2d,0.2141,0.0107,21.44,17917807,false
+URY,Uruguay,high,2025,isco08_2d,0.3821,0.0346,31.53,1754035,false
+USA,United States,high,2025,isco08_2d,0.519,0.0357,38.89,163492865,false
+VNM,Viet Nam,upper-middle,2024,isco08_2d,0.2848,0.0187,25.71,53436105,false
+VUT,Vanuatu,lower-middle,2025,isco08_2d,0.255,0.0127,23.74,144929,false
+WSM,Samoa,upper-middle,2022,isco08_2d,0.3457,0.0216,29.06,52466,false
+ZMB,Zambia,lower-middle,2024,isco08_2d,0.2276,0.0125,22.15,7126220,false
+ZWE,Zimbabwe,lower-middle,2025,isco08_2d,0.2223,0.0092,21.99,5765763,false

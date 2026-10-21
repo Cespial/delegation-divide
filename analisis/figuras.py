@@ -59,16 +59,28 @@ def fig1_escalera():
     guardar(fig, "fig1_escalera")
 
 
+def _claim(i, defecto):
+    """Valor de salidas/claims.jsonl (para que las cajas de la figura 2 no lleven cifras escritas a mano)."""
+    import json
+    f = SAL / "claims.jsonl"
+    if f.exists():
+        for l in f.read_text().splitlines():
+            c = json.loads(l)
+            if c.get("id") == i and c.get("valor") not in (None, "--"): return c["valor"]
+    return defecto
+
+
 def fig2_flujo():
     fig, ax = plt.subplots(figsize=(6.5, 2.4)); ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
-    pasos = [("O*NET 30.2\n18,796 task\nstatements", 0.0), ("Crosswalk\nO*NET-SOC 2019\n→ SOC 2010\n→ ISCO-08", 0.205),
-             ("Ratings\n4 language models\n+ 3 human raters\n(1,500 tasks)", 0.41), ("ISCO-08\n433 unit groups\ntask-weighted\nADI, ADI3, ADIs", 0.615),
-             ("Countries\nILOSTAT employment\n150 countries\n→ world headline", 0.82)]
-    for t, x in pasos: caja(ax, x + 0.005, 0.38, 0.17, 0.5, t, fc="#f3f5f7", fs=7.5)
+    nt, nm, ni, npai = (int(_claim(i, d)) for i, d in (("cobertura.tareas", 18796), ("n.modelos", 2), ("cobertura.isco", 433), ("cobertura.paises", 146)))
+    pasos = [(f"O*NET 30.2\n{nt:,} task\nstatements", 0.0), ("Crosswalk\nO*NET-SOC 2019\n→ SOC 2010\n→ ISCO-08", 0.205),
+             (f"Ratings\n{nm} language models\n+ validation\nsample (1,500 tasks)", 0.41), (f"ISCO-08\n{ni} unit groups\ntask-weighted\nADI, ADI3, ADIs", 0.615),
+             (f"Countries\nILOSTAT\nemployment\n{npai} countries\n→ world headline", 0.82)]
+    for t, x in pasos: caja(ax, x + 0.005, 0.38, 0.17, 0.5, t, fc="#f3f5f7", fs=7.2)
     for (_, x1), (_, x2) in zip(pasos, pasos[1:]): flecha(ax, (x1 + 0.178, 0.63), (x2 + 0.003, 0.63))
     notas = ["importance × frequency\nweights", "SOC → k ISCO groups:\nweight 1/k", "modal level; ties →\nlower; median share",
              "bootstrap over tasks\nwithin occupation", "4-digit weights within\nreported groups"]
-    for (n, (_, x)) in zip(notas, pasos): ax.text(x + 0.09, 0.27, n, ha="center", va="top", fontsize=6.5, color=GRIS, style="italic")
+    for (n, (_, x)) in zip(notas, pasos): ax.text(x + 0.09, 0.27, n, ha="center", va="top", fontsize=6.8, color=GRIS, style="italic")
     guardar(fig, "fig2_flujo")
 
 
@@ -79,7 +91,7 @@ def fig3_isco():
     ax.barh(y, 100 * g.adi_l3, color="#1f4e79", height=0.62, label="ADI3 (L3 only)")
     ax.errorbar(100 * g.adi_l2, y, xerr=[100 * (g.adi_l2 - g.lo), 100 * (g.hi - g.adi_l2)], fmt="none", ecolor=TINTA, elinewidth=0.7, capsize=2)
     ax.set_yticks(y, [f"{k}  {GG.get(k, k)}" for k in g.gg]); ax.set_xlabel("Share of task weight delegable to AI agents (%)")
-    ax.set_xlim(0, 100); ax.legend(frameon=False, loc="lower right", fontsize=7.5); ax.grid(axis="x", color=CLARO, lw=0.5); ax.set_axisbelow(True)
+    ax.set_xlim(0, 100); ax.legend(frameon=False, loc="lower right", fontsize=8); ax.grid(axis="x", color=CLARO, lw=0.5); ax.set_axisbelow(True)
     guardar(fig, "fig3_isco")
 
 
@@ -120,12 +132,15 @@ def fig5_ingreso():
     for ing, col in INGRESO_COL.items():
         d = p[p.ingreso == ing]; ax.scatter(np.log(d.pib_pc_ppp), 100 * d.adi_l2, s=14, color=col, alpha=0.85, lw=0, label=INGRESO_EN[ing])
     b, a = np.polyfit(x, y, 1); xx = np.linspace(x.min(), x.max(), 50); ax.plot(xx, a + b * xx, color=TINTA, lw=0.9)
-    for iso in ("COL", "MEX", "BRA", "USA", "IND", "DEU", "NGA"):
+    import matplotlib.patheffects as pe
+    desp = {"COL": (-34, -8), "MEX": (10, -10), "BRA": (-30, 10), "USA": (-8, 9), "IND": (5, -8), "DEU": (6, -9), "NGA": (-22, 5)}
+    for iso, (dx, dy) in desp.items():
         r = p[p.iso3 == iso]
-        if len(r): ax.annotate(iso, (np.log(r.pib_pc_ppp.iat[0]), 100 * r.adi_l2.iat[0]), fontsize=6.5, color=GRIS, xytext=(3, 2), textcoords="offset points")
+        if len(r): ax.annotate(iso, (np.log(r.pib_pc_ppp.iat[0]), 100 * r.adi_l2.iat[0]), fontsize=7.5, color=TINTA, xytext=(dx, dy), textcoords="offset points",
+                               arrowprops=dict(arrowstyle="-", color=GRIS, lw=0.5, shrinkA=0, shrinkB=2), path_effects=[pe.withStroke(linewidth=2.2, foreground="white")])
     tk = [1000, 3000, 10000, 30000, 100000]; ax.set_xticks(np.log(tk), [f"{t:,}" for t in tk])
     ax.set_xlabel("GDP per capita, PPP (constant 2021 international \\$, log scale)"); ax.set_ylabel("ADI$_c$ (%)")
-    ax.legend(frameon=False, fontsize=7, loc="upper left"); ax.grid(color=CLARO, lw=0.5); ax.set_axisbelow(True)
+    ax.legend(frameon=False, fontsize=8, loc="upper left"); ax.grid(color=CLARO, lw=0.5); ax.set_axisbelow(True)
     guardar(fig, "fig5_ingreso")
 
 
@@ -135,7 +150,7 @@ def fig6_barreras():
     for col, nom, c in BARRERAS:
         v = 100 * g[col].values; ax.barh(y, v, left=base, color=c, height=0.65, label=nom, edgecolor="white", lw=0.3); base += v
     ax.set_yticks(y, [f"{k}  {GG[k]}" for k in g.gg]); ax.set_xlabel("Task weight flagged by each barrier (%; barriers are not exclusive and stack)")
-    ax.legend(frameon=False, ncol=4, fontsize=7, loc="lower center", bbox_to_anchor=(0.5, 1.0))
+    ax.legend(frameon=False, ncol=4, fontsize=8, loc="lower center", bbox_to_anchor=(0.5, 1.0))
     ax.grid(axis="x", color=CLARO, lw=0.5); ax.set_axisbelow(True)
     guardar(fig, "fig6_barreras")
 

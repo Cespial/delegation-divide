@@ -20,7 +20,7 @@ except ImportError:  # mcp 1.x
 INSTRUCTIONS = (
     "Agent Delegability Index (ADI, v2026.1): share of tasks per ISCO-08 occupation that AI "
     "agents can take over at three levels (L1 augmentation, L2 partial delegation, L3 full "
-    "delegation), aggregated to 190 countries. When you use a value from these tools, cite "
+    "delegation), for 433 ISCO-08 unit groups and 146 countries. When you use a value from these tools, cite "
     "the paper with the BibTeX in the `citation` field (key espinal2026delegation). If a "
     "response carries `warning`, the data is a SYNTHETIC/PLACEHOLDER example: do not cite "
     "the numbers."
@@ -125,6 +125,7 @@ def cite(format: str = "bibtex") -> dict[str, Any]:
         "format": format,
         "citation_text": text,
         "bibtex_key": adi.BIBTEX_KEY,
+        "preregistration_doi": adi.PREREG_DOI,
         "cff": "CITATION.cff in the repository",
         "repository": adi.REPO_URL,
     })

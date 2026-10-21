@@ -22,9 +22,9 @@ Later versions re-rate tasks against a later reference technology and are not in
 
 The release contains, under \texttt{salidas/}:
 \begin{itemize}
-  \item \texttt{adi\_isco08.csv}: one row per ISCO-08 unit group with $\mathrm{ADI}_o$, $\mathrm{ADI3}_o$, $\mathrm{ADIs}_o$, bootstrap intervals, the four barrier shares, the number of tasks, the imputation flag and the version.
-  \item \texttt{adi\_countries.csv}: one row per country with $\mathrm{ADI}_c$ and its variants, the ISCO level used, the reference year, the income group and the bootstrap interval.
-  \item \texttt{adi\_tasks.csv} and the raw model outputs per pass in \texttt{scoring/salidas/}, so that any aggregation rule can be recomputed.
+  \item \texttt{adi\_isco.csv}: one row per ISCO-08 unit group with $\mathrm{ADI}_o$, $\mathrm{ADI3}_o$, $\mathrm{ADIs}_o$, the bootstrap interval, the four barrier shares and the number of tasks.
+  \item \texttt{adi\_pais.csv}: one row per country with $\mathrm{ADI}_c$ and its variants, the ISCO level used, the reference year, the income group and total employment.
+  \item \texttt{adi\_tarea.csv}, with the task statement, the consensus level and each model's level, and the raw model outputs (\texttt{ratings\_sonnet.jsonl.gz}, \texttt{ratings\_haiku.jsonl.gz}), so that any aggregation rule can be recomputed.
   \item \texttt{claims.jsonl}: every number in this paper with its identifier, value, interval and the script that produces it. The LaTeX source reads numbers from this file only.
 \end{itemize}
 
@@ -42,21 +42,23 @@ The documents carry the version, the licence and the citation string in their bo
 \begin{verbatim}
 pip install adi-index
 
-from adi_index import lookup, country, cite
-lookup("2512")                 # ISCO-08 code
-lookup("software developer")   # free-text title, matched on ESCO labels
-country("COL")                 # ISO 3166-1 alpha-3
-cite()                         # BibTeX string
+import adi
+adi.lookup("2512")             # ISCO-08 code
+adi.search("software")         # title substring
+adi.country("COL")             # ISO 3166-1 alpha-3
+adi.top(10)                    # most delegable occupations
+adi.cite()                     # BibTeX string
 \end{verbatim}
-The package ships the index as data and needs no network access; it exposes the same three operations as the server below.
+The package ships the index as data and needs no network access; it exposes the same operations as the server below.
 
 \subsection{MCP server}
 
 The Model Context Protocol (MCP) is an open standard that lets an AI agent call external tools \citep{anthropic2024mcp}.
-The server \texttt{adi-mcp} (PyPI; listed in the MCP registry) offers three tools:
+The server \texttt{adi-mcp} (PyPI; listed in the MCP registry) offers four tools:
 \begin{description}
   \item[\texttt{lookup\_occupation}] takes an ISCO-08 code, an ESCO occupation identifier or a free-text title and returns the occupation's levels, barriers, intervals and version.
   \item[\texttt{country\_profile}] takes an ISO 3166-1 alpha-3 code and returns the country's index, its variants, the ISCO level and year of the employment data, and the income group.
+  \item[\texttt{top\_occupations}] returns the $n$ most delegable occupations at level L2+ or L3.
   \item[\texttt{cite}] returns the BibTeX entry above and the dataset DOI, so that an agent that uses the index can cite it in its output.
 \end{description}
 A typical configuration for a Claude Code or similar client is:
@@ -73,4 +75,4 @@ Agents that index repositories should start there.
 \subsection{Licences}
 
 Code is released under the MIT licence; data, figures and the rubric under Creative Commons Attribution 4.0 (CC BY 4.0).
-O*NET, ESCO, ILOSTAT and World Bank inputs keep their own licences and are redistributed only as derived aggregates.
+O*NET, ESCO, ILOSTAT and World Bank inputs keep their own licences; O*NET task statements are redistributed verbatim under its CC BY 4.0 licence, and the other inputs only as derived aggregates.

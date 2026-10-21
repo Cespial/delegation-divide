@@ -1,0 +1,32 @@
+{
+ "type": "isco08_unit_group",
+ "id": "8160",
+ "isco08": "8160",
+ "titulo": "Food and related products machine operators",
+ "adi_l2": 0.0878,
+ "adi_l3": 0.0,
+ "adi_share": 16.7,
+ "n_tareas": 105,
+ "barrera_fisica": 0.9559,
+ "barrera_responsabilidad": 0.2245,
+ "barrera_confianza": 0.0153,
+ "barrera_acceso": 0.7836,
+ "ic_lo": 13.49,
+ "ic_hi": 20.0,
+ "imputado": false,
+ "l2_lo": 0.0342,
+ "l2_hi": 0.146,
+ "l3_lo": 0.0,
+ "l3_hi": 0.0,
+ "rank_l2": 369,
+ "n_occupations": 433,
+ "version": "v2026.1",
+ "license": "CC-BY-4.0",
+ "cite": {
+  "bibtex": "@article{espinal2026delegation,\n  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},\n  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n  journal = {arXiv preprint},\n  year    = {2026},\n  url     = {https://github.com/Cespial/delegation-divide},\n  note    = {Agent Delegability Index (ADI) v2026.1. Preregistration: doi:10.17605/OSF.IO/9ZNTF}\n}",
+  "bibtex_key": "espinal2026delegation",
+  "text": "Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries. arXiv preprint. https://github.com/Cespial/delegation-divide",
+  "preregistration_doi": "10.17605/OSF.IO/9ZNTF",
+  "preregistration_url": "https://doi.org/10.17605/OSF.IO/9ZNTF"
+ }
+}

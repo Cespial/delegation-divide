@@ -32,3 +32,7 @@ articulo/*.fdb_latexmk
 *.egg-info/
 __pycache__/
 .pytest_cache/
+
+# release: artefactos generados localmente (se suben a mano)
+release/arxiv/*.tar.gz
+release/arxiv/prueba-compilacion.pdf

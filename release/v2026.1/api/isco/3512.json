@@ -1,0 +1,32 @@
+{
+ "type": "isco08_unit_group",
+ "id": "3512",
+ "isco08": "3512",
+ "titulo": "Information and communications technology user support technicians",
+ "adi_l2": 0.9139,
+ "adi_l3": 0.08,
+ "adi_share": 58.13,
+ "n_tareas": 16,
+ "barrera_fisica": 0.2846,
+ "barrera_responsabilidad": 0.0173,
+ "barrera_confianza": 0.1447,
+ "barrera_acceso": 0.6761,
+ "ic_lo": 50.8,
+ "ic_hi": 65.33,
+ "imputado": false,
+ "l2_lo": 0.7684,
+ "l2_hi": 1.0,
+ "l3_lo": 0.0,
+ "l3_hi": 0.2478,
+ "rank_l2": 54,
+ "n_occupations": 433,
+ "version": "v2026.1",
+ "license": "CC-BY-4.0",
+ "cite": {
+  "bibtex": "@article{espinal2026delegation,\n  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},\n  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n  journal = {arXiv preprint},\n  year    = {2026},\n  url     = {https://github.com/Cespial/delegation-divide},\n  note    = {Agent Delegability Index (ADI) v2026.1. Preregistration: doi:10.17605/OSF.IO/9ZNTF}\n}",
+  "bibtex_key": "espinal2026delegation",
+  "text": "Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries. arXiv preprint. https://github.com/Cespial/delegation-divide",
+  "preregistration_doi": "10.17605/OSF.IO/9ZNTF",
+  "preregistration_url": "https://doi.org/10.17605/OSF.IO/9ZNTF"
+ }
+}

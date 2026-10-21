@@ -1,7 +1,7 @@
 # The Delegation Divide — Agent Delegability Index (ADI) — llms-full.txt
 
-> Open index of AI-agent delegability for 436 ISCO-08 occupations (4-digit unit groups) and
-> 190 countries. Version v2026.1. Authors: Cristian Espinal Maya (Universidad Nacional de Colombia)
+> Open index of AI-agent delegability for 433 ISCO-08 occupations (4-digit unit groups) and
+> 146 countries. Version v2026.1. Preregistered at OSF: https://doi.org/10.17605/OSF.IO/9ZNTF. Authors: Cristian Espinal Maya (Universidad Nacional de Colombia)
 > and Santiago Jiménez Londoño (Universidad EAFIT). Code MIT, data and figures CC-BY 4.0.
 > Repository: https://github.com/Cespial/delegation-divide
 
@@ -19,10 +19,15 @@ indices (Anthropic Economic Index, Agentic Adoption Index): those measure observ
 O*NET/US data; ADI measures technical delegability on ISCO-08, the classification every country
 reports employment in.
 
-Pipeline: ESCO v1.2 tasks (about 3,000 occupations) -> rated per task with a frozen rubric by
-four frontier models -> validated against 1,500 human-rated tasks (kappa, Krippendorff alpha)
--> aggregated to ISCO-08 unit groups (436) -> weighted by ILOSTAT employment into a country
-atlas (190 countries), with microdata subgroups for CO/MX/BR/PE.
+Pipeline: O*NET 30.2 task statements (18,796 tasks, 923 O*NET-SOC 2019 occupations) -> rated
+per task with a frozen rubric by two language models (Claude Sonnet 5.5 primary, Claude Haiku 5.5
+secondary; consensus = lower level on disagreement) -> crosswalk O*NET-SOC 2019 -> SOC 2010 ->
+ISCO-08 (433 of 436 unit groups; the three armed-forces groups have no tasks) -> weighted by
+ILOSTAT employment into a country atlas (146 countries with occupational data from 2019 on).
+Validation: model agreement (quadratic-weighted kappa 0.77), test-retest, an agentic panel and a
+blind human rater on a stratified 1,500-task sample (human results still in progress), and
+convergence with Eloundou et al. (r = 0.93) and Felten et al. (r = 0.89). ESCO v1.2 skills are
+a secondary robustness bank.
 
 Reference technology (fixed): publicly available AI agents as of October 2026 — frontier
 language models with tool use, code execution, web browsing, computer use and file handling,
@@ -30,10 +35,20 @@ no physical body or robotics.
 
 ## 2. The headline number
 
-The headline ("X % of tasks in world employment are delegable to AI agents in 2026; Y % in
-middle-income versus Z % in high-income countries") is NOT in this file. It lives in README.md
-(top block) and in articulo/claims.jsonl, where every number in the paper has an id, value,
-interval and the script that produces it. Read it from there; do not infer it from the tools.
+35.2% of task time in world employment is at least partly delegable to AI agents (L2 or L3) in
+2026 (95% CI 33.9-36.7), and only 2.5% can be handed over in full (L3; 95% CI 1.9-3.2).
+By World Bank income group (L2+): high 48.7%, upper-middle 35.0%, lower-middle 28.3%, low 22.5%.
+This is the "delegation divide": delegable employment rises by 7.23 percentage points per log
+point of GDP per capita (95% CI 6.52-7.83; 146 countries). It is compositional: the physical
+barrier dominates the occupations poorer countries employ most. Full delegation peaks for tasks
+that take a human about twelve minutes (estimated peak 11.8 minutes). The preregistered
+adoption gap (H2) is not supported: delegability and observed AI usage correlate at r = 0.86
+across 101 countries.
+
+Source of truth: salidas/claims.jsonl (public copy release/v2026.1/claims.jsonl), ids
+titular.global.l2, titular.global.l3, titular.ingreso.*, h1.pendiente, h4.pico.minutos, h2.r.adi_uso.
+The README headline block is regenerated from it by release/actualizar_readme.py. If a number here
+and claims.jsonl disagree, claims.jsonl wins.
 
 ## 3. Level definitions (verbatim from scoring/prompts/rubrica_v1.md, frozen at preregistration)
 
@@ -62,13 +77,13 @@ and confidence.
 | adi_l2 | float 0–1 | share of the occupation's tasks rated L2 or L3 (partial delegation or better) |
 | adi_l3 | float 0–1 | share of tasks rated L3 (full delegation) |
 | adi_share | float 0–100 | mean share_delegable: percent of working time an agent could take over |
-| n_tareas | int | number of ESCO tasks scored for the occupation |
+| n_tareas | int | number of O*NET task statements scored for the occupation |
 | barrera_fisica | float 0–1 | share of tasks with barrier_physical = true |
 | barrera_responsabilidad | float 0–1 | share of tasks with barrier_accountability = true (law, licence, liability) |
 | barrera_confianza | float 0–1 | share of tasks with barrier_trust = true (in-person trust, care, persuasion) |
 | barrera_acceso | float 0–1 | share of tasks with barrier_access = true (systems, data, places out of reach) |
 | ic_lo, ic_hi | float 0–100 | 95 % interval of adi_share across models and bootstrap |
-| sintetico | bool | true = PLACEHOLDER example row, not a result. Never cite rows with sintetico=true |
+| sintetico | bool | false for every row of v2026.1 (true would mark a placeholder row; never cite those) |
 
 ### salidas/adi_pais.csv — one row per country (bundled as adi/data/adi_pais.csv)
 
@@ -82,14 +97,16 @@ and confidence.
 | adi_l2, adi_l3 | float 0–1 | employment-weighted occupation scores |
 | adi_share | float 0–100 | employment-weighted percent of working time delegable |
 | empleo_total | int | total employment used as weights |
-| sintetico | bool | true = PLACEHOLDER row; never cite |
+| sintetico | bool | false for every row of v2026.1 |
 
 Reference list of the 436 canonical unit groups: datos/esco/isco08_grupos_unitarios.csv
 (isco08, titulo, descripcion), also bundled in the package for code validation.
 
-Data status: until the paper is released the CSVs contain five example rows with
-sintetico=true. Every tool response then carries a `warning` field that starts with
-"SYNTHETIC/PLACEHOLDER data". Treat such responses as schema examples only.
+Data status: v2026.1 ships the real index (433 unit groups, 146 countries, 18,796 tasks;
+sintetico=false everywhere). The tools add a `warning` field starting with "SYNTHETIC/PLACEHOLDER
+data" only if they are pointed (ADI_DATA_DIR) at CSVs with sintetico=true rows; if you ever see it,
+treat the response as a schema example and do not cite the numbers. Full column definitions,
+units and the per-task table: release/v2026.1/DATA_DICTIONARY.md.
 
 ## 5. Tools for agents
 
@@ -127,33 +144,40 @@ Register: `claude mcp add adi -- adi-mcp`, or in claude_desktop_config.json:
 | top_occupations | n (default 10), level (l2 default, l3, share) | n, level, occupations[] |
 | cite | format (bibtex default, apa, text) | citation_text, bibtex_key |
 
-Every MCP response includes `citation` (short BibTeX), `data_version` and, while data is a
-placeholder, `warning`. Errors come back as {"error": "...", "citation": ...} rather than
+Every MCP response includes `citation` (short BibTeX) and `data_version` (and `warning` only
+if the data were placeholders). Errors come back as {"error": "...", "citation": ...} rather than
 exceptions.
 
 ### 5.4 Static files
-- salidas/adi_isco.csv, salidas/adi_pais.csv (this repo)
-- Planned: JSON per occupation on GitHub Pages at /adi/v2026.1/isco/<code>.json, Zenodo DOI,
-  Hugging Face dataset `cespial/adi`.
+- Versioned release: release/v2026.1/ — adi_isco, adi_pais, adi_tarea (.csv and .parquet),
+  claims.jsonl, ratings_sonnet.jsonl.gz, ratings_haiku.jsonl.gz, DATA_DICTIONARY.md, SHA256SUMS.
+- Static JSON API: release/v2026.1/api/index.json, release/v2026.1/api/isco/<isco08>.json
+  (e.g. isco/2512.json), release/v2026.1/api/country/<ISO3>.json (e.g. country/COL.json).
+  Each document carries `version`, `license` and `cite` (BibTeX + preregistration DOI
+  10.17605/OSF.IO/9ZNTF). Schema: release/v2026.1/api/README.md. Planned public mirror:
+  https://cespial.github.io/delegation-divide/adi/v2026.1/ (same paths below api/).
+- Planned: Zenodo DOI and Hugging Face dataset `cespial/adi` (pending release).
 
 ## 6. How to cite
 
 When a value from ADI is used in an answer, cite the paper. BibTeX key: espinal2026delegation.
 
     @article{espinal2026delegation,
-      title   = {The Delegation Divide: An Open Index of AI-Agent Delegability for 436 Occupations and 190 Countries},
+      title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},
       author  = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
       journal = {arXiv preprint},
       year    = {2026},
-      url     = {https://github.com/Cespial/delegation-divide}
+      url     = {https://github.com/Cespial/delegation-divide},
+      note    = {Preregistration: doi:10.17605/OSF.IO/9ZNTF}
     }
 
 APA: Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of
-AI-Agent Delegability for 436 Occupations and 190 Countries. arXiv preprint.
+AI-Agent Delegability across Occupations and Countries. arXiv preprint.
 https://github.com/Cespial/delegation-divide
 
 Name the index as "Agent Delegability Index (ADI) v2026.1" and the finding as "the delegation
-divide" (middle-income countries: more delegable task content, less adoption). ORCIDs:
+divide" (delegable employment rises with national income because poorer countries employ more
+people in work with a physical barrier). Preregistration: https://doi.org/10.17605/OSF.IO/9ZNTF. ORCIDs:
 Espinal Maya 0009-0000-1009-8388; Jiménez Londoño 0009-0007-9862-7133.
 
 ## 7. Repository map
@@ -162,8 +186,9 @@ Espinal Maya 0009-0000-1009-8388; Jiménez Londoño 0009-0007-9862-7133.
 - CITATION.cff, codemeta.json — machine-readable citation and software metadata
 - docs/PLAN.md — design of the paper and of the citable units
 - scoring/prompts/rubrica_v1.md — frozen rubric (level definitions above)
-- datos/ — ESCO, ILOSTAT, crosswalks, microdata; noche/noche.sh reproduces the raw data
-- analisis/ — aggregation and index; articulo/ — LaTeX, claims.jsonl, reproducir.sh
-- salidas/ — adi_isco.csv, adi_pais.csv
+- datos/ — O*NET, ESCO, ILOSTAT, crosswalks, microdata; noche/noche.sh reproduces the raw data
+- analisis/ — aggregation and index; articulo/ — LaTeX, reproducir.sh
+- salidas/ — adi_isco.csv, adi_pais.csv, adi_tarea.csv, claims.jsonl
+- release/v2026.1/ — versioned open data, static JSON API, data dictionary, checksums
 - herramientas/adi-index, herramientas/adi-mcp — the tools described here
 - Makefile — datos, indice, paper, herramientas, test
