@@ -52,9 +52,8 @@
   number      = {140},
   address     = {Geneva},
   year        = {2025},
-  url         = {https://www.ilo.org/publications/working-papers}
+  doi         = {10.54394/HETP0387}
 }
-% [VERIFY] exact URL / DOI
 
 @techreport{gmyrek2023generative,
   author      = {Gmyrek, Pawel and Berg, Janine and Bescond, David},
@@ -66,16 +65,18 @@
   year        = {2023},
   doi         = {10.54394/FHEM8239}
 }
-% [VERIFY]
 
 @techreport{gmyrek2024buffer,
   author      = {Gmyrek, Pawel and Winkler, Hernan and Garganta, Santiago},
   title       = {Buffer or bottleneck? {Employment} exposure to generative {AI} and the digital divide in {Latin America}},
   institution = {International Labour Organization and World Bank},
+  type        = {ILO Working Paper},
+  address     = {Geneva},
   year        = {2024},
-  url         = {https://www.ilo.org/}
+  doi         = {10.54394/TFZY7681},
+  note        = {Also World Bank Policy Research Working Paper 10863, DOI 10.1596/1813-9450-10863}
 }
-% [VERIFY] series, number and URL
+% [VERIFY] ILO working-paper number (DOI confirmed in Crossref)
 
 @article{frey2017future,
   author  = {Frey, Carl Benedikt and Osborne, Michael A.},
@@ -135,9 +136,9 @@
   type        = {IMF Working Paper},
   number      = {2023/216},
   year        = {2023},
-  url         = {https://www.imf.org/en/Publications/WP/Issues/2023/10/04/Labor-Market-Exposure-to-AI-Cross-country-Differences-and-Distributional-Implications-539656}
+  url         = {https://www.imf.org/en/Publications/WP/Issues/2023/10/04/Labor-Market-Exposure-to-AI-Cross-country-Differences-and-Distributional-Implications-539656},
+  doi         = {10.5089/9798400254802.001}
 }
-% [VERIFY]
 
 @techreport{cazzaniga2024gen,
   author      = {Cazzaniga, Mauro and Jaumotte, Florence and Li, Longji and Melina, Giovanni and Panton, Augustus J. and Pizzinelli, Carlo and Rockall, Emma and Mendes Tavares, Marina},
@@ -146,9 +147,9 @@
   type        = {IMF Staff Discussion Note},
   number      = {SDN/2024/001},
   year        = {2024},
-  url         = {https://www.imf.org/en/Publications/Staff-Discussion-Notes/Issues/2024/01/14/Gen-AI-Artificial-Intelligence-and-the-Future-of-Work-542379}
+  url         = {https://www.imf.org/en/Publications/Staff-Discussion-Notes/Issues/2024/01/14/Gen-AI-Artificial-Intelligence-and-the-Future-of-Work-542379},
+  doi         = {10.5089/9798400262548.006}
 }
-% [VERIFY]
 
 @article{carbonero2023impact,
   author  = {Carbonero, Francesco and Davies, Jeremy and Ernst, Ekkehard and Fossen, Frank M. and Samaan, Daniel and Sorgner, Alina},
@@ -157,9 +158,9 @@
   volume  = {33},
   pages   = {707--736},
   year    = {2023},
+  number  = {3},
   doi     = {10.1007/s00191-023-00809-7}
 }
-% [VERIFY]
 
 @techreport{chen2023large,
   author      = {Chen, Qin and Ge, Jinfeng and Xie, Huaqing and Xu, Xingcheng and Yang, Yanqing},
@@ -195,9 +196,9 @@
   type        = {NBER Working Paper},
   number      = {31357},
   year        = {2023},
-  url         = {https://www.nber.org/papers/w31357}
+  url         = {https://www.nber.org/papers/w31357},
+  doi         = {10.3386/w31357}
 }
-% [VERIFY]
 
 @article{dingel2020how,
   author  = {Dingel, Jonathan I. and Neiman, Brent},
@@ -218,7 +219,6 @@
   year    = {2021},
   doi     = {10.1016/j.euroecorev.2021.103679}
 }
-% [VERIFY]
 
 % ---------- Adoption and usage ----------
 
@@ -277,7 +277,6 @@
   year        = {2025},
   url         = {https://www.nber.org/papers/w33777}
 }
-% [VERIFY] number
 
 @techreport{brynjolfsson2023generative,
   author      = {Brynjolfsson, Erik and Li, Danielle and Raymond, Lindsey R.},
@@ -336,11 +335,12 @@
 @techreport{patwardhan2025gdpval,
   author      = {Patwardhan, Tejal and others},
   title       = {{GDPval}: Evaluating {AI} model performance on real-world economically valuable tasks},
-  institution = {OpenAI},
+  institution = {arXiv},
+  number      = {2510.04374},
   year        = {2025},
-  url         = {https://openai.com/index/gdpval/}
+  url         = {https://arxiv.org/abs/2510.04374},
+  note        = {Published at ICLR 2026}
 }
-% [VERIFY] author list and arXiv number
 
 @misc{anthropic2024mcp,
   author       = {{Anthropic}},
@@ -365,15 +365,6 @@
   number      = {2404.13076},
   year        = {2024},
   url         = {https://arxiv.org/abs/2404.13076}
-}
-
-@techreport{chiang2024chatbot,
-  author      = {Chiang, Wei-Lin and Zheng, Lianmin and Sheng, Ying and Angelopoulos, Anastasios N. and Li, Tianle and Li, Dacheng and Zhang, Hao and Zhu, Banghua and Jordan, Michael and Gonzalez, Joseph E. and Stoica, Ion},
-  title       = {Chatbot {Arena}: An open platform for evaluating {LLMs} by human preference},
-  institution = {arXiv},
-  number      = {2403.04132},
-  year        = {2024},
-  url         = {https://arxiv.org/abs/2403.04132}
 }
 
 % ---------- Language models as raters / simulated subjects ----------
@@ -401,12 +392,14 @@
 
 @techreport{pew2026silicon,
   author      = {{Pew Research Center}},
-  title       = {[VERIFY] Can large language models simulate survey respondents? {Silicon} samples compared with {American Trends Panel} data},
+  title       = {{AI}-generated surveys consistently miss results of human polls},
   institution = {Pew Research Center},
+  address     = {Washington, DC},
   year        = {2026},
-  url         = {https://www.pewresearch.org/}
+  url         = {https://www.pewresearch.org/?p=401753},
+  note        = {Published 30 September 2026}
 }
-% [VERIFY] title, year and URL
+% [VERIFY] canonical URL and named authors (the page fetched shows neither)
 
 @article{korinek2023language,
   author  = {Korinek, Anton},
@@ -452,9 +445,9 @@
   number  = {121},
   pages   = {13--58},
   year    = {2025},
-  doi     = {10.1093/epolic/eiae042}
+  doi     = {10.1093/epolic/eiae042},
+  note    = {Earlier version: NBER Working Paper 32487 (2024)}
 }
-% [VERIFY] volume, pages, DOI; NBER WP 32487 (2024)
 
 @article{autor2015why,
   author  = {Autor, David H.},
@@ -482,30 +475,37 @@
   title     = {Automation and Utopia: Human Flourishing in a World without Work},
   publisher = {Harvard University Press},
   address   = {Cambridge, MA},
-  year      = {2019}
+  year      = {2019},
+  doi       = {10.4159/9780674242203}
 }
 
 % ---------- Authors' prior work ----------
 
 @techreport{espinal2026augmented,
-  author      = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
-  title       = {[VERIFY] Augmented human capital: Measuring generative-{AI} augmentation of occupations in {Colombia}},
+  author      = {Espinal Maya, Cristian},
+  title       = {Augmented human capital: A unified theory and {LLM}-based measurement framework for cognitive factor decomposition in {AI}-augmented economies},
   institution = {arXiv},
   number      = {2604.01066},
   year        = {2026},
   url         = {https://arxiv.org/abs/2604.01066}
 }
-% [VERIFY] exact title and author order
 
 @techreport{espinal2026measuring,
-  author      = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
-  title       = {[VERIFY] Measuring augmentation with language models: Task-level evidence from household survey microdata},
+  author      = {Espinal Maya, Cristian},
+  title       = {Measuring what cannot be surveyed: {LLMs} as instruments for latent cognitive variables in labor economics},
   institution = {arXiv},
   number      = {2604.02403},
   year        = {2026},
   url         = {https://arxiv.org/abs/2604.02403}
 }
-% [VERIFY] exact title and author order
+
+@misc{espinal2026prereg,
+  author       = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
+  title        = {The Delegation Divide: An open index of {AI}-agent delegability across occupations and countries},
+  year         = {2026},
+  howpublished = {Preregistration, OSF Registries, \url{https://osf.io/9zntf}},
+  note         = {DOI 10.17605/OSF.IO/9ZNTF. Registered 21 October 2026; embargoed until 31 January 2027}
+}
 
 % ---------- Agreement statistics and inference ----------
 
@@ -552,16 +552,14 @@
   doi     = {10.1111/ecot.12145},
   note    = {SOC 2010 to ISCO-08 crosswalk released by the Institute for Structural Research (IBS), \url{https://ibs.org.pl}}
 }
-% [VERIFY]
 
 @misc{onet2026database,
   author       = {{National Center for O*NET Development}},
   title        = {{O*NET} 30.2 Database},
   year         = {2026},
   howpublished = {\url{https://www.onetcenter.org/database.html}},
-  note         = {Task Statements, Task Ratings and Occupation Data files; sponsored by the U.S. Department of Labor, Employment and Training Administration}
+  note         = {Released February 2026. Task Statements, Task Ratings and Occupation Data files; sponsored by the U.S. Department of Labor, Employment and Training Administration}
 }
-% [VERIFY] release date of 30.2
 
 @book{ilo2012isco,
   author    = {{International Labour Office}},

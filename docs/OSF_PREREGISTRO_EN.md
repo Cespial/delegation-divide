@@ -1,3 +1,5 @@
+> **Registered 21 Oct 2026 04:53 UTC as osf.io/9zntf (embargo to 2027-01-31).** The registered text of each field is in `docs/osf_responses.json`; where this file differs (rater set, pilot, batching, wrapper sensitivity, D1 weights), the JSON is canonical.
+
 # OSF Preregistration — field-by-field text (template: "OSF Preregistration")
 
 > Paste each block into the matching OSF field. Embargo: until 2027-01-31. Contributors: Cristian Espinal Maya, Santiago Jiménez Londoño.

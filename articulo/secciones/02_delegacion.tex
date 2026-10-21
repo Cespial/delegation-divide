@@ -5,6 +5,7 @@
 \label{sec:capas}
 
 ADI rates a task, not an occupation, and rates it at one of four levels.
+The choice follows the task-based view of technological change, in which technology substitutes for some tasks within a job and complements others \citep{autor2003skill, acemoglu2011skills, autor2015why}; occupation-level scores of automation risk shrink substantially once the variation of tasks within occupations is taken into account \citep{arntz2016risk, nedelkoska2018automation}.
 The reference technology is fixed: publicly available AI agents as of October 2026, that is, frontier language models with tool use, code execution, web browsing, computer use and file handling, with no body and no robotics.
 The rater judges what is technically feasible with that technology, not what employers do and not what the law allows.
 The four levels, in the wording of the frozen rubric (Appendix~\ref{app:rubrica}), are:
@@ -35,18 +36,19 @@ It also records the share of the task's working time an agent could take over an
 The exposure indices that most of the literature uses answer a different question.
 \citet{eloundou2024gpts} label a task as exposed if access to a large language model, alone or with software built on it, would reduce the time needed to complete the task with equal quality by at least 50\%.
 \citet{felten2021occupational} link ten AI application areas to the 52 O*NET abilities and score an occupation by the abilities it needs; the result, the AI Occupational Exposure index (AIOE), does not refer to tasks at all.
-\citet{webb2020impact} measures overlap between patent texts and task descriptions.
-All three ask how much AI \emph{touches} the work.
+\citet{webb2020impact} measures overlap between patent texts and task descriptions, and \citet{brynjolfsson2018what} score each task's suitability for machine learning.
+All of them ask how much AI \emph{touches} the work.
 ADI asks whether an agent can \emph{do} the work.
 
 The two constructs separate in both directions.
 A task can be highly exposed and not delegable: writing a radiology report is faster with a model, but a licensed radiologist must read the images and sign, so the task stays at L1 or L2 with an accountability barrier.
 A task can be delegable and barely exposed: reconciling a bank statement against an accounting ledger saved little time when the model could only talk, but an agent with access to both systems completes it end to end.
+The experimental evidence on generative AI at work is evidence about this first case: customer-support agents, professional writers and consultants who keep the task and do it faster or better with a model \citep{brynjolfsson2023generative, noy2023experimental, dellacqua2023navigating}.
 Exposure measures the intensity of assistance on a task whose owner does not change.
 Delegation measures a change of owner.
 
 Delegation is also not adoption.
-The Anthropic Economic Index \citep{anthropic2025economic, handa2025economic} observes which O*NET tasks people actually bring to a model and, in later releases, which they hand to a coding agent.
+The Anthropic Economic Index \citep{anthropic2025economic, handa2025economic} observes which O*NET tasks people actually bring to a model and, in later releases, which they hand to a coding agent; \citet{tomlinson2025working} do the same with conversations with Microsoft Copilot.
 The Agentic Adoption Index \citep{lee2026delegates} scores a task by how closely it matches the agent configurations practitioners publish on GitHub, a measure its authors call delegated exposure.
 Both record what has happened.
 ADI records what the technology permits, so it is an upper bound on delegation that adoption data can be compared against.
@@ -76,7 +78,7 @@ ADI is the only task-level index that is natively in ISCO-08, rated for agents, 
     \citet{gmyrek2025generative} (ILO) & Generative-AI exposure, refined & Task & Expert review and LLM [VERIFY] & ISCO-08 & Global via ILO employment [VERIFY] & Y [VERIFY] & N \\
     \citet{anthropic2025economic} (AEI) & Observed usage of Claude by task & Conversation mapped to task & Automated classifier & O*NET-SOC & US; country series in later releases & Y & Partial \\
     \citet{lee2026delegates} (AAI) & Delegated exposure: match to published agent skills & Task & Embedding similarity to $\sim$888,000 agent skill files & O*NET-SOC & US (GitHub corpus is global) & [VERIFY] & Y \\
-    ADI (this paper) & Delegability to an agent, four levels and four barriers & Task (18,796) & Frontier LLMs; 3 human raters on 1,500 tasks & ISCO-08 (433 unit groups) & 151 & Y & Y \\
+    ADI (this paper) & Delegability to an agent, four levels and four barriers & Task (18,796) & Frontier LLMs; 3 human raters on 1,500 tasks & ISCO-08 (433 unit groups) & \cifra{diseno.atlas.paises} & Y & Y \\
     \bottomrule
   \end{tabular}
 \end{table}

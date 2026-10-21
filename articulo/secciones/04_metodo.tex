@@ -2,7 +2,7 @@
 \label{sec:metodo}
 
 Figure~\ref{fig:flujo} summarises the pipeline: tasks are rated by models, consensus is taken across models, consensus is weighted into occupations, occupations are weighted into countries, and every step is validated or bootstrapped.
-The design was preregistered on the Open Science Framework before the first model call, with an embargo until January 2027; the hypotheses, the rubric hash and the sample seeds are in the registration and in \texttt{docs/OSF\_PREREGISTRO\_EN.md}.
+The design was preregistered on the Open Science Framework on 21 October 2026, before the first call of the main pass, with an embargo until 31 January 2027 \citep{espinal2026prereg}; the hypotheses, the rater set, the rubric hash and the sample seeds are in the registration (\url{https://osf.io/9zntf}), and the exact rater configuration is in \texttt{docs/MODELOS.md}.
 
 \begin{figure}[t]
   \centering
@@ -17,23 +17,31 @@ Each task is rated with the rubric reproduced in Appendix~\ref{app:rubrica}.
 The prompt contains the reference technology, the four level definitions, the occupation title and the task text, and asks for a single JSON object with eight fields: level (0--3), share of the task's working time an agent could take over (0--100), minutes a competent human needs for one instance, four barrier flags (physical, accountability, trust, access) and a confidence label.
 The rubric contains no example tasks, so no task in the data can anchor the rating of another.
 The file was frozen at registration; its SHA-256 hash is \texttt{bcd076fb\ldots0ea0e46} (full value in Appendix~\ref{app:rubrica}), and the scoring script refuses to run the main pass unless the file on disk matches it.
-A pilot of at most 300 tasks (seed 20261020) checked JSON compliance and cost; pilot ratings are discarded.
+A pilot of at most 300 tasks (seed 20261020) checked JSON compliance, cost and the call format before registration; pilot ratings are discarded (Section~\ref{sec:evaluadores}).
 
 \subsection{Raters: language models}
+\label{sec:evaluadores}
 
-Models are queried one task per call, with no other task or rating in context, through the Claude Code command-line interface (\texttt{claude -p --output-format json}) rather than through a raw API.
-The primary rater is Claude Sonnet and the secondary rater is Claude Haiku; Claude Opus is run as an optional third rater on the full task set if budget allows and otherwise on the validation sample.
-Every call is logged with the interface version, the model identifier returned by the interface, the prompt hash, the duration and the outcome in \texttt{docs/llm-llamadas.jsonl}, which doubles as the manuscript's declaration of AI use.
+Two models rate every task: Claude Sonnet 5.5 is the primary rater and Claude Haiku 5.5 the secondary rater, both by Anthropic (identifiers returned by the interface: \texttt{claude-sonnet-5-5} and \texttt{claude-haiku-5-5}).
+The rater set was fixed in the registration and no model is added or dropped after seeing the main pass.
+Both are queried through the Claude Code command-line interface (\texttt{claude -p}, version \texttt{2.1.306}, \texttt{-{}-output-format json}) rather than through a raw API, in a neutral configuration: no tools (\texttt{-{}-tools ""}), no Model Context Protocol servers (\texttt{-{}-strict-mcp-config}), no session persistence (\texttt{-{}-no-session-persistence}) and a fixed one-line system prompt that replaces the interface's default, quoted here in full:
+\begin{quote}\small\texttt{You are an expert rater of occupational tasks. Follow the user instructions exactly.}\end{quote}
+Each call carries one task, with no other task or rating in context.
+Every call is logged with the interface version, the model identifier returned by the interface, the prompt hash, the duration and the outcome in \texttt{docs/llm-llamadas.jsonl}, which doubles as the manuscript's declaration of AI use; the configuration is recorded in \texttt{docs/MODELOS.md}.
+
 The interface does not expose a temperature setting, so the ratings are not deterministic by construction.
 We therefore measure stability directly: a random subsample of \cifra{n.testretest} tasks is rated a second time by each model under identical prompts, and we report exact agreement and quadratic-weighted kappa between the two passes (Sonnet: \cifra{agree.testretest.sonnet.kappa}; Haiku: \cifra{agree.testretest.haiku.kappa}).
-% and in the deviations appendix before submission. The sentence below assumes that entry exists.
-Two of the four raters are open-weights models queried through their providers' APIs at temperature zero (DeepSeek V4-Pro and Kimi K2.6); the two Claude models are queried through the Claude command-line interface, which does not expose temperature. Exact model identifiers and the interface version are recorded in \texttt{docs/MODELOS.md} before the main run.
 Calls whose output fails validation (malformed JSON, a level outside 0--3, a share outside 0--100) are retried up to five times; tasks that still fail are excluded for that model only, and the counts are reported (\cifra{n.fallos.sonnet} for Sonnet, \cifra{n.fallos.haiku} for Haiku).
+
+The call format was settled in the discarded pilot by two tests, both run before registration.
+First, rating tasks in batches of \cifra{diseno.piloto.lote.tareas} per call agreed with one-task calls at quadratic-weighted $\kappa$ = \cifra{diseno.piloto.lote.sonnet.kappa} for Sonnet and \cifra{diseno.piloto.lote.haiku.kappa} for Haiku, below the preregistered floor of 0.80, so batching was rejected and the main pass uses one task per call.
+Second, the interface's default wrapper, which tells the model that it is a coding agent with tools, raised the mean level from \cifra{diseno.piloto.neutro.nivel} under the neutral configuration to \cifra{diseno.piloto.envoltorio.nivel} (agreement between the two, $\kappa$ = \cifra{diseno.piloto.envoltorio.kappa}).
+The main pass therefore uses the neutral configuration, and a preregistered sensitivity analysis re-rates the 1,500 tasks of the human-validation sample with the default wrapper (Section~\ref{sec:limites}).
 
 \subsection{Aggregation}
 
 Let $t$ index tasks, $m$ models, $o$ ISCO-08 unit groups and $c$ countries.
-The consensus level of a task is the modal level across models, with ties resolved to the lower level; the consensus share is the median share across models.
+The consensus level of a task is the level both models give when they agree and the lower of the two levels when they do not (the preregistered modal rule with ties resolved downward, applied to two raters); the consensus share is the median, here the mean, of the two models' shares.
 Task weights $w_{ot}$ are importance times mean frequency, normalised within the O*NET occupation, multiplied by the crosswalk weight ($1/k$ for a SOC code that maps to $k$ ISCO groups) and renormalised so that $\sum_t w_{ot} = 1$ within each unit group.
 The primary occupation index is the share of task weight at partial delegation or above:
 \begin{equation}
@@ -53,7 +61,7 @@ The country index is the employment-weighted mean over the occupational groups $
 \end{equation}
 where $e_{cg}$ is ILOSTAT employment and $g$ runs over two-digit sub-major groups if the country reports them for a year from 2019 onward and over one-digit major groups otherwise.
 Within a reported group, unit-group indices are averaged with employment weights pooled from the countries in the same World Bank income group that report finer detail; equal weights within the group are the preregistered sensitivity check.
-The world headline is the employment-weighted mean of $\mathrm{ADI}_c$ over the 151 included countries, and the income-group figures are the same mean within each group.
+The world headline is the employment-weighted mean of $\mathrm{ADI}_c$ over the \cifra{diseno.atlas.paises} included countries, and the income-group figures are the same mean within each group.
 
 \subsection{Human validation}
 

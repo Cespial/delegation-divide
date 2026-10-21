@@ -1,0 +1,39 @@
+{"id": "diseno.onet.tareas", "valor": 18796, "fuente": "datos/tareas_unicas.parquet", "sintetico": false}
+{"id": "diseno.onet.ocupaciones", "valor": 923, "fuente": "datos/tareas_unicas.parquet: O*NET-SOC 2019 distintos", "sintetico": false}
+{"id": "diseno.puente.pares", "valor": 30549, "fuente": "datos/pares_isco_tarea.parquet", "sintetico": false}
+{"id": "diseno.puente.tareas", "valor": 18796, "fuente": "datos/pares_isco_tarea.parquet", "sintetico": false}
+{"id": "diseno.puente.isco", "valor": 433, "fuente": "datos/pares_isco_tarea.parquet", "sintetico": false}
+{"id": "diseno.puente.imputados", "valor": 7, "fuente": "datos/pares_isco_tarea.parquet", "sintetico": false}
+{"id": "diseno.puente.conjuntos", "valor": 403, "fuente": "datos/pares_isco_tarea.parquet: conjuntos de tareas distintos", "sintetico": false}
+{"id": "diseno.puente.tareas_grupo.mediana", "valor": 48, "fuente": "datos/pares_isco_tarea.parquet", "sintetico": false}
+{"id": "diseno.puente.tareas_grupo.min", "valor": 5, "fuente": "datos/pares_isco_tarea.parquet", "sintetico": false}
+{"id": "diseno.puente.tareas_grupo.max", "valor": 860, "fuente": "datos/pares_isco_tarea.parquet", "sintetico": false}
+{"id": "diseno.agro.tareas", "valor": 193, "fuente": "datos/pares_isco_tarea.parquet: gran grupo de mayor peso = 6", "sintetico": false}
+{"id": "diseno.agro.en_muestra", "valor": 193, "fuente": "validacion/muestra_1500.csv", "sintetico": false}
+{"id": "diseno.onet10_19.codigos2010", "valor": 1110, "fuente": "datos/crosswalks/onet_2010_to_2019.csv", "sintetico": false}
+{"id": "diseno.onet10_19.codigos2019", "valor": 1012, "fuente": "datos/crosswalks/onet_2010_to_2019.csv", "sintetico": false}
+{"id": "diseno.onet10_19.multiples", "valor": 97, "fuente": "datos/crosswalks/onet_2010_to_2019.csv: códigos 2019 con varios ancestros 2010", "sintetico": false}
+{"id": "diseno.ibs.filas", "valor": 1131, "fuente": "datos/crosswalks/ibs/soc10_isco08.dta", "sintetico": false}
+{"id": "diseno.ibs.soc", "valor": 839, "fuente": "datos/crosswalks/ibs/soc10_isco08.dta", "sintetico": false}
+{"id": "diseno.ibs.isco", "valor": 436, "fuente": "datos/crosswalks/ibs/soc10_isco08.dta", "sintetico": false}
+{"id": "diseno.ibs.k1", "valor": 683, "fuente": "datos/crosswalks/ibs/soc10_isco08.dta", "sintetico": false}
+{"id": "diseno.ibs.k2", "valor": 102, "fuente": "datos/crosswalks/ibs/soc10_isco08.dta", "sintetico": false}
+{"id": "diseno.ibs.k3", "valor": 30, "fuente": "datos/crosswalks/ibs/soc10_isco08.dta", "sintetico": false}
+{"id": "diseno.ibs.k4mas", "valor": 24, "fuente": "datos/crosswalks/ibs/soc10_isco08.dta", "sintetico": false}
+{"id": "diseno.ibs.kmax", "valor": 17, "fuente": "datos/crosswalks/ibs/soc10_isco08.dta", "sintetico": false}
+{"id": "diseno.previo.ocupaciones", "valor": 440, "fuente": "datos/crosswalks/occupation_task_matrix.parquet", "sintetico": false}
+{"id": "diseno.previo.conjuntos", "valor": 9, "fuente": "datos/crosswalks/occupation_task_matrix.parquet", "sintetico": false}
+{"id": "diseno.previo.ocupaciones_por_tarea.mediana", "valor": 77, "fuente": "datos/crosswalks/occupation_task_matrix.parquet", "sintetico": false}
+{"id": "diseno.ilostat.paises.1d", "valor": 173, "fuente": "datos/ilostat/emp_isco_todos.csv", "sintetico": false}
+{"id": "diseno.ilostat.paises.1d.desde2019", "valor": 151, "fuente": "datos/ilostat/emp_isco_todos.csv: último año ≥ 2019", "sintetico": false}
+{"id": "diseno.ilostat.paises.2d", "valor": 144, "fuente": "datos/ilostat/emp2_isco_todos.csv", "sintetico": false}
+{"id": "diseno.ilostat.paises.2d.desde2019", "valor": 134, "fuente": "datos/ilostat/emp2_isco_todos.csv: último año ≥ 2019", "sintetico": false}
+{"id": "diseno.atlas.paises", "valor": 150, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
+{"id": "diseno.atlas.paises.2d", "valor": 127, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
+{"id": "diseno.atlas.paises.1d", "valor": 23, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
+{"id": "diseno.piloto.lote.tareas", "valor": 25, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}
+{"id": "diseno.piloto.lote.sonnet.kappa", "valor": 0.6, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}
+{"id": "diseno.piloto.lote.haiku.kappa", "valor": 0.56, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}
+{"id": "diseno.piloto.envoltorio.nivel", "valor": 1.64, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}
+{"id": "diseno.piloto.neutro.nivel", "valor": 1.33, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}
+{"id": "diseno.piloto.envoltorio.kappa", "valor": 0.7, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}

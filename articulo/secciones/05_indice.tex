@@ -5,7 +5,7 @@
 
 Of the \cifra{cobertura.tareas.puntuadas} task statements with a valid consensus, \cifra{tareas.nivel0.pct}\% are rated L0, \cifra{tareas.nivel1.pct}\% L1, \cifra{tareas.nivel2.pct}\% L2 and \cifra{tareas.nivel3.pct}\% L3, so that \cifra{tareas.l2.pct}\% of statements reach at least partial delegation before any weighting.
 Ties between models, resolved to the lower level as preregistered, affect \cifra{tareas.empates.pct}\% of tasks.
-The models agree with each other at Krippendorff's $\alpha$ = \cifra{agree.alpha.modelos} (ordinal), and the two Claude raters at quadratic-weighted $\kappa$ = \cifra{agree.kappa.sonnet_haiku}.
+The two models agree with each other at Krippendorff's $\alpha$ = \cifra{agree.alpha.modelos} (ordinal) and at quadratic-weighted $\kappa$ = \cifra{agree.kappa.sonnet_haiku}.
 
 \subsection{Occupations}
 
@@ -44,5 +44,5 @@ The implied peak is at about \cifra{h4.pico.minutos} minutes of human work.
 \subsection{Robustness}
 
 The occupational index is not an artefact of the task-to-occupation assignment: the dispersion of $\mathrm{ADI}_o$ across unit groups (standard deviation \cifra{placebo.sd.obs}) compares with a mean of \cifra{placebo.sd.media} under the permutation null (\pval{placebo.p}).
-Model by model, the world headline is \cifra{titular.modelo.sonnet.l2}\% with Sonnet, \cifra{titular.modelo.haiku.l2}\% with Haiku, \cifra{titular.modelo.deepseek-v4-pro.l2}\% with DeepSeek and \cifra{titular.modelo.kimi-k2_6.l2}\% with Kimi.
+Model by model, the world headline is \cifra{titular.modelo.sonnet.l2}\% with Sonnet and \cifra{titular.modelo.haiku.l2}\% with Haiku.
 With uniform task weights it is \cifra{titular.global.l2.pesos_uniformes}\%, and without the imputed unit groups \cifra{titular.global.l2.sin_imputados}\%.

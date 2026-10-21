@@ -6,6 +6,7 @@ Its SHA-256 hash is
 \begin{center}\small\texttt{bcd076fb705f0f363f4a7eb2c2a403f16653f22f898eeb7d83bada74a0ea0e46}\end{center}
 and the scoring script (\texttt{scoring/puntuar.py}) refuses to run the main pass unless the file on disk matches this value.
 The prompt sent to the model is the text from ``You are rating'' onward, with \texttt{\string{occupation\_title\string}} and \texttt{\string{task\_text\string}} replaced by the O*NET occupation title and the task statement; the doubled braces in the output block are Python format escapes and reach the model as single braces.
+It is sent as the user message of a call that carries one task, to Claude Sonnet 5.5 and Claude Haiku 5.5, with the fixed one-line system prompt quoted in Section~\ref{sec:evaluadores} and no tools.
 The same text, with no model output, is the second sheet of each human rater's workbook; the rater guide is \texttt{validacion/GUIA\_EVALUADORES.md}.
 
 {\tiny

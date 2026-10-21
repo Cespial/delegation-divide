@@ -18,6 +18,7 @@ paso esco         $PY analisis/esco_isco.py
 paso comparadores $PY analisis/comparadores_isco.py
 paso pnadc        $PY analisis/microdatos_pnadc.py
 paso enoe         $PY analisis/microdatos_enoe.py
+paso diseno       $PY analisis/claims_diseno.py
 paso indice       $PY analisis/indice.py $MODO
 [[ -f salidas/claims.jsonl ]] || { echo "sin salidas/claims.jsonl: el índice falló, ver $OUT/indice.log"; exit 1; }
 cp salidas/claims.jsonl $OUT/claims.jsonl

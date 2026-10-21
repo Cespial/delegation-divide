@@ -7,6 +7,7 @@ ADI measures what an agent can do with the technology of October 2026, given the
 It does not measure what firms do, what regulators allow or what workers accept.
 A task at L3 may never be delegated because the agent is too expensive relative to local wages, because the systems it would need are not connected, or because nobody is willing to be accountable for its output.
 The index is therefore an upper bound on delegation, and the comparison with observed usage in Section~\ref{sec:validacion} is a comparison of a ceiling with a floor.
+Adoption of generative AI has been fast among workers \citep{bick2024rapid}, but its measured effects on earnings and hours have so far been small \citep{humlum2025large}, with early employment losses concentrated among young workers in exposed occupations \citep{brynjolfsson2025canaries}.
 Readers who need a forecast of employment effects should combine ADI with adoption, prices and institutions, as \citet{acemoglu2024simple} does for exposure; the index alone supports none.
 The reference technology is also a moving target.
 We fix it by date and version the index (\texttt{v2026.1}) so that later releases can be compared with this one rather than silently replacing it.
@@ -17,13 +18,14 @@ The task statements, and the importance and frequency weights, come from surveys
 The same occupation elsewhere may contain different tasks, in different proportions, with different tools.
 The crosswalk to ISCO-08 carries the United States task mix to every country; it does not adapt it.
 The problem is sharpest in agriculture.
-O*NET has only 193 task statements that map to ISCO major group 6, skilled agricultural, forestry and fishery workers, which employs a large share of workers in low-income countries, and all 193 fall in the human-validation sample.
+O*NET has only \cifra{diseno.agro.tareas} task statements whose main ISCO group lies in major group 6, skilled agricultural, forestry and fishery workers, which employs a large share of workers in low-income countries, and \cifra{diseno.agro.en_muestra} of them fall in the human-validation sample.
 Since the delegation divide (H1) depends on that group, we rerun the country regression with the ESCO skill bank in place of O*NET tasks for major group 6 and for all groups; the slope with ESCO is \cifra{robustez.esco.h1.pendiente}, against \cifra{h1.pendiente} with O*NET.
+The same transfer problem is known from the measurement of teleworkability: a task-based feasibility measure built on O*NET \citep{dingel2020how} overstates what can be done at home in poorer countries, where the same occupations are performed with fewer digital tools \citep{gottlieb2021working}, and the access barrier in ADI plays the role that connectivity plays there \citep{gmyrek2024buffer}.
 Informal and subsistence work, which household surveys capture better than labour-force statistics by occupation, is treated in the microdata breakdowns rather than in the headline.
 
 \subsection{Language models as raters}
 
-The raters are language models from a single developer, and the usage data in Section~\ref{sec:validacion} come from the same developer's Anthropic Economic Index.
+The raters are two language models from a single developer, and the usage data in Section~\ref{sec:validacion} come from the same developer's Anthropic Economic Index.
 Three risks follow.
 The first is bias: a model may rate tasks in its own domain, such as software, as more delegable than tasks it knows less well, and may share the blind spots of its training data about work outside rich countries.
 The human validation on 1,500 tasks bounds this bias at the level of agreement reported in Section~\ref{sec:metodo}, but three raters with university degrees are not a sample of the world's workers.
@@ -31,13 +33,17 @@ The second is circularity: if the same family of models both rates delegability 
 We address it by testing convergence against indices built by other methods and other raters \citep{eloundou2024gpts, felten2021occupational, gmyrek2025generative}, by comparing with the Agentic Adoption Index, which uses no model rating \citep{lee2026delegates}, and by reporting the Colombian wage dynamics, which involve no model at all.
 The third is instability: the command-line interface exposes no temperature setting, so the same prompt can return different levels on different days.
 The test--retest statistics in Section~\ref{sec:metodo} quantify this, and the consensus rule across models dampens it; the raw outputs of every pass are released so that others can recompute.
-Model-based rating of social facts has a short literature \citep{horton2023large, argyle2023out, korinek2023language}, and the known tendency of models to favour their own outputs \citep{zheng2023judging, panickssery2024llm} is a reason to read every number here as a model's judgement, not a measurement of the world.
+A fourth risk is framing.
+In the pilot, a model told that it is an agent rated tasks as more delegable: the interface's default wrapper raised the mean level from \cifra{diseno.piloto.neutro.nivel} to \cifra{diseno.piloto.envoltorio.nivel} on the same tasks.
+The ratings therefore depend on how the rater is addressed, not only on the task.
+We fix the neutral configuration for the main pass and report, as a preregistered secondary result, the same validation tasks rated under the default wrapper, so that readers can see how much of the index moves with the frame.
+Model-based rating of social facts has a short literature \citep{horton2023large, argyle2023out, korinek2023language}, including evidence that model-simulated survey respondents miss the results of human polls \citep{pew2026silicon}, and the known tendency of models to favour their own outputs \citep{zheng2023judging, panickssery2024llm} is a reason to read every number here as a model's judgement, not a measurement of the world.
 
 \subsection{Preregistration}
 
-The hypotheses, rubric, model rule, sample seeds and analysis plan were registered before the first model call, under embargo until January 2027.
+The hypotheses, rubric, rater set, call configuration, sample seeds and analysis plan were registered on the Open Science Framework on 21 October 2026, before the main pass, under embargo until 31 January 2027 \citep{espinal2026prereg}.
 The registration constrains what we can report as confirmatory; everything else is labelled exploratory.
-Deviations from the plan, including the change in the rater set described in Section~\ref{sec:metodo}, are dated in \texttt{docs/DESVIACIONES.md} and listed in the deviations appendix.
+Deviations from the registered plan, such as the source of the employment weights for unit groups within a reported group, are dated in \texttt{docs/DESVIACIONES.md}.
 A preregistration does not make a measurement right; it makes it checkable.
 
 \subsection{Ethics}
@@ -45,6 +51,7 @@ A preregistration does not make a measurement right; it makes it checkable.
 An index of delegability describes work in the voice of the machine: which parts of a job it could take, and which it could not.
 That framing has costs.
 It can reduce a worker to the residue of tasks an agent cannot do, and it can read a barrier such as trust or care as a temporary obstacle rather than as the point of the job.
+Whether agents complement or replace the people who do these tasks is a design choice as much as a technical fact \citep{autor2024applying}, and a world with less work is not self-evidently a worse one \citep{danaher2019automation}.
 We have tried to keep the four barriers visible rather than fold them into a single score, so that a reader can see why a task stays with a human and not only that it does.
 The divide we name is also not symmetrical in its meaning.
 In high-income countries, high delegability describes a labour market about to reorganise; in low-income countries, low delegability describes a labour market whose work agents cannot reach, which is not the same as protection.
