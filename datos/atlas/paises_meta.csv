@@ -27,7 +27,6 @@ CIV,2022,1,9,11410381.0,Cote d'Ivoire,Sub-Saharan Africa ,Lower middle income,LM
 CMR,2021,1,9,9174745.0,Cameroon,Sub-Saharan Africa ,Lower middle income,LMC,4945.95640965334,2025,29879337,87.099
 COD,2020,2,38,30581573.0,"Congo, Dem. Rep.",Sub-Saharan Africa ,Low income,LIC,1640.56621824278,2025,112832473,96.298
 COL,2025,2,40,23807444.0,Colombia,Latin America & Caribbean ,Upper middle income,UMC,18778.6482631901,2025,53425635,56.012
-COM,2021,1,9,171139.0,Comoros,Sub-Saharan Africa ,Lower middle income,LMC,3621.76626304343,2025,882847,88.809
 CPV,2019,1,9,205932.0,Cabo Verde,Sub-Saharan Africa ,Upper middle income,UMC,10395.7415044012,2025,527326,60.587
 CRI,2025,2,39,2186549.0,Costa Rica,Latin America & Caribbean ,High income,HIC,28443.4127676388,2025,5152950,36.11
 CUW,2020,1,9,51110.0,Curacao,Latin America & Caribbean ,High income,HIC,28762.0581566389,2024,156263,
@@ -56,7 +55,6 @@ GRC,2025,2,39,4273309.0,Greece,Europe & Central Asia,High income,HIC,38218.72162
 GRD,2023,1,9,50180.0,Grenada,Latin America & Caribbean ,Upper middle income,UMC,18240.9934237926,2025,117303,48.048
 GTM,2025,2,40,7862391.0,Guatemala,Latin America & Caribbean ,Upper middle income,UMC,12986.5241144632,2025,18687881,73.518
 GUY,2024,2,40,366676.0,Guyana,Latin America & Caribbean ,High income,HIC,83658.6773475997,2025,835986,49.441
-HKG,2025,1,6,2748419.0,"Hong Kong SAR, China",East Asia & Pacific,High income,HIC,68724.5565865756,2025,7498900,
 HND,2025,2,39,4041178.0,Honduras,Latin America & Caribbean ,Lower middle income,LMC,6726.16685066658,2025,11005850,82.612
 HRV,2024,2,40,1659976.0,Croatia,Europe & Central Asia,High income,HIC,44172.0442284906,2025,3876200,14.816
 HUN,2024,2,39,4691763.0,Hungary,Europe & Central Asia,High income,HIC,41160.6419140983,2025,9514251,0.857
@@ -121,12 +119,10 @@ ROU,2024,2,39,7807822.0,Romania,Europe & Central Asia,High income,HIC,40845.9843
 RUS,2025,2,40,73457373.0,Russian Federation,Europe & Central Asia,High income,HIC,42357.98828125,2025,143513328,19.226
 RWA,2025,2,40,6416466.0,Rwanda,Sub-Saharan Africa ,Low income,LIC,3558.68003753808,2025,14569341,90.055
 SDN,2022,2,40,7961215.0,Sudan,Sub-Saharan Africa ,Low income,LIC,1873.38562011719,2025,51662147,94.194
-SEN,2025,2,40,1686534.0,Senegal,Sub-Saharan Africa ,Lower middle income,LMC,4668.54167658726,2025,18931966,90.546
 SGP,2025,2,38,2266655.0,Singapore,East Asia & Pacific,High income,HIC,139592.612210761,2025,6111175,
 SLV,2025,2,40,2975467.0,El Salvador,Latin America & Caribbean ,Upper middle income,UMC,12050.028265702,2025,6365503,63.626
 SOM,2019,2,40,1010469.0,"Somalia, Fed. Rep.",Sub-Saharan Africa ,Low income,LIC,1403.81389064466,2025,19654739,81.935
 SRB,2025,2,40,3045928.0,Serbia,Europe & Central Asia,Upper middle income,UMC,27603.3916309287,2025,6549143,17.14
-SUR,2022,1,1,253549.0,Suriname,Latin America & Caribbean ,Upper middle income,UMC,19357.3907969318,2025,639850,55.598
 SVK,2023,2,40,2593491.0,Slovak Republic,Europe & Central Asia,High income,HIC,40689.8179557427,2025,5413813,6.248
 SVN,2024,2,39,984804.0,Slovenia,Europe & Central Asia,High income,HIC,49091.0184405902,2025,2130986,3.345
 SWE,2024,2,38,5275498.0,Sweden,Europe & Central Asia,High income,HIC,63362.4612808079,2025,10596620,3.227

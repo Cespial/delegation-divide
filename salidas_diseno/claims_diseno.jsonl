@@ -28,9 +28,9 @@
 {"id": "diseno.ilostat.paises.1d.desde2019", "valor": 151, "fuente": "datos/ilostat/emp_isco_todos.csv: último año ≥ 2019", "sintetico": false}
 {"id": "diseno.ilostat.paises.2d", "valor": 144, "fuente": "datos/ilostat/emp2_isco_todos.csv", "sintetico": false}
 {"id": "diseno.ilostat.paises.2d.desde2019", "valor": 134, "fuente": "datos/ilostat/emp2_isco_todos.csv: último año ≥ 2019", "sintetico": false}
-{"id": "diseno.atlas.paises", "valor": 150, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
-{"id": "diseno.atlas.paises.2d", "valor": 127, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
-{"id": "diseno.atlas.paises.1d", "valor": 23, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
+{"id": "diseno.atlas.paises", "valor": 146, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
+{"id": "diseno.atlas.paises.2d", "valor": 126, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
+{"id": "diseno.atlas.paises.1d", "valor": 20, "fuente": "datos/atlas/paises_meta.csv", "sintetico": false}
 {"id": "diseno.piloto.lote.tareas", "valor": 25, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}
 {"id": "diseno.piloto.lote.sonnet.kappa", "valor": 0.6, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}
 {"id": "diseno.piloto.lote.haiku.kappa", "valor": 0.56, "fuente": "docs/MODELOS.md (piloto descartado)", "sintetico": false}

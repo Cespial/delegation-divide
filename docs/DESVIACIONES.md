@@ -19,3 +19,31 @@ ingreso, declarado. Un grupo sin empleo en la fuente recibe pesos iguales. **Sen
 
 **Pendiente:** cuando PNADC (Brasil, COD ≈ ISCO-08 a 4 díg.) esté completa, agrupar GEIH + PNADC para el ingreso medio; para
 ingreso alto, evaluar microdatos de un país de ingreso alto (p. ej. EU-LFS a 3 díg. o OES de EE. UU. vía el puente SOC→ISCO).
+
+## D2 — 2026-10-21 (10:45, antes de abrir cualquier resultado real) · Validación: de 1.500 × 3 humanos a 300 × 1 humano ciego + panel agéntico
+
+**Preregistro (Data collection, Sample size):** tres evaluadores humanos califican a ciegas las mismas 1.500 tareas.
+
+**Qué cambia y por qué:** decisión de los autores por plazo y costo. (1) **Humano ciego:** Santiago Jiménez Londoño (coautor) califica
+a ciegas una submuestra de 300 tareas de la muestra de 1.500, estratificada por gran grupo ISCO (mínimo 20 por grupo, semilla
+20261025, `validacion/santiago/muestra_300.csv`), con la guía y las 20 tareas de práctica, sin ver calificaciones de modelos ni del
+panel. Su α de Krippendorff y κ cuadrático con el consenso de modelos son la cifra humana del paper. Que el evaluador sea coautor se
+declara como limitación. (2) **Panel agéntico, reportado como validación NO humana:** Claude Opus 5.5 vía `claude -p` con búsqueda web
+(máx. 4 búsquedas por tarea), que no participa como evaluador del índice, investiga y califica las 1.500 tareas con la misma rúbrica y
+cita hasta 3 evidencias (`validacion/agentico/panel.py`). Se reporta su acuerdo con los modelos y con Santiago. (3) Los 1.500 × 3
+humanos preregistrados quedan como trabajo para la v2 si un árbitro lo pide.
+
+## D3 — 2026-10-21 (11:05, DESPUÉS de ver los primeros resultados reales) · Exclusión por calidad del dato de empleo
+
+**Qué pasó:** en la primera corrida real Surinam aparecía como el país más delegable (ADI L2 = 0,82). La causa es la fuente: ILOSTAT
+trae para Surinam 2022 todo el empleo en el gran grupo 1 (Directores y gerentes). Revisando la cobertura de todos los países
+aparecieron otros tres casos donde las ocupaciones reportadas no suman el empleo total.
+
+**Regla añadida (no preregistrada):** se excluye el país-año si sus grupos ocupacionales cubren menos del 75 % del empleo total de
+ILOSTAT del mismo año, o si tiene empleo en menos de 6 de los 9 grandes grupos civiles. Excluidos: Surinam 2022 (1 gran grupo),
+Senegal 2025 (34 % del empleo), Comoras 2021 (66 %) y Hong Kong 2025 (74,8 %, 6 grandes grupos). El atlas pasa de 150 a 146 países.
+Lista en `datos/atlas/EXCLUIDOS_D3.csv`. Como la regla se fijó después de ver resultados, el paper reporta también el titular y H1
+con los 150 países originales (sensibilidad).
+
+Sensibilidad con los 150 países originales (corrida 2026-10-21-1103): titular L2 35,20 % · H1 pendiente 7,30 (IC 6,61–7,89).
+Con 146 países (corrida 2026-10-21-1104): titular L2 35,17 % · H1 pendiente 7,23 (IC 6,52–7,83). La exclusión no cambia ninguna conclusión.

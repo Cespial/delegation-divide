@@ -24,6 +24,16 @@ ok2 = [c for c in t2.index if c in t1.index and abs(t2[c] / t1[c] - 1) < 0.05 an
 largo = pd.concat([e2[e2.iso3.isin(ok2)], e1[~e1.iso3.isin(ok2)]], ignore_index=True)
 largo = largo[~largo.grupo.str.startswith("0")]  # militares fuera
 largo["empleo"] = largo.empleo * 1000  # ILOSTAT en miles
+# D3 (calidad de dato, detectada tras ver resultados): fuera los país-año cuyos grupos cubren < 75 % del empleo total de ILOSTAT
+# o que tienen empleo en menos de 6 de los 9 grandes grupos civiles (p. ej. Surinam 2022 trae todo su empleo en el grupo 1).
+tot = pd.read_csv(I / "emp_isco_todos.csv", low_memory=False); tot = tot[(tot.SEX == "SEX_T") & (tot.OCU == "OCU_ISCO08_TOTAL")]
+tot = tot.rename(columns={"REF_AREA": "iso3", "TIME_PERIOD": "anio"}).set_index(["iso3", "anio"]).OBS_VALUE * 1000
+cal = largo.groupby(["iso3", "anio"]).agg(empleo=("empleo", "sum"), gg=("grupo", lambda g: g.str[0].nunique())).reset_index()
+cal["cobertura"] = cal.empleo / cal.set_index(["iso3", "anio"]).index.map(tot).values
+fuera = cal[(cal.cobertura < 0.75) | (cal.gg < 6)]
+for r in fuera.itertuples(): lg.warning(f"D3 excluido {r.iso3} {r.anio}: cobertura {r.cobertura:.0%}, {r.gg} grandes grupos")
+largo = largo[~largo.iso3.isin(fuera.iso3)]
+(A / "EXCLUIDOS_D3.csv").write_text(fuera.round(3).to_csv(index=False))
 # Metadatos: ingreso, PIB pc, población, informalidad agregada, resolución
 wb = pd.read_csv(W / "paises_ingreso.csv")
 pib = pd.read_csv(W / "pib_pc_ppp.csv").dropna().sort_values("anio").drop_duplicates("iso3", keep="last").rename(columns={"valor": "pib_pc_ppp", "anio": "anio_pib"})
