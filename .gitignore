@@ -15,3 +15,4 @@ datos/crosswalks/occupation_task_matrix.parquet
 datos/crosswalks/ibs/*.zip
 datos/*.parquet
 validacion/hoja_E*.xlsx
+logs/
