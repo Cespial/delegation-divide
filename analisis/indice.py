@@ -145,6 +145,44 @@ def kappa_cuadratica(a, b):
     return 1 - (W * O).sum() / (W * E).sum() if (W * E).sum() > 0 else np.nan
 
 
+# ---------------------------------------------------------------- agregación ISCO 4 díg. → país (también la usa analisis/robustez_esco.py)
+def cargar_atlas(sin_d3=False):
+    """Atlas largo (empleo > 0) y metadatos de país. sin_d3=True: países originales, antes de la exclusión D3."""
+    suf = "_sin_d3" if sin_d3 else ""
+    P = pd.read_parquet(DATOS / f"atlas/paises{suf}.parquet"); meta = pd.read_csv(DATOS / f"atlas/paises_meta{suf}.csv")
+    return P[P.empleo > 0], meta
+
+
+def vectores_peso(isco):
+    """Empleo por ISCO 4 díg. en el orden de `isco`: (GEIH Colombia, BLS OES 2024 por el mismo puente)."""
+    geih = pd.read_csv(DATOS / "microdatos/geih_ciuo_resumen.csv", dtype={"ciuo4": str})
+    geih["isco08"] = geih.ciuo4.str.zfill(4); v_geih = geih.groupby("isco08").empleo.sum().reindex(isco).fillna(0).values
+    oes = pd.read_csv(DATOS / "oes/oes_isco.csv", dtype={"isco08": str})
+    v_oes = oes.set_index(oes.isco08.str.zfill(4)).empleo.reindex(isco).fillna(0).values
+    return v_geih, v_oes
+
+
+def pesos_d1(meta, v_geih, v_oes):
+    """D1 (docs/DESVIACIONES.md): pesos 4 díg. por grupo de ingreso — alto (HIC): OES; resto: GEIH. Devuelve país → vector."""
+    ingreso_de = meta.set_index("iso3").ingreso_id.to_dict()
+    return lambda c: v_oes if ingreso_de.get(c) == "HIC" else v_geih
+
+
+def matriz_paises(isco, P, v):
+    """M[c,u] = (e_cg / E_c) · v_u / V_g ; v es un vector o una función país → vector; V_g = 0 → pesos iguales en el grupo.
+    P: atlas largo; filas de M en orden alfabético de iso3."""
+    nc = P.iso3.nunique(); isco_s = np.asarray(isco).astype(str)
+    M = np.zeros((nc, len(isco))); E = np.zeros(nc)
+    for ci, (c, d) in enumerate(P.groupby("iso3")):
+        vc = v(c) if callable(v) else v
+        for g, e in zip(d.grupo, d.empleo):
+            u = np.flatnonzero(np.char.startswith(isco_s, g))
+            if not len(u): continue
+            vu = vc[u] if vc[u].sum() > 0 else np.ones(len(u))
+            M[ci, u] += e * vu / vu.sum(); E[ci] += e
+    return M / E[:, None], E
+
+
 # ---------------------------------------------------------------- main
 def main():
     global SINT
@@ -213,33 +251,16 @@ def main():
     claim("cobertura.isco", len(isco)); claim("cobertura.isco.imputados", int(occ.imputado.sum()))
 
     # --- pesos 4 díg. dentro de grupo: GEIH (primario) e iguales (sensibilidad)
-    geih = pd.read_csv(DATOS / "microdatos/geih_ciuo_resumen.csv", dtype={"ciuo4": str})
-    geih["isco08"] = geih.ciuo4.str.zfill(4); v_geih = geih.groupby("isco08").empleo.sum().reindex(isco).fillna(0).values
+    v_geih, v_oes = vectores_peso(isco)
     claim("cobertura.geih.isco", int((v_geih > 0).sum())); lg.info(f"GEIH: {int((v_geih > 0).sum())} de {len(isco)} ISCO con empleo")
 
-    paises = pd.read_parquet(DATOS / "atlas/paises.parquet"); meta = pd.read_csv(DATOS / "atlas/paises_meta.csv")
-    paises = paises[paises.empleo > 0]
+    paises, meta = cargar_atlas()
     ciso = sorted(paises.iso3.unique())
     # D1 (docs/DESVIACIONES.md): pesos 4 díg. por grupo de ingreso — alto: BLS OES 2024 (EE. UU.) por el mismo puente;
     # medio-alto, medio-bajo y bajo: GEIH Colombia. Sensibilidades: GEIH para todos y pesos iguales.
-    oes = pd.read_csv(DATOS / "oes/oes_isco.csv", dtype={"isco08": str})
-    v_oes = oes.set_index(oes.isco08.str.zfill(4)).empleo.reindex(isco).fillna(0).values
     claim("cobertura.oes.isco", int((v_oes > 0).sum()))
-    ingreso_de = meta.set_index("iso3").ingreso_id.to_dict()
-    v_ingreso = lambda c: v_oes if ingreso_de.get(c) == "HIC" else v_geih
-    def matriz(v, P=None):
-        """M[c,u] = (e_cg / E_c) · v_u / V_g ; v es un vector o una función país → vector; V_g = 0 → pesos iguales en el grupo.
-        P: atlas largo (por defecto `paises`); filas de M en orden alfabético de iso3."""
-        P = paises if P is None else P; nc = P.iso3.nunique()
-        M = np.zeros((nc, len(isco))); E = np.zeros(nc)
-        for ci, (c, d) in enumerate(P.groupby("iso3")):
-            vc = v(c) if callable(v) else v
-            for g, e in zip(d.grupo, d.empleo):
-                u = np.flatnonzero(np.char.startswith(isco.astype(str), g))
-                if not len(u): continue
-                vu = vc[u] if vc[u].sum() > 0 else np.ones(len(u))
-                M[ci, u] += e * vu / vu.sum(); E[ci] += e
-        return M / E[:, None], E
+    v_ingreso = pesos_d1(meta, v_geih, v_oes)
+    def matriz(v, P=None): return matriz_paises(isco, paises if P is None else P, v)   # filas en orden alfabético de iso3
     M, E = matriz(v_ingreso); Mi, _ = matriz(np.ones(len(isco))); Mg, _ = matriz(v_geih)
     C = M @ O[:, :3]; Ci = Mi @ O[:, :3]; Cg = Mg @ O[:, :3]; CB = np.einsum("cu,buk->bck", M, OB)       # (B, países, 3)
     pa = pd.DataFrame({"iso3": ciso, "adi_l2": C[:, 0], "adi_l3": C[:, 1], "adi_share": 100 * C[:, 2], "empleo_total": E,
@@ -311,8 +332,8 @@ def main():
     # D3 (docs/DESVIACIONES.md): titular y pendiente H1 con los países originales, antes de la exclusión por calidad del dato
     p0, m0 = DATOS / "atlas/paises_sin_d3.parquet", DATOS / "atlas/paises_meta_sin_d3.csv"
     if p0.exists() and m0.exists():
-        P0 = pd.read_parquet(p0); P0 = P0[P0.empleo > 0]; meta0 = pd.read_csv(m0); ing0 = meta0.set_index("iso3").ingreso_id.to_dict()
-        M0, E0 = matriz(lambda c: v_oes if ing0.get(c) == "HIC" else v_geih, P0)
+        P0, meta0 = cargar_atlas(sin_d3=True)
+        M0, E0 = matriz(pesos_d1(meta0, v_geih, v_oes), P0)
         d0 = pd.DataFrame({"iso3": sorted(P0.iso3.unique()), "y": 100 * (M0 @ O[:, 0]), "e": E0})
         claim("d3.titular.l2.150", float(np.average(d0.y, weights=d0.e))); claim("d3.n.paises", len(d0))
         claim("d3.titular.l2.con_regla", 100 * float(wE @ C[:, 0]), nota="= titular.global.l2, con 2 decimales para compararlo con d3.titular.l2.150")
@@ -460,7 +481,8 @@ def main():
         sd_p[r] = o.std(); sl_p[r] = (100 * (Mh @ o)) @ Xc / (Xc @ Xc)
     claim("placebo.p", float(np.mean(sd_p >= sd_obs))); claim("placebo.h1.p", float(np.mean(sl_p >= b)))
     claim("placebo.sd.obs", sd_obs); claim("placebo.sd.media", sd_p.mean())
-    claim("robustez.esco.h1.pendiente", "--", nota="requiere puntuar el banco ESCO (scoring/salidas/esco)")
+    if not (RAIZ / "salidas_robustez/claims_esco.jsonl").exists():   # los valores reales los emite analisis/robustez_esco.py
+        claim("robustez.esco.h1.pendiente", "--", nota="falta salidas_robustez/claims_esco.jsonl (analisis/robustez_esco.py)")
 
     # --- gran grupo ISCO (figuras 3 y 6)
     gg = occ.isco08.str[0].values; wm = occ.empleo_mundial.values; fil = []

@@ -26,9 +26,11 @@ Section~\ref{sec:limites} returns to the consequences.
 
 O*NET describes work in the United States.
 As a check on that origin, we also score the essential skills and competences that the European Skills, Competences, Qualifications and Occupations classification (ESCO, version 1.2) attaches to each of its occupations \citep{esco2026}.
-ESCO maps every occupation to an ISCO-08 unit group by construction, so it reaches the 436 groups without a crosswalk, and it is available in 28 languages.
+ESCO maps every occupation to an ISCO-08 unit group by construction, so it needs no crosswalk, and it is available in 28 languages.
 Its units are skills, not tasks, so we treat it as a robustness bank rather than as the primary source.
-The ESCO results are reported in Section~\ref{sec:indice} as a sensitivity check and matter most for agriculture, where O*NET has few tasks (Section~\ref{sec:limites}).
+We keep only items of the skill and competence type and drop knowledge items, because the rubric rates activities that can be handed over and a body of knowledge is not one.
+The bank has \cifraopc{robustez.esco.n.skills} distinct essential skills and competences in \cifraopc{robustez.esco.n.isco} unit groups; each is rated once, by Sonnet alone, with the same rubric and the occupation for which it is most often essential, and enters each unit group with equal weight.
+The ESCO results are reported in Section~\ref{sec:atlas} as a sensitivity check and matter most for agriculture, where O*NET has few tasks (Section~\ref{sec:limites}).
 
 \subsection{Employment by occupation: ILOSTAT}
 

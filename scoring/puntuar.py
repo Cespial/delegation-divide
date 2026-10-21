@@ -9,6 +9,7 @@ Claves: ~/.config/adi/.env (ANTHROPIC_API_KEY, OPENAI_API_KEY, GOOGLE_API_KEY, O
 Uso: .venv/bin/python -I scoring/puntuar.py --modelo claude-sonnet-5-5 --piloto 300
      .venv/bin/python -I scoring/puntuar.py --modelo claude-sonnet-5-5            # principal
      .venv/bin/python -I scoring/puntuar.py --modelo claude-haiku-5-5 --lote      # Message Batches (−50 %)
+     .venv/bin/python -I scoring/puntuar.py --modelo sonnet --banco esco --particion 0/6   # robustez ESCO → scoring/salidas/esco/
 """
 import argparse, hashlib, json, os, random, sys, time
 from datetime import datetime
@@ -92,11 +93,12 @@ def main():
     ap.add_argument("--salida", help="subcarpeta de scoring/salidas (por defecto piloto o main)")
     a = ap.parse_args(); sha = candado(a.piloto)
     sys.path.insert(0, str(RAIZ / "scoring"))
-    tareas = pd.read_parquet(RAIZ / "datos/tareas_unicas.parquet")
+    # --banco esco: skills/competencias esenciales ESCO (analisis/esco_banco.py), robustez exploratoria preregistrada (OSF 344-83)
+    tareas = pd.read_parquet(RAIZ / ("datos/esco_banco.parquet" if a.banco == "esco" else "datos/tareas_unicas.parquet"))
     if a.piloto: tareas = tareas.sample(a.piloto, random_state=20261020)
     if a.tareas: tareas = tareas[tareas.task_id.isin(pd.read_csv(RAIZ / a.tareas).task_id)]
     k, K = map(int, a.particion.split("/")); tareas = tareas[tareas.task_id % K == k]
-    sal = RAIZ / "scoring/salidas" / (a.salida or ("piloto" if a.piloto else "main")); sal.mkdir(parents=True, exist_ok=True)
+    sal = RAIZ / "scoring/salidas" / (a.salida or ("piloto" if a.piloto else "esco" if a.banco == "esco" else "main")); sal.mkdir(parents=True, exist_ok=True)
     suf = f".{os.environ.get('ADI_SUFIJO', 'p')}{k}" if K > 1 else ""
     for rep in range(1, a.repetir + 1):
         out = sal / (f"{a.modelo}{suf}.jsonl" if rep == 1 else f"{a.modelo}{suf}_r{rep}.jsonl")

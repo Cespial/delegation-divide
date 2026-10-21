@@ -23,6 +23,8 @@ paso pesos_oes    $PY analisis/pesos_oes.py
 paso indice       $PY analisis/indice.py $MODO
 [[ -f salidas/claims.jsonl ]] || { echo "sin salidas/claims.jsonl: el índice falló, ver $OUT/indice.log"; exit 1; }
 cp salidas/claims.jsonl $OUT/claims.jsonl
+paso robustez_esco $PY analisis/robustez_esco.py
+[[ -f salidas_robustez/claims_esco.jsonl ]] && cp salidas_robustez/claims_esco.jsonl $OUT/claims_esco.jsonl
 paso figuras      $PY analisis/figuras.py
 paso tablas       $PY analisis/tablas.py
 paso cifras       $PY articulo/generar_cifras.py

@@ -1,5 +1,6 @@
 """Genera articulo/cifras.tex desde salidas_diseno/claims_diseno.jsonl (conteos de diseño, analisis/claims_diseno.py) y
-salidas/claims.jsonl (resultados, analisis/indice.py), en ese orden; la última escritura de cada id gana. Adaptado del paper del sismo.
+salidas/claims.jsonl (resultados, analisis/indice.py), en ese orden; la última escritura de cada id gana. Después añade
+salidas_robustez/claims_esco.jsonl (analisis/robustez_esco.py) sin pisar ids ya presentes. Adaptado del paper del sismo.
 En el texto: \\cifra{id} imprime el valor formateado; \\cifraopc{id} imprime -- si falta; \\cifraabs{id} el valor absoluto;
 \\pval{id} imprime «p = …». Un id inexistente imprime ??id en negrita y qa/texto.py lo detecta.
 Formato por sufijo (último segmento del id): .pct, .l2/.l3/.share/.lo/.hi y titular.*/pais.*/gg.* → 1 decimal; .p/.p1/.p2 → 3 decimales
@@ -14,6 +15,11 @@ for ruta in (DISENO, R / "salidas/claims.jsonl"):
     if not ruta.exists(): continue
     for l in open(ruta):
         if l.strip(): d = json.loads(l); CL[d["id"]] = d
+# robustez ESCO (analisis/robustez_esco.py): se añade después y nunca pisa un id ya emitido por indice.py
+ESCO = R / "salidas_robustez/claims_esco.jsonl"
+if ESCO.exists():
+    for l in open(ESCO):
+        if l.strip() and (d := json.loads(l))["id"] not in CL: CL[d["id"]] = d
 SINT = any(d.get("sintetico") for d in CL.values())
 UNO = ("pct", "l2", "l3", "share", "lo", "hi", "minutos", "millones")
 
