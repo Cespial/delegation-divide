@@ -34,7 +34,9 @@
   146 countries).
 - **H4, task length (supported):** Full delegation peaks for tasks that take a human about twelve minutes
   (estimated peak: 11.8 minutes).
-- Model agreement (Sonnet 5.5 vs Haiku 5.5): quadratic-weighted κ = 0.77. Human validation is in progress.
+- Model agreement (Sonnet 5.5 vs Haiku 5.5): quadratic-weighted κ = 0.77. A blind human rating of 300 tasks
+  (led by a coauthor with student raters, analysed as one rating) agrees with the model consensus at κ = 0.85;
+  an agentic panel (Claude Opus 5.5 with web search, 1,500 tasks) agrees at κ = 0.87.
 
 Every number above has an id in [`salidas/claims.jsonl`](salidas/claims.jsonl) (`titular.*`, `h1.*`, `h4.pico.minutos`).
 <!-- headline:end -->

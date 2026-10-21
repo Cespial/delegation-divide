@@ -1,9 +1,10 @@
-{"id": "robustez.esco.n.skills", "valor": 8229, "t": "2026-10-21T12:30:25", "sintetico": false}
-{"id": "robustez.esco.n.isco", "valor": 424, "t": "2026-10-21T12:30:25", "sintetico": false}
-{"id": "robustez.esco.cobertura.pct", "valor": 8.615870701178759, "t": "2026-10-21T12:30:25", "sintetico": false}
-{"id": "robustez.esco.h1.pendiente", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
-{"id": "robustez.esco.h1.p", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
-{"id": "robustez.esco.h1.n", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
-{"id": "robustez.esco.titular.l2", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
-{"id": "robustez.esco.r.isco", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
-{"id": "robustez.esco.h1.pendiente.gg6", "valor": "--", "t": "2026-10-21T12:30:25", "sintetico": false, "nota": "banco ESCO puntuado al 8.6 % (< 80 %): correr scoring/correr_esco.sh"}
+{"id": "robustez.esco.n.skills", "valor": 8229, "t": "2026-10-21T15:40:06", "sintetico": false}
+{"id": "robustez.esco.n.isco", "valor": 424, "t": "2026-10-21T15:40:06", "sintetico": false}
+{"id": "robustez.esco.cobertura.pct", "valor": 100.0, "t": "2026-10-21T15:40:06", "sintetico": false}
+{"id": "robustez.esco.titular.l2", "valor": 37.99985408615776, "t": "2026-10-21T15:40:06", "sintetico": false}
+{"id": "robustez.esco.h1.pendiente", "valor": 4.662858554380108, "t": "2026-10-21T15:40:07", "sintetico": false}
+{"id": "robustez.esco.h1.p", "valor": 2.9010237568373795e-28, "t": "2026-10-21T15:40:07", "sintetico": false}
+{"id": "robustez.esco.h1.n", "valor": 146, "t": "2026-10-21T15:40:07", "sintetico": false}
+{"id": "robustez.esco.r.isco", "valor": 0.8757197627980705, "t": "2026-10-21T15:40:07", "sintetico": false}
+{"id": "robustez.esco.n.isco.comun", "valor": 421, "t": "2026-10-21T15:40:07", "sintetico": false}
+{"id": "robustez.esco.h1.pendiente.gg6", "valor": 6.921535287313673, "t": "2026-10-21T15:40:07", "sintetico": false}

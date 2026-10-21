@@ -409,7 +409,8 @@ def main():
     col_m = {m: pd.Series(L[:, nombres.index(m)], index=tid) for m in ("sonnet", "haiku") if m in nombres}
     MIN_H, MIN_P = 20, 50                                           # mínimo de tareas en común para reportar acuerdo humano / panel / envoltorio
 
-    # D2 (docs/DESVIACIONES.md): un evaluador humano ciego (Santiago, 300 tareas); α humano–humano solo con ≥ 2 hojas
+    # D2 (docs/DESVIACIONES.md): calificación humana ciega de 300 tareas liderada por Santiago con estudiantes evaluadores; no se registró
+    # quién calificó cada tarea, así que la hoja se analiza como UNA calificación humana; α humano–humano solo si hubiera ≥ 2 hojas
     rh = RAIZ / "validacion/respuestas"
     hojas = {f.stem: leer_hoja(f) for f in sorted(rh.glob("*.xlsx")) if not f.name.startswith("~$")} if rh.exists() else {}
     hojas = {k: v for k, v in hojas.items() if len(v)}
@@ -426,6 +427,9 @@ def main():
             claim("agree.exacto.humano.modelo.pct", 100 * float((hv == c_h)[c_h.notna()].mean()))
             for m, sm_ in col_m.items(): claim(f"agree.kappa.humano.{m}", kappa_cuadratica(hv.values, sm_.reindex(hv.index).values))
             claim("humano.nivel.media", float(hv[c_h.notna()].mean())); claim("modelo.nivel.media.humano", float(c_h.dropna().mean()))
+            hv_, ch_ = hv[c_h.notna()], c_h.dropna()
+            claim("humano.l2.pct", 100 * float((hv_ >= 2).mean())); claim("modelo.l2.pct.humano", 100 * float((ch_ >= 2).mean()))
+            claim("humano.l3.n", int((hv_ == 3).sum())); claim("humano.l3.consenso.l2.n", int(((hv_ == 3) & (ch_ == 2)).sum()))   # L3 humanos que el consenso deja en L2
         lg.info(f"validación humana: {Hm.shape[1]} hoja(s), {n_h} tareas calificadas con consenso")
     if hv is None or int(cons.reindex(hv.index).notna().sum()) < MIN_H:
         for i in ("agree.alpha.humano.modelo", "agree.kappa.humano.modelo", "agree.kappa.humano.sonnet", "agree.kappa.humano.haiku", "agree.exacto.humano.modelo.pct"): claim(i, "--")

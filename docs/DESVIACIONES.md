@@ -33,6 +33,14 @@ declara como limitación. (2) **Panel agéntico, reportado como validación NO h
 cita hasta 3 evidencias (`validacion/agentico/panel.py`). Se reporta su acuerdo con los modelos y con Santiago. (3) Los 1.500 × 3
 humanos preregistrados quedan como trabajo para la v2 si un árbitro lo pide.
 
+**Actualización 2026-10-21 (cómo se hizo de verdad la calificación humana):** la calificación a ciegas de las 300 tareas
+(`validacion/respuestas/hoja_Santiago_LISTA.xlsx`, 300/300 llenas) la lideró Santiago Jiménez Londoño con la ayuda de estudiantes
+evaluadores. No se registró qué tarea calificó cada persona, así que la hoja se analiza como UNA sola calificación humana y no se
+reporta acuerdo humano–humano (α ni κ entre humanos). No se nombran los estudiantes ni se dice cuántos fueron. Ningún evaluador vio
+calificaciones de modelos, del panel ni resultados del paper. El texto del artículo (secciones 1, 2, 4, 7, 8, 9 y resumen) describe la
+validación como «calificación humana ciega liderada por un coautor con estudiantes evaluadores», y mantiene como limitación que el
+líder es coautor y que, sin registro de contribuciones individuales, no hay α humano–humano.
+
 ## D3 — 2026-10-21 (11:05, DESPUÉS de ver los primeros resultados reales) · Exclusión por calidad del dato de empleo
 
 **Qué pasó:** en la primera corrida real Surinam aparecía como el país más delegable (ADI L2 = 0,82). La causa es la fuente: ILOSTAT

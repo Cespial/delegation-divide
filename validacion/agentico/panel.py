@@ -1,7 +1,8 @@
 """Adjudicación agéntica (D2): un agente con búsqueda web (Claude Opus 5.5 vía `claude -p`, distinto de los evaluadores Sonnet/Haiku)
 investiga cada tarea de la muestra de validación y la califica con la misma rúbrica, citando evidencia. Es una validación NO humana
 y se reporta aparte de la de Santiago. El agente no ve ninguna calificación de los modelos evaluadores.
-Uso: .venv/bin/python -I validacion/agentico/panel.py --muestra validacion/santiago/muestra_300.csv [--n 2] [--particion k/K]"""
+Uso: .venv/bin/python -I validacion/agentico/panel.py --muestra validacion/santiago/muestra_300.csv [--n 2] [--particion k/K] [--tareas ids.txt]
+--tareas: archivo con un task_id por línea; limita la corrida a esas tareas (p. ej. para relanzar solo las fallidas)."""
 import argparse, json, os, subprocess, sys, time, hashlib
 from datetime import datetime
 from pathlib import Path
@@ -27,12 +28,13 @@ def llamar(prompt, timeout=600):
     return d["result"], d.get("total_cost_usd", 0)
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--muestra", required=True); ap.add_argument("--n", type=int); ap.add_argument("--particion", default="0/1")
+    ap = argparse.ArgumentParser(); ap.add_argument("--muestra", required=True); ap.add_argument("--n", type=int); ap.add_argument("--particion", default="0/1"); ap.add_argument("--tareas")
     a = ap.parse_args(); k, K = map(int, a.particion.split("/"))
     t = pd.read_parquet(R / "datos/tareas_unicas.parquet"); m = pd.read_csv(R / a.muestra)
     t = t[t.task_id.isin(m.task_id) & (t.task_id % K == k)]
+    if a.tareas: t = t[t.task_id.isin({int(x) for x in Path(a.tareas).read_text().split()})]
     out = R / "validacion/agentico/salidas" / (f"panel.p{k}.jsonl" if K > 1 else "panel.jsonl"); out.parent.mkdir(parents=True, exist_ok=True)
-    hechos = {json.loads(l)["task_id"] for l in open(out) if "error" not in l} if out.exists() else set()
+    hechos = {d["task_id"] for d in map(json.loads, open(out)) if "error" not in d} if out.exists() else set()   # solo filas válidas (no basta buscar «error» como texto)
     t = t[~t.task_id.isin(hechos)]; t = t.head(a.n) if a.n else t
     base = prompt_de(RUBRICA.read_text()); print(f"{len(t)} pendientes → {out.name}")
     with open(out, "a") as f:

@@ -19,7 +19,7 @@ The same occupation elsewhere may contain different tasks, in different proporti
 The crosswalk to ISCO-08 carries the United States task mix to every country; it does not adapt it.
 The problem is sharpest in agriculture.
 O*NET has only \cifra{diseno.agro.tareas} task statements whose main ISCO group lies in major group 6, skilled agricultural, forestry and fishery workers, which employs a large share of workers in low-income countries, and \cifra{diseno.agro.en_muestra} of them fall in the human-validation sample.
-Since the delegation divide (H1) depends on that group, we rerun the country regression with the ESCO skill bank in place of O*NET tasks for major group 6 and for all groups; the slope is \cifraopc{robustez.esco.h1.pendiente} with ESCO for all groups and \cifraopc{robustez.esco.h1.pendiente.gg6} with ESCO for major group 6 only, against \cifra{h1.pendiente} with O*NET.
+Since the delegation divide (H1) depends on that group, we rerun the country regression with the ESCO skill bank in place of O*NET tasks for major group 6 and for all groups; the slope is \cifra{robustez.esco.h1.pendiente} with ESCO for all groups and \cifra{robustez.esco.h1.pendiente.gg6} with ESCO for major group 6 only, against \cifra{h1.pendiente} with O*NET.
 The same transfer problem is known from the measurement of teleworkability: a task-based feasibility measure built on O*NET \citep{dingel2020how} overstates what can be done at home in poorer countries, where the same occupations are performed with fewer digital tools \citep{gottlieb2021working}, and the access barrier in ADI plays the role that connectivity plays there \citep{gmyrek2024buffer}.
 Informal and subsistence work, which household surveys capture better than labour-force statistics by occupation, is treated in the microdata breakdowns rather than in the headline.
 
@@ -29,8 +29,8 @@ The raters are two language models from a single developer, and the usage data i
 Three risks follow.
 The first is bias: a model may rate tasks in its own domain, such as software, as more delegable than tasks it knows less well, and may share the blind spots of its training data about work outside rich countries.
 The human check that would bound this bias is weaker than the one we registered (deviation D2).
-A single human rater scores 300 tasks, and he is a coauthor: he is blind to the model ratings, but he shares the authors' framing of the question, and with one rater there is no measure of how much humans disagree with each other.
-Agreement with him bounds the bias only as far as one informed reader's judgement does, and neither he nor any small panel of graduates is a sample of the world's workers.
+The human rating of 300 tasks was led by a coauthor with the help of student raters: they were blind to the model ratings and to the results, but the lead shares the authors' framing of the question, and because which rater scored which task was not recorded there is no measure of how much humans disagree with each other.
+Agreement with that rating bounds the bias only as far as a few informed readers' judgement does, and neither they nor any small panel of graduates is a sample of the world's workers.
 The agentic panel does not fill that gap: Claude Opus 5.5 with web search brings evidence about how tasks are done, but it comes from the same developer as the two raters and may share their view of which work suits a model, so its agreement with them is a check of consistency, not of validity.
 Three independent human raters on the full 1,500 tasks remain the registered standard and are left for a second version.
 The second is circularity: if the same family of models both rates delegability and generates the usage data, agreement between the two could reflect a shared view of the world rather than validation.
@@ -61,4 +61,4 @@ The divide we name is also not symmetrical in its meaning.
 In high-income countries, high delegability describes a labour market about to reorganise; in low-income countries, low delegability describes a labour market whose work agents cannot reach, which is not the same as protection.
 Who is delegated, who delegates, and who is left outside the scope of delegation are distributional questions, and the atlas is meant to put them on the table, not to settle them.
 We use no personal data; all inputs are public statistics, public classifications or anonymised household surveys used under their licences.
-The only human rater in this version is a coauthor, who rated as part of his work on the paper; no external raters were recruited, and no personal data about raters are collected or released.
+The human rating in this version was led by a coauthor as part of his work on the paper, with the help of student raters; no external professional raters were recruited, the student raters are not identified, and no personal data about raters are collected or released.

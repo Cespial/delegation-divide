@@ -67,7 +67,9 @@ def bloque(C: dict) -> str:
   {int(v('h1.n'))} countries).
 - **H4, task length (supported):** Full delegation peaks for tasks that take a human about twelve minutes
   (estimated peak: {f1('h4.pico.minutos')} minutes).
-- Model agreement (Sonnet 5.5 vs Haiku 5.5): quadratic-weighted κ = {f2('agree.kappa.sonnet_haiku')}. Human validation is in progress.
+- Model agreement (Sonnet 5.5 vs Haiku 5.5): quadratic-weighted κ = {f2('agree.kappa.sonnet_haiku')}. A blind human rating of {int(v('n.humano'))} tasks
+  (led by a coauthor with student raters, analysed as one rating) agrees with the model consensus at κ = {f2('agree.kappa.humano.modelo')};
+  an agentic panel (Claude Opus 5.5 with web search, 1,500 tasks) agrees at κ = {f2('agree.kappa.panel.modelo')}.
 
 Every number above has an id in [`salidas/claims.jsonl`](salidas/claims.jsonl) (`titular.*`, `h1.*`, `h4.pico.minutos`).
 {FIN}"""

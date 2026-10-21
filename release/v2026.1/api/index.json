@@ -6,7 +6,7 @@
   "world_l2_pct": 35.17,
   "world_l2_ci95_pct": [
    33.88,
-   36.67
+   36.68
   ],
   "world_l3_pct": 2.5,
   "world_l3_ci95_pct": [
@@ -3102,7 +3102,7 @@
    "iso3": "AGO",
    "pais": "Angola",
    "ingreso": "lower-middle",
-   "adi_l2": 0.2737,
+   "adi_l2": 0.2736,
    "adi_l3": 0.0167,
    "adi_share": 24.96
   },
@@ -3112,7 +3112,7 @@
    "ingreso": "upper-middle",
    "adi_l2": 0.3151,
    "adi_l3": 0.0155,
-   "adi_share": 26.88
+   "adi_share": 26.89
   },
   {
    "iso3": "ARE",
@@ -3126,7 +3126,7 @@
    "iso3": "ARG",
    "pais": "Argentina",
    "ingreso": "upper-middle",
-   "adi_l2": 0.4345,
+   "adi_l2": 0.4344,
    "adi_l3": 0.0433,
    "adi_share": 34.45
   },
@@ -3174,17 +3174,17 @@
    "iso3": "BFA",
    "pais": "Burkina Faso",
    "ingreso": "low",
-   "adi_l2": 0.2554,
+   "adi_l2": 0.2553,
    "adi_l3": 0.0152,
-   "adi_share": 23.66
+   "adi_share": 23.65
   },
   {
    "iso3": "BGD",
    "pais": "Bangladesh",
    "ingreso": "lower-middle",
-   "adi_l2": 0.2776,
+   "adi_l2": 0.2777,
    "adi_l3": 0.0176,
-   "adi_share": 25.21
+   "adi_share": 25.22
   },
   {
    "iso3": "BGR",
@@ -3208,7 +3208,7 @@
    "ingreso": "upper-middle",
    "adi_l2": 0.3893,
    "adi_l3": 0.0279,
-   "adi_share": 31.73
+   "adi_share": 31.74
   },
   {
    "iso3": "BLR",
@@ -3222,9 +3222,9 @@
    "iso3": "BLZ",
    "pais": "Belize",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3796,
-   "adi_l3": 0.0306,
-   "adi_share": 30.99
+   "adi_l2": 0.3794,
+   "adi_l3": 0.0305,
+   "adi_share": 30.98
   },
   {
    "iso3": "BOL",
@@ -3294,7 +3294,7 @@
    "iso3": "CMR",
    "pais": "Cameroon",
    "ingreso": "lower-middle",
-   "adi_l2": 0.3825,
+   "adi_l2": 0.3826,
    "adi_l3": 0.0191,
    "adi_share": 30.24
   },
@@ -3302,7 +3302,7 @@
    "iso3": "COD",
    "pais": "Congo, Dem. Rep.",
    "ingreso": "low",
-   "adi_l2": 0.2432,
+   "adi_l2": 0.2433,
    "adi_l3": 0.0109,
    "adi_share": 23.0
   },
@@ -3318,9 +3318,9 @@
    "iso3": "CPV",
    "pais": "Cabo Verde",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3432,
-   "adi_l3": 0.0261,
-   "adi_share": 28.82
+   "adi_l2": 0.3431,
+   "adi_l3": 0.026,
+   "adi_share": 28.81
   },
   {
    "iso3": "CRI",
@@ -3391,7 +3391,7 @@
    "pais": "Egypt, Arab Rep.",
    "ingreso": "lower-middle",
    "adi_l2": 0.3621,
-   "adi_l3": 0.0224,
+   "adi_l3": 0.0223,
    "adi_share": 30.04
   },
   {
@@ -3431,7 +3431,7 @@
    "pais": "Fiji",
    "ingreso": "upper-middle",
    "adi_l2": 0.371,
-   "adi_l3": 0.0287,
+   "adi_l3": 0.0286,
    "adi_share": 30.56
   },
   {
@@ -3480,13 +3480,13 @@
    "ingreso": "lower-middle",
    "adi_l2": 0.2878,
    "adi_l3": 0.0189,
-   "adi_share": 25.95
+   "adi_share": 25.94
   },
   {
    "iso3": "GMB",
    "pais": "Gambia, The",
    "ingreso": "low",
-   "adi_l2": 0.3319,
+   "adi_l2": 0.3318,
    "adi_l3": 0.0218,
    "adi_share": 28.37
   },
@@ -3494,7 +3494,7 @@
    "iso3": "GNB",
    "pais": "Guinea-Bissau",
    "ingreso": "low",
-   "adi_l2": 0.2204,
+   "adi_l2": 0.2203,
    "adi_l3": 0.0113,
    "adi_share": 22.22
   },
@@ -3518,16 +3518,16 @@
    "iso3": "GRD",
    "pais": "Grenada",
    "ingreso": "upper-middle",
-   "adi_l2": 0.297,
+   "adi_l2": 0.2969,
    "adi_l3": 0.0212,
-   "adi_share": 25.88
+   "adi_share": 25.87
   },
   {
    "iso3": "GTM",
    "pais": "Guatemala",
    "ingreso": "upper-middle",
    "adi_l2": 0.3028,
-   "adi_l3": 0.0239,
+   "adi_l3": 0.0238,
    "adi_share": 26.84
   },
   {
@@ -3542,7 +3542,7 @@
    "iso3": "HND",
    "pais": "Honduras",
    "ingreso": "lower-middle",
-   "adi_l2": 0.3087,
+   "adi_l2": 0.3086,
    "adi_l3": 0.0209,
    "adi_share": 27.02
   },
@@ -3598,7 +3598,7 @@
    "iso3": "IRQ",
    "pais": "Iraq",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3683,
+   "adi_l2": 0.3682,
    "adi_l3": 0.0223,
    "adi_share": 30.58
   },
@@ -3654,7 +3654,7 @@
    "iso3": "KEN",
    "pais": "Kenya",
    "ingreso": "lower-middle",
-   "adi_l2": 0.2959,
+   "adi_l2": 0.296,
    "adi_l3": 0.0143,
    "adi_share": 25.47
   },
@@ -3679,7 +3679,7 @@
    "pais": "Kiribati",
    "ingreso": "lower-middle",
    "adi_l2": 0.325,
-   "adi_l3": 0.0195,
+   "adi_l3": 0.0194,
    "adi_share": 28.13
   },
   {
@@ -3694,9 +3694,9 @@
    "iso3": "LAO",
    "pais": "Lao PDR",
    "ingreso": "lower-middle",
-   "adi_l2": 0.2593,
+   "adi_l2": 0.2594,
    "adi_l3": 0.0147,
-   "adi_share": 24.05
+   "adi_share": 24.06
   },
   {
    "iso3": "LBN",
@@ -3710,15 +3710,15 @@
    "iso3": "LCA",
    "pais": "St. Lucia",
    "ingreso": "upper-middle",
-   "adi_l2": 0.4243,
+   "adi_l2": 0.4242,
    "adi_l3": 0.034,
-   "adi_share": 33.58
+   "adi_share": 33.57
   },
   {
    "iso3": "LKA",
    "pais": "Sri Lanka",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3333,
+   "adi_l2": 0.3334,
    "adi_l3": 0.0227,
    "adi_share": 28.44
   },
@@ -3766,7 +3766,7 @@
    "iso3": "MDG",
    "pais": "Madagascar",
    "ingreso": "low",
-   "adi_l2": 0.1968,
+   "adi_l2": 0.1969,
    "adi_l3": 0.0088,
    "adi_share": 20.48
   },
@@ -3775,7 +3775,7 @@
    "pais": "Maldives",
    "ingreso": "upper-middle",
    "adi_l2": 0.4342,
-   "adi_l3": 0.0327,
+   "adi_l3": 0.0326,
    "adi_share": 34.2
   },
   {
@@ -3783,7 +3783,7 @@
    "pais": "Mexico",
    "ingreso": "upper-middle",
    "adi_l2": 0.3676,
-   "adi_l3": 0.0278,
+   "adi_l3": 0.0277,
    "adi_share": 30.32
   },
   {
@@ -3799,7 +3799,7 @@
    "pais": "North Macedonia",
    "ingreso": "upper-middle",
    "adi_l2": 0.4215,
-   "adi_l3": 0.0292,
+   "adi_l3": 0.0291,
    "adi_share": 33.61
   },
   {
@@ -3830,8 +3830,8 @@
    "iso3": "MNE",
    "pais": "Montenegro",
    "ingreso": "upper-middle",
-   "adi_l2": 0.4976,
-   "adi_l3": 0.0409,
+   "adi_l2": 0.4975,
+   "adi_l3": 0.0408,
    "adi_share": 37.92
   },
   {
@@ -3878,15 +3878,15 @@
    "iso3": "NER",
    "pais": "Niger",
    "ingreso": "low",
-   "adi_l2": 0.2347,
+   "adi_l2": 0.2348,
    "adi_l3": 0.0138,
-   "adi_share": 22.75
+   "adi_share": 22.76
   },
   {
    "iso3": "NGA",
    "pais": "Nigeria",
    "ingreso": "lower-middle",
-   "adi_l2": 0.2964,
+   "adi_l2": 0.2963,
    "adi_l3": 0.0204,
    "adi_share": 26.36
   },
@@ -3910,7 +3910,7 @@
    "iso3": "NPL",
    "pais": "Nepal",
    "ingreso": "lower-middle",
-   "adi_l2": 0.3478,
+   "adi_l2": 0.3477,
    "adi_l3": 0.0219,
    "adi_share": 28.88
   },
@@ -3942,7 +3942,7 @@
    "iso3": "PER",
    "pais": "Peru",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3302,
+   "adi_l2": 0.3303,
    "adi_l3": 0.0239,
    "adi_share": 28.63
   },
@@ -3951,7 +3951,7 @@
    "pais": "Philippines",
    "ingreso": "upper-middle",
    "adi_l2": 0.3528,
-   "adi_l3": 0.0318,
+   "adi_l3": 0.0317,
    "adi_share": 29.69
   },
   {
@@ -3998,7 +3998,7 @@
    "iso3": "PRY",
    "pais": "Paraguay",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3623,
+   "adi_l2": 0.3622,
    "adi_l3": 0.0271,
    "adi_share": 29.92
   },
@@ -4006,7 +4006,7 @@
    "iso3": "PSE",
    "pais": "West Bank and Gaza",
    "ingreso": "lower-middle",
-   "adi_l2": 0.3637,
+   "adi_l2": 0.3636,
    "adi_l3": 0.0211,
    "adi_share": 30.05
   },
@@ -4046,7 +4046,7 @@
    "iso3": "SDN",
    "pais": "Sudan",
    "ingreso": "low",
-   "adi_l2": 0.2788,
+   "adi_l2": 0.2787,
    "adi_l3": 0.015,
    "adi_share": 25.4
   },
@@ -4062,7 +4062,7 @@
    "iso3": "SLV",
    "pais": "El Salvador",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3362,
+   "adi_l2": 0.3361,
    "adi_l3": 0.0273,
    "adi_share": 28.62
   },
@@ -4072,7 +4072,7 @@
    "ingreso": "low",
    "adi_l2": 0.3919,
    "adi_l3": 0.0168,
-   "adi_share": 32.09
+   "adi_share": 32.1
   },
   {
    "iso3": "SRB",
@@ -4110,7 +4110,7 @@
    "iso3": "SWZ",
    "pais": "Eswatini",
    "ingreso": "lower-middle",
-   "adi_l2": 0.3391,
+   "adi_l2": 0.339,
    "adi_l3": 0.0218,
    "adi_share": 29.02
   },
@@ -4126,7 +4126,7 @@
    "iso3": "TCD",
    "pais": "Chad",
    "ingreso": "low",
-   "adi_l2": 0.242,
+   "adi_l2": 0.2421,
    "adi_l3": 0.0146,
    "adi_share": 23.18
   },
@@ -4134,7 +4134,7 @@
    "iso3": "TGO",
    "pais": "Togo",
    "ingreso": "lower-middle",
-   "adi_l2": 0.3005,
+   "adi_l2": 0.3004,
    "adi_l3": 0.0209,
    "adi_share": 26.64
   },
@@ -4152,13 +4152,13 @@
    "ingreso": "lower-middle",
    "adi_l2": 0.265,
    "adi_l3": 0.017,
-   "adi_share": 24.34
+   "adi_share": 24.35
   },
   {
    "iso3": "TON",
    "pais": "Tonga",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3311,
+   "adi_l2": 0.3312,
    "adi_l3": 0.0209,
    "adi_share": 28.37
   },
@@ -4175,30 +4175,30 @@
    "pais": "Turkiye",
    "ingreso": "upper-middle",
    "adi_l2": 0.3826,
-   "adi_l3": 0.0282,
+   "adi_l3": 0.0281,
    "adi_share": 31.24
   },
   {
    "iso3": "TUV",
    "pais": "Tuvalu",
    "ingreso": "upper-middle",
-   "adi_l2": 0.5068,
-   "adi_l3": 0.0354,
+   "adi_l2": 0.5069,
+   "adi_l3": 0.0353,
    "adi_share": 38.31
   },
   {
    "iso3": "TZA",
    "pais": "Tanzania",
    "ingreso": "lower-middle",
-   "adi_l2": 0.1981,
+   "adi_l2": 0.1983,
    "adi_l3": 0.0094,
-   "adi_share": 20.19
+   "adi_share": 20.2
   },
   {
    "iso3": "UGA",
    "pais": "Uganda",
    "ingreso": "low",
-   "adi_l2": 0.2141,
+   "adi_l2": 0.214,
    "adi_l3": 0.0107,
    "adi_share": 21.44
   },
@@ -4232,13 +4232,13 @@
    "ingreso": "lower-middle",
    "adi_l2": 0.255,
    "adi_l3": 0.0127,
-   "adi_share": 23.74
+   "adi_share": 23.75
   },
   {
    "iso3": "WSM",
    "pais": "Samoa",
    "ingreso": "upper-middle",
-   "adi_l2": 0.3457,
+   "adi_l2": 0.3456,
    "adi_l3": 0.0216,
    "adi_share": 29.06
   },
@@ -4254,7 +4254,7 @@
    "iso3": "ZWE",
    "pais": "Zimbabwe",
    "ingreso": "lower-middle",
-   "adi_l2": 0.2223,
+   "adi_l2": 0.2222,
    "adi_l3": 0.0092,
    "adi_share": 21.99
   }

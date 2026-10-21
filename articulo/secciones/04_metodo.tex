@@ -70,27 +70,28 @@ The registration specifies three human raters who each rate the same 1,500 tasks
 Before any result of the main pass was opened, we replaced that design for reasons of time and cost; the change is dated and justified as deviation D2 in \texttt{docs/DESVIACIONES.md}.
 The validation now has two parts.
 
-\emph{One blind human rater.}
-Santiago Jim\'enez Londo\~no, a coauthor, rates a subsample of 300 of the 1,500 validation tasks, stratified by ISCO-08 major group with at least 20 tasks per group (seed 20261025; \texttt{validacion/santiago/muestra\_300.csv}).
+\emph{Blind human rating.}
+A subsample of 300 of the 1,500 validation tasks, stratified by ISCO-08 major group with at least 20 tasks per group (seed 20261025; \texttt{validacion/santiago/muestra\_300.csv}), was rated blind by a group led by Santiago Jim\'enez Londo\~no, a coauthor, with the help of student raters.
 The 1,500-task sample is the registered one, stratified by major group in proportion to world employment (\texttt{validacion/muestra.py}, seed 20261020).
-He works from the frozen rubric and the rater guide, is trained on 20 practice tasks outside the sample, rates in a spreadsheet that contains no model or panel output, and does not use AI tools while rating.
-We report Krippendorff's alpha for ordinal data \citep{krippendorff2004reliability} and quadratic-weighted kappa \citep{cohen1968weighted} between his ratings and the model consensus ($\alpha$ = \cifraopc{agree.alpha.humano.modelo}; $\kappa$ = \cifraopc{agree.kappa.humano.modelo}; exact agreement \cifraopc{agree.exacto.humano.modelo.pct}\%; \cifraopc{n.humano} tasks), and kappa with each model separately (Sonnet \cifraopc{agree.kappa.humano.sonnet}; Haiku \cifraopc{agree.kappa.humano.haiku}).
+The raters worked from the frozen rubric and the rater guide, were trained on 20 practice tasks outside the sample, rated in a spreadsheet that contained no model or panel output and no result of the paper, and did not use AI tools while rating.
+Which rater scored which task was not recorded, so the sheet is analysed as one human rating.
+We report Krippendorff's alpha for ordinal data \citep{krippendorff2004reliability} and quadratic-weighted kappa \citep{cohen1968weighted} between that rating and the model consensus ($\alpha$ = \cifra{agree.alpha.humano.modelo}; $\kappa$ = \cifra{agree.kappa.humano.modelo}; exact agreement \cifra{agree.exacto.humano.modelo.pct}\%; \cifra{n.humano} tasks), and kappa with each model separately (Sonnet \cifra{agree.kappa.humano.sonnet}; Haiku \cifra{agree.kappa.humano.haiku}).
 The preregistered acceptance threshold for the primary rater, $\alpha \geq 0.60$, is kept and results are reported whatever the value.
 Two features of this design are limitations, not details.
-The rater is an author of the paper, not an independent rater in the sense of the registration; and with a single rater no human--human agreement can be computed, so the human figures carry no estimate of how much humans disagree among themselves.
+The rating was led by an author of the paper, not by independent raters in the sense of the registration; and because individual contributions were not recorded, no human--human agreement can be computed, so the human figures carry no estimate of how much humans disagree among themselves.
 With 300 instead of 1,500 tasks the confidence interval of alpha is also wider than the registered design allowed for.
 
 \emph{An agentic panel, reported as non-human validation.}
 Claude Opus 5.5, a model that plays no part in the index, rates the 1,500 validation tasks through the same command-line interface (\texttt{claude -p}) with web search enabled, at most four searches per task; it applies the same rubric and returns up to three pieces of cited evidence with each rating (\texttt{validacion/agentico/panel.py}).
 The panel tests whether a rater that can look up how a task is actually done, and what rules govern it, reaches the levels that the raters without tools assign.
-We report its agreement with the model consensus, with each model and, on the tasks they share, with the human rater.
+We report its agreement with the model consensus, with each model and, on the tasks they share, with the human rating.
 The panel is a language model from the same developer as the raters, so it is not human validation and is never reported as such.
 
 The registered design, three human raters on all 1,500 tasks, is left for a second version of the paper.
 
 \emph{Sensitivity to the interface wrapper.}
 As preregistered, each model re-rates the 1,500 validation tasks under the interface's default system prompt, which describes the model as a coding agent with tools, instead of the neutral configuration (\texttt{scoring/salidas/envoltorio\_cc/}).
-We report, model by model and on the same tasks, the mean level and the share at L2 or above under each configuration, quadratic-weighted kappa between the two, and the agreement of each with the human rater.
+We report, model by model and on the same tasks, the mean level and the share at L2 or above under each configuration, quadratic-weighted kappa between the two, and the agreement of each with the human rating.
 
 \subsection{Convergent validity}
 
