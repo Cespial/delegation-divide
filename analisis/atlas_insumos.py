@@ -1,6 +1,7 @@
 """Paso 10: insumos del atlas por país. ILOSTAT empleo por ISCO-08 a 1 y 2 dígitos (último año ≥ 2019), informalidad, salario,
 sexo×edad; Banco Mundial ingreso y PIB pc PPA. Salida: datos/atlas/paises.parquet (largo: iso3, anio, resolucion, grupo, empleo)
-+ datos/atlas/paises_meta.csv + datos/atlas/COBERTURA.md (Tabla 2)."""
++ datos/atlas/paises_meta.csv + datos/atlas/COBERTURA.md (Tabla 2); también paises_sin_d3.parquet y paises_meta_sin_d3.csv
+(antes de la exclusión D3, para la sensibilidad con los países originales)."""
 import sys; sys.path.insert(0, "noche")
 from comun import *
 import pandas as pd, numpy as np
@@ -32,18 +33,23 @@ cal = largo.groupby(["iso3", "anio"]).agg(empleo=("empleo", "sum"), gg=("grupo",
 cal["cobertura"] = cal.empleo / cal.set_index(["iso3", "anio"]).index.map(tot).values
 fuera = cal[(cal.cobertura < 0.75) | (cal.gg < 6)]
 for r in fuera.itertuples(): lg.warning(f"D3 excluido {r.iso3} {r.anio}: cobertura {r.cobertura:.0%}, {r.gg} grandes grupos")
+largo_sin_d3 = largo.copy()   # sensibilidad D3: atlas con los países originales (analisis/indice.py, claims d3.*)
 largo = largo[~largo.iso3.isin(fuera.iso3)]
 (A / "EXCLUIDOS_D3.csv").write_text(fuera.round(3).to_csv(index=False))
 # Metadatos: ingreso, PIB pc, población, informalidad agregada, resolución
 wb = pd.read_csv(W / "paises_ingreso.csv")
 pib = pd.read_csv(W / "pib_pc_ppp.csv").dropna().sort_values("anio").drop_duplicates("iso3", keep="last").rename(columns={"valor": "pib_pc_ppp", "anio": "anio_pib"})
 pob = pd.read_csv(W / "poblacion.csv").dropna().sort_values("anio").drop_duplicates("iso3", keep="last").rename(columns={"valor": "poblacion"})[["iso3", "poblacion"]]
-meta = largo.groupby("iso3").agg(anio=("anio", "max"), resolucion=("resolucion", "max"), n_grupos=("grupo", "nunique"), empleo_total=("empleo", "sum")).reset_index()
+meta = largo_sin_d3.groupby("iso3").agg(anio=("anio", "max"), resolucion=("resolucion", "max"), n_grupos=("grupo", "nunique"), empleo_total=("empleo", "sum")).reset_index()
 meta = meta.merge(wb[["iso3", "pais", "region", "ingreso", "ingreso_id"]], on="iso3", how="left").merge(pib[["iso3", "pib_pc_ppp", "anio_pib"]], on="iso3", how="left").merge(pob, on="iso3", how="left")
 inf = I / "informal_tasa_isco_todos.csv"
 if inf.exists():
     f = pd.read_csv(inf); f = f[(f.SEX == "SEX_T") & (f.OCU == "OCU_ISCO08_TOTAL")].sort_values("TIME_PERIOD").drop_duplicates("REF_AREA", keep="last")
     meta = meta.merge(f[["REF_AREA", "OBS_VALUE"]].rename(columns={"REF_AREA": "iso3", "OBS_VALUE": "informalidad_pct"}), on="iso3", how="left")
+# Todas las columnas de meta son por país: filtrar después de construirla da lo mismo que construirla sobre `largo`.
+largo_sin_d3.to_parquet(A / "paises_sin_d3.parquet", index=False); meta.to_csv(A / "paises_meta_sin_d3.csv", index=False)
+registrar(A / "paises_sin_d3.parquet", "derivado: atlas_insumos.py", nota=f"sensibilidad D3: {meta.iso3.nunique()} países sin la exclusión")
+meta = meta[~meta.iso3.isin(fuera.iso3)].reset_index(drop=True)
 largo.to_parquet(A / "paises.parquet", index=False); meta.to_csv(A / "paises_meta.csv", index=False)
 registrar(A / "paises.parquet", "derivado: atlas_insumos.py", nota=f"{meta.iso3.nunique()} países"); registrar(A / "paises_meta.csv", "derivado: atlas_insumos.py")
 # Tabla 2

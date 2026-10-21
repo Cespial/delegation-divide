@@ -36,7 +36,7 @@ Calls whose output fails validation (malformed JSON, a level outside 0--3, a sha
 The call format was settled in the discarded pilot by two tests, both run before registration.
 First, rating tasks in batches of \cifra{diseno.piloto.lote.tareas} per call agreed with one-task calls at quadratic-weighted $\kappa$ = \cifra{diseno.piloto.lote.sonnet.kappa} for Sonnet and \cifra{diseno.piloto.lote.haiku.kappa} for Haiku, below the preregistered floor of 0.80, so batching was rejected and the main pass uses one task per call.
 Second, the interface's default wrapper, which tells the model that it is a coding agent with tools, raised the mean level from \cifra{diseno.piloto.neutro.nivel} under the neutral configuration to \cifra{diseno.piloto.envoltorio.nivel} (agreement between the two, $\kappa$ = \cifra{diseno.piloto.envoltorio.kappa}).
-The main pass therefore uses the neutral configuration, and a preregistered sensitivity analysis re-rates the 1,500 tasks of the human-validation sample with the default wrapper (Section~\ref{sec:limites}).
+The main pass therefore uses the neutral configuration, and a preregistered sensitivity analysis re-rates the 1,500 tasks of the validation sample with the default wrapper (Sections~\ref{sec:validacion_humana} and~\ref{sec:validacion}).
 
 \subsection{Aggregation}
 
@@ -63,14 +63,34 @@ where $e_{cg}$ is ILOSTAT employment and $g$ runs over two-digit sub-major group
 Within a reported group, unit-group indices are averaged with employment weights from microdata of a country in the same World Bank income group, as preregistered. No country publishes employment at the four-digit level in ILOSTAT, so we borrow the within-group structure from two sources mapped through the same bridge as the tasks: United States Occupational Employment and Wage Statistics for May 2024 \citep{bls2025oes} for high-income countries, and Colombia's household survey (GEIH, 2024--2026) \citep{dane2026geih} for middle- and low-income countries. The second is a stated loan for lower-middle and low-income countries, where no four-digit microdata were available to us. Two sensitivity checks are reported: equal weights within each group (preregistered) and GEIH weights for every country.
 The world headline is the employment-weighted mean of $\mathrm{ADI}_c$ over the \cifra{diseno.atlas.paises} included countries, and the income-group figures are the same mean within each group.
 
-\subsection{Human validation}
+\subsection{Human and agentic validation}
+\label{sec:validacion_humana}
 
-Three raters with at least a university degree in economics, engineering or social science rate 1,500 tasks each.
-The sample is stratified by ISCO-08 major group in proportion to world employment, with a minimum of 60 tasks per group (\texttt{validacion/muestra.py}, seed 20261020); each rater receives the same tasks in an independent random order (seeds 20261021--20261023) in a spreadsheet that contains the rubric and no model output.
-Raters are blind to the models and to each other, are trained on 20 practice tasks outside the sample, and are asked not to use AI tools while rating.
-We report quadratic-weighted kappa \citep{cohen1968weighted} for each pair of raters and Krippendorff's alpha for ordinal data \citep{krippendorff2004reliability} among the three humans (\cifra{agree.alpha.humano}; pairwise $\kappa$ from \cifra{agree.kappa.humano.min} to \cifra{agree.kappa.humano.max}) and between the human majority and the model consensus (\cifra{agree.alpha.humano.modelo}; $\kappa$ = \cifra{agree.kappa.humano.modelo}).
-The preregistered acceptance threshold for the primary rater is $\alpha \geq 0.60$; results are reported whatever the value.
-The 1,500 tasks give a 95\% confidence-interval half-width below 0.03 for an alpha near 0.60.
+The registration specifies three human raters who each rate the same 1,500 tasks blind \citep{espinal2026prereg}.
+Before any result of the main pass was opened, we replaced that design for reasons of time and cost; the change is dated and justified as deviation D2 in \texttt{docs/DESVIACIONES.md}.
+The validation now has two parts.
+
+\emph{One blind human rater.}
+Santiago Jim\'enez Londo\~no, a coauthor, rates a subsample of 300 of the 1,500 validation tasks, stratified by ISCO-08 major group with at least 20 tasks per group (seed 20261025; \texttt{validacion/santiago/muestra\_300.csv}).
+The 1,500-task sample is the registered one, stratified by major group in proportion to world employment (\texttt{validacion/muestra.py}, seed 20261020).
+He works from the frozen rubric and the rater guide, is trained on 20 practice tasks outside the sample, rates in a spreadsheet that contains no model or panel output, and does not use AI tools while rating.
+We report Krippendorff's alpha for ordinal data \citep{krippendorff2004reliability} and quadratic-weighted kappa \citep{cohen1968weighted} between his ratings and the model consensus ($\alpha$ = \cifraopc{agree.alpha.humano.modelo}; $\kappa$ = \cifraopc{agree.kappa.humano.modelo}; exact agreement \cifraopc{agree.exacto.humano.modelo.pct}\%; \cifraopc{n.humano} tasks), and kappa with each model separately (Sonnet \cifraopc{agree.kappa.humano.sonnet}; Haiku \cifraopc{agree.kappa.humano.haiku}).
+The preregistered acceptance threshold for the primary rater, $\alpha \geq 0.60$, is kept and results are reported whatever the value.
+Two features of this design are limitations, not details.
+The rater is an author of the paper, not an independent rater in the sense of the registration; and with a single rater no human--human agreement can be computed, so the human figures carry no estimate of how much humans disagree among themselves.
+With 300 instead of 1,500 tasks the confidence interval of alpha is also wider than the registered design allowed for.
+
+\emph{An agentic panel, reported as non-human validation.}
+Claude Opus 5.5, a model that plays no part in the index, rates the 1,500 validation tasks through the same command-line interface (\texttt{claude -p}) with web search enabled, at most four searches per task; it applies the same rubric and returns up to three pieces of cited evidence with each rating (\texttt{validacion/agentico/panel.py}).
+The panel tests whether a rater that can look up how a task is actually done, and what rules govern it, reaches the levels that the raters without tools assign.
+We report its agreement with the model consensus, with each model and, on the tasks they share, with the human rater.
+The panel is a language model from the same developer as the raters, so it is not human validation and is never reported as such.
+
+The registered design, three human raters on all 1,500 tasks, is left for a second version of the paper.
+
+\emph{Sensitivity to the interface wrapper.}
+As preregistered, each model re-rates the 1,500 validation tasks under the interface's default system prompt, which describes the model as a coding agent with tools, instead of the neutral configuration (\texttt{scoring/salidas/envoltorio\_cc/}).
+We report, model by model and on the same tasks, the mean level and the share at L2 or above under each configuration, quadratic-weighted kappa between the two, and the agreement of each with the human rater.
 
 \subsection{Convergent validity}
 

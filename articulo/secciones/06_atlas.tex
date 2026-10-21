@@ -12,7 +12,7 @@ The headline does not depend on how unit groups are weighted inside the groups a
 With equal weights, the preregistered sensitivity check, it is \cifra{titular.global.l2.iguales}\% (\cifra{titular.global.l3.iguales}\% at L3); with Colombian weights for every country it is \cifra{titular.global.l2.geih}\% (\cifra{titular.global.l3.geih}\% at L3); without any employment weighting of unit groups it is \cifra{titular.global.l2.sin_ponderar}\%.
 
 Four countries were excluded after the first real run because their occupational employment data do not add up to their total employment: Suriname, Senegal, Comoros and Hong Kong (deviation D3 in \texttt{docs/DESVIACIONES.md}).
-The rule was set after seeing results, so we also computed the headline and the H1 slope with the original country set; both are almost unchanged, and no conclusion depends on the exclusion.
+The rule was set after seeing results, so we also computed the headline and the H1 slope with the original \cifra{d3.n.paises} countries: the headline is \cifra{d3.titular.l2.150}\% (against \cifra{d3.titular.l2.con_regla}\%) and the slope \cifra{d3.h1.pendiente.150} (against \cifra{h1.pendiente}). No conclusion depends on the exclusion.
 
 \begin{figure}[t]
   \centering
@@ -52,8 +52,8 @@ Section~\ref{sec:limites} discusses what the transfer of the United States task 
 \subsection{Countries}
 
 The extremes of the atlas follow the same logic.
-The most delegable countries are small, service-intensive, high-income economies: Singapore and Luxembourg lead, followed by the United Kingdom, Sweden, the Netherlands and Israel.
-The least delegable are agrarian, low- and lower-middle-income economies in Africa: Burundi, Mozambique, Madagascar, Tanzania, Lesotho and Ethiopia.
+The most delegable countries are small, service-intensive, high-income economies: \cifra{extremo.pais.top1.nombre} (\cifra{extremo.pais.top1.l2}\%), \cifra{extremo.pais.top2.nombre} (\cifra{extremo.pais.top2.l2}\%) and \cifra{extremo.pais.top3.nombre} (\cifra{extremo.pais.top3.l2}\%) lead, followed closely by Sweden, the Netherlands and Israel.
+The least delegable are agrarian, low- and lower-middle-income economies in Africa: \cifra{extremo.pais.bot1.nombre} (\cifra{extremo.pais.bot1.l2}\%), \cifra{extremo.pais.bot2.nombre} (\cifra{extremo.pais.bot2.l2}\%) and \cifra{extremo.pais.bot3.nombre} (\cifra{extremo.pais.bot3.l2}\%), followed by Tanzania, Lesotho and Ethiopia.
 Among large economies, Colombia stands at \cifra{pais.COL.l2}\%, Mexico at \cifra{pais.MEX.l2}\% and Brazil at \cifra{pais.BRA.l2}\%, against \cifra{pais.USA.l2}\% in the United States and \cifra{pais.IND.l2}\% in India.
 The three Latin American countries sit above the upper-middle-income average, close to the world headline.
 The full country table, with bootstrap intervals and the equal-weight variant, is released as \texttt{salidas/adi\_pais.csv}.

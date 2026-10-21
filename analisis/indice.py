@@ -86,6 +86,45 @@ def leer_modelo(p):
     return ok[["task_id"] + CAMPOS].set_index("task_id"), len(fallos)
 
 
+def leer_union(rutas):
+    """Une varios JSONL (particiones de un mismo pase): descarta errores y líneas truncadas, deja la última fila válida por task_id (por ts)."""
+    filas = []
+    for p in rutas:
+        for l in open(p):
+            if not l.strip(): continue
+            try: filas.append(json.loads(l))
+            except json.JSONDecodeError: pass                      # línea a medio escribir por un proceso en curso
+    d = pd.DataFrame(filas)
+    if d.empty or "level" not in d: return pd.DataFrame(columns=CAMPOS).rename_axis("task_id")
+    if "error" not in d: d["error"] = np.nan
+    d = d[d.error.isna() & d.level.isin([0, 1, 2, 3])]
+    if "ts" in d: d = d.sort_values("ts", kind="stable")
+    return d.drop_duplicates("task_id", keep="last").set_index("task_id")[CAMPOS]
+
+
+def leer_hoja(f):
+    """Hoja de un evaluador humano (formato validacion/santiago/hoja_Santiago.xlsx): serie task_id → nivel 0..3 (solo filas llenas)."""
+    try: x = pd.read_excel(f, sheet_name="2_tareas_300")
+    except ValueError: x = pd.read_excel(f)
+    col = next((c for c in x.columns if str(c).lower().startswith(("level", "nivel"))), None)
+    if col is None or "task_id" not in x: return pd.Series(dtype=float)
+    s = pd.Series(pd.to_numeric(x[col], errors="coerce").values, index=pd.to_numeric(x.task_id, errors="coerce").values).dropna()
+    s = s[s.index.notna() & s.isin([0, 1, 2, 3])]; s = s[~s.index.duplicated(keep="last")]; s.index = s.index.astype(int)
+    return s
+
+
+def esc_tex(t): return re.sub(r"([&%#_$])", r"\\\1", str(t))
+
+
+ARTICULO = re.compile(r"^(United |Netherlands|Philippines|Gambia|Bahamas|Czech Republic|Dominican Republic|Central African|Maldives|Solomon|Marshall|"
+                      r"Comoros|Seychelles|Russian Federation|Slovak Republic|Kyrgyz Republic|Lao PDR|Syrian|Democratic|Republic|West Bank|Turks|Cayman|Virgin|Faroe)")
+
+
+def con_articulo(pais):
+    """Nombre de país para usar a mitad de frase en inglés («the United Kingdom»)."""
+    return ("the " + pais) if ARTICULO.match(str(pais)) else str(pais)
+
+
 def alpha_ordinal(M):
     """Krippendorff α ordinal; M = unidades × evaluadores con valores 0..3 o NaN."""
     M = np.asarray(M, float); cnt = np.stack([(M == c).sum(1) for c in range(4)], 1).astype(float)
@@ -188,10 +227,12 @@ def main():
     claim("cobertura.oes.isco", int((v_oes > 0).sum()))
     ingreso_de = meta.set_index("iso3").ingreso_id.to_dict()
     v_ingreso = lambda c: v_oes if ingreso_de.get(c) == "HIC" else v_geih
-    def matriz(v):
-        """M[c,u] = (e_cg / E_c) · v_u / V_g ; v es un vector o una función país → vector; V_g = 0 → pesos iguales en el grupo."""
-        M = np.zeros((len(ciso), len(isco))); E = np.zeros(len(ciso))
-        for ci, (c, d) in enumerate(paises.groupby("iso3")):
+    def matriz(v, P=None):
+        """M[c,u] = (e_cg / E_c) · v_u / V_g ; v es un vector o una función país → vector; V_g = 0 → pesos iguales en el grupo.
+        P: atlas largo (por defecto `paises`); filas de M en orden alfabético de iso3."""
+        P = paises if P is None else P; nc = P.iso3.nunique()
+        M = np.zeros((nc, len(isco))); E = np.zeros(nc)
+        for ci, (c, d) in enumerate(P.groupby("iso3")):
             vc = v(c) if callable(v) else v
             for g, e in zip(d.grupo, d.empleo):
                 u = np.flatnonzero(np.char.startswith(isco.astype(str), g))
@@ -231,6 +272,15 @@ def main():
         r = pa[pa.iso3 == iso]
         if len(r): claim(f"pais.{iso}.l2", 100 * r.adi_l2.iat[0])
 
+    # --- extremos (3 ISCO y 3 países con mayor y menor ADI L2; empates en L2 se ordenan por ADIs)
+    for nom, df, idc, nomc in (("isco", occ, "isco08", "titulo"), ("pais", pa, "iso3", "pais")):
+        s = df.sort_values(["adi_l2", "adi_share"], ascending=False, kind="stable").reset_index(drop=True)
+        claim(f"extremo.{nom}.n.max", int((df.adi_l2 >= df.adi_l2.max() - 1e-9).sum())); claim(f"extremo.{nom}.n.min", int((df.adi_l2 <= df.adi_l2.min() + 1e-9).sum()))
+        for k in range(3):
+            for pre, r in (("top", s.iloc[k]), ("bot", s.iloc[len(s) - 1 - k])):
+                claim(f"extremo.{nom}.{pre}{k + 1}.l2", 100 * r.adi_l2); claim(f"extremo.{nom}.{pre}{k + 1}.id", str(r[idc]))
+                claim(f"extremo.{nom}.{pre}{k + 1}.nombre", esc_tex(con_articulo(r[nomc]) if nom == "pais" else r[nomc][:1].lower() + r[nomc][1:]))
+
     # --- por modelo (exploratorio)
     for j, m in enumerate(nombres):
         okm = ~np.isnan(L[ti, j]); Xm = np.stack([(L[ti, j] >= 2), (L[ti, j] == 3)], 1).astype(float)
@@ -258,6 +308,19 @@ def main():
     r1g = sm.OLS(100 * h.adi_l2_geih, sm.add_constant(h.lpib)).fit(); claim("h1.pendiente.geih", r1g.params.lpib)
     r1s = sm.OLS(h.adi_share, sm.add_constant(h.lpib)).fit(); claim("h1.pendiente.share", r1s.params.lpib)
     r1r = sm.OLS(h.y, sm.add_constant(h.lpib)).fit(cov_type="HC1"); claim("h1.se.hc1", r1r.bse.lpib)
+    # D3 (docs/DESVIACIONES.md): titular y pendiente H1 con los países originales, antes de la exclusión por calidad del dato
+    p0, m0 = DATOS / "atlas/paises_sin_d3.parquet", DATOS / "atlas/paises_meta_sin_d3.csv"
+    if p0.exists() and m0.exists():
+        P0 = pd.read_parquet(p0); P0 = P0[P0.empleo > 0]; meta0 = pd.read_csv(m0); ing0 = meta0.set_index("iso3").ingreso_id.to_dict()
+        M0, E0 = matriz(lambda c: v_oes if ing0.get(c) == "HIC" else v_geih, P0)
+        d0 = pd.DataFrame({"iso3": sorted(P0.iso3.unique()), "y": 100 * (M0 @ O[:, 0]), "e": E0})
+        claim("d3.titular.l2.150", float(np.average(d0.y, weights=d0.e))); claim("d3.n.paises", len(d0))
+        claim("d3.titular.l2.con_regla", 100 * float(wE @ C[:, 0]), nota="= titular.global.l2, con 2 decimales para compararlo con d3.titular.l2.150")
+        d0 = d0.merge(meta0[["iso3", "pib_pc_ppp"]], on="iso3").dropna()
+        r0 = sm.OLS(d0.y, sm.add_constant(np.log(d0.pib_pc_ppp))).fit(); claim("d3.h1.pendiente.150", r0.params.iloc[1]); claim("d3.h1.n", int(r0.nobs))
+        lg.info(f"D3 sensibilidad: {P0.iso3.nunique()} países, titular {np.average(100 * (M0 @ O[:, 0]), weights=E0):.3f}, pendiente {r0.params.iloc[1]:.3f}")
+    else:
+        for i in ("d3.titular.l2.150", "d3.h1.pendiente.150", "d3.n.paises"): claim(i, "--", nota="falta datos/atlas/paises_sin_d3.parquet (correr analisis/atlas_insumos.py)")
     reg = {"h1a": {"coef": r1.params.to_dict(), "se": r1.bse.to_dict(), "p_una_cola": {"lpib": p1}, "n": int(r1.nobs), "r2": r1.rsquared},
            "h1b": {"coef": r2.params.to_dict(), "se": r2.bse.to_dict(), "p_una_cola": {k: stats.t.cdf(r2.params[k] / r2.bse[k], r2.df_resid) for k in D.columns}, "n": int(r2.nobs), "r2": r2.rsquared},
            "h1a_iguales": {"coef": r1i.params.to_dict(), "se": r1i.bse.to_dict(), "n": int(r1i.nobs), "r2": r1i.rsquared}}
@@ -272,6 +335,10 @@ def main():
         r3 = sm.OLS(h2.brecha, sm.add_constant(D2)).fit()
         for k in ("lower-middle", "upper-middle"):
             claim(f"h2.b.{CORTO[k]}", r3.params[k]); claim(f"h2.b.{CORTO[k]}.p", stats.t.sf(r3.params[k] / r3.bse[k], r3.df_resid))
+        if D2["low"].sum() > 0:
+            claim("h2.b.bajo", r3.params["low"]); claim("h2.b.bajo.p", r3.pvalues["low"], nota="bilateral: H2 no predice signo para ingreso bajo")
+        else:
+            claim("h2.b.bajo", "--"); claim("h2.b.bajo.p", "--")
         D3 = pd.DataFrame({"low": D2["low"], "medio": D2["lower-middle"] + D2["upper-middle"]})
         r4 = sm.OLS(h2.brecha, sm.add_constant(D3)).fit()
         claim("h2.brecha.medio", r4.params.medio); claim("h2.brecha.medio.p", stats.t.sf(r4.params.medio / r4.bse.medio, r4.df_resid)); claim("h2.n", len(h2))
@@ -279,7 +346,7 @@ def main():
         pa = pa.merge(u, on="iso3", how="left"); pa.loc[pa.iso3.isin(h2.iso3), "brecha_h2"] = h2.set_index("iso3").brecha.reindex(pa.iso3[pa.iso3.isin(h2.iso3)]).values
         reg["h2"] = {"coef": r3.params.to_dict(), "se": r3.bse.to_dict(), "p_una_cola": {k: stats.t.sf(r3.params[k] / r3.bse[k], r3.df_resid) for k in ("lower-middle", "upper-middle")}, "n": int(r3.nobs), "r2": r3.rsquared}
     else:
-        for i in ("h2.brecha.medio", "h2.n"): claim(i, "--")
+        for i in ("h2.brecha.medio", "h2.n", "h2.b.bajo", "h2.b.bajo.p"): claim(i, "--")
 
     # --- H3
     cp = DATOS / "comparadores_isco.parquet"
@@ -317,19 +384,72 @@ def main():
         else:
             claim(f"agree.testretest.{m}.kappa", "--")
     claim("n.testretest", nret if nret else "--")
-    hum = sorted((RAIZ / "validacion/respuestas").glob("*.xlsx")) if (RAIZ / "validacion/respuestas").exists() else []
-    if len(hum) >= 2:
-        H = {}
-        for f in hum:
-            x = pd.read_excel(f); x.columns = [c.lower() for c in x.columns]; col = "level" if "level" in x else "nivel"
-            H[f.stem] = x.dropna(subset=[col]).set_index("task_id")[col].astype(float)
-        Hm = pd.DataFrame(H); ks = [kappa_cuadratica(Hm.iloc[:, i], Hm.iloc[:, j]) for i in range(Hm.shape[1]) for j in range(i + 1, Hm.shape[1])]
-        claim("agree.alpha.humano", alpha_ordinal(Hm.values)); claim("agree.kappa.humano.min", min(ks)); claim("agree.kappa.humano.max", max(ks))
-        cons = pd.Series(nivel, index=tid).reindex(Hm.index).replace(-1, np.nan)
-        hmod = Hm.median(1).round()
-        claim("agree.alpha.humano.modelo", alpha_ordinal(np.column_stack([hmod, cons]))); claim("agree.kappa.humano.modelo", kappa_cuadratica(hmod, cons)); claim("n.validacion", len(Hm))
+    cons = pd.Series(np.where(rated, nivel, np.nan), index=tid)    # consenso de modelos por task_id
+    col_m = {m: pd.Series(L[:, nombres.index(m)], index=tid) for m in ("sonnet", "haiku") if m in nombres}
+    MIN_H, MIN_P = 20, 50                                           # mínimo de tareas en común para reportar acuerdo humano / panel / envoltorio
+
+    # D2 (docs/DESVIACIONES.md): un evaluador humano ciego (Santiago, 300 tareas); α humano–humano solo con ≥ 2 hojas
+    rh = RAIZ / "validacion/respuestas"
+    hojas = {f.stem: leer_hoja(f) for f in sorted(rh.glob("*.xlsx")) if not f.name.startswith("~$")} if rh.exists() else {}
+    hojas = {k: v for k, v in hojas.items() if len(v)}
+    hv = None
+    if hojas:
+        Hm = pd.DataFrame(hojas); hv = Hm.median(1).round() if Hm.shape[1] > 1 else Hm.iloc[:, 0]
+        if Hm.shape[1] >= 2:
+            ks = [kappa_cuadratica(Hm.iloc[:, i], Hm.iloc[:, j]) for i in range(Hm.shape[1]) for j in range(i + 1, Hm.shape[1])]
+            claim("agree.alpha.humano", alpha_ordinal(Hm.values)); claim("agree.kappa.humano.min", min(ks)); claim("agree.kappa.humano.max", max(ks))
+        c_h = cons.reindex(hv.index); n_h = int((hv.notna() & c_h.notna()).sum())
+        claim("n.humano", n_h); claim("n.humano.hojas", Hm.shape[1]); claim("n.validacion", n_h)
+        if n_h >= MIN_H:
+            claim("agree.alpha.humano.modelo", alpha_ordinal(np.column_stack([hv.values, c_h.values]))); claim("agree.kappa.humano.modelo", kappa_cuadratica(hv.values, c_h.values))
+            claim("agree.exacto.humano.modelo.pct", 100 * float((hv == c_h)[c_h.notna()].mean()))
+            for m, sm_ in col_m.items(): claim(f"agree.kappa.humano.{m}", kappa_cuadratica(hv.values, sm_.reindex(hv.index).values))
+            claim("humano.nivel.media", float(hv[c_h.notna()].mean())); claim("modelo.nivel.media.humano", float(c_h.dropna().mean()))
+        lg.info(f"validación humana: {Hm.shape[1]} hoja(s), {n_h} tareas calificadas con consenso")
+    if hv is None or int(cons.reindex(hv.index).notna().sum()) < MIN_H:
+        for i in ("agree.alpha.humano.modelo", "agree.kappa.humano.modelo", "agree.kappa.humano.sonnet", "agree.kappa.humano.haiku", "agree.exacto.humano.modelo.pct"): claim(i, "--")
+        if hv is None: claim("n.humano", "--")
+
+    # D2: panel agéntico (Opus 5.5 + web), validación NO humana; particiones panel.p?.jsonl + panel.jsonl
+    rp = RAIZ / "validacion/agentico/salidas"
+    pan = leer_union(sorted(rp.glob("panel.p*.jsonl")) + ([rp / "panel.jsonl"] if (rp / "panel.jsonl").exists() else [])) if rp.exists() else pd.DataFrame(columns=CAMPOS)
+    pv = pan.level.astype(float); pv = pv[pv.index.isin(pos.index)]; c_p = cons.reindex(pv.index); ok_p = c_p.notna(); pv, c_p = pv[ok_p], c_p[ok_p]
+    IDS_P = ["n.panel", "agree.kappa.panel.modelo", "agree.alpha.panel.modelo", "agree.kappa.panel.sonnet", "agree.kappa.panel.haiku", "panel.nivel.media",
+             "modelo.nivel.media.muestra", "panel.l2.pct", "modelo.l2.pct.muestra", "agree.exacto.panel.modelo.pct"]
+    if len(pv) >= MIN_P:
+        claim("n.panel", len(pv)); claim("agree.kappa.panel.modelo", kappa_cuadratica(pv.values, c_p.values)); claim("agree.alpha.panel.modelo", alpha_ordinal(np.column_stack([pv.values, c_p.values])))
+        for m in ("sonnet", "haiku"): claim(f"agree.kappa.panel.{m}", kappa_cuadratica(pv.values, col_m[m].reindex(pv.index).values) if m in col_m else np.nan)
+        claim("panel.nivel.media", float(pv.mean())); claim("modelo.nivel.media.muestra", float(c_p.mean()))
+        claim("panel.l2.pct", 100 * float((pv >= 2).mean())); claim("modelo.l2.pct.muestra", 100 * float((c_p >= 2).mean()))
+        claim("agree.exacto.panel.modelo.pct", 100 * float((pv == c_p).mean()))
+        if hv is not None:
+            hh = hv.reindex(pv.index).dropna(); claim("n.panel.humano", len(hh))
+            claim("agree.kappa.panel.humano", kappa_cuadratica(pv.reindex(hh.index).values, hh.values) if len(hh) >= MIN_H else np.nan)
+        else: claim("agree.kappa.panel.humano", "--")
     else:
-        for i in ("agree.alpha.humano", "agree.alpha.humano.modelo", "agree.kappa.humano.min", "agree.kappa.humano.max", "agree.kappa.humano.modelo"): claim(i, "--")
+        for i in IDS_P + ["agree.kappa.panel.humano"]: claim(i, "--", nota=f"panel con {len(pv)} tareas (< {MIN_P})")
+    lg.info(f"panel agéntico: {len(pv)} tareas válidas con consenso")
+
+    # sensibilidad al envoltorio por defecto de Claude Code (preregistrada): scoring/salidas/envoltorio_cc/{modelo}.p?.jsonl
+    re_ = RAIZ / "scoring/salidas/envoltorio_cc"
+    for m in ("sonnet", "haiku"):
+        ev = leer_union(sorted(re_.glob(f"{m}.p*.jsonl")) + ([re_ / f"{m}.jsonl"] if (re_ / f"{m}.jsonl").exists() else [])) if re_.exists() else pd.DataFrame(columns=CAMPOS)
+        ids = [f"envoltorio.{m}.{x}" for x in ("n", "kappa", "nivel.neutro", "nivel.cc", "l2.neutro.pct", "l2.cc.pct", "kappa.humano.neutro", "kappa.humano.cc")]
+        if m not in col_m or ev.empty:
+            for i in ids: claim(i, "--")
+            continue
+        cc = ev.level.astype(float); cc = cc[cc.index.isin(pos.index)]; ne = col_m[m].reindex(cc.index); ok_e = ne.notna(); cc, ne = cc[ok_e], ne[ok_e]
+        lg.info(f"envoltorio {m}: {len(cc)} tareas con calificación principal")
+        if len(cc) < MIN_P:
+            for i in ids: claim(i, "--", nota=f"{len(cc)} tareas (< {MIN_P})")
+            continue
+        claim(f"envoltorio.{m}.n", len(cc)); claim(f"envoltorio.{m}.kappa", kappa_cuadratica(ne.values, cc.values))
+        claim(f"envoltorio.{m}.nivel.neutro", float(ne.mean())); claim(f"envoltorio.{m}.nivel.cc", float(cc.mean()))
+        claim(f"envoltorio.{m}.l2.neutro.pct", 100 * float((ne >= 2).mean())); claim(f"envoltorio.{m}.l2.cc.pct", 100 * float((cc >= 2).mean()))
+        hh = hv.reindex(cc.index).dropna() if hv is not None else pd.Series(dtype=float)
+        claim(f"envoltorio.{m}.n.humano", len(hh) if hv is not None else "--")
+        for tag, ser in (("neutro", ne), ("cc", cc)):
+            claim(f"envoltorio.{m}.kappa.humano.{tag}", kappa_cuadratica(hh.values, ser.reindex(hh.index).values) if len(hh) >= MIN_H else np.nan)
 
     # --- placebo: tareas permutadas entre ocupaciones (pesos y número de tareas fijos), 1.000 veces
     rng = np.random.default_rng(SEMILLA + 1); sd_obs = O[:, 0].std(); x2 = X[:, 0]
@@ -351,6 +471,7 @@ def main():
                     "adi_share": occ.adi_share.values[s] @ ww, **{c: occ[c].values[s] @ ww for c in ("barrera_fisica", "barrera_responsabilidad", "barrera_confianza", "barrera_acceso")},
                     "empleo_mundial": wm[s].sum(), "n_isco": int(s.sum())})
         claim(f"gg.{g}.l2", 100 * fil[-1]["adi_l2"])
+        for c in ("barrera_fisica", "barrera_responsabilidad", "barrera_confianza", "barrera_acceso"): claim(f"gg.{g}.{c}.pct", 100 * fil[-1][c])
     pd.DataFrame(fil).to_csv(SAL / "indice_gg.csv", index=False)
 
     # --- salidas

@@ -13,18 +13,18 @@ The interface exposes no temperature, yet a second call returns the same level f
 
 \subsection{Human and agentic validation}
 
-The preregistered human validation changed before any result was opened (deviation D2 in \texttt{docs/DESVIACIONES.md}).
-Instead of three human raters on 1,500 tasks, one human rater scores, blind to all model ratings, a subsample of 300 tasks drawn from the 1,500 and stratified by ISCO-08 major group.
-That rater is a coauthor of this paper.
-He follows the frozen rubric and the practice tasks and sees no model output, but he is not an independent rater in the sense of the registration, and a single rater gives no human--human agreement.
-We report this as a limitation, not as a validation equivalent to the registered one.
-Human--model agreement on this subsample is $\alpha$ = \cifraopc{agree.alpha.humano.modelo} (ordinal) and quadratic-weighted $\kappa$ = \cifraopc{agree.kappa.humano.modelo}, against the preregistered acceptance threshold of $\alpha \geq 0.60$ for the primary rater.
-These figures, still being collected, are reported in the final version whatever their value.
+The preregistered human validation changed before any result was opened (deviation D2; Section~\ref{sec:validacion_humana}).
+Instead of three human raters on 1,500 tasks, one human rater, a coauthor, scores a subsample of 300 of them blind to all model ratings.
+A single rater gives no human--human agreement, and a coauthor is not an independent rater in the sense of the registration; we report his agreement with the models as a limitation-bound check, not as a validation equivalent to the registered one.
+Human--model agreement is $\alpha$ = \cifraopc{agree.alpha.humano.modelo} (ordinal) and quadratic-weighted $\kappa$ = \cifraopc{agree.kappa.humano.modelo} over \cifraopc{n.humano} tasks, against the preregistered acceptance threshold of $\alpha \geq 0.60$ for the primary rater; by model, $\kappa$ is \cifraopc{agree.kappa.humano.sonnet} for Sonnet and \cifraopc{agree.kappa.humano.haiku} for Haiku, and the human gives the same level as the consensus on \cifraopc{agree.exacto.humano.modelo.pct}\% of tasks.
+A dash marks a figure whose ratings were still being collected for this version; every figure is reported whatever its value.
 
-A second check is an agentic panel: a third model, Claude Opus 5.5, which plays no part in the index, researches each of the 1,500 validation tasks on the web and rates it with the same rubric, citing its evidence.
-The panel is a model, from the same developer as the raters.
-Its agreement with the index tests whether a rater with tools and evidence reaches the same levels as raters without them; it is not human validation and is not reported as such.
-The panel's agreement with the models and with the human rater is reported in the final version.
+The agentic panel, Claude Opus 5.5 with web search, which plays no part in the index, had rated \cifraopc{n.panel} of the 1,500 validation tasks for this version.
+On those tasks its agreement with the model consensus is quadratic-weighted $\kappa$ = \cifraopc{agree.kappa.panel.modelo} and $\alpha$ = \cifraopc{agree.alpha.panel.modelo} (ordinal), with exact agreement on \cifraopc{agree.exacto.panel.modelo.pct}\% of tasks; with each model, $\kappa$ = \cifraopc{agree.kappa.panel.sonnet} for Sonnet and \cifraopc{agree.kappa.panel.haiku} for Haiku.
+Its mean level is \cifraopc{panel.nivel.media}, against \cifraopc{modelo.nivel.media.muestra} for the consensus on the same tasks, and it places \cifraopc{panel.l2.pct}\% of them at L2 or above, against \cifraopc{modelo.l2.pct.muestra}\% for the consensus.
+On the tasks it shares with the human rater, its agreement with him is $\kappa$ = \cifraopc{agree.kappa.panel.humano}.
+The panel tests whether a rater with tools and evidence reaches the same levels as raters without them.
+It is a model from the same developer as the raters, so its agreement with them may partly reflect a shared view of work; it is not human validation and is not reported as such.
 
 \subsection{Convergence with exposure indices (H3)}
 
@@ -52,7 +52,7 @@ The preregistered test regresses the standardized gap between the two on income-
 The gap in middle-income countries is \cifra{h2.brecha.medio} standard deviations relative to high-income countries, not distinguishable from zero (one-sided \pval{h2.brecha.medio.p}).
 Separately, the coefficient is \cifra{h2.b.medio_alto} for upper-middle (\pval{h2.b.medio_alto.p}) and \cifra{h2.b.medio_bajo} for lower-middle income (\pval{h2.b.medio_bajo.p}; Table~\ref{tab:h1}, column 4).
 Neither is significant, and the lower-middle coefficient has the wrong sign.
-The only group whose gap departs clearly from high income is low income, and it departs in the opposite direction to the hypothesis: there, usage is less far below the high-income level than delegability is.
+The only group whose gap departs clearly from high income is low income, and it departs in the opposite direction to the hypothesis: the coefficient is \cifra{h2.b.bajo} (two-sided \pval{h2.b.bajo.p}), so usage there is less far below the high-income level than delegability is.
 We read this as a null result.
 Across countries, observed usage of one AI system follows the delegable task base closely; we find no evidence that middle-income countries lag behind what their occupational structure would allow.
 Two cautions apply.
@@ -62,5 +62,8 @@ Usage comes from a single developer's product and measures conversations, not de
 
 The preregistered wrapper sensitivity re-rates the 1,500 validation tasks under the default Claude Code system prompt, which describes the model as an agent with tools.
 In the pilot, that wrapper raised the mean level (Section~\ref{sec:evaluadores}).
-The re-rating is in progress; the shift in level and the agreement with the neutral configuration are reported in the final version.
+For Haiku, \cifraopc{envoltorio.haiku.n} tasks had been re-rated for this version: the mean level moves from \cifraopc{envoltorio.haiku.nivel.neutro} under the neutral configuration to \cifraopc{envoltorio.haiku.nivel.cc} under the default wrapper, the share at L2 or above from \cifraopc{envoltorio.haiku.l2.neutro.pct}\% to \cifraopc{envoltorio.haiku.l2.cc.pct}\%, and agreement between the two configurations is $\kappa$ = \cifraopc{envoltorio.haiku.kappa}.
+For Sonnet, the primary rater, the same figures are \cifraopc{envoltorio.sonnet.nivel.neutro} and \cifraopc{envoltorio.sonnet.nivel.cc}, \cifraopc{envoltorio.sonnet.l2.neutro.pct}\% and \cifraopc{envoltorio.sonnet.l2.cc.pct}\%, with $\kappa$ = \cifraopc{envoltorio.sonnet.kappa} (\cifraopc{envoltorio.sonnet.n} tasks).
+Against the human rater, the neutral and default configurations reach $\kappa$ = \cifraopc{envoltorio.sonnet.kappa.humano.neutro} and \cifraopc{envoltorio.sonnet.kappa.humano.cc} for Sonnet, and \cifraopc{envoltorio.haiku.kappa.humano.neutro} and \cifraopc{envoltorio.haiku.kappa.humano.cc} for Haiku.
+The frame in which a model is addressed therefore enters the index; Section~\ref{sec:limites} discusses what this means for reading it.
 % TODO: Agentic Adoption Index (EE. UU.) y dinámica salarial GEIH 2023--2026.

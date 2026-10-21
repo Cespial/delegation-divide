@@ -28,7 +28,11 @@ Informal and subsistence work, which household surveys capture better than labou
 The raters are two language models from a single developer, and the usage data in Section~\ref{sec:validacion} come from the same developer's Anthropic Economic Index.
 Three risks follow.
 The first is bias: a model may rate tasks in its own domain, such as software, as more delegable than tasks it knows less well, and may share the blind spots of its training data about work outside rich countries.
-The human validation on 1,500 tasks bounds this bias at the level of agreement reported in Section~\ref{sec:metodo}, but three raters with university degrees are not a sample of the world's workers.
+The human check that would bound this bias is weaker than the one we registered (deviation D2).
+A single human rater scores 300 tasks, and he is a coauthor: he is blind to the model ratings, but he shares the authors' framing of the question, and with one rater there is no measure of how much humans disagree with each other.
+Agreement with him bounds the bias only as far as one informed reader's judgement does, and neither he nor any small panel of graduates is a sample of the world's workers.
+The agentic panel does not fill that gap: Claude Opus 5.5 with web search brings evidence about how tasks are done, but it comes from the same developer as the two raters and may share their view of which work suits a model, so its agreement with them is a check of consistency, not of validity.
+Three independent human raters on the full 1,500 tasks remain the registered standard and are left for a second version.
 The second is circularity: if the same family of models both rates delegability and generates the usage data, agreement between the two could reflect a shared view of the world rather than validation.
 We address it by testing convergence against indices built by other methods and other raters \citep{eloundou2024gpts, felten2021occupational, gmyrek2025generative}, by comparing with the Agentic Adoption Index, which uses no model rating \citep{lee2026delegates}, and by reporting the Colombian wage dynamics, which involve no model at all.
 The third is instability: the command-line interface exposes no temperature setting, so the same prompt can return different levels on different days.
@@ -36,7 +40,7 @@ The test--retest statistics in Section~\ref{sec:metodo} quantify this, and the c
 A fourth risk is framing.
 In the pilot, a model told that it is an agent rated tasks as more delegable: the interface's default wrapper raised the mean level from \cifra{diseno.piloto.neutro.nivel} to \cifra{diseno.piloto.envoltorio.nivel} on the same tasks.
 The ratings therefore depend on how the rater is addressed, not only on the task.
-We fix the neutral configuration for the main pass and report, as a preregistered secondary result, the same validation tasks rated under the default wrapper, so that readers can see how much of the index moves with the frame.
+We fix the neutral configuration for the main pass and report, as a preregistered secondary result, the same validation tasks rated under the default wrapper (Section~\ref{sec:validacion}), so that readers can see how much of the index moves with the frame.
 Model-based rating of social facts has a short literature \citep{horton2023large, argyle2023out, korinek2023language}, including evidence that model-simulated survey respondents miss the results of human polls \citep{pew2026silicon}, and the known tendency of models to favour their own outputs \citep{zheng2023judging, panickssery2024llm} is a reason to read every number here as a model's judgement, not a measurement of the world.
 
 \subsection{Preregistration}
@@ -57,4 +61,4 @@ The divide we name is also not symmetrical in its meaning.
 In high-income countries, high delegability describes a labour market about to reorganise; in low-income countries, low delegability describes a labour market whose work agents cannot reach, which is not the same as protection.
 Who is delegated, who delegates, and who is left outside the scope of delegation are distributional questions, and the atlas is meant to put them on the table, not to settle them.
 We use no personal data; all inputs are public statistics, public classifications or anonymised household surveys used under their licences.
-The human raters are informed adults with university degrees who agreed to the protocol; their individual ratings are released only in aggregate. % [VERIFY] compensation and ethics approval of the raters
+The only human rater in this version is a coauthor, who rated as part of his work on the paper; no external raters were recruited, and no personal data about raters are collected or released.
