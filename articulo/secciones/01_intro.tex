@@ -1,2 +1,56 @@
 \section{Introduction}
-% TODO
+\label{sec:intro}
+
+\cifra{titular.global.l2}\% of task time in world employment is delegable to an AI agent in 2026, and \cifra{titular.global.l3}\% can be handed over in full.
+These two numbers are the output of the Agent Delegability Index (ADI), an open index that rates every task statement of the United States Occupational Information Network (O*NET) on how much of it a software agent can execute, maps the ratings to the International Standard Classification of Occupations (ISCO-08), and weights them by employment in 150 countries.
+This paper describes how the index is built, validates it against human raters and existing measures, and reports its first finding: a \emph{delegation divide} between rich and poor countries.
+
+Two gaps motivate the index.
+The first is conceptual.
+The measures that dominate the literature on artificial intelligence and work score \emph{exposure}: whether a large language model can reduce the time a worker needs for a task by at least half \citep{eloundou2024gpts}, or how closely the abilities an occupation requires track progress in AI applications \citep{felten2021occupational, webb2020impact}.
+Exposure was the right construct for a chatbot.
+It is not the right construct for an agent.
+Since 2025, publicly available systems run code, browse the web, operate a desktop, read and write files and work for hours on a multi-step goal \citep{metr2025measuring}.
+The policy question has moved from ``can the model help with this task?'' to ``can the worker hand this task over?''
+That is delegation, and the two differ in kind: a model can halve the time a radiologist spends on a report without being able to sign it, and an agent can file a tax return that no model could have sped up much, because the time was never in the drafting.
+Observed usage indices measure a third thing again, adoption, which depends on prices, regulation and habit as much as on capability \citep{anthropic2025economic, lee2026delegates, henseke2026exposure}.
+
+The second gap is geographic.
+Almost every task-level measure is built on O*NET and its Standard Occupational Classification (SOC), which only the United States uses for its statistics.
+The rest of the world reports employment in ISCO-08 \citep{ilo2012isco}.
+Studies that reach other countries do so through coarse bridges, usually at the one-digit level, or through a single national crosswalk \citep{gmyrek2025generative, murugan2026jagged, carbonero2023impact}.
+The International Labour Organization (ILO) index of generative-AI exposure is the exception that works natively in ISCO-08 \citep{gmyrek2025generative}, but it measures exposure, not delegation.
+Nobody has measured delegability to agents in the classification that most countries use.
+
+ADI fills both gaps at once.
+The design is simple to state.
+Each of the 18,796 task statements in O*NET 30.2 \citep{onet2026database} is rated by frontier language models with a fixed rubric at one of four levels: no meaningful role, augmentation, partial delegation or full delegation (Section~\ref{sec:delegacion}).
+The rubric is frozen and preregistered; its hash is in Appendix~\ref{app:rubrica}.
+Three human raters score a stratified sample of 1,500 tasks blind to the models and to each other; agreement between humans and the model consensus is $\alpha$ = \cifra{agree.alpha.humano.modelo} (Krippendorff's alpha, ordinal), against a preregistered acceptance threshold of 0.60.
+Tasks are weighted by importance and frequency within their O*NET occupation and carried to 433 of the 436 ISCO-08 unit groups through a documented chain of crosswalks (Appendix~\ref{app:crosswalk}).
+Occupation scores are then weighted by employment from the ILO statistics database (ILOSTAT) to give a delegability share for each of 150 countries with occupational employment data from 2019 onward.
+
+We make five contributions, each meant to stand on its own.
+\begin{enumerate}
+  \item \textbf{The Agent Delegability Index (ADI).} An open, versioned index of AI-agent delegability for 433 ISCO-08 unit groups and 150 countries, with three variants per occupation (share of task weight at partial delegation or above, share at full delegation, and expected share of working time delegable), bootstrap confidence intervals, and a permutation placebo. The world headline is \cifra{titular.global.l2}\% (partial or full delegation) and \cifra{titular.global.l3}\% (full delegation).
+  \item \textbf{A three-layer definition of delegation.} One citable sentence each for augmentation, partial delegation and full delegation, written for agents with tool use rather than for chat models, with four named barriers (physical, accountability, trust, access) recorded separately from the level. Section~\ref{sec:delegacion} gives the definitions and Table~\ref{tab:comparativa} places them against eight existing measures.
+  \item \textbf{A task-level crosswalk and country atlas in ISCO-08.} A reproducible bridge from O*NET-SOC 2019 tasks to ISCO-08 unit groups that keeps 403 distinct task sets (an earlier matrix in our own prior work collapsed the same occupations into nine), and an atlas of delegable employment for 150 countries at the finest ISCO level each country reports, with gender, age and informality breakdowns where household microdata allow.
+  \item \textbf{Human validation and convergence.} 1,500 tasks rated by three independent humans, agreement reported with quadratic-weighted kappa and Krippendorff's alpha, and preregistered convergence tests against the exposure indices of \citet{eloundou2024gpts} and \citet{felten2021occupational} ($r$ = \cifra{h3.r.eloundou} and \cifra{h3.r.felten}), which show that ADI is related to exposure but is not the same construct.
+  \item \textbf{Open tools for people and for agents.} The full prompts, the raw model outputs, a Python package (\texttt{pip install adi-index}), static JSON per occupation, a \texttt{llms.txt} file and a Model Context Protocol (MCP) server with three tools (\texttt{lookup\_occupation}, \texttt{country\_profile}, \texttt{cite}), so that an AI agent that needs a delegability score can fetch it and cite it (Appendix~\ref{app:citar}).
+\end{enumerate}
+
+The first finding we name is the \emph{delegation divide}.
+Delegable employment is not spread evenly across the world.
+It rises with income: the share of employment in delegable tasks is \cifra{titular.ingreso.alto.l2}\% in high-income countries and \cifra{titular.ingreso.medio.l2}\% in middle-income countries, and a country-level regression of delegability on log GDP per capita at purchasing power parity has a slope of \cifra{h1.pendiente} percentage points per log point (95\% bootstrap interval \cifra{h1.pendiente.ic}).
+The reason is composition.
+Poorer countries concentrate employment in agriculture, crafts and elementary occupations, where the binding barrier is physical, and agents have no body.
+The divide has a second edge.
+Among countries with observed AI usage data, middle-income countries use agents less than their delegable task base predicts: the standardized gap between delegability and usage is \cifra{h2.brecha.medio} standard deviations wider than in high-income countries.
+Where delegation is technically possible, it is being realised first in the countries that already had the most of it.
+
+The paper proceeds as follows.
+Section~\ref{sec:delegacion} defines the three layers and relates delegation to exposure.
+Section~\ref{sec:datos} describes the data and Section~\ref{sec:metodo} the method, validation and inference.
+Section~\ref{sec:indice} presents the occupational index, Section~\ref{sec:atlas} the country atlas and the divide, and Section~\ref{sec:validacion} the comparison with observed adoption.
+Section~\ref{sec:limites} discusses limitations and ethics, and Section~\ref{sec:conclusion} concludes.
+Appendices give the rubric, the crosswalk, and instructions for citing and using the index.

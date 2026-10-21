@@ -1,2 +1,19 @@
 \section{Validation against observed adoption}
-% TODO
+\label{sec:validacion}
+
+\subsection{Human raters}
+
+Human--model agreement on the 1,500-task validation sample is $\alpha$ = \cifraopc{agree.alpha.humano.modelo} (ordinal) and quadratic-weighted $\kappa$ = \cifraopc{agree.kappa.humano.modelo}; agreement among the three humans is $\alpha$ = \cifraopc{agree.alpha.humano}.
+Stability across repeated calls on \cifra{n.testretest} tasks is $\kappa$ = \cifra{agree.testretest.sonnet.kappa} for Sonnet and \cifra{agree.testretest.haiku.kappa} for Haiku, with exact agreement of \cifraopc{agree.testretest.sonnet.exacto.pct}\% and \cifraopc{agree.testretest.haiku.exacto.pct}\%.
+
+\subsection{Convergence with exposure indices (H3)}
+
+Across ISCO-08 unit groups, ADI correlates with the exposure measure of \citet{eloundou2024gpts} at $r$ = \cifra{h3.r.eloundou} (Spearman $\rho$ = \cifra{h3.rho.eloundou}) and with the AIOE of \citet{felten2021occupational} at $r$ = \cifra{h3.r.felten} ($\rho$ = \cifra{h3.rho.felten}).
+As exploratory comparisons, the correlation is \cifra{h3.r.eisfeldt} with \citet{eisfeldt2023generative}, \cifra{h3.r.webb_ai} with the AI patent exposure of \citet{webb2020impact} and \cifra{h3.r.webb_robot} with its robot exposure, and \cifra{h3.r.aei} with observed Claude exposure by occupation \citep{handa2025economic}.
+
+\subsection{Observed usage and the adoption gap (H2)}
+
+For the \cifra{h2.n} countries with Anthropic Economic Index usage per working-age person \citep{anthropic2025economic}, delegability and usage correlate at $r$ = \cifra{h2.r.adi_uso}.
+The standardized gap between delegability and usage is \cifra{h2.brecha.medio} standard deviations wider in middle-income than in high-income countries (one-sided \pval{h2.brecha.medio.p}); separately, \cifra{h2.b.medio_alto} for upper-middle (\pval{h2.b.medio_alto.p}) and \cifra{h2.b.medio_bajo} for lower-middle income (\pval{h2.b.medio_bajo.p}; Table~\ref{tab:h1}, column 4).
+% INTERPRETAR tras la corrida real (sentido del signo de H2).
+% TODO: Agentic Adoption Index (EE. UU.) y dinámica salarial GEIH 2023--2026.

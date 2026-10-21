@@ -1,2 +1,13 @@
-\cifra{titular.global.l2} of tasks in world employment are delegable to AI agents. [≤250 words: number; gap; ADI; three findings; we release …]
-% TODO
+% Abstract: ≤250 words. Every result number is a \cifra{id} resolved from salidas/claims.jsonl.
+\cifra{titular.global.l2}\% of task time in world employment is delegable to AI agents in 2026, and \cifra{titular.global.l3}\% is fully delegable.
+Existing measures score the \emph{exposure} of occupations to generative AI: whether a language model can cut the time a task takes.
+They do not measure \emph{delegability}: whether an AI agent with tool use and computer use can carry a task out end to end.
+They are also built on the United States O*NET classification, which most countries do not use.
+We build the Agent Delegability Index (ADI).
+We rate all 18,796 O*NET 30.2 task statements on a frozen three-level rubric (augmentation, partial delegation, full delegation) with frontier language models, validate the ratings against three independent human raters on 1,500 tasks (Krippendorff's $\alpha$ = \cifra{agree.alpha.humano.modelo}), map tasks to 433 ISCO-08 unit groups, and aggregate to 150 countries with ILOSTAT employment by occupation.
+Three findings.
+First, delegable employment rises with income: \cifra{titular.ingreso.medio.l2}\% in middle-income countries against \cifra{titular.ingreso.alto.l2}\% in high-income countries, a slope of \cifra{h1.pendiente} percentage points per log point of GDP per capita.
+We call this the \emph{delegation divide}.
+Second, among countries with observed AI usage, the standardized gap between technical delegability and usage is \cifra{h2.brecha.medio} standard deviations wider in middle-income countries than in high-income countries.
+Third, ADI converges with exposure indices ($r$ = \cifra{h3.r.eloundou} with Eloundou et al.; \cifra{h3.r.felten} with Felten et al.) but reorders occupations where physical presence, accountability or system access bar an agent.
+We release the index, the country atlas, the prompts and an MCP server at \url{https://github.com/Cespial/delegation-divide}.

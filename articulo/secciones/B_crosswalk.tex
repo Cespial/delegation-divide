@@ -1,2 +1,54 @@
 \section{Crosswalk O*NET to ISCO-08}
-% TODO
+\label{app:crosswalk}
+
+This appendix documents the bridge from O*NET 30.2 task statements to ISCO-08 unit groups implemented in \texttt{datos/construir\_crosswalk.py}.
+Every count below is printed by the script's log and is reproducible from the input files listed in \texttt{datos/MANIFIESTO.jsonl}.
+
+\subsection{Inputs}
+
+\begin{itemize}
+  \item O*NET 30.2 \emph{Task Statements} (18,796 statements for 923 O*NET-SOC 2019 occupations), \emph{Task Ratings} (scales IM, importance, and FT, frequency) and \emph{Occupation Data} (titles) \citep{onet2026database}.
+  \item O*NET-SOC 2010 to O*NET-SOC 2019 crosswalk, O*NET Resource Center (CSV; 1,110 codes of 2010 to 1,012 codes of 2019).
+  \item SOC 2010 to ISCO-08 crosswalk of \citet{hardy2018educational}, Institute for Structural Research (IBS), file \texttt{soc10\_isco08.dta}: 1,131 rows linking 839 six-digit SOC 2010 codes to all 436 ISCO-08 unit groups.
+\end{itemize}
+
+\subsection{Steps}
+
+\begin{enumerate}
+  \item \textbf{Task weights within O*NET occupation.} For each task, importance is the mean of the IM scale (1--5) and frequency is the mean category of the FT distribution (1--7, from yearly or less to hourly or more), computed as $\sum_k p_k k / 100$ over the seven category percentages. Missing values are imputed with the median of each scale. The task weight is importance $\times$ frequency, normalised to sum to one within the O*NET-SOC 2019 occupation, following \citet{acemoglu2011skills}.
+  \item \textbf{O*NET-SOC 2019 to O*NET-SOC 2010.} The official crosswalk is used in reverse. The six-digit SOC 2010 code is the 2010 O*NET-SOC code with its two-digit suffix removed. An O*NET-SOC 2019 code that descends from several 2010 codes (97 cases) divides its mapping weight equally among them.
+  \item \textbf{Rescue of SOC 2010 codes absent from the IBS file.} Two codes used by O*NET-SOC 2010 are not in the IBS crosswalk: 19-1020 (biological scientists, broad group used as a detailed code) and 29-2055 (surgical technologists). The rule tries, in order, the ``all other'' residual of the same broad group (code ending in 9), then the other detailed codes of the same broad group in ascending order, then the codes of the same minor group. It assigns 19-1020 to 19-1029, which the IBS file maps to ISCO 2131 (biologists, botanists, zoologists and related professionals), and 29-2055 to 29-2051, mapped to ISCO 3259 (health associate professionals not elsewhere classified). Both are documented here because the second is a group-level approximation rather than a conceptual match.
+  \item \textbf{New occupations without a 2010 ancestor.} Four O*NET-SOC 2019 codes were created after the 2010 taxonomy and have no row in the crosswalk: 15-1299.04 (penetration testers), 15-1299.05 (information security engineers), 15-1299.06 (digital forensics analysts) and 15-1299.07 (blockchain engineers). They are assigned by hand to SOC 2010 15-1199 (computer occupations, all other), which the IBS file maps to ISCO 2519 (software and applications developers and analysts not elsewhere classified) and 2529 (database and network professionals not elsewhere classified), with weight one half each.
+  \item \textbf{SOC 2010 to ISCO-08.} Each SOC 2010 code maps to $k$ ISCO-08 unit groups with weight $1/k$. In the IBS file 683 codes map to one group, 102 to two, 30 to three and 24 to four or more (maximum 17). The mapping weight is multiplied by the within-occupation task weight to give the weight of each (ISCO group, task) pair, then renormalised within the ISCO group.
+  \item \textbf{Aggregation to pairs.} The same task reached through several O*NET occupations is summed into one pair per ISCO group. The result is 30,549 pairs covering 18,796 distinct tasks and 433 unit groups, with a median of 48 tasks per group (minimum 5, maximum 860), and 403 distinct task sets, since some groups share exactly the same O*NET sources.
+\end{enumerate}
+
+\subsection{Exclusions and imputations}
+
+\textbf{Military.} The three armed-forces groups, 0110 (commissioned armed forces officers), 0210 (non-commissioned armed forces officers) and 0310 (armed forces occupations, other ranks), have no O*NET tasks and are excluded from the index and from the country weights.
+
+\textbf{Seven imputed groups.} Seven unit groups receive no task through the chain because their SOC counterparts are residual ``all other'' codes that the IBS file routes elsewhere. Each inherits the task set of its three-digit minor group (all non-imputed unit groups with the same first three digits), with weights renormalised, and is flagged \texttt{imputado = True} so that it can be dropped in the robustness check without imputed groups:
+
+\begin{center}
+  \small
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    ISCO-08 & Unit group \\
+    \midrule
+    3413 & Religious associate professionals \\
+    3511 & Information and communications technology operations technicians \\
+    4213 & Pawnbrokers and money-lenders \\
+    7133 & Building structure cleaners \\
+    8155 & Fur and leather preparing machine operators \\
+    8159 & Textile, fur and leather products machine operators not elsewhere classified \\
+    9613 & Sweepers and related labourers \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+\subsection{Why not the earlier matrix}
+
+Our earlier work on augmented human capital \citep{espinal2026augmented, espinal2026measuring} bridged SOC to the Colombian adaptation of ISCO-08 at one digit and distributed tasks downward, so that 440 four-digit occupations shared nine task sets and the median task belonged to 77 occupations.
+That matrix cannot separate a surgeon from a statistician.
+The chain above keeps 403 distinct task sets across 433 groups and is the only bridge used in this paper.
+The occupation-level comparison indices of Section~\ref{sec:metodo} are carried to ISCO-08 with the same chain, applied at the occupation rather than the task level.

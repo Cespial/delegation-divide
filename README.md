@@ -26,6 +26,12 @@ countries via ILOSTAT. Cross-listed econ.GN · cs.CY · cs.AI.
 }
 ```
 
+## For AI agents
+
+- Python: `pip install adi-index` → `adi lookup 2631`, `adi country COL`, `adi cite` (data bundled, every record carries `citation`).
+- MCP: `pip install adi-mcp` then `claude mcp add adi -- adi-mcp` (tools `lookup_occupation`, `country_profile`, `top_occupations`, `cite`).
+- Read `llms.txt` (short) or `llms-full.txt` (definitions, column schema, tool reference); metadata in `CITATION.cff` and `codemeta.json`.
+
 ## Layout
 
 | Dir | Content |

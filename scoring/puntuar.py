@@ -19,7 +19,10 @@ from dotenv import load_dotenv
 RAIZ = Path(__file__).resolve().parents[1]
 RUBRICA = RAIZ / "scoring/prompts/rubrica_v1.md"
 load_dotenv(Path.home() / ".config/adi/.env")
-PROVEEDOR = {"claude": "anthropic", "gpt": "openai", "o3": "openai", "o4": "openai", "gemini": "google"}
+PROVEEDOR = {"claude-": "anthropic", "gpt": "openai", "o3": "openai", "o4": "openai", "gemini": "google",
+             "deepseek": "deepseek", "kimi": "kimi", "moonshot": "kimi"}
+# Modelos por CLI de Claude (suscripción, sin temperatura 0): sonnet | haiku | opus
+CLI = {"sonnet", "haiku", "opus"}
 CAMPOS = {"level": int, "share_delegable": int, "minutes_human": int, "barrier_physical": bool,
           "barrier_accountability": bool, "barrier_trust": bool, "barrier_access": bool, "confidence": str}
 
@@ -42,7 +45,14 @@ def candado(piloto: int | None):
 
 
 def cliente(modelo: str):
+    if modelo in CLI:
+        return "cli", None
     prov = next((v for k, v in PROVEEDOR.items() if modelo.startswith(k)), "openrouter")
+    import openai
+    if prov == "deepseek":   # OpenAI-compatible; caché de prefijo automática (la rúbrica fija se cobra a precio de hit)
+        return prov, openai.OpenAI(api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com")
+    if prov == "kimi":
+        return prov, openai.OpenAI(api_key=os.environ["MOONSHOT_API_KEY"], base_url="https://api.moonshot.ai/v1")
     if prov == "anthropic":
         import anthropic; return prov, anthropic.Anthropic()
     if prov == "openai":
@@ -53,6 +63,9 @@ def cliente(modelo: str):
 
 
 def llamar(prov, cli, modelo, texto) -> str:
+    if prov == "cli":
+        import llm_cli  # claude -p; registra cada llamada en docs/llm-llamadas.jsonl
+        return llm_cli.llamar(texto, modelo=modelo, timeout=300, reintentos=2, etiqueta="adi")
     if prov == "anthropic":
         r = cli.messages.create(model=modelo, max_tokens=300, temperature=0, messages=[{"role": "user", "content": texto}])
         return r.content[0].text
@@ -70,14 +83,24 @@ def validar(txt: str) -> dict:
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--modelo", required=True); ap.add_argument("--piloto", type=int)
     ap.add_argument("--banco", default="onet", choices=["onet", "esco"]); ap.add_argument("--pausa", type=float, default=0.1)
+    ap.add_argument("--repetir", type=int, default=1, help="pasadas por tarea (test-retest); la salida lleva sufijo _rN")
+    ap.add_argument("--n", type=int, help="limita a las primeras n tareas pendientes (para el piloto)")
     a = ap.parse_args(); sha = candado(a.piloto)
+    sys.path.insert(0, str(RAIZ / "scoring"))
     tareas = pd.read_parquet(RAIZ / "datos/tareas_unicas.parquet")
     if a.piloto: tareas = tareas.sample(a.piloto, random_state=20261020)
     sal = RAIZ / "scoring/salidas" / ("piloto" if a.piloto else a.banco); sal.mkdir(parents=True, exist_ok=True)
-    out = sal / f"{a.modelo}.jsonl"
+    for rep in range(1, a.repetir + 1):
+        out = sal / (f"{a.modelo}.jsonl" if rep == 1 else f"{a.modelo}_r{rep}.jsonl")
+        correr(a, out, tareas, sha)
+
+
+def correr(a, out, tareas, sha):
     hechos = {json.loads(l)["task_id"] for l in open(out) if l.strip() and "error" not in l} if out.exists() else set()
     plantilla = prompt_de(RUBRICA.read_text()); prov, cli = cliente(a.modelo)
-    pend = tareas[~tareas.task_id.isin(hechos)]; print(f"{a.modelo}: {len(hechos)} hechas, {len(pend)} pendientes")
+    pend = tareas[~tareas.task_id.isin(hechos)]
+    if a.n: pend = pend.head(a.n)
+    print(f"{a.modelo} → {out.name}: {len(hechos)} hechas, {len(pend)} pendientes")
     with open(out, "a") as f:
         for n, t in enumerate(pend.itertuples(), 1):
             texto = plantilla.format(occupation_title=t.titulo, task_text=t.texto)

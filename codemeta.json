@@ -1,0 +1,89 @@
+{
+  "@context": "https://w3id.org/codemeta/3.0",
+  "@type": "SoftwareSourceCode",
+  "name": "The Delegation Divide — Agent Delegability Index (ADI)",
+  "description": "An open index of AI-agent delegability for 436 ISCO-08 occupations and 190 countries. Scores every ESCO task on three layers (augmentation, partial delegation, full delegation) with four frontier models, validated against 1,500 human-rated tasks, and aggregates to ISCO-08 and to countries via ILOSTAT. Ships a Python package (adi-index) and an MCP server (adi-mcp) so AI agents can query and cite the index.",
+  "identifier": "adi",
+  "version": "2026.1",
+  "dateCreated": "2026-10-20",
+  "datePublished": "2026-12-15",
+  "codeRepository": "https://github.com/Cespial/delegation-divide",
+  "issueTracker": "https://github.com/Cespial/delegation-divide/issues",
+  "url": "https://github.com/Cespial/delegation-divide",
+  "license": [
+    "https://spdx.org/licenses/MIT",
+    "https://spdx.org/licenses/CC-BY-4.0"
+  ],
+  "programmingLanguage": [
+    { "@type": "ComputerLanguage", "name": "Python", "version": ">=3.10" }
+  ],
+  "runtimePlatform": "Python 3",
+  "operatingSystem": ["Linux", "macOS", "Windows"],
+  "applicationCategory": "Economics",
+  "keywords": [
+    "AI agents", "delegation", "automation", "labour economics", "ISCO-08", "ESCO",
+    "ILOSTAT", "occupations", "country atlas", "Model Context Protocol", "MCP"
+  ],
+  "developmentStatus": "active",
+  "isPartOf": "https://github.com/Cespial/delegation-divide",
+  "softwareRequirements": [
+    "https://pypi.org/project/mcp/",
+    "https://pypi.org/project/pandas/",
+    "https://pypi.org/project/pyarrow/"
+  ],
+  "hasPart": [
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "adi-index",
+      "description": "Python package and CLI: lookup, search, country, top, cite.",
+      "codeRepository": "https://github.com/Cespial/delegation-divide/tree/main/herramientas/adi-index",
+      "version": "2026.1.dev0",
+      "license": "https://spdx.org/licenses/MIT"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "adi-mcp",
+      "description": "MCP server (stdio): lookup_occupation, country_profile, top_occupations, cite.",
+      "codeRepository": "https://github.com/Cespial/delegation-divide/tree/main/herramientas/adi-mcp",
+      "version": "2026.1.dev0",
+      "license": "https://spdx.org/licenses/MIT"
+    },
+    {
+      "@type": "Dataset",
+      "name": "ADI v2026.1 — occupation index and country atlas",
+      "description": "salidas/adi_isco.csv (ISCO-08 unit groups) and salidas/adi_pais.csv (countries).",
+      "license": "https://spdx.org/licenses/CC-BY-4.0"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0000-1009-8388",
+      "givenName": "Cristian",
+      "familyName": "Espinal Maya",
+      "email": "cristian@inplux.co",
+      "affiliation": { "@type": "Organization", "name": "Universidad Nacional de Colombia, Facultad de Minas" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0007-9862-7133",
+      "givenName": "Santiago",
+      "familyName": "Jiménez Londoño",
+      "affiliation": { "@type": "Organization", "name": "Universidad EAFIT" }
+    }
+  ],
+  "maintainer": { "@id": "https://orcid.org/0009-0000-1009-8388" },
+  "referencePublication": {
+    "@type": "ScholarlyArticle",
+    "name": "The Delegation Divide: An Open Index of AI-Agent Delegability for 436 Occupations and 190 Countries",
+    "author": [
+      { "@id": "https://orcid.org/0009-0000-1009-8388" },
+      { "@id": "https://orcid.org/0009-0007-9862-7133" }
+    ],
+    "datePublished": "2026",
+    "publisher": "arXiv preprint",
+    "url": "https://github.com/Cespial/delegation-divide"
+  },
+  "readme": "https://github.com/Cespial/delegation-divide/blob/main/README.md",
+  "citation": "https://github.com/Cespial/delegation-divide/blob/main/CITATION.cff"
+}

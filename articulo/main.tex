@@ -1,8 +1,19 @@
 \documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}\usepackage{graphicx,booktabs,hyperref,amsmath,siunitx}\usepackage[numbers]{natbib}
-% Cifras: solo por \cifra{id}, generadas desde salidas/claims.jsonl (patrón del paper del sismo)
-\InputIfFileExists{cifras.tex}{}{\newcommand{\cifra}[1]{\textbf{[#1]}}}
-\title{The Delegation Divide: An Open Index of AI-Agent Delegability for 436 Occupations and 190 Countries}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}\usepackage{lmodern}\usepackage{microtype}
+\usepackage{graphicx,booktabs,amsmath,siunitx}
+\usepackage[authoryear,round]{natbib}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{{./}}
+% Cifras: solo por \cifra{id}, generadas por generar_cifras.py desde salidas/claims.jsonl (patrón del paper del sismo).
+% cifras.tex define también \ifsintetico; sin él, todo id sale como [id] y no hay marca de agua.
+\InputIfFileExists{cifras.tex}{}{\newif\ifsintetico
+  \newcommand{\cifra}[1]{\textbf{[##1]}}\newcommand{\cifraopc}[1]{--}\newcommand{\cifraabs}[1]{\textbf{[##1]}}\newcommand{\pval}[1]{\textbf{[##1]}}}
+\ifsintetico
+  \usepackage{draftwatermark}
+  \SetWatermarkText{SYNTHETIC --- NOT RESULTS}\SetWatermarkScale{0.32}\SetWatermarkLightness{0.82}\SetWatermarkAngle{45}
+\fi
+\title{The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries}
 \author{Cristian Espinal Maya\thanks{Universidad Nacional de Colombia, Facultad de Minas. ORCID 0009-0000-1009-8388. Corresponding author.}
   \and Santiago Jim\'enez Londo\~no\thanks{Universidad EAFIT. ORCID 0009-0007-9862-7133.}}
 \date{\today}
@@ -11,6 +22,7 @@
 \input{secciones/01_intro}
 \input{secciones/02_delegacion}
 \input{secciones/03_datos}
+\input{tablas/tab2_cobertura}
 \input{secciones/04_metodo}
 \input{secciones/05_indice}
 \input{secciones/06_atlas}

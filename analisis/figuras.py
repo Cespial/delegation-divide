@@ -1,0 +1,149 @@
+"""Paso 21: figuras del artículo (PDF vectorial en articulo/fig/, estilo sobrio, fuente serif). Si el índice es sintético cada
+figura lleva la marca de agua diagonal «SYNTHETIC». Lee salidas/ (indice.py) y datos/atlas/. Uso: analisis/figuras.py [fig1 fig4 …]"""
+import sys, zipfile; sys.path.insert(0, "noche")
+from comun import *
+import numpy as np, pandas as pd
+import matplotlib; matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+
+lg = log("21_figuras"); SAL = RAIZ / "salidas"; FIG = RAIZ / "articulo/fig"; FIG.mkdir(parents=True, exist_ok=True)
+plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "Times", "DejaVu Serif"], "mathtext.fontset": "stix",
+                     "font.size": 9, "axes.spines.top": False, "axes.spines.right": False, "axes.linewidth": 0.6, "xtick.major.width": 0.6,
+                     "ytick.major.width": 0.6, "pdf.fonttype": 42, "savefig.bbox": "tight", "savefig.pad_inches": 0.03})
+TINTA, GRIS, CLARO = "#1f2a36", "#7d8794", "#d9dde2"
+INGRESO_COL = {"high": "#1f4e79", "upper-middle": "#4f86b8", "lower-middle": "#d08c3f", "low": "#a8432f"}
+INGRESO_EN = {"high": "High income", "upper-middle": "Upper-middle income", "lower-middle": "Lower-middle income", "low": "Low income"}
+GG = {"1": "Managers", "2": "Professionals", "3": "Technicians and associate prof.", "4": "Clerical support", "5": "Service and sales",
+      "6": "Skilled agricultural", "7": "Craft and related trades", "8": "Plant and machine operators", "9": "Elementary occupations"}
+BARRERAS = [("barrera_fisica", "Physical", "#5b6b7c"), ("barrera_responsabilidad", "Accountability", "#9c6b3f"),
+            ("barrera_confianza", "Trust", "#b9a26b"), ("barrera_acceso", "Access", "#8fa9bf")]
+SINT = (SAL / "adi_isco.csv").exists() and pd.read_csv(SAL / "adi_isco.csv").sintetico.astype(str).str.lower().eq("true").any()
+
+
+def guardar(fig, nombre):
+    if SINT:
+        fig.text(0.5, 0.5, "SYNTHETIC", rotation=30, ha="center", va="center", fontsize=54, color="#b22222", alpha=0.18, weight="bold", zorder=100)
+    p = FIG / f"{nombre}.pdf"; fig.savefig(p); plt.close(fig); registrar(p, "derivado: figuras.py", nota="SINTÉTICO" if SINT else "")
+    lg.info(f"{p.name}")
+
+
+def caja(ax, x, y, w, h, texto, fc="white", ec=TINTA, fs=8, peso="normal"):
+    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.006,rounding_size=0.012", fc=fc, ec=ec, lw=0.7))
+    ax.text(x + w / 2, y + h / 2, texto, ha="center", va="center", fontsize=fs, weight=peso, color=TINTA, wrap=True)
+
+
+def flecha(ax, a, b):
+    ax.add_patch(FancyArrowPatch(a, b, arrowstyle="-|>", mutation_scale=8, lw=0.7, color=GRIS))
+
+
+def fig1_escalera():
+    niveles = [("L0", "No meaningful role", "Human does the task;\nagent cannot speed\nup any substantial\npart"),
+               ("L1", "Augmentation", "Human performs the\ntask; AI assists\nstep by step\n(drafts, searches)"),
+               ("L2", "Partial delegation", "Agent executes\nsub-steps end to end;\nhuman does a key\nstep or reviews"),
+               ("L3", "Full delegation", "Agent completes the\ntask from goal and\naccess; human\nassigns and accepts")]
+    fig, ax = plt.subplots(figsize=(6.5, 3.0)); ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
+    tonos = ["#eef1f4", "#dfe6ee", "#c6d5e4", "#a9c2da"]
+    for k, (cod, nom, defi) in enumerate(niveles):
+        x, y, w, h = 0.02 + k * 0.205, 0.08 + k * 0.15, 0.19, 0.42
+        ax.add_patch(plt.Rectangle((x, 0.08), w, y - 0.08 + h, fc=tonos[k], ec=TINTA, lw=0.6))
+        ax.text(x + w / 2, y + h - 0.05, f"{cod}", ha="center", va="top", fontsize=12, weight="bold", color=TINTA)
+        ax.text(x + w / 2, y + h - 0.14, nom, ha="center", va="top", fontsize=8.5, style="italic", color=TINTA)
+        ax.text(x + w / 2, y + 0.04, defi, ha="center", va="bottom", fontsize=6.3, color=TINTA, linespacing=1.25)
+    ax.annotate("", xy=(0.83, 0.97), xytext=(0.02, 0.62), arrowprops=dict(arrowstyle="-|>", color=GRIS, lw=0.8))
+    ax.text(0.33, 0.86, "agent contributes → executes → finishes", rotation=21, fontsize=7.5, color=GRIS, ha="center")
+    ax.text(0.865, 0.62, "Barriers that keep\na task below L3", fontsize=8, weight="bold", color=TINTA, va="top")
+    for k, (_, nom, col) in enumerate(BARRERAS):
+        yy = 0.5 - k * 0.1; ax.add_patch(plt.Rectangle((0.865, yy - 0.025), 0.02, 0.05, fc=col, ec="none"))
+        ax.text(0.895, yy, nom, fontsize=7.5, va="center", color=TINTA)
+    guardar(fig, "fig1_escalera")
+
+
+def fig2_flujo():
+    fig, ax = plt.subplots(figsize=(6.5, 2.4)); ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
+    pasos = [("O*NET 30.2\n18,796 task\nstatements", 0.0), ("Crosswalk\nO*NET-SOC 2019\n→ SOC 2010\n→ ISCO-08", 0.205),
+             ("Ratings\n4 language models\n+ 3 human raters\n(1,500 tasks)", 0.41), ("ISCO-08\n433 unit groups\ntask-weighted\nADI, ADI3, ADIs", 0.615),
+             ("Countries\nILOSTAT employment\n150 countries\n→ world headline", 0.82)]
+    for t, x in pasos: caja(ax, x + 0.005, 0.38, 0.17, 0.5, t, fc="#f3f5f7", fs=7.5)
+    for (_, x1), (_, x2) in zip(pasos, pasos[1:]): flecha(ax, (x1 + 0.178, 0.63), (x2 + 0.003, 0.63))
+    notas = ["importance × frequency\nweights", "SOC → k ISCO groups:\nweight 1/k", "modal level; ties →\nlower; median share",
+             "bootstrap over tasks\nwithin occupation", "4-digit weights within\nreported groups"]
+    for (n, (_, x)) in zip(notas, pasos): ax.text(x + 0.09, 0.27, n, ha="center", va="top", fontsize=6.5, color=GRIS, style="italic")
+    guardar(fig, "fig2_flujo")
+
+
+def fig3_isco():
+    g = pd.read_csv(SAL / "indice_gg.csv", dtype={"gg": str}).sort_values("adi_l2")
+    fig, ax = plt.subplots(figsize=(6.0, 3.2)); y = np.arange(len(g))
+    ax.barh(y, 100 * g.adi_l2, color="#a9c2da", height=0.62, label="ADI (L2 or L3)")
+    ax.barh(y, 100 * g.adi_l3, color="#1f4e79", height=0.62, label="ADI3 (L3 only)")
+    ax.errorbar(100 * g.adi_l2, y, xerr=[100 * (g.adi_l2 - g.lo), 100 * (g.hi - g.adi_l2)], fmt="none", ecolor=TINTA, elinewidth=0.7, capsize=2)
+    ax.set_yticks(y, [f"{k}  {GG.get(k, k)}" for k in g.gg]); ax.set_xlabel("Share of task weight delegable to AI agents (%)")
+    ax.set_xlim(0, 100); ax.legend(frameon=False, loc="lower right", fontsize=7.5); ax.grid(axis="x", color=CLARO, lw=0.5); ax.set_axisbelow(True)
+    guardar(fig, "fig3_isco")
+
+
+def natural_earth():
+    d = DATOS / "geo"; shp = d / "ne_110m_admin_0_countries.shp"
+    if not shp.exists():
+        z = d / "ne_110m_admin_0_countries.zip"
+        if descargar("https://naciscdn.org/naturalearth/110m/cultural/ne_110m_admin_0_countries.zip", z, "Natural Earth 110m", lg, minimo=10000):
+            zipfile.ZipFile(z).extractall(d)
+    return shp if shp.exists() else None
+
+
+def fig4_mapa():
+    p = pd.read_csv(SAL / "adi_pais.csv")
+    try:
+        import geopandas as gpd
+        shp = natural_earth()
+        if shp is None: raise RuntimeError("sin Natural Earth")
+        w = gpd.read_file(shp); iso = w["ISO_A3_EH"].where(w["ISO_A3_EH"] != "-99", w["ADM0_A3"]); w["iso3"] = iso
+        w = w[w.iso3 != "ATA"].merge(p[["iso3", "adi_l2"]], on="iso3", how="left"); w["v"] = 100 * w.adi_l2
+        fig, ax = plt.subplots(figsize=(6.5, 3.4))
+        w[w.v.isna()].plot(ax=ax, color="#eceef0", edgecolor="white", linewidth=0.2)
+        w[w.v.notna()].plot(ax=ax, column="v", cmap="Blues", edgecolor="white", linewidth=0.2, legend=True,
+                            legend_kwds={"shrink": 0.55, "label": "ADI$_c$ (% of employment-weighted task time at L2–L3)", "orientation": "horizontal", "pad": 0.02})
+        ax.set_axis_off(); ax.set_xlim(-170, 180); ax.set_ylim(-57, 84)
+    except Exception as e:
+        lg.warning(f"mapa con geopandas falló ({e}); gráfico de puntos por país")
+        p = p.sort_values("adi_l2"); fig, ax = plt.subplots(figsize=(6.5, 7.5))
+        ax.scatter(100 * p.adi_l2, np.arange(len(p)), s=6, c=p.ingreso.map(INGRESO_COL).fillna(GRIS))
+        ax.set_yticks(np.arange(len(p)), p.iso3, fontsize=3.5); ax.set_xlabel("ADI$_c$ (%)")
+    guardar(fig, "fig4_mapa")
+
+
+def fig5_ingreso():
+    p = pd.read_csv(SAL / "indice_pais_detalle.csv").dropna(subset=["pib_pc_ppp"])
+    x, y = np.log(p.pib_pc_ppp), 100 * p.adi_l2
+    fig, ax = plt.subplots(figsize=(5.2, 3.6))
+    for ing, col in INGRESO_COL.items():
+        d = p[p.ingreso == ing]; ax.scatter(np.log(d.pib_pc_ppp), 100 * d.adi_l2, s=14, color=col, alpha=0.85, lw=0, label=INGRESO_EN[ing])
+    b, a = np.polyfit(x, y, 1); xx = np.linspace(x.min(), x.max(), 50); ax.plot(xx, a + b * xx, color=TINTA, lw=0.9)
+    for iso in ("COL", "MEX", "BRA", "USA", "IND", "DEU", "NGA"):
+        r = p[p.iso3 == iso]
+        if len(r): ax.annotate(iso, (np.log(r.pib_pc_ppp.iat[0]), 100 * r.adi_l2.iat[0]), fontsize=6.5, color=GRIS, xytext=(3, 2), textcoords="offset points")
+    tk = [1000, 3000, 10000, 30000, 100000]; ax.set_xticks(np.log(tk), [f"{t:,}" for t in tk])
+    ax.set_xlabel("GDP per capita, PPP (constant 2021 international \\$, log scale)"); ax.set_ylabel("ADI$_c$ (%)")
+    ax.legend(frameon=False, fontsize=7, loc="upper left"); ax.grid(color=CLARO, lw=0.5); ax.set_axisbelow(True)
+    guardar(fig, "fig5_ingreso")
+
+
+def fig6_barreras():
+    g = pd.read_csv(SAL / "indice_gg.csv", dtype={"gg": str}).sort_values("gg", ascending=False)
+    fig, ax = plt.subplots(figsize=(6.0, 3.2)); y = np.arange(len(g)); base = np.zeros(len(g))
+    for col, nom, c in BARRERAS:
+        v = 100 * g[col].values; ax.barh(y, v, left=base, color=c, height=0.65, label=nom, edgecolor="white", lw=0.3); base += v
+    ax.set_yticks(y, [f"{k}  {GG[k]}" for k in g.gg]); ax.set_xlabel("Task weight flagged by each barrier (%; barriers are not exclusive and stack)")
+    ax.legend(frameon=False, ncol=4, fontsize=7, loc="lower center", bbox_to_anchor=(0.5, 1.0))
+    ax.grid(axis="x", color=CLARO, lw=0.5); ax.set_axisbelow(True)
+    guardar(fig, "fig6_barreras")
+
+
+TODAS = {"fig1": fig1_escalera, "fig2": fig2_flujo, "fig3": fig3_isco, "fig4": fig4_mapa, "fig5": fig5_ingreso, "fig6": fig6_barreras}
+if __name__ == "__main__":
+    pedidas = [a.split("_")[0] for a in sys.argv[1:]] or list(TODAS)
+    lg.info(f"figuras {'SINTÉTICAS' if SINT else 'reales'}: {pedidas}")
+    for k in pedidas:
+        try: TODAS[k]()
+        except Exception as e: lg.error(f"{k}: {e}")

@@ -1,0 +1,42 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "adi-mcp"
+version = "2026.1.dev0"
+description = "MCP server (stdio) for the Agent Delegability Index (ADI): lookup_occupation, country_profile, top_occupations, cite."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+  { name = "Cristian Espinal Maya", email = "cristian@inplux.co" },
+  { name = "Santiago Jiménez Londoño" },
+]
+keywords = ["mcp", "model-context-protocol", "ai-agents", "delegation", "ISCO-08", "labour-economics"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+dependencies = [
+  "mcp>=1.2",
+  "adi-index>=2026.1.dev0",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/Cespial/delegation-divide"
+Repository = "https://github.com/Cespial/delegation-divide"
+
+[project.scripts]
+adi-mcp = "adi_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["adi_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
