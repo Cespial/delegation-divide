@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+datos/microdatos/*
+!datos/microdatos/.gitkeep
+scoring/salidas/*.jsonl
+*.log
+.env*

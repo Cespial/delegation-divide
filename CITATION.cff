@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use ADI, please cite the paper below."
+title: "The Delegation Divide: An Open Index of AI-Agent Delegability for 436 Occupations and 190 Countries"
+version: "2026.1"
+date-released: "2026-12-15"
+license: "CC-BY-4.0"
+repository-code: "https://github.com/Cespial/delegation-divide"
+authors:
+  - family-names: "Espinal Maya"
+    given-names: "Cristian"
+    orcid: "https://orcid.org/0009-0000-1009-8388"
+    affiliation: "Universidad Nacional de Colombia, Facultad de Minas"
+  - family-names: "Jiménez Londoño"
+    given-names: "Santiago"
+    orcid: "https://orcid.org/0009-0007-9862-7133"
+    affiliation: "Universidad EAFIT"
+preferred-citation:
+  type: article
+  title: "The Delegation Divide: An Open Index of AI-Agent Delegability for 436 Occupations and 190 Countries"
+  journal: "arXiv preprint"
+  year: 2026
+  authors:
+    - family-names: "Espinal Maya"
+      given-names: "Cristian"
+    - family-names: "Jiménez Londoño"
+      given-names: "Santiago"

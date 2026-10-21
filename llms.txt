@@ -1,0 +1,19 @@
+# The Delegation Divide — Agent Delegability Index (ADI)
+
+> Open index of AI-agent delegability for 436 ISCO-08 occupations and 190 countries (v2026.1).
+> Three layers per task: augmentation, partial delegation, full delegation. Scored by four frontier
+> models, validated against 1,500 human-rated tasks. Headline number in README.md and claims.jsonl.
+
+## How to use
+- Occupation lookup: `datos/salidas/adi_isco08.csv` or JSON `adi/v2026.1/isco/<code>.json`
+- Country atlas: `datos/salidas/adi_countries.csv`
+- MCP server: `adi-mcp` (tools: lookup_occupation, country_profile, cite)
+- Python: `pip install adi-index`
+
+## How to cite
+See CITATION.cff. BibTeX key: espinal2026delegation.
+
+## Files
+- README.md: summary, headline, BibTeX
+- docs/PLAN.md: full design
+- articulo/claims.jsonl: every number in the paper, with the script that produces it
