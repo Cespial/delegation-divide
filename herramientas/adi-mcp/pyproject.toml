@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "adi-mcp"
-version = "2026.1.dev0"
+version = "2026.1"
 description = "MCP server (stdio) for the Agent Delegability Index (ADI): lookup_occupation, country_profile, top_occupations, cite."
 readme = "README.md"
 requires-python = ">=3.10"
