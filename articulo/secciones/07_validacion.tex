@@ -1,19 +1,66 @@
-\section{Validation against observed adoption}
+\section{Validation, convergence and adoption}
 \label{sec:validacion}
 
-\subsection{Human raters}
+The ratings are stable and the two models largely agree; at the occupation level, ADI coincides with existing exposure indices more than the preregistration anticipated; and the adoption gap we predicted does not appear.
 
-Human--model agreement on the 1,500-task validation sample is $\alpha$ = \cifraopc{agree.alpha.humano.modelo} (ordinal) and quadratic-weighted $\kappa$ = \cifraopc{agree.kappa.humano.modelo}; agreement among the three humans is $\alpha$ = \cifraopc{agree.alpha.humano}.
-Stability across repeated calls on \cifra{n.testretest} tasks is $\kappa$ = \cifra{agree.testretest.sonnet.kappa} for Sonnet and \cifra{agree.testretest.haiku.kappa} for Haiku, with exact agreement of \cifraopc{agree.testretest.sonnet.exacto.pct}\% and \cifraopc{agree.testretest.haiku.exacto.pct}\%.
+\subsection{Agreement between models and over time}
+
+The two models agree at quadratic-weighted $\kappa$ = \cifra{agree.kappa.sonnet_haiku} and Krippendorff's $\alpha$ = \cifra{agree.alpha.modelos} (ordinal), over \cifra{cobertura.tareas.puntuadas} tasks.
+They differ in generosity: Haiku places many more tasks at L2 or above, and its headline is \cifra{titular.modelo.haiku.l2}\% against \cifra{titular.modelo.sonnet.l2}\% for Sonnet.
+The preregistered consensus takes the lower level when they disagree, so the headline follows Sonnet, the primary rater; the Haiku figure is an upper reading of the same rubric.
+Stability across repeated calls on \cifra{n.testretest} randomly drawn tasks is $\kappa$ = \cifra{agree.testretest.sonnet.kappa} for Sonnet and \cifra{agree.testretest.haiku.kappa} for Haiku, with exact agreement on \cifra{agree.testretest.sonnet.exacto.pct}\% and \cifra{agree.testretest.haiku.exacto.pct}\% of tasks.
+The interface exposes no temperature, yet a second call returns the same level for most tasks; the disagreement between models is therefore systematic, not sampling noise.
+
+\subsection{Human and agentic validation}
+
+The preregistered human validation changed before any result was opened (deviation D2 in \texttt{docs/DESVIACIONES.md}).
+Instead of three human raters on 1,500 tasks, one human rater scores, blind to all model ratings, a subsample of 300 tasks drawn from the 1,500 and stratified by ISCO-08 major group.
+That rater is a coauthor of this paper.
+He follows the frozen rubric and the practice tasks and sees no model output, but he is not an independent rater in the sense of the registration, and a single rater gives no human--human agreement.
+We report this as a limitation, not as a validation equivalent to the registered one.
+Human--model agreement on this subsample is $\alpha$ = \cifraopc{agree.alpha.humano.modelo} (ordinal) and quadratic-weighted $\kappa$ = \cifraopc{agree.kappa.humano.modelo}, against the preregistered acceptance threshold of $\alpha \geq 0.60$ for the primary rater.
+These figures, still being collected, are reported in the final version whatever their value.
+
+A second check is an agentic panel: a third model, Claude Opus 5.5, which plays no part in the index, researches each of the 1,500 validation tasks on the web and rates it with the same rubric, citing its evidence.
+The panel is a model, from the same developer as the raters.
+Its agreement with the index tests whether a rater with tools and evidence reaches the same levels as raters without them; it is not human validation and is not reported as such.
+The panel's agreement with the models and with the human rater is reported in the final version.
 
 \subsection{Convergence with exposure indices (H3)}
 
+H3 is not supported in the form registered, and the reason matters for what ADI is.
 Across ISCO-08 unit groups, ADI correlates with the exposure measure of \citet{eloundou2024gpts} at $r$ = \cifra{h3.r.eloundou} (Spearman $\rho$ = \cifra{h3.rho.eloundou}) and with the AIOE of \citet{felten2021occupational} at $r$ = \cifra{h3.r.felten} ($\rho$ = \cifra{h3.rho.felten}).
-As exploratory comparisons, the correlation is \cifra{h3.r.eisfeldt} with \citet{eisfeldt2023generative}, \cifra{h3.r.webb_ai} with the AI patent exposure of \citet{webb2020impact} and \cifra{h3.r.webb_robot} with its robot exposure, and \cifra{h3.r.aei} with observed Claude exposure by occupation \citep{handa2025economic}.
+The preregistration set a band of 0.40 to 0.80 and stated in advance that a correlation above 0.80 would mean that ADI adds little beyond exposure.
+Both correlations are above it.
+At the level of occupations, the delegability that language models rate largely coincides with the exposure that earlier studies measured: the occupations an agent could take over are, for the most part, the occupations a chatbot could speed up.
+The correlation with \citet{eisfeldt2023generative} is similar, at \cifra{h3.r.eisfeldt}.
+A ranking of occupations is therefore not ADI's contribution.
+
+What ADI adds lies elsewhere, and four results locate it.
+First, the level scale: exposure indices say whether AI touches a task, while ADI separates partial from full delegation, and full delegation turns out to be rare (\cifra{titular.global.l3}\% of world task time) and concentrated in a few clerical groups (Section~\ref{sec:indice}).
+Second, the barriers, which say why a task stops short of L3 and which are not recorded by any exposure index.
+Third, the reach: a task-level index carried to \cifra{cobertura.paises} countries in ISCO-08, where exposure indices are mostly confined to the United States.
+Fourth, the relation to what is observed and to other kinds of automation.
+ADI correlates at only \cifra{h3.r.aei} with observed Claude usage by occupation \citep{handa2025economic} (\cifra{h3.r.aei_tareas} when usage is matched task by task), well below its correlation with exposure, so capability and use are not the same ranking.
+It is nearly uncorrelated with the AI-patent exposure of \citet{webb2020impact} ($r$ = \cifra{h3.r.webb_ai}), negatively correlated with Webb's software exposure (\cifra{h3.r.webb_software}) and strongly negatively correlated with his robot exposure (\cifra{h3.r.webb_robot}): the work agents can take over is the opposite of the work robots were expected to take.
 
 \subsection{Observed usage and the adoption gap (H2)}
 
+H2 is not supported.
 For the \cifra{h2.n} countries with Anthropic Economic Index usage per working-age person \citep{anthropic2025economic}, delegability and usage correlate at $r$ = \cifra{h2.r.adi_uso}.
-The standardized gap between delegability and usage is \cifra{h2.brecha.medio} standard deviations wider in middle-income than in high-income countries (one-sided \pval{h2.brecha.medio.p}); separately, \cifra{h2.b.medio_alto} for upper-middle (\pval{h2.b.medio_alto.p}) and \cifra{h2.b.medio_bajo} for lower-middle income (\pval{h2.b.medio_bajo.p}; Table~\ref{tab:h1}, column 4).
-% INTERPRETAR tras la corrida real (sentido del signo de H2).
+The preregistered test regresses the standardized gap between the two on income-group dummies.
+The gap in middle-income countries is \cifra{h2.brecha.medio} standard deviations relative to high-income countries, not distinguishable from zero (one-sided \pval{h2.brecha.medio.p}).
+Separately, the coefficient is \cifra{h2.b.medio_alto} for upper-middle (\pval{h2.b.medio_alto.p}) and \cifra{h2.b.medio_bajo} for lower-middle income (\pval{h2.b.medio_bajo.p}; Table~\ref{tab:h1}, column 4).
+Neither is significant, and the lower-middle coefficient has the wrong sign.
+The only group whose gap departs clearly from high income is low income, and it departs in the opposite direction to the hypothesis: there, usage is less far below the high-income level than delegability is.
+We read this as a null result.
+Across countries, observed usage of one AI system follows the delegable task base closely; we find no evidence that middle-income countries lag behind what their occupational structure would allow.
+Two cautions apply.
+Usage comes from a single developer's product and measures conversations, not delegated work, and the same developer's models produce the ratings, so part of the high correlation may reflect a shared view of which work suits these models (Section~\ref{sec:limites}).
+
+\subsection{Sensitivity to the interface wrapper}
+
+The preregistered wrapper sensitivity re-rates the 1,500 validation tasks under the default Claude Code system prompt, which describes the model as an agent with tools.
+In the pilot, that wrapper raised the mean level (Section~\ref{sec:evaluadores}).
+The re-rating is in progress; the shift in level and the agreement with the neutral configuration are reported in the final version.
 % TODO: Agentic Adoption Index (EE. UU.) y dinámica salarial GEIH 2023--2026.

@@ -1,18 +1,32 @@
 \section{The index}
 \label{sec:indice}
 
+Partial delegation is the most common rating of a task, full delegation is rare, and the occupations at the top are clerical and administrative.
+
 \subsection{Tasks}
 
 Of the \cifra{cobertura.tareas.puntuadas} task statements with a valid consensus, \cifra{tareas.nivel0.pct}\% are rated L0, \cifra{tareas.nivel1.pct}\% L1, \cifra{tareas.nivel2.pct}\% L2 and \cifra{tareas.nivel3.pct}\% L3, so that \cifra{tareas.l2.pct}\% of statements reach at least partial delegation before any weighting.
+L2 is the modal level.
+Agents, as the models judge them, can execute substantial parts of many tasks but can finish very few of them without a human step.
 Ties between models, resolved to the lower level as preregistered, affect \cifra{tareas.empates.pct}\% of tasks.
 The two models agree with each other at Krippendorff's $\alpha$ = \cifra{agree.alpha.modelos} (ordinal) and at quadratic-weighted $\kappa$ = \cifra{agree.kappa.sonnet_haiku}.
 
 \subsection{Occupations}
 
 Table~\ref{tab:ocupaciones} lists the ten most and the ten least delegable of the \cifra{cobertura.isco} ISCO-08 unit groups covered by the crosswalk (\cifra{cobertura.isco.imputados} of them inherit the tasks of their parent group).
+The index spans its whole range.
+At the top, every weighted task of groups such as payroll clerks, accounting associate professionals, personnel clerks and database designers and administrators reaches L2 or above.
+At the bottom, no weighted task of stonemasons, concrete placers, sewing and embroidery workers, shoemakers or civil engineering labourers does.
+Full delegation is concentrated in a few clerical groups: coding and proof-reading clerks, typists and word processing operators, contact centre salespersons, receptionists and data entry clerks have the largest shares at L3.
+
 Figure~\ref{fig:isco} aggregates unit groups to the nine major groups with implied world employment weights.
-Professionals reach \cifra{gg.2.l2}\% and clerical support workers \cifra{gg.4.l2}\%, against \cifra{gg.7.l2}\% for craft and related trades and \cifra{gg.9.l2}\% for elementary occupations.
-% INTERPRETAR tras la corrida real: orden frente a los índices de exposición y amplitud de la brecha entre extremos.
+Managers reach \cifra{gg.1.l2}\%, professionals \cifra{gg.2.l2}\%, technicians and associate professionals \cifra{gg.3.l2}\% and clerical support workers \cifra{gg.4.l2}\%.
+Service and sales workers sit in the middle at \cifra{gg.5.l2}\%.
+The manual groups sit far below: \cifra{gg.6.l2}\% for skilled agricultural workers, \cifra{gg.7.l2}\% for craft and related trades, \cifra{gg.8.l2}\% for plant and machine operators and \cifra{gg.9.l2}\% for elementary occupations.
+The order is the one exposure indices produce, with cognitive and office work on top and manual work at the bottom; Section~\ref{sec:validacion} quantifies how close it is.
+Two features are specific to delegation.
+Managers rank first at L2 or above but, like professionals, have very little weight at L3: the models leave the decision with a human.
+Clerical support workers have by far the largest share at L3 of any major group, because their tasks are digital, specified by a goal and accepted by someone else.
 
 \input{tablas/tab3_ocupaciones}
 
@@ -26,7 +40,12 @@ Professionals reach \cifra{gg.2.l2}\% and clerical support workers \cifra{gg.4.l
 \subsection{Barriers}
 
 Figure~\ref{fig:barreras} decomposes the task weight that each barrier flags by major group (exploratory).
-% INTERPRETAR tras la corrida real: qué barrera domina en cada gran grupo.
+Two barriers split the occupational structure.
+The physical barrier flags most of the task weight in the five manual and service groups (service and sales, agriculture, crafts, operators and elementary occupations), and it is what keeps them low.
+In the four office groups the most frequent flag is access: the task depends on systems, data or places an agent would not normally reach.
+Accountability and trust are highest among managers and professionals, where tasks involve signatures, liability, persuasion and care; trust is also frequent in service and sales work.
+Clerical work carries the fewest accountability flags of any group and few trust flags, which is why it is the group that reaches full delegation.
+The barriers stack, so a task can carry several; the figure reports each one separately rather than assigning a single cause.
 
 \begin{figure}[t]
   \centering
@@ -37,12 +56,21 @@ Figure~\ref{fig:barreras} decomposes the task weight that each barrier flags by 
 
 \subsection{Task length (H4)}
 
+H4 is supported: full delegation peaks for tasks that take a human about a quarter of an hour.
 The probability that a task is fully delegable follows an inverted U in the log of the minutes a human needs for it: the logistic coefficients are \cifra{h4.b1} on log minutes (one-sided \pval{h4.p1}) and \cifra{h4.b2} on its square (\pval{h4.p2}), over \cifra{h4.n} tasks clustered in \cifra{h4.n.clusters} O*NET occupations.
 The implied peak is at about \cifra{h4.pico.minutos} minutes of human work.
-% INTERPRETAR tras la corrida real (forma de la U invertida).
+Very short tasks are often moments inside a physical or interpersonal activity, which an agent cannot isolate and finish on its own.
+Long tasks bundle several steps, including judgement, coordination or sign-off, and one human step is enough to keep the whole task at L2.
+Full delegation lives in between, in self-contained pieces of digital work.
+The minutes are themselves a model estimate, recorded in the same call as the level, so the shape of the curve should be read as the models' view of task length rather than as a measured duration.
 
 \subsection{Robustness}
 
 The occupational index is not an artefact of the task-to-occupation assignment: the dispersion of $\mathrm{ADI}_o$ across unit groups (standard deviation \cifra{placebo.sd.obs}) compares with a mean of \cifra{placebo.sd.media} under the permutation null (\pval{placebo.p}).
+With uniform task weights the world headline is \cifra{titular.global.l2.pesos_uniformes}\%, and without the imputed unit groups \cifra{titular.global.l2.sin_imputados}\%.
+
+The choice of model matters more than any weighting choice.
 Model by model, the world headline is \cifra{titular.modelo.sonnet.l2}\% with Sonnet and \cifra{titular.modelo.haiku.l2}\% with Haiku.
-With uniform task weights it is \cifra{titular.global.l2.pesos_uniformes}\%, and without the imputed unit groups \cifra{titular.global.l2.sin_imputados}\%.
+Haiku is the more generous rater: it places many more tasks at L2 or above.
+Because the preregistered consensus takes the lower level when the two models disagree, the consensus headline of \cifra{titular.global.l2}\% stays close to Sonnet, the primary rater, and the gap to Haiku is a measure of how much the index depends on which model is asked.
+Both models are stable across repeated calls (Section~\ref{sec:validacion}), so the difference is systematic, not noise.

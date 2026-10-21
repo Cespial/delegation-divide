@@ -1,12 +1,18 @@
 \section{The atlas: a delegation divide}
 \label{sec:atlas}
 
+A minority of task time in world employment is delegable to AI agents, almost none of it in full, and the share rises steeply with national income.
+
 \subsection{The headline}
 
 Weighting each country by its employment, \cifra{titular.global.l2}\% of task time in world employment is delegable to AI agents (95\% bootstrap interval \cifra{titular.global.l2.lo}--\cifra{titular.global.l2.hi}), and \cifra{titular.global.l3}\% is fully delegable (\cifra{titular.global.l3.lo}--\cifra{titular.global.l3.hi}).
 The share-based variant, the employment-weighted mean share of task time an agent can carry, is \cifra{titular.global.share}\%.
 The headline covers \cifra{cobertura.paises} countries and \cifra{cobertura.empleo_millones} million workers (Table~\ref{tab:cobertura}); \cifra{cobertura.paises.2d} countries report employment at two ISCO digits and \cifra{cobertura.paises.1d} at one.
-With equal weights for the unit groups inside each reported group, the preregistered sensitivity check, it is \cifra{titular.global.l2.iguales}\%; with Colombian weights for every country it is \cifra{titular.global.l2.geih}\%.
+The headline does not depend on how unit groups are weighted inside the groups a country reports.
+With equal weights, the preregistered sensitivity check, it is \cifra{titular.global.l2.iguales}\% (\cifra{titular.global.l3.iguales}\% at L3); with Colombian weights for every country it is \cifra{titular.global.l2.geih}\% (\cifra{titular.global.l3.geih}\% at L3); without any employment weighting of unit groups it is \cifra{titular.global.l2.sin_ponderar}\%.
+
+Four countries were excluded after the first real run because their occupational employment data do not add up to their total employment: Suriname, Senegal, Comoros and Hong Kong (deviation D3 in \texttt{docs/DESVIACIONES.md}).
+The rule was set after seeing results, so we also computed the headline and the H1 slope with the original country set; both are almost unchanged, and no conclusion depends on the exclusion.
 
 \begin{figure}[t]
   \centering
@@ -17,12 +23,22 @@ With equal weights for the unit groups inside each reported group, the preregist
 
 \subsection{Delegability and income (H1)}
 
+H1 is supported: delegable employment rises with income.
 Figure~\ref{fig:mapa} maps $\mathrm{ADI}_c$ and Figure~\ref{fig:ingreso} plots it against GDP per capita.
 The share of employment in delegable tasks is \cifra{titular.ingreso.alto.l2}\% in high-income countries, \cifra{titular.ingreso.medio_alto.l2}\% in upper-middle-income, \cifra{titular.ingreso.medio_bajo.l2}\% in lower-middle-income and \cifra{titular.ingreso.bajo.l2}\% in low-income countries.
+The ordering holds at full delegation: \cifra{titular.ingreso.alto.l3}\%, \cifra{titular.ingreso.medio_alto.l3}\%, \cifra{titular.ingreso.medio_bajo.l3}\% and \cifra{titular.ingreso.bajo.l3}\%.
 The preregistered regression (Table~\ref{tab:h1}, column 1) has a slope of \cifra{h1.pendiente} percentage points per log point of GDP per capita (one-sided \pval{h1.p}; 95\% bootstrap interval \cifra{h1.pendiente.ic}; $R^2$ = \cifra{h1.r2}; \cifra{h1.n} countries).
-With income-group dummies, low-income countries sit \cifraabs{h1.dif.bajo_alto} points below high-income countries (\pval{h1.dif.bajo_alto.p}).
-The slope with equal within-group weights is \cifra{h1.pendiente.iguales}, and with the share-based index \cifra{h1.pendiente.share}.
+With heteroskedasticity-robust errors the standard error is \cifra{h1.se.hc1}, against \cifra{h1.se} under the classical assumption.
+With income-group dummies, every group sits below high income in the preregistered direction: low-income countries by \cifraabs{h1.dif.bajo_alto} points (\pval{h1.dif.bajo_alto.p}), lower-middle by \cifraabs{h1.dif.medio_bajo_alto} (\pval{h1.dif.medio_bajo_alto.p}) and upper-middle by \cifraabs{h1.dif.medio_alto_alto} (\pval{h1.dif.medio_alto_alto.p}); the dummies alone give $R^2$ = \cifra{h1.dummies.r2}.
+The slope is \cifra{h1.pendiente.iguales} with equal within-group weights, \cifra{h1.pendiente.geih} with Colombian weights for every country and \cifra{h1.pendiente.share} with the share-based index.
 A placebo in which tasks are shuffled across occupations reproduces the slope in a fraction \cifra{placebo.h1.p} of draws.
+
+The divide is a statement about the composition of employment, and should be read as one.
+Every country receives the same occupational index, built from the United States task mix, so differences between countries come from which occupations employ their workers and, at the margin, from the within-group weights of their income group.
+Low-income countries employ most of their workers in agriculture, crafts and elementary occupations, where the physical barrier flags most of the task weight (Section~\ref{sec:indice}).
+High-income countries employ more managers, professionals and clerks, whose tasks are digital.
+The divide therefore does not say that an agent performs the same task worse in a poorer country; it says that the work poorer countries do is work agents cannot reach.
+Section~\ref{sec:limites} discusses what the transfer of the United States task mix may hide.
 
 \begin{figure}[t]
   \centering
@@ -35,6 +51,10 @@ A placebo in which tasks are shuffled across occupations reproduces the slope in
 
 \subsection{Countries}
 
-Colombia stands at \cifra{pais.COL.l2}\%, Mexico at \cifra{pais.MEX.l2}\% and Brazil at \cifra{pais.BRA.l2}\%, against \cifra{pais.USA.l2}\% in the United States and \cifra{pais.IND.l2}\% in India.
+The extremes of the atlas follow the same logic.
+The most delegable countries are small, service-intensive, high-income economies: Singapore and Luxembourg lead, followed by the United Kingdom, Sweden, the Netherlands and Israel.
+The least delegable are agrarian, low- and lower-middle-income economies in Africa: Burundi, Mozambique, Madagascar, Tanzania, Lesotho and Ethiopia.
+Among large economies, Colombia stands at \cifra{pais.COL.l2}\%, Mexico at \cifra{pais.MEX.l2}\% and Brazil at \cifra{pais.BRA.l2}\%, against \cifra{pais.USA.l2}\% in the United States and \cifra{pais.IND.l2}\% in India.
+The three Latin American countries sit above the upper-middle-income average, close to the world headline.
 The full country table, with bootstrap intervals and the equal-weight variant, is released as \texttt{salidas/adi\_pais.csv}.
 % TODO (exploratorio): gradientes por sexo, edad e informalidad con GEIH, ENOE y PNADC (datos/microdatos/*_resumen.csv).
