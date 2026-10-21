@@ -88,14 +88,16 @@ def main():
     ap.add_argument("--n", type=int, help="limita a las primeras n tareas pendientes (para el piloto)")
     ap.add_argument("--lote", type=int, default=1, help="tareas por llamada (1 = individual)")
     ap.add_argument("--particion", default="0/1", help="k/K: procesa solo task_id %% K == k (procesos en paralelo)")
+    ap.add_argument("--tareas", help="CSV con columna task_id: limita a esas tareas (p. ej. validacion/muestra_1500.csv)")
     ap.add_argument("--salida", help="subcarpeta de scoring/salidas (por defecto piloto o main)")
     a = ap.parse_args(); sha = candado(a.piloto)
     sys.path.insert(0, str(RAIZ / "scoring"))
     tareas = pd.read_parquet(RAIZ / "datos/tareas_unicas.parquet")
     if a.piloto: tareas = tareas.sample(a.piloto, random_state=20261020)
+    if a.tareas: tareas = tareas[tareas.task_id.isin(pd.read_csv(RAIZ / a.tareas).task_id)]
     k, K = map(int, a.particion.split("/")); tareas = tareas[tareas.task_id % K == k]
     sal = RAIZ / "scoring/salidas" / (a.salida or ("piloto" if a.piloto else "main")); sal.mkdir(parents=True, exist_ok=True)
-    suf = f".p{k}" if K > 1 else ""
+    suf = f".{os.environ.get('ADI_SUFIJO', 'p')}{k}" if K > 1 else ""
     for rep in range(1, a.repetir + 1):
         out = sal / (f"{a.modelo}{suf}.jsonl" if rep == 1 else f"{a.modelo}{suf}_r{rep}.jsonl")
         (correr_lote if a.lote > 1 else correr)(a, out, tareas, sha)
@@ -146,6 +148,9 @@ def correr_lote(a, out, tareas, sha):
 
 def correr(a, out, tareas, sha):
     hechos = {json.loads(l)["task_id"] for l in open(out) if l.strip() and "error" not in l} if out.exists() else set()
+    if os.environ.get("ADI_HECHOS"):  # glob extra de checkpoints (repartir de nuevo una corrida a medias sin repetir tareas)
+        for q in out.parent.glob(os.environ["ADI_HECHOS"]):
+            if q != out: hechos |= {json.loads(l)["task_id"] for l in open(q) if l.strip() and "error" not in l}
     plantilla = prompt_de(RUBRICA.read_text()); prov, cli = cliente(a.modelo)
     pend = tareas[~tareas.task_id.isin(hechos)]
     if a.n: pend = pend.head(a.n)
