@@ -1,5 +1,7 @@
 # Preregistro — The Delegation Divide (Agent Delegability Index, ADI)
 
+> **Versión canónica para OSF: `docs/OSF_PREREGISTRO_EN.md`** (20-oct: H1 menor en países pobres, embargo a ene-2027, regla de modelos, 151 países). Este archivo es la lectura en español del borrador inicial.
+
 Borrador para OSF. Autores: Cristian Espinal Maya (UNAL, ORCID 0009-0000-1009-8388) y Santiago Jiménez Londoño (EAFIT,
 ORCID 0009-0007-9862-7133). Fecha del borrador: 2026-10-20. **Ninguna puntuación de modelos de la corrida principal
 existe al registrar.** El piloto (≤ 300 tareas) sirve solo para ajustar la redacción de la rúbrica y se descarta.
