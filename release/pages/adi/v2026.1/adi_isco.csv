@@ -1,0 +1,434 @@
+isco08,titulo,adi_l2,adi_l3,adi_share,n_tareas,barrera_fisica,barrera_responsabilidad,barrera_confianza,barrera_acceso,ic_lo,ic_hi,sintetico
+1111,Legislators,0.5,0.0,42.17,30,0.2667,0.5333,0.8,0.5167,36.17,48.25,false
+1112,Senior government officials,0.7612,0.0,50.68,89,0.2081,0.4927,0.6208,0.6613,46.79,54.51,false
+1113,Traditional chiefs and heads of village,0.6276,0.0,47.01,79,0.1396,0.4819,0.7056,0.5741,43.28,50.47,false
+1114,Senior officials of special-interest organisations,0.9033,0.0097,55.17,305,0.1977,0.3457,0.4805,0.741,53.54,57.01,false
+1120,Managing directors and chief executives,0.7586,0.0,50.34,66,0.0632,0.4079,0.6351,0.6486,46.85,54.08,false
+1211,Finance managers,0.8676,0.0288,56.48,39,0.0476,0.6007,0.3376,0.761,52.02,60.65,false
+1212,Human resource managers,0.8953,0.0,56.63,60,0.0206,0.3203,0.6688,0.7567,53.83,59.36,false
+1213,Policy and planning managers,0.886,0.0151,55.17,252,0.2416,0.4882,0.4402,0.7895,53.4,56.75,false
+1219,Business services and administration managers not elsewhere classified,0.8065,0.0122,53.01,371,0.2714,0.3902,0.4751,0.7221,50.53,55.69,false
+1221,Sales and marketing managers,0.8768,0.031,53.87,37,0.0966,0.0776,0.5201,0.7239,49.79,58.04,false
+1222,Advertising and public relations managers,0.8987,0.0162,55.57,66,0.0777,0.0487,0.6005,0.5757,51.83,59.01,false
+1223,Research and development managers,0.8725,0.0,52.13,107,0.2542,0.4468,0.4129,0.7405,49.87,54.23,false
+1311,Agricultural and forestry production managers,0.5654,0.0374,44.05,30,0.7507,0.2858,0.1922,0.8429,38.47,50.25,false
+1312,Aquaculture and fisheries production managers,0.5654,0.0374,44.05,30,0.7507,0.2858,0.1922,0.8429,38.36,50.59,false
+1321,Manufacturing managers,0.6963,0.0114,47.76,116,0.5083,0.6033,0.3158,0.9045,44.97,50.62,false
+1322,Mining managers,0.886,0.0151,55.17,252,0.2416,0.4882,0.4402,0.7895,53.39,56.87,false
+1323,Construction managers,0.7793,0.0,48.81,25,0.516,0.6735,0.5204,0.7697,43.21,54.2,false
+1324,"Supply, distribution and related managers",0.9011,0.0,55.21,30,0.2756,0.2787,0.4391,0.8729,50.48,59.81,false
+1330,Information and communications technology service managers,0.9342,0.0,54.07,17,0.0,0.2013,0.4196,0.605,47.8,59.56,false
+1341,Child care services managers,0.7001,0.0,47.65,17,0.3043,0.5872,0.627,0.6442,38.14,56.62,false
+1342,Health services managers,0.7137,0.0596,52.21,18,0.1417,0.4733,0.5087,0.7427,45.07,59.19,false
+1343,Aged care services managers,0.7602,0.0464,51.49,35,0.1438,0.422,0.5371,0.7544,45.96,57.47,false
+1344,Social welfare managers,0.68,0.0,48.53,16,0.0687,0.2864,0.8315,0.6073,43.0,55.04,false
+1345,Education managers,0.7478,0.0,48.89,83,0.2386,0.4509,0.6513,0.7152,45.39,52.27,false
+1346,Financial and insurance services branch managers,0.8745,0.0252,55.54,56,0.0605,0.5559,0.375,0.7652,51.37,59.4,false
+1349,Professional services managers not elsewhere classified,0.886,0.0151,55.17,252,0.2416,0.4882,0.4402,0.7895,53.46,56.86,false
+1411,Hotel managers,0.8107,0.0,50.44,24,0.5545,0.0802,0.6042,0.6863,43.73,56.33,false
+1412,Restaurant managers,0.6921,0.0662,45.92,28,0.5728,0.1988,0.3058,0.6738,36.23,55.73,false
+1420,Retail and wholesale trade managers,0.9231,0.0,48.96,17,0.1511,0.2421,0.6368,0.7951,39.87,56.16,false
+1431,"Sports, recreation and cultural centre managers",0.8652,0.009,54.66,271,0.2893,0.5605,0.4223,0.8046,51.65,57.63,false
+1439,Services managers not elsewhere classified,0.886,0.0151,55.17,252,0.2416,0.4882,0.4402,0.7895,53.49,56.85,false
+2111,Physicists and astronomers,0.8078,0.0676,56.32,51,0.1777,0.1925,0.3045,0.4151,50.34,61.98,false
+2112,Meteorologists,0.9437,0.0743,60.35,51,0.1269,0.2237,0.1666,0.4007,56.27,64.72,false
+2113,Chemists,0.6759,0.0,46.73,52,0.6028,0.3322,0.1613,0.8332,41.87,52.45,false
+2114,Geologists and geophysicists,0.8266,0.0,52.91,81,0.3984,0.5796,0.1504,0.6834,49.53,56.08,false
+2120,"Mathematicians, actuaries and statisticians",0.9646,0.0528,61.73,125,0.0187,0.2652,0.2508,0.5154,59.62,63.91,false
+2131,"Biologists, botanists, zoologists and related professionals",0.7197,0.0203,47.49,219,0.5737,0.3438,0.2721,0.7393,45.26,49.58,false
+2132,"Farming, forestry and fisheries advisers",0.6844,0.0,46.51,67,0.6943,0.3187,0.4995,0.7191,42.71,50.8,false
+2133,Environmental protection professionals,0.8168,0.0132,53.19,163,0.3938,0.3864,0.3533,0.6663,50.6,55.76,false
+2141,Industrial and production engineers,0.8764,0.0,54.03,46,0.3376,0.1388,0.3233,0.879,49.67,58.01,false
+2142,Civil engineers,0.7853,0.0,50.92,42,0.4132,0.9347,0.1937,0.7891,46.09,55.58,false
+2143,Environmental engineers,0.8856,0.0102,55.33,57,0.2394,0.7906,0.2799,0.7975,52.26,58.37,false
+2144,Mechanical engineers,0.8492,0.0145,51.24,139,0.3998,0.5405,0.2121,0.828,48.91,53.52,false
+2145,Chemical engineers,0.8888,0.0,52.7,14,0.5721,0.555,0.0982,0.9697,46.31,58.37,false
+2146,"Mining engineers, metallurgists and related professionals",0.7862,0.0,49.17,78,0.4552,0.6291,0.179,0.9057,45.8,52.03,false
+2149,Engineering professionals not elsewhere classified,0.8936,0.0132,53.24,336,0.4667,0.498,0.1762,0.8279,51.83,54.64,false
+2151,Electrical engineers,0.9176,0.0,54.22,22,0.3894,0.6051,0.2186,0.7224,48.98,59.08,false
+2152,Electronics engineers,0.8555,0.0408,53.53,59,0.3267,0.1415,0.1781,0.7858,49.88,56.87,false
+2153,Telecommunications engineers,0.9006,0.0174,55.48,41,0.3838,0.283,0.176,0.8198,51.84,59.33,false
+2161,Building architects,0.9114,0.0,51.83,24,0.182,0.7864,0.366,0.5893,47.99,55.4,false
+2162,Landscape architects,0.8037,0.0,51.71,19,0.3348,0.4917,0.4151,0.5771,45.92,57.68,false
+2163,Product and garment designers,0.7581,0.0,48.09,37,0.429,0.0209,0.3392,0.4193,43.72,52.72,false
+2164,Town and traffic planners,0.8224,0.0,56.21,25,0.1263,0.4126,0.47,0.6691,50.49,61.52,false
+2165,Cartographers and surveyors,0.8366,0.0,56.79,54,0.2827,0.6768,0.0963,0.6823,53.27,60.15,false
+2166,Graphic and multimedia designers,0.9679,0.0,60.41,32,0.0793,0.0,0.0255,0.1157,57.37,63.71,false
+2211,Generalist medical practitioners,0.5622,0.0021,41.24,300,0.5043,0.9513,0.7295,0.856,39.26,43.15,false
+2212,Specialist medical practitioners,0.5292,0.0017,38.33,330,0.5014,0.9558,0.6864,0.8644,36.26,40.62,false
+2221,Nursing professionals,0.4442,0.0,35.89,188,0.5681,0.8912,0.6898,0.8543,33.48,38.23,false
+2222,Midwifery professionals,0.337,0.0,36.11,21,0.5723,0.892,0.761,0.6658,26.99,44.5,false
+2230,Traditional and complementary medicine professionals,0.4784,0.0099,35.28,54,0.5696,0.906,0.7935,0.5827,29.33,40.88,false
+2240,Paramedical practitioners,0.3559,0.0,28.19,28,0.7857,0.9522,0.594,0.8286,20.95,35.01,false
+2250,Veterinarians,0.2841,0.0385,31.03,21,0.7456,0.8673,0.5685,0.4679,22.3,41.29,false
+2261,Dentists,0.2718,0.0,24.76,57,0.7829,0.9548,0.7646,0.6036,19.56,30.04,false
+2262,Pharmacists,0.7757,0.0,49.17,20,0.4583,0.8793,0.4123,0.8634,41.27,56.14,false
+2263,Environmental and occupational health and hygiene professionals,0.6951,0.0,50.27,38,0.3868,0.4907,0.4717,0.8076,44.7,55.62,false
+2264,Physiotherapists,0.4672,0.0,39.26,49,0.6037,0.7487,0.8087,0.5079,33.11,45.44,false
+2265,Dieticians and nutritionists,0.8703,0.0,54.15,28,0.2439,0.7662,0.5671,0.7109,49.66,58.53,false
+2266,Audiologists and speech therapists,0.4701,0.0,40.7,45,0.4849,0.8747,0.786,0.6602,35.92,45.63,false
+2267,Optometrists and ophthalmic opticians,0.3072,0.0,34.0,10,0.638,0.9382,0.7401,0.5483,24.9,43.47,false
+2269,Health professionals not elsewhere classified,0.4595,0.0011,37.5,199,0.541,0.8432,0.8208,0.6153,34.46,40.47,false
+2310,University and higher education teachers,0.6804,0.0073,49.55,860,0.2636,0.382,0.5949,0.5902,48.22,50.74,false
+2320,Vocational education teachers,0.5349,0.0,42.43,84,0.5822,0.4079,0.6592,0.6053,38.23,46.64,false
+2330,Secondary education teachers,0.4987,0.0,41.58,32,0.5286,0.3791,0.6083,0.6818,35.2,48.15,false
+2341,Primary school teachers,0.4301,0.0,37.83,73,0.6547,0.3373,0.7126,0.5942,33.9,42.44,false
+2342,Early childhood educators,0.1813,0.0,26.58,71,0.8412,0.3484,0.796,0.4442,23.11,30.43,false
+2351,Education methods specialists,0.8552,0.0,58.4,30,0.0909,0.1445,0.419,0.4687,53.86,62.32,false
+2352,Special needs teachers,0.332,0.0,34.43,196,0.6804,0.5262,0.7742,0.6072,31.89,36.94,false
+2353,Other language teachers,0.5702,0.0208,44.75,104,0.4361,0.2186,0.6817,0.5225,40.0,48.92,false
+2354,Other music teachers,0.5921,0.0466,46.6,30,0.4469,0.1361,0.6796,0.4434,39.81,53.53,false
+2355,Other arts teachers,0.4816,0.0457,40.7,67,0.5111,0.2631,0.7065,0.5278,34.1,47.26,false
+2356,Information technology trainers,1.0,0.0,61.45,20,0.0557,0.0199,0.4087,0.688,57.47,65.26,false
+2359,Teaching professionals not elsewhere classified,0.5505,0.026,43.04,72,0.3757,0.3639,0.7743,0.5853,37.74,48.49,false
+2411,Accountants,0.9699,0.093,66.59,54,0.0277,0.5244,0.2292,0.6366,63.32,69.64,false
+2412,Financial and investment advisers,0.9523,0.0231,61.77,77,0.0112,0.6797,0.6499,0.6398,58.9,64.38,false
+2413,Financial analysts,0.939,0.0844,61.82,84,0.0317,0.6245,0.26,0.6968,56.56,66.27,false
+2421,Management and organisation analysts,0.9253,0.0347,61.0,94,0.1311,0.0693,0.3235,0.7834,58.47,63.52,false
+2422,Policy administration professionals,0.906,0.0902,61.87,156,0.215,0.3024,0.1811,0.7501,59.41,64.32,false
+2423,Personnel and careers professionals,0.8486,0.0189,57.14,111,0.0424,0.3064,0.5374,0.6888,54.05,59.88,false
+2424,Training and staff development professionals,1.0,0.0,61.45,20,0.0557,0.0199,0.4087,0.688,57.33,65.1,false
+2431,Advertising and marketing professionals,0.9723,0.0699,67.14,49,0.0068,0.0443,0.206,0.4817,63.87,70.12,false
+2432,Public relations professionals,0.9298,0.0,58.09,18,0.0173,0.0593,0.6242,0.4814,51.62,63.99,false
+2433,Technical and medical sales professionals (excluding ICT),0.895,0.0628,59.4,64,0.1669,0.1384,0.5275,0.5862,55.49,62.91,false
+2434,Information and communications technology sales professionals,0.9082,0.0363,57.81,89,0.1826,0.1277,0.5667,0.6902,54.47,61.25,false
+2511,Systems analysts,0.943,0.0,56.43,54,0.0413,0.1268,0.4183,0.6852,53.75,58.87,false
+2512,Software developers,0.9698,0.1278,64.31,47,0.0133,0.0,0.1897,0.4858,60.0,69.04,false
+2513,Web and multimedia developers,0.9511,0.3467,70.97,59,0.0,0.0,0.1034,0.282,67.05,74.48,false
+2514,Applications programmers,0.9697,0.3381,68.64,17,0.0234,0.0,0.2285,0.2363,60.7,74.94,false
+2519,Software and applications developers and analysts not elsewhere classified,0.983,0.0569,63.77,415,0.0385,0.0957,0.1531,0.6518,62.78,64.84,false
+2521,Database designers and administrators,1.0,0.0638,64.57,43,0.0,0.0404,0.0728,0.7205,62.32,66.95,false
+2522,Systems administrators,1.0,0.0459,60.32,20,0.3813,0.0484,0.0777,0.8894,56.97,63.78,false
+2523,Computer network professionals,0.9817,0.0149,57.26,59,0.266,0.1196,0.1971,0.8675,54.31,60.2,false
+2529,Database and network professionals not elsewhere classified,0.985,0.0633,63.66,426,0.0339,0.1009,0.1743,0.6602,62.55,64.73,false
+2611,Lawyers,0.8327,0.0,52.65,22,0.1598,1.0,0.5666,0.5388,47.2,57.57,false
+2612,Judges,0.631,0.0,49.92,35,0.0717,0.9603,0.43,0.5084,44.14,55.29,false
+2619,Legal professionals not elsewhere classified,0.8077,0.0484,55.03,20,0.0369,0.696,0.3921,0.2471,47.43,62.27,false
+2621,Archivists and curators,0.7159,0.0,49.67,28,0.5241,0.1574,0.382,0.7738,44.26,54.25,false
+2622,Librarians and related information professionals,0.6315,0.0737,51.43,30,0.4882,0.0895,0.3822,0.6433,45.12,58.06,false
+2631,Economists,0.9446,0.0,62.28,34,0.0075,0.1072,0.3282,0.4673,59.01,64.9,false
+2632,"Sociologists, anthropologists and related professionals",0.7645,0.0,52.09,57,0.3298,0.1774,0.4848,0.5431,47.41,56.05,false
+2633,"Philosophers, historians and political scientists",0.8844,0.0554,57.97,57,0.1716,0.1956,0.3193,0.5862,53.5,62.09,false
+2634,Psychologists,0.6614,0.0,45.96,106,0.2233,0.7279,0.7929,0.7589,43.04,48.87,false
+2635,Social work and counselling professionals,0.6249,0.0029,41.82,154,0.1209,0.8519,0.8584,0.7789,39.75,44.03,false
+2636,Religious professionals,0.5647,0.0,44.75,40,0.3745,0.1751,0.8663,0.3114,38.83,50.12,false
+2641,Authors and related writers,0.9294,0.1137,65.04,72,0.0458,0.0381,0.2233,0.3267,61.12,68.68,false
+2642,Journalists,0.8273,0.1327,59.33,51,0.1349,0.0796,0.4294,0.3708,54.14,64.34,false
+2643,"Translators, interpreters and other linguists",0.8934,0.0455,61.45,39,0.0838,0.2733,0.3233,0.5114,55.15,66.7,false
+2651,Visual artists,0.5392,0.0,37.76,44,0.6553,0.0136,0.1496,0.123,30.0,44.94,false
+2652,"Musicians, singers and composers",0.4193,0.0,33.79,59,0.5451,0.0275,0.4508,0.1671,27.09,40.29,false
+2653,Dancers and choreographers,0.1543,0.0,22.56,32,0.8341,0.0,0.5225,0.1107,16.79,29.15,false
+2654,"Film, stage and related directors and producers",0.6914,0.0089,48.34,121,0.2094,0.0867,0.433,0.5379,45.36,51.56,false
+2655,Actors,0.1528,0.0,20.51,18,0.8756,0.0153,0.6784,0.1077,12.08,30.2,false
+2656,"Announcers on radio, television and other media",0.8015,0.0819,58.49,54,0.2049,0.1607,0.4189,0.4844,53.63,63.6,false
+2659,Creative and performing artists not elsewhere classified,0.5263,0.0526,43.37,19,0.5,0.0263,0.2895,0.5,30.57,54.87,false
+3111,Chemical and physical science technicians,0.6968,0.0312,49.46,130,0.5581,0.3271,0.1107,0.8258,45.59,53.45,false
+3112,Civil engineering technicians,0.5756,0.0173,46.07,123,0.4807,0.667,0.2086,0.7501,41.53,50.17,false
+3113,Electrical engineering technicians,0.469,0.0,38.42,80,0.7906,0.2597,0.0479,0.8107,33.53,44.01,false
+3114,Electronics engineering technicians,0.6015,0.0,47.2,30,0.5432,0.3333,0.0689,0.7769,40.47,53.92,false
+3115,Mechanical engineering technicians,0.4997,0.0008,39.27,249,0.7158,0.2837,0.0338,0.8162,35.81,42.43,false
+3116,Chemical engineering technicians,0.4478,0.0025,39.2,198,0.6799,0.3611,0.0361,0.8212,36.02,42.54,false
+3117,Mining and metallurgical technicians,0.5153,0.0017,41.37,243,0.6475,0.3277,0.0513,0.8432,38.21,44.29,false
+3118,Draughtspersons,0.823,0.0039,52.8,101,0.197,0.2614,0.1337,0.5209,50.05,55.38,false
+3119,Physical and engineering science technicians not elsewhere classified,0.5107,0.0152,42.04,466,0.632,0.5721,0.1593,0.85,39.55,44.67,false
+3121,Mining supervisors,0.7163,0.0,48.63,30,0.4863,0.3796,0.3866,0.7986,42.59,54.51,false
+3122,Manufacturing supervisors,0.5649,0.0505,47.62,20,0.398,0.188,0.4893,0.9076,40.18,55.36,false
+3123,Construction supervisors,0.7163,0.0,48.63,30,0.4863,0.3796,0.3866,0.7986,42.73,54.49,false
+3131,Power production plant operators,0.4871,0.0059,38.29,83,0.5156,0.8445,0.2161,0.9825,34.17,42.2,false
+3132,Incinerator and water treatment plant operators,0.2813,0.0047,29.79,130,0.8814,0.5414,0.0946,0.9283,26.1,33.44,false
+3133,Chemical processing plant controllers,0.2961,0.0536,32.52,19,0.8355,0.5392,0.062,0.96,24.61,41.9,false
+3134,Petroleum and natural gas refining plant operators,0.3955,0.0107,33.37,70,0.8519,0.5309,0.0531,0.9247,28.68,38.26,false
+3135,Metal production process controllers,0.2154,0.0,19.6,15,0.9291,0.3625,0.0457,0.9097,10.19,30.17,false
+3139,Process control technicians not elsewhere classified,0.9111,0.0,57.96,16,0.3206,0.0,0.0,0.7551,49.97,63.84,false
+3141,Life science technicians (excluding medical),0.364,0.0168,40.17,42,0.699,0.4475,0.0837,0.8447,34.01,46.47,false
+3142,Agricultural technicians,0.2803,0.0567,32.25,42,0.8368,0.2332,0.0734,0.6245,24.44,40.16,false
+3143,Forestry technicians,0.2762,0.0,33.62,20,0.8157,0.4063,0.3908,0.761,25.84,42.93,false
+3151,Ships’ engineers,0.3194,0.0,30.79,85,0.8686,0.7232,0.173,0.889,24.55,37.81,false
+3152,Ships' deck officers and pilots,0.3038,0.0,28.46,98,0.7807,0.8786,0.2641,0.9151,23.27,34.17,false
+3153,Aircraft pilots and related associate professionals,0.3082,0.0227,34.54,116,0.6265,0.9514,0.2502,0.9326,28.61,40.68,false
+3154,Air traffic controllers,0.3726,0.0,36.98,91,0.2127,0.9146,0.1546,0.9767,30.9,43.54,false
+3155,Air traffic safety electronics technicians,0.5473,0.0,42.93,57,0.5302,0.6449,0.218,0.8884,37.96,47.74,false
+3211,Medical imaging and therapeutic equipment technicians,0.2996,0.0,28.06,113,0.7615,0.7317,0.5397,0.8914,23.96,32.2,false
+3212,Medical and pathology laboratory technicians,0.2651,0.0,28.01,95,0.8295,0.6425,0.0973,0.7944,23.86,32.44,false
+3213,Pharmaceutical technicians and assistants,0.4533,0.0,37.84,21,0.6974,0.6107,0.0959,0.8824,27.09,48.92,false
+3214,Medical and dental prosthetic technicians,0.1206,0.0,19.06,58,0.8722,0.5409,0.498,0.453,14.77,23.52,false
+3221,Nursing associate professionals,0.1362,0.0,20.48,22,0.9204,0.7448,0.7055,0.6969,13.38,27.73,false
+3222,Midwifery associate professionals,0.472,0.0,35.48,80,0.5572,0.7551,0.5688,0.7356,29.33,41.16,false
+3230,Traditional and complementary medicine associate professionals,0.472,0.0,35.48,80,0.5572,0.7551,0.5688,0.7356,29.5,41.26,false
+3240,Veterinary technicians and assistants,0.2187,0.0,21.84,59,0.9057,0.4826,0.358,0.5248,16.64,27.78,false
+3251,Dental assistants and therapists,0.1738,0.0,19.27,32,0.8301,0.7758,0.7285,0.5367,11.26,29.35,false
+3252,Medical records and health information technicians,0.9792,0.0784,66.43,33,0.0993,0.4491,0.0833,0.8487,62.65,70.58,false
+3253,Community health workers,0.5045,0.0,36.24,28,0.476,0.3042,0.9415,0.5947,29.8,42.52,false
+3254,Dispensing opticians,0.3529,0.0,33.06,21,0.6991,0.2955,0.4562,0.4079,22.37,43.18,false
+3255,Physiotherapy technicians and assistants,0.2906,0.0033,25.9,89,0.7033,0.7633,0.7785,0.4902,20.4,31.77,false
+3256,Medical assistants,0.2535,0.0,24.01,40,0.7814,0.4434,0.6602,0.6484,17.41,32.17,false
+3257,Environmental and occupational health inspectors and associates,0.382,0.0,37.15,127,0.7026,0.8198,0.1977,0.8072,32.06,42.57,false
+3258,Ambulance workers,0.0,0.0,14.16,25,0.9792,0.8173,0.6554,0.7804,10.26,18.31,false
+3259,Health associate professionals not elsewhere classified,0.3106,0.0,27.57,309,0.7503,0.6937,0.5895,0.7665,24.7,30.45,false
+3311,Securities and finance dealers and brokers,0.9108,0.0949,60.41,48,0.091,0.5133,0.4635,0.7542,55.79,64.83,false
+3312,Credit and loans officers,0.9819,0.0382,65.83,53,0.0,0.4852,0.5063,0.6321,62.99,68.57,false
+3313,Accounting associate professionals,1.0,0.355,73.34,28,0.1861,0.1676,0.02,0.6411,68.93,77.75,false
+3314,"Statistical, mathematical and related associate professionals",0.9747,0.2816,69.68,96,0.0655,0.1079,0.2072,0.4195,66.91,72.51,false
+3315,Valuers and loss assessors,0.8689,0.0455,58.17,78,0.3025,0.6408,0.1694,0.7711,53.46,62.26,false
+3321,Insurance representatives,0.9695,0.1485,63.11,44,0.0605,0.6175,0.2731,0.6274,58.56,66.97,false
+3322,Commercial sales representatives,0.9185,0.1074,62.01,127,0.126,0.1857,0.4928,0.6423,58.04,65.59,false
+3323,Buyers,0.89,0.0705,57.78,51,0.1456,0.1629,0.4534,0.691,53.59,61.9,false
+3324,Trade brokers,0.8396,0.1257,60.22,103,0.205,0.3201,0.1923,0.7434,55.66,64.62,false
+3331,Clearing and forwarding agents,0.7749,0.1759,59.13,66,0.3111,0.1835,0.0629,0.7025,52.2,65.34,false
+3332,Conference and event planners,0.8527,0.0609,56.22,21,0.2654,0.2382,0.6403,0.6412,49.65,62.37,false
+3333,Employment agents and contractors,0.493,0.0133,45.39,33,0.4946,0.5506,0.6153,0.5822,37.65,57.84,false
+3334,Real estate agents and property managers,0.8591,0.0308,54.25,95,0.2936,0.4747,0.5969,0.6824,50.26,57.84,false
+3339,Business services agents not elsewhere classified,0.9157,0.0778,61.16,330,0.1119,0.2572,0.289,0.7139,59.5,62.95,false
+3341,Office supervisors,0.9254,0.048,57.89,28,0.0612,0.087,0.5378,0.5736,52.93,63.25,false
+3342,Legal secretaries,0.9049,0.135,61.97,14,0.3555,0.2317,0.0674,0.7936,50.31,71.82,false
+3343,Administrative and executive secretaries,0.8749,0.0853,63.45,36,0.3004,0.495,0.1789,0.7737,56.84,69.05,false
+3344,Medical secretaries,0.964,0.0368,68.36,30,0.2086,0.4572,0.1404,0.88,63.84,72.2,false
+3351,Customs and border inspectors,0.61,0.0135,45.87,173,0.4079,0.8341,0.4243,0.785,42.73,49.17,false
+3352,Government tax and excise officials,0.9172,0.1434,62.19,21,0.115,0.7675,0.2843,0.9802,54.69,68.72,false
+3353,Government social benefits officials,0.7732,0.0253,53.59,140,0.2537,0.7747,0.3689,0.8003,50.46,56.49,false
+3354,Government licensing officials,0.811,0.0272,55.46,153,0.2635,0.7562,0.2617,0.828,52.59,58.04,false
+3355,Police inspectors and detectives,0.5474,0.0,40.67,98,0.5033,0.7619,0.33,0.9257,35.94,45.58,false
+3359,Regulatory government associate professionals not elsewhere classified,0.1587,0.0,29.87,16,0.8941,0.9736,0.382,0.8829,23.58,37.19,false
+3411,Legal and related associate professionals,0.7026,0.0232,49.22,83,0.3586,0.6318,0.3301,0.8448,43.52,54.45,false
+3412,Social work associate professionals,0.4968,0.0,40.84,19,0.4048,0.2356,0.8366,0.7522,32.49,49.67,false
+3413,Religious associate professionals,0.5997,0.0116,45.03,102,0.3817,0.4337,0.5833,0.7985,39.74,50.71,false
+3421,Athletes and sports players,0.0,0.0,15.82,9,0.8194,0.0563,0.3986,0.4137,7.69,25.11,false
+3422,"Sports coaches, instructors and officials",0.4626,0.0036,38.66,73,0.6596,0.4423,0.6368,0.5256,31.83,45.8,false
+3423,Fitness and recreation instructors and program leaders,0.4537,0.0091,36.87,149,0.7051,0.4229,0.7315,0.4541,31.12,43.01,false
+3431,Photographers,0.3619,0.0219,37.68,28,0.7234,0.0207,0.1311,0.2151,26.98,48.69,false
+3432,Interior designers and decorators,0.6848,0.0149,45.57,67,0.4681,0.1658,0.3601,0.5243,40.78,50.26,false
+3433,"Gallery, museum and library technicians",0.4148,0.039,39.19,71,0.7994,0.1816,0.2096,0.6562,34.03,45.43,false
+3434,Chefs,0.5174,0.0148,41.96,47,0.6356,0.2258,0.4484,0.6004,35.47,49.06,false
+3435,Other artistic and cultural associate professionals,0.257,0.0263,30.52,56,0.7819,0.1008,0.2402,0.5752,25.0,36.44,false
+3511,Information and communications technology operations technicians,0.9529,0.16,62.62,121,0.2441,0.0184,0.0853,0.6521,59.65,65.72,false
+3512,Information and communications technology user support technicians,0.9139,0.08,58.13,16,0.2846,0.0173,0.1447,0.6761,50.8,65.33,false
+3513,Computer network and systems technicians,0.974,0.1734,63.02,26,0.2952,0.0186,0.0182,0.7553,57.0,68.27,false
+3514,Web technicians,0.9706,0.2264,66.71,79,0.1525,0.0194,0.0931,0.525,63.69,69.75,false
+3521,Broadcasting and audiovisual technicians,0.45,0.015,37.89,107,0.6647,0.0975,0.1078,0.6912,33.7,42.01,false
+3522,Telecommunications engineering technicians,0.6015,0.0,47.2,30,0.5432,0.3333,0.0689,0.7769,40.53,54.17,false
+4110,General office clerks,0.8488,0.2294,65.13,39,0.2924,0.0725,0.072,0.6717,59.68,70.26,false
+4120,Secretaries (general),0.8965,0.2276,65.62,31,0.3357,0.0899,0.1612,0.6994,59.4,71.34,false
+4131,Typists and word processing operators,0.9603,0.6191,73.83,19,0.3282,0.0,0.0,0.3071,62.79,83.08,false
+4132,Data entry clerks,0.9305,0.3856,72.23,9,0.1597,0.0,0.0,0.4991,56.48,82.27,false
+4211,Bank tellers and related clerks,0.5117,0.0315,42.52,47,0.6831,0.5047,0.2912,0.8953,36.1,49.32,false
+4212,"Bookmakers, croupiers and related gaming workers",0.2402,0.0,25.98,86,0.8379,0.6891,0.4643,0.9095,21.19,30.96,false
+4213,Pawnbrokers and money-lenders,0.5701,0.046,44.01,176,0.5392,0.4482,0.4073,0.8385,40.29,48.1,false
+4214,Debt-collectors and related workers,0.9584,0.1064,63.53,43,0.0965,0.1509,0.4664,0.7106,59.32,67.46,false
+4221,Travel consultants and clerks,0.8535,0.1781,64.15,47,0.2209,0.13,0.1932,0.6814,56.28,70.51,false
+4222,Contact centre information clerks,0.9536,0.1674,65.39,44,0.0794,0.1035,0.445,0.7217,60.97,70.06,false
+4223,Telephone switchboard operators,0.8287,0.2641,65.07,33,0.2218,0.1341,0.16,0.8073,58.99,70.97,false
+4224,Hotel receptionists,0.7149,0.1587,55.36,38,0.4356,0.0866,0.4751,0.713,47.38,62.76,false
+4225,Enquiry clerks,0.9293,0.4019,71.5,35,0.2045,0.0376,0.0628,0.6749,65.28,77.04,false
+4226,Receptionists (general),0.8233,0.4154,65.45,18,0.3354,0.0334,0.157,0.7333,53.44,75.93,false
+4227,Survey and market research interviewers,0.8787,0.0,59.82,16,0.1346,0.0219,0.4899,0.6097,53.68,65.34,false
+4229,Client information workers not elsewhere classified,1.0,0.05,62.65,17,0.0368,0.6122,0.4959,0.9662,58.89,66.55,false
+4311,Accounting and bookkeeping clerks,0.9007,0.2809,68.81,56,0.203,0.0818,0.0067,0.6858,62.84,73.93,false
+4312,"Statistical, finance and insurance clerks",0.9575,0.1932,68.8,84,0.1511,0.3684,0.1856,0.8252,65.34,71.98,false
+4313,Payroll clerks,1.0,0.1608,73.88,21,0.0284,0.1751,0.0391,0.761,71.32,76.52,false
+4321,Stock clerks,0.4389,0.0839,39.08,59,0.7898,0.0492,0.0243,0.7019,32.16,45.85,false
+4322,Production clerks,1.0,0.1336,65.59,17,0.15,0.0607,0.131,0.8976,60.39,70.47,false
+4323,Transport clerks,1.0,0.0835,65.55,12,0.0431,0.0,0.0,0.8756,61.34,70.44,false
+4411,Library clerks,0.571,0.0808,45.57,63,0.7655,0.0574,0.232,0.6668,39.85,51.32,false
+4412,Mail carriers and sorting clerks,0.1441,0.0227,20.45,95,0.8942,0.1612,0.1133,0.6954,16.31,24.85,false
+4413,"Coding, proof-reading and related clerks",1.0,0.6771,79.56,11,0.0,0.0,0.0,0.0981,73.82,83.91,false
+4414,Scribes and related workers,0.4722,0.0222,39.02,87,0.5682,0.2156,0.7377,0.5753,32.33,46.65,false
+4415,Filing and copying clerks,0.5288,0.0324,40.74,37,0.8188,0.0349,0.0151,0.5729,32.19,48.95,false
+4416,Personnel clerks,1.0,0.2245,70.44,19,0.094,0.323,0.1636,0.7443,65.79,75.39,false
+4419,Clerical support workers not elsewhere classified,1.0,0.4107,75.04,36,0.111,0.0326,0.0307,0.5812,70.92,78.97,false
+5111,Travel attendants and travel stewards,0.1074,0.0,15.36,78,0.971,0.5218,0.5912,0.7983,10.72,20.81,false
+5112,Transport conductors,0.165,0.0,21.25,53,0.9216,0.4245,0.5321,0.721,13.53,32.1,false
+5113,Travel guides,0.4364,0.033,39.24,112,0.7103,0.3094,0.6516,0.3926,32.39,46.31,false
+5120,Cooks,0.2419,0.0056,26.4,87,0.8332,0.2037,0.2953,0.493,20.8,32.31,false
+5131,Waiters,0.114,0.0,15.63,39,0.9478,0.1118,0.4223,0.4057,10.17,21.92,false
+5132,Bartenders,0.2016,0.0,17.36,20,0.9273,0.3481,0.4518,0.4798,9.91,26.3,false
+5141,Hairdressers,0.258,0.0248,25.51,116,0.7468,0.2804,0.5997,0.3795,19.03,33.83,false
+5142,Beauticians and related workers,0.265,0.0213,23.56,160,0.7714,0.3018,0.6679,0.2695,17.0,30.88,false
+5151,"Cleaning and housekeeping supervisors in offices, hotels and other establishments",0.5527,0.0,43.9,26,0.5683,0.1143,0.3642,0.6872,37.11,51.1,false
+5152,Domestic housekeepers,0.3962,0.0,33.96,38,0.6705,0.2707,0.4234,0.6387,26.83,41.38,false
+5153,Building caretakers,0.0475,0.0,9.52,21,0.9525,0.1592,0.0,0.3178,4.49,16.73,false
+5161,"Astrologers, fortune-tellers and related workers",0.5263,0.0526,43.37,19,0.5,0.0263,0.2895,0.5,31.34,54.48,false
+5162,Companions and valets,0.3681,0.0162,32.34,99,0.6504,0.3141,0.6852,0.5663,26.65,38.63,false
+5163,Undertakers and embalmers,0.2466,0.0,21.47,72,0.7977,0.3755,0.6179,0.4999,15.71,26.74,false
+5164,Pet groomers and animal care workers,0.2384,0.0053,23.73,141,0.8365,0.214,0.5464,0.449,19.47,28.97,false
+5165,Driving instructors,0.5921,0.0466,46.6,30,0.4469,0.1361,0.6796,0.4434,39.29,54.51,false
+5169,Personal services workers not elsewhere classified,0.3636,0.0197,33.47,162,0.6597,0.2347,0.7135,0.6524,29.15,37.8,false
+5211,Stall and market salespersons,0.3242,0.0,34.84,12,0.7059,0.0855,0.6945,0.3742,21.65,49.39,false
+5212,Street food salespersons,0.1081,0.0,18.73,26,0.902,0.1,0.3967,0.4349,11.87,26.53,false
+5221,Shop keepers,0.9231,0.0,48.96,17,0.1511,0.2421,0.6368,0.7951,40.49,55.78,false
+5222,Shop supervisors,0.549,0.0404,45.62,21,0.4808,0.1265,0.4858,0.7014,37.37,54.8,false
+5223,Shop sales assistants,0.5539,0.0634,42.83,43,0.6757,0.0427,0.3346,0.6668,35.6,50.27,false
+5230,Cashiers and ticket clerks,0.2586,0.0361,27.55,41,0.8508,0.364,0.2813,0.8728,20.27,35.71,false
+5241,Fashion and other models,0.3536,0.0,30.75,10,0.6464,0.0,0.461,0.3018,12.17,49.46,false
+5242,Sales demonstrators,0.3584,0.0,34.59,21,0.7011,0.0,0.5495,0.3521,25.19,45.06,false
+5243,Door to door salespersons,0.3242,0.0,34.84,12,0.7059,0.0855,0.6945,0.3742,20.76,48.08,false
+5244,Contact centre salespersons,1.0,0.4313,79.03,12,0.0,0.0,0.1955,0.4761,76.07,81.78,false
+5245,Service station attendants,0.219,0.0669,23.27,55,0.8156,0.0759,0.1211,0.4864,11.51,39.11,false
+5246,Food service counter attendants,0.1163,0.0,13.46,69,0.9718,0.1044,0.2271,0.3739,9.4,18.2,false
+5249,Sales workers not elsewhere classified,0.8221,0.1248,51.54,16,0.6254,0.0,0.4714,0.6324,41.06,61.03,false
+5311,Child care workers,0.2304,0.0064,24.21,119,0.8262,0.289,0.7717,0.3442,19.87,29.34,false
+5312,Teachers’ aides,0.1949,0.0159,24.2,58,0.9163,0.2489,0.6811,0.616,19.7,29.63,false
+5321,Health care assistants,0.1041,0.0,13.43,50,0.9572,0.39,0.8232,0.6276,9.47,17.87,false
+5322,Home-based personal care workers,0.2428,0.009,25.26,102,0.7992,0.3227,0.868,0.531,19.83,32.2,false
+5329,Personal care workers in health services not elsewhere classified,0.2127,0.0,22.28,147,0.884,0.4334,0.4406,0.6437,18.36,26.37,false
+5411,Fire-fighters,0.1442,0.0,16.21,60,0.9014,0.6256,0.3398,0.7486,12.28,21.22,false
+5412,Police officers,0.279,0.0,30.82,62,0.7263,0.9153,0.7323,0.8482,25.04,37.73,false
+5413,Prison guards,0.1949,0.0,25.17,50,0.853,0.8192,0.6,0.9509,19.84,31.12,false
+5414,Security guards,0.3396,0.0299,28.66,69,0.7834,0.5199,0.4514,0.9144,23.22,35.12,false
+5419,Protective services workers not elsewhere classified,0.3254,0.0,28.26,167,0.7513,0.5215,0.4788,0.7835,24.96,32.2,false
+6111,Field crop and vegetable growers,0.1326,0.0102,17.49,47,0.9018,0.2637,0.166,0.6394,13.0,22.9,false
+6112,Tree and shrub crop growers,0.1326,0.0102,17.49,47,0.9018,0.2637,0.166,0.6394,13.48,22.94,false
+6113,"Gardeners, horticultural and nursery growers",0.2146,0.0,19.71,69,0.8677,0.2762,0.1791,0.4321,14.31,26.06,false
+6114,Mixed crop growers,0.1326,0.0102,17.49,47,0.9018,0.2637,0.166,0.6394,13.61,23.2,false
+6121,Livestock and dairy producers,0.3434,0.0102,27.97,51,0.8533,0.2645,0.283,0.6731,20.42,35.13,false
+6122,Poultry producers,0.3434,0.0102,27.97,51,0.8533,0.2645,0.283,0.6731,21.0,35.17,false
+6123,Apiarists and sericulturists,0.3434,0.0102,27.97,51,0.8533,0.2645,0.283,0.6731,21.14,35.52,false
+6129,Animal producers not elsewhere classified,0.3434,0.0102,27.97,51,0.8533,0.2645,0.283,0.6731,20.95,36.16,false
+6130,Mixed crop and animal producers,0.2039,0.006,19.82,68,0.9129,0.2604,0.192,0.6301,14.88,24.58,false
+6210,Forestry and related workers,0.0593,0.0008,12.44,86,0.9562,0.4078,0.066,0.6398,8.76,16.46,false
+6221,Aquaculture workers,0.3434,0.0102,27.97,51,0.8533,0.2645,0.283,0.6731,20.94,35.74,false
+6222,Inland and coastal waters fishery workers,0.2301,0.0123,22.84,59,0.8537,0.3551,0.2054,0.6568,17.84,28.29,false
+6223,Deep-sea fishery workers,0.2301,0.0123,22.84,59,0.8537,0.3551,0.2054,0.6568,17.65,28.47,false
+6224,Hunters and trappers,0.1854,0.0076,19.22,59,0.8924,0.3719,0.1601,0.6242,14.55,24.91,false
+6310,Subsistence crop farmers,0.1565,0.0,19.8,27,0.9783,0.1707,0.1245,0.4911,12.96,26.68,false
+6320,Subsistence livestock farmers,0.0906,0.0,14.51,19,0.9552,0.1816,0.0777,0.7065,7.74,23.12,false
+6330,Subsistence mixed crop and livestock farmers,0.1236,0.0,17.15,46,0.9668,0.1762,0.1011,0.5988,12.46,22.9,false
+6340,"Subsistence fishers, hunters, trappers and gatherers",0.1132,0.0,13.38,29,0.9549,0.399,0.087,0.5715,8.8,19.28,false
+7111,House builders,0.7793,0.0,48.81,25,0.516,0.6735,0.5204,0.7697,43.66,53.95,false
+7112,Bricklayers and related workers,0.0517,0.0,9.14,24,0.9483,0.0987,0.0,0.3118,3.51,16.81,false
+7113,"Stonemasons, stone cutters, splitters and carvers",0.0,0.0,6.59,28,0.9725,0.0952,0.0275,0.2148,4.35,9.23,false
+7114,"Concrete placers, concrete finishers and related workers",0.0,0.0,6.41,64,0.9835,0.0507,0.0387,0.2266,4.35,8.77,false
+7115,Carpenters and joiners,0.2189,0.0,20.44,29,0.8105,0.1556,0.0792,0.342,12.15,30.41,false
+7119,Building frame and related trades workers not elsewhere classified,0.1606,0.009,17.89,122,0.9192,0.4409,0.0506,0.5155,14.59,21.8,false
+7121,Roofers,0.0512,0.0,8.73,27,1.0,0.3482,0.0,0.3755,4.12,15.74,false
+7122,Floor layers and tile setters,0.0642,0.0,9.44,62,0.9736,0.02,0.0038,0.2497,6.57,13.21,false
+7123,Plasterers,0.0429,0.0,7.75,57,0.9467,0.0337,0.0071,0.19,4.55,12.16,false
+7124,Insulation workers,0.2056,0.0,16.2,19,0.8517,0.1052,0.0,0.343,6.98,27.8,false
+7125,Glaziers,0.1241,0.0,13.0,27,0.8944,0.1791,0.037,0.2453,6.77,20.12,false
+7126,Plumbers and pipe fitters,0.1154,0.0,15.07,44,0.9231,0.4356,0.0367,0.5897,10.37,20.58,false
+7127,Air conditioning and refrigeration mechanics,0.2541,0.0035,25.05,52,0.8371,0.5079,0.1136,0.562,18.6,32.41,false
+7131,Painters and related workers,0.1141,0.0,11.86,37,0.9098,0.071,0.0323,0.19,5.72,19.75,false
+7132,Spray painters and varnishers,0.0357,0.0,10.57,29,1.0,0.1063,0.0,0.5077,7.2,14.97,false
+7133,Building structure cleaners,0.0749,0.0,11.21,66,0.9549,0.0886,0.0162,0.3489,7.7,15.58,false
+7211,Metal moulders and coremakers,0.0226,0.0,6.7,42,0.9934,0.1215,0.0271,0.4947,4.66,9.36,false
+7212,Welders and flamecutters,0.0987,0.0,15.33,59,0.9049,0.2342,0.0205,0.4689,10.91,20.08,false
+7213,Sheet-metal workers,0.1475,0.0,18.56,51,0.8943,0.3514,0.0276,0.4158,13.59,24.2,false
+7214,Structural-metal preparers and erectors,0.105,0.0,11.79,49,0.895,0.3484,0.0185,0.2883,5.94,19.68,false
+7215,Riggers and cable splicers,0.0792,0.0,10.61,14,0.9604,0.8078,0.1947,0.5801,5.43,18.8,false
+7221,"Blacksmiths, hammersmiths and forging press workers",0.0908,0.0,13.75,13,0.9092,0.238,0.0724,0.8106,6.04,25.09,false
+7222,Toolmakers and related workers,0.2964,0.0,25.52,92,0.8099,0.098,0.1072,0.5077,20.76,30.53,false
+7223,Metal working machine tool setters and operators,0.1742,0.0054,20.89,224,0.8636,0.0831,0.0173,0.6798,18.09,23.92,false
+7224,"Metal polishers, wheel grinders and tool sharpeners",0.0406,0.0,10.75,35,0.9594,0.0406,0.0,0.3155,6.5,16.25,false
+7231,Motor vehicle mechanics and repairers,0.0715,0.0004,13.55,202,0.9449,0.1477,0.0448,0.3507,11.53,15.7,false
+7232,Aircraft engine mechanics and repairers,0.2136,0.0035,22.74,60,0.8453,0.8683,0.0669,0.7126,17.06,29.39,false
+7233,Agricultural and industrial machinery mechanics and repairers,0.1474,0.0085,19.39,155,0.9139,0.2924,0.0374,0.5929,16.08,22.63,false
+7234,Bicycle and related repairers,0.2821,0.0035,21.45,36,0.8901,0.0243,0.1529,0.1347,10.8,34.84,false
+7311,Precision-instrument makers and repairers,0.2223,0.0094,25.46,72,0.8157,0.2264,0.0712,0.458,19.17,31.81,false
+7312,Musical instrument makers and tuners,0.0546,0.0035,10.81,46,0.9564,0.0333,0.0385,0.0892,8.32,14.48,false
+7313,Jewellery and precious-metal workers,0.2175,0.0,20.09,44,0.9221,0.1276,0.0995,0.3353,13.9,26.78,false
+7314,Potters and related workers,0.1563,0.0,17.48,95,0.8578,0.0035,0.0266,0.215,13.41,21.87,false
+7315,"Glass makers, cutters, grinders and finishers",0.0369,0.0,10.17,114,0.9708,0.0018,0.0051,0.2564,7.31,13.84,false
+7316,"Sign writers, decorative painters, engravers and etchers",0.044,0.0,12.31,35,0.9776,0.0053,0.0,0.2794,7.68,18.9,false
+7317,"Handicraft workers in wood, basketry and related materials",0.5218,0.0,37.7,16,0.5515,0.0,0.073,0.0706,26.49,50.77,false
+7318,"Handicraft workers in textile, leather and related materials",0.0,0.0,9.32,26,1.0,0.0127,0.0765,0.1141,6.09,13.2,false
+7319,Handicraft workers not elsewhere classified,0.5218,0.0,37.7,16,0.5515,0.0,0.073,0.0706,26.37,50.16,false
+7321,Pre-press technicians,0.7836,0.1844,59.63,33,0.2545,0.0,0.0,0.3277,51.3,67.34,false
+7322,Printers,0.3333,0.0,31.92,23,0.7206,0.0169,0.0426,0.8039,21.79,41.39,false
+7323,Print finishing and binding workers,0.131,0.0,14.71,25,0.8933,0.0113,0.0658,0.3307,8.35,22.99,false
+7411,Building and related electricians,0.3047,0.0,26.56,47,0.8586,0.6696,0.0595,0.6489,19.73,33.88,false
+7412,Electrical mechanics and fitters,0.2173,0.0096,22.3,263,0.862,0.3585,0.0764,0.5656,19.79,25.43,false
+7413,Electrical line installers and repairers,0.1056,0.0035,12.83,45,0.9055,0.5951,0.1069,0.6341,8.71,18.52,false
+7421,Electronics mechanics and servicers,0.3662,0.0011,31.43,122,0.757,0.4533,0.1019,0.7086,26.75,36.54,false
+7422,Information and communications technology installers and servicers,0.2458,0.0067,26.2,161,0.7952,0.1942,0.1158,0.6397,21.87,30.62,false
+7511,"Butchers, fishmongers and related food preparers",0.0784,0.0,10.29,56,0.9639,0.253,0.0481,0.4732,6.44,14.94,false
+7512,"Bakers, pastry-cooks and confectionery makers",0.1898,0.0,21.64,18,0.872,0.1206,0.0,0.5043,13.0,33.24,false
+7513,Dairy-products makers,0.139,0.0,17.6,45,0.948,0.3524,0.0335,0.812,13.21,22.42,false
+7514,"Fruit, vegetable and related preservers",0.0626,0.0,19.02,17,0.9687,0.2683,0.0,0.8246,11.21,27.96,false
+7515,Food and beverage tasters and graders,0.0794,0.0,20.71,21,0.9471,0.5302,0.191,0.7868,14.68,28.9,false
+7516,Tobacco preparers and tobacco products makers,0.0427,0.0,12.54,110,0.9609,0.0483,0.0067,0.479,9.45,15.85,false
+7521,Wood treaters,0.1984,0.0,20.71,33,0.9218,0.108,0.0454,0.7937,13.48,28.05,false
+7522,Cabinet-makers and related workers,0.1956,0.0116,22.15,76,0.8512,0.0,0.035,0.1977,17.76,26.87,false
+7523,Woodworking-machine tool setters and operators,0.0777,0.0,11.02,25,0.9798,0.0717,0.0,0.6161,6.44,16.36,false
+7531,"Tailors, dressmakers, furriers and hatters",0.0751,0.0,13.17,22,0.9437,0.0,0.2688,0.0375,7.62,19.3,false
+7532,Garment and related pattern-makers and cutters,0.31,0.0,28.77,52,0.7623,0.0,0.0113,0.6175,21.94,34.89,false
+7533,"Sewing, embroidery and related workers",0.0,0.0,6.87,37,1.0,0.0032,0.1006,0.0285,4.36,10.27,false
+7534,Upholsterers and related workers,0.1869,0.0,17.37,22,0.9257,0.0205,0.0934,0.1225,9.4,27.98,false
+7535,"Pelt dressers, tanners and fellmongers",0.0,0.0,11.55,5,1.0,0.0869,0.0,0.6908,5.51,21.35,false
+7536,Shoemakers and related workers,0.0,0.0,9.32,26,1.0,0.0127,0.0765,0.1141,6.23,13.2,false
+7541,Underwater divers,0.0659,0.0,14.26,23,0.967,0.8147,0.1721,0.898,7.46,22.5,false
+7542,Shotfirers and blasters,0.1493,0.0,15.5,27,0.9667,0.9299,0.061,0.9363,8.84,23.01,false
+7543,Product graders and testers (excluding foods and beverages),0.3804,0.0602,34.62,31,0.7928,0.282,0.0233,0.7373,26.5,42.9,false
+7544,Fumigators and other pest and weed controllers,0.3004,0.0,23.13,51,0.8522,0.5478,0.1821,0.5534,16.54,31.15,false
+7549,Craft and related workers not elsewhere classified,0.2076,0.0,23.39,33,0.8673,0.0,0.2042,0.373,15.06,31.08,false
+8111,Miners and quarriers,0.025,0.0,8.02,135,0.9776,0.4959,0.0364,0.8284,6.44,10.05,false
+8112,Mineral and stone processing plant operators,0.0366,0.0,17.16,32,0.9728,0.1142,0.0,0.8373,12.32,22.63,false
+8113,Well drillers and borers and related workers,0.0704,0.0,14.06,137,0.9599,0.4872,0.1033,0.78,11.27,16.84,false
+8114,"Cement, stone and other mineral products machine operators",0.1649,0.0,22.13,154,0.9327,0.3519,0.0209,0.8509,19.12,25.28,false
+8121,Metal processing plant operators,0.0976,0.0,13.67,89,0.9391,0.1934,0.0414,0.7491,10.53,17.46,false
+8122,"Metal finishing, plating and coating machine operators",0.055,0.0,14.03,73,0.9687,0.0876,0.0,0.6915,10.72,17.75,false
+8131,Chemical products plant and machine operators,0.199,0.0,21.53,122,0.9247,0.2738,0.0333,0.7189,17.07,26.21,false
+8132,Photographic products machine operators,0.3042,0.0698,34.58,27,0.7936,0.0155,0.0,0.5619,23.79,44.88,false
+8141,Rubber products machine operators,0.0651,0.0,11.04,163,0.9576,0.0627,0.0111,0.5055,8.73,14.09,false
+8142,Plastic products machine operators,0.1178,0.0054,15.81,248,0.9075,0.0863,0.0131,0.6127,13.32,18.6,false
+8143,Paper products machine operators,0.053,0.0,11.4,30,0.9868,0.0109,0.0132,0.6814,7.52,16.19,false
+8151,"Fibre preparing, spinning and winding machine operators",0.0483,0.0,14.53,23,0.955,0.0,0.0,0.765,8.92,20.5,false
+8152,Weaving and knitting machine operators,0.0541,0.0,20.25,19,0.9763,0.0,0.0235,0.7813,14.33,26.3,false
+8153,Sewing machine operators,0.0,0.0,7.69,26,1.0,0.0,0.0,0.3896,4.35,12.24,false
+8154,"Bleaching, dyeing and fabric cleaning machine operators",0.1352,0.0,21.1,23,0.9365,0.0122,0.0,0.7268,14.66,28.23,false
+8155,Fur and leather preparing machine operators,0.0396,0.0,12.86,133,0.9743,0.0055,0.0039,0.5548,10.43,15.7,false
+8156,Shoemaking and related machine operators,0.0,0.0,7.18,19,1.0,0.0,0.0,0.4812,2.69,13.43,false
+8157,Laundry machine operators,0.0,0.0,6.42,23,0.9777,0.0207,0.0,0.1847,3.72,10.83,false
+8159,"Textile, fur and leather products machine operators not elsewhere classified",0.0396,0.0,12.86,133,0.9743,0.0055,0.0039,0.5548,10.47,15.43,false
+8160,Food and related products machine operators,0.0878,0.0,16.7,105,0.9559,0.2245,0.0153,0.7836,13.49,20.0,false
+8171,Pulp and papermaking plant operators,0.0,0.0,11.81,25,1.0,0.0364,0.0,0.7208,8.1,16.49,false
+8172,Wood processing plant operators,0.0424,0.0,10.14,22,0.9576,0.018,0.0,0.5367,5.3,16.28,false
+8181,Glass and ceramics plant operators,0.091,0.0,15.75,180,0.9558,0.0928,0.0196,0.7076,12.93,18.67,false
+8182,Steam engine and boiler operators,0.1732,0.0,28.29,25,0.9343,0.7074,0.0546,0.9389,21.65,34.62,false
+8183,"Packing, bottling and labelling machine operators",0.0448,0.0,13.69,20,1.0,0.0759,0.0,0.811,8.63,19.14,false
+8189,Stationary plant and machine operators not elsewhere classified,0.1749,0.0163,21.01,74,0.8912,0.15,0.0039,0.8401,16.53,26.09,false
+8211,Mechanical machinery assemblers,0.0755,0.0,13.63,39,0.9363,0.397,0.0,0.4929,8.77,19.48,false
+8212,Electrical and electronic equipment assemblers,0.1042,0.0,15.28,84,0.9031,0.0427,0.0254,0.399,10.97,20.35,false
+8219,Assemblers not elsewhere classified,0.1824,0.0,24.85,11,0.8176,0.1047,0.1687,0.7412,13.26,38.51,false
+8311,Locomotive engine drivers,0.0981,0.0,15.13,139,0.9248,0.7264,0.1086,0.905,11.44,19.1,false
+8312,"Railway brake, signal and switch operators",0.231,0.0,24.1,87,0.8298,0.7294,0.1894,0.9275,17.84,30.7,false
+8321,Motorcycle drivers,0.3921,0.0432,32.79,56,0.7468,0.2175,0.2346,0.7162,24.31,42.21,false
+8322,"Car, taxi and van drivers",0.1263,0.0,20.79,118,0.8852,0.3553,0.2989,0.5493,16.0,25.61,false
+8331,Bus and tram drivers,0.1406,0.0,19.05,108,0.8768,0.5896,0.3101,0.7273,14.1,24.5,false
+8332,Heavy truck and lorry drivers,0.2163,0.0335,24.5,70,0.7849,0.4097,0.1166,0.6547,16.03,33.25,false
+8341,Mobile farm and forestry plant operators,0.1181,0.0,14.98,26,0.9409,0.4114,0.0148,0.7437,5.11,28.01,false
+8342,Earthmoving and related plant operators,0.0185,0.0,7.46,73,0.9872,0.4485,0.056,0.7966,5.65,9.93,false
+8343,"Crane, hoist and related plant operators",0.1311,0.0,16.4,100,0.928,0.6016,0.171,0.8384,12.17,21.12,false
+8344,Lifting truck operators,0.0424,0.0,9.11,50,0.9576,0.4424,0.0395,0.5491,6.05,15.15,false
+8350,Ships’ deck crews and related workers,0.057,0.0,12.04,44,0.964,0.5837,0.2033,0.7285,8.17,16.47,false
+9111,Domestic cleaners and helpers,0.0381,0.0,6.52,20,1.0,0.0,0.1057,0.3095,3.52,10.94,false
+9112,"Cleaners and helpers in offices, hotels and other establishments",0.0431,0.0,7.4,61,0.9881,0.0794,0.0396,0.2928,5.0,10.23,false
+9121,Hand launderers and pressers,0.0,0.0,4.99,28,0.9806,0.0,0.0,0.1547,2.54,8.92,false
+9122,Vehicle cleaners,0.0452,0.0,6.88,20,1.0,0.1055,0.0,0.2596,3.14,11.43,false
+9123,Window cleaners,0.0475,0.0,9.52,21,0.9525,0.1592,0.0,0.3178,4.58,16.48,false
+9129,Other cleaning workers,0.1351,0.0,13.25,22,0.883,0.3469,0.0474,0.6769,6.25,22.4,false
+9211,Crop farm labourers,0.1565,0.0,19.8,27,0.9783,0.1707,0.1245,0.4911,12.73,27.55,false
+9212,Livestock farm labourers,0.0906,0.0,14.51,19,0.9552,0.1816,0.0777,0.7065,8.06,23.55,false
+9213,Mixed crop and livestock farm labourers,0.1236,0.0,17.15,46,0.9668,0.1762,0.1011,0.5988,12.33,22.94,false
+9214,Garden and horticultural labourers,0.0537,0.0,12.18,53,0.9964,0.1316,0.0484,0.3259,8.66,16.95,false
+9215,Forestry labourers,0.0,0.0,9.27,17,1.0,0.3006,0.1664,0.5484,5.69,13.36,false
+9216,Fishery and aquaculture labourers,0.0993,0.0,14.08,48,0.9551,0.2653,0.0813,0.6546,9.56,19.88,false
+9311,Mining and quarrying labourers,0.0,0.0,5.86,14,1.0,0.2362,0.0,0.5048,3.86,8.01,false
+9312,Civil engineering labourers,0.0,0.0,5.28,45,1.0,0.4726,0.0088,0.5843,4.28,6.43,false
+9313,Building construction labourers,0.0106,0.0,6.51,129,0.9947,0.1915,0.0196,0.281,5.35,7.78,false
+9321,Hand packers,0.0853,0.0,9.73,12,0.9573,0.0,0.0,0.3547,3.22,20.28,false
+9329,Manufacturing labourers not elsewhere classified,0.1841,0.0,17.58,113,0.8811,0.1396,0.0026,0.643,13.66,21.73,false
+9331,Hand and pedal vehicle drivers,0.1524,0.0195,15.22,33,0.9103,0.3705,0.0484,0.6415,9.42,23.46,false
+9332,Drivers of animal-drawn vehicles and machinery,0.0556,0.0,8.22,18,0.9444,0.4722,0.0,0.6111,3.36,15.67,false
+9333,Freight handlers,0.4526,0.0,35.12,85,0.7116,0.4321,0.2232,0.7944,29.4,40.98,false
+9334,Shelf fillers,0.2324,0.0817,31.07,30,0.8138,0.0363,0.0432,0.6065,21.48,41.25,false
+9411,Fast food preparers,0.1022,0.0,11.41,30,0.9701,0.1953,0.0572,0.3535,6.97,17.25,false
+9412,Kitchen helpers,0.0236,0.0,5.5,67,1.0,0.0846,0.0593,0.2224,3.7,7.63,false
+9510,Street and related service workers,0.0833,0.0,14.08,12,0.875,0.5833,0.5417,0.5417,6.12,24.13,false
+9520,Street vendors (excluding food),0.3242,0.0,34.84,12,0.7059,0.0855,0.6945,0.3742,20.76,48.25,false
+9611,Garbage and recycling collectors,0.2316,0.0,22.17,55,0.7994,0.2485,0.0732,0.6005,13.47,34.65,false
+9612,Refuse sorters,0.1802,0.0,18.51,14,0.8563,0.2287,0.0,0.5731,8.17,32.62,false
+9613,Sweepers and related labourers,0.2059,0.0,20.34,55,0.8278,0.2386,0.0366,0.5868,10.06,33.2,false
+9621,"Messengers, package deliverers and luggage porters",0.2054,0.0117,23.44,32,0.8626,0.0736,0.5183,0.5218,15.77,32.21,false
+9622,Odd job persons,0.2384,0.0,24.7,67,0.8973,0.3627,0.0281,0.6532,19.64,30.64,false
+9623,Meter readers and vending-machine collectors,0.3923,0.0,32.63,30,0.7917,0.0953,0.057,0.7915,24.77,40.65,false
+9624,Water and firewood collectors,0.0919,0.0,13.76,13,0.9081,0.1255,0.0335,0.5939,5.33,24.07,false
+9629,Elementary workers not elsewhere classified,0.101,0.0,16.99,95,0.9691,0.0856,0.3543,0.684,13.92,20.01,false

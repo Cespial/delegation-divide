@@ -1,0 +1,32 @@
+{
+ "type": "isco08_unit_group",
+ "id": "2412",
+ "isco08": "2412",
+ "titulo": "Financial and investment advisers",
+ "adi_l2": 0.9523,
+ "adi_l3": 0.0231,
+ "adi_share": 61.77,
+ "n_tareas": 77,
+ "barrera_fisica": 0.0112,
+ "barrera_responsabilidad": 0.6797,
+ "barrera_confianza": 0.6499,
+ "barrera_acceso": 0.6398,
+ "ic_lo": 58.9,
+ "ic_hi": 64.38,
+ "imputado": false,
+ "l2_lo": 0.8997,
+ "l2_hi": 0.9894,
+ "l3_lo": 0.005,
+ "l3_hi": 0.0488,
+ "rank_l2": 35,
+ "n_occupations": 433,
+ "version": "v2026.1",
+ "license": "CC-BY-4.0",
+ "cite": {
+  "bibtex": "@article{espinal2026delegation,\n  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},\n  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n  journal = {arXiv preprint},\n  year    = {2026},\n  url     = {https://github.com/Cespial/delegation-divide},\n  note    = {Agent Delegability Index (ADI) v2026.1. Preregistration: doi:10.17605/OSF.IO/9ZNTF}\n}",
+  "bibtex_key": "espinal2026delegation",
+  "text": "Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries. arXiv preprint. https://github.com/Cespial/delegation-divide",
+  "preregistration_doi": "10.17605/OSF.IO/9ZNTF",
+  "preregistration_url": "https://doi.org/10.17605/OSF.IO/9ZNTF"
+ }
+}

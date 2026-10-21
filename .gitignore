@@ -36,3 +36,4 @@ __pycache__/
 # release: artefactos generados localmente (se suben a mano)
 release/arxiv/*.tar.gz
 release/arxiv/prueba-compilacion.pdf
+dist/

@@ -1,0 +1,26 @@
+# The Delegation Divide — Agent Delegability Index (ADI)
+
+> Open index of AI-agent delegability for 433 ISCO-08 occupations and 146 countries (v2026.1).
+> Headline: 35.2% of task time in world employment is at least partly delegable to AI agents (L2+) in 2026;
+> only 2.5% can be handed over in full (L3). 48.7% in high-income vs 22.5% in low-income countries
+> (the "delegation divide": +7.23 pp per log point of GDP per capita). Full delegation peaks for tasks
+> that take a human about twelve minutes. Source of every number: salidas/claims.jsonl.
+> Four levels per task: L0 no role, L1 augmentation, L2 partial delegation, L3 full delegation.
+> Rated by Claude Sonnet 5.5 and Claude Haiku 5.5 on 18,796 O*NET 30.2 tasks; human validation in progress.
+> Preregistered at OSF: https://doi.org/10.17605/OSF.IO/9ZNTF
+
+## How to use
+- Occupation lookup (static JSON): release/v2026.1/api/isco/<4-digit ISCO-08>.json (e.g. isco/2512.json)
+- Country lookup (static JSON): release/v2026.1/api/country/<ISO3>.json (e.g. country/COL.json); index: release/v2026.1/api/index.json
+- Tables: release/v2026.1/adi_isco.csv, adi_pais.csv, adi_tarea.csv (+ .parquet); columns in release/v2026.1/DATA_DICTIONARY.md
+- MCP server: adi-mcp (tools: lookup_occupation, country_profile, top_occupations, cite)
+- Python: pip install adi-index
+
+## How to cite
+See CITATION.cff. BibTeX key: espinal2026delegation. Every JSON record carries a `cite` field.
+
+## Files
+- README.md: BibTeX, headline block, summary
+- llms-full.txt: definitions, column schema, tool reference
+- docs/PLAN.md: full design
+- salidas/claims.jsonl: every number in the paper (public copy: release/v2026.1/claims.jsonl)

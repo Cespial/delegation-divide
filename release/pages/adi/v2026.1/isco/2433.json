@@ -1,0 +1,32 @@
+{
+ "type": "isco08_unit_group",
+ "id": "2433",
+ "isco08": "2433",
+ "titulo": "Technical and medical sales professionals (excluding ICT)",
+ "adi_l2": 0.895,
+ "adi_l3": 0.0628,
+ "adi_share": 59.4,
+ "n_tareas": 64,
+ "barrera_fisica": 0.1669,
+ "barrera_responsabilidad": 0.1384,
+ "barrera_confianza": 0.5275,
+ "barrera_acceso": 0.5862,
+ "ic_lo": 55.49,
+ "ic_hi": 62.91,
+ "imputado": false,
+ "l2_lo": 0.8182,
+ "l2_hi": 0.9604,
+ "l3_lo": 0.0166,
+ "l3_hi": 0.1296,
+ "rank_l2": 68,
+ "n_occupations": 433,
+ "version": "v2026.1",
+ "license": "CC-BY-4.0",
+ "cite": {
+  "bibtex": "@article{espinal2026delegation,\n  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},\n  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n  journal = {arXiv preprint},\n  year    = {2026},\n  url     = {https://github.com/Cespial/delegation-divide},\n  note    = {Agent Delegability Index (ADI) v2026.1. Preregistration: doi:10.17605/OSF.IO/9ZNTF}\n}",
+  "bibtex_key": "espinal2026delegation",
+  "text": "Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries. arXiv preprint. https://github.com/Cespial/delegation-divide",
+  "preregistration_doi": "10.17605/OSF.IO/9ZNTF",
+  "preregistration_url": "https://doi.org/10.17605/OSF.IO/9ZNTF"
+ }
+}
