@@ -30,7 +30,7 @@ release() {
   echo "✔ release $VER · DOI de Zenodo en https://zenodo.org/account/settings/github/ (pegarlo en README, CITATION.cff, F_citar.tex)"
 }
 pypi() {
-  for p in adi-index adi-mcp; do (cd herramientas/$p && twine upload dist/*); done
+  for p in adi-index adi-mcp; do (cd herramientas/$p && ../../.venv/bin/python -m twine upload dist/*); done
   echo "✔ pip install adi-index · uvx adi-mcp"
 }
 hf() {
