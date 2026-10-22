@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Mapa } from "@/components/Mapa";
-import { TablaPaises } from "@/components/TablaPaises";
-import { INGRESOS, N_PAISES, cifra, paises } from "@/lib/datos";
+import Link from "next/link";
+import { ExploradorPaises } from "@/components/graficas/ExploradorPaises";
+import { N_PAISES, cifra } from "@/lib/datos";
+import { PUNTOS, REGIONES, divide } from "@/lib/graficas-datos";
 
 export const metadata: Metadata = {
   title: "Countries: the delegation divide in 146 economies",
@@ -10,31 +11,25 @@ export const metadata: Metadata = {
 };
 
 export default function Paises() {
-  const filas = paises.map((p) => ({ iso3: p.iso3, nombre: p.nombre, region: p.region_nombre, ingreso: p.ingreso, ingreso_nombre: p.ingreso_nombre, l2: p.l2, lo: p.lo, hi: p.hi, l3: p.l3, s: p.s, pib: p.pib, rk: p.rk }));
-  const regiones = [...new Set(paises.map((p) => p.region_nombre))].sort();
   return (
-    <>
-      <section className="seccion">
-        <div className="envoltura">
-          <div className="encabezado">
-            <div>
-              <span className="rotulo">Country atlas · {N_PAISES} countries</span>
-              <h1 className="titulo" style={{ marginTop: 14, maxWidth: "16ch" }}>Delegable work follows income</h1>
-              <p className="entrada" style={{ marginTop: 18 }}>
-                A country’s ADI weights each occupation by its employment there (ILOSTAT, latest year from 2019). The index runs from {cifra("extremo.pais.bot1.l2")}% in
-                {" "}{cifra("extremo.pais.bot1.nombre")} to {cifra("extremo.pais.top1.l2")}% in {cifra("extremo.pais.top1.nombre")}, and rises {cifra("h1.pendiente")} points per log point of GDP per capita.
-              </p>
-            </div>
+    <section className="seccion" style={{ borderTop: 0 }}>
+      <div className="envoltura">
+        <div className="encabezado">
+          <div>
+            <span className="rotulo">Country atlas · {N_PAISES} countries · v2026.1</span>
+            <h1 className="titulo" style={{ marginTop: 14, maxWidth: "18ch" }}>Delegable work follows income</h1>
+            <p className="entrada" style={{ marginTop: 18 }}>
+              A country’s ADI weights each occupation by its employment there (ILOSTAT, latest year from 2019). The index runs from {cifra("extremo.pais.bot1.l2")}% in
+              {" "}{cifra("extremo.pais.bot1.nombre")} to {cifra("extremo.pais.top1.l2")}% in {cifra("extremo.pais.top1.nombre")}. Hover a flag to read a country; switch the
+              metric to see what else moves with income.
+            </p>
           </div>
-          <Mapa />
-          <p className="nota" style={{ marginTop: 8 }}>Finest ISCO-08 level each country reports to ILOSTAT: {cifra("cobertura.paises.2d")} countries at two digits, {cifra("cobertura.paises.1d")} at one. Small states shown as dots. Boundaries: Natural Earth 1:110m.</p>
+          <div className="botones"><Link className="boton" href="/adi/methodology#countries">Methodology</Link><Link className="boton" href="/adi/data">Data</Link></div>
         </div>
-      </section>
-      <section className="seccion">
-        <div className="envoltura">
-          <TablaPaises filas={filas} regiones={regiones} ingresos={INGRESOS} />
-        </div>
-      </section>
-    </>
+        <ExploradorPaises puntos={PUNTOS} divide={divide} regiones={REGIONES} />
+        <p className="nota" style={{ marginTop: 14 }}>Finest ISCO-08 level each country reports to ILOSTAT: {cifra("cobertura.paises.2d")} countries at two digits, {cifra("cobertura.paises.1d")} at one.
+          “vs income” and the country decomposition are site calculations from the published v2026.1 figures. Flags: flag-icons (MIT).</p>
+      </div>
+    </section>
   );
 }
