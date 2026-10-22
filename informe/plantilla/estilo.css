@@ -146,8 +146,8 @@ li::marker { color: var(--teal); }
 /* ---------- aperturas de capítulo ---------- */
 .apertura { page: apertura; break-before: page; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--papel); }
 .apertura .img { position: absolute; left: 0; right: 0; top: 0; height: 4.7in; background: var(--niebla); overflow: hidden; }
-.apertura .img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; opacity: 0.92; }
-.apertura .img::after { content: ""; position: absolute; inset: 0; background: var(--teal); mix-blend-mode: screen; opacity: 0.38; }
+.apertura .img img { width: 100%; height: 100%; object-fit: cover; display: block; }  /* duotono hecho al generar el JPEG */
+
 .apertura .texto { position: absolute; left: 0.9in; top: 5.05in; width: 6.3in; }
 .apertura .num { font: 500 64pt/1 "Inter Display", var(--sans); color: var(--teal); letter-spacing: -0.03em; }
 .apertura h2 { margin: 10pt 0 18pt; font: 400 34pt/1.05 var(--serif); letter-spacing: -0.015em; hyphens: none; }
