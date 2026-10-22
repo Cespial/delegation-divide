@@ -40,7 +40,7 @@ export function Descomposicion({ pais, mundo, nombre, nombres }: { pais: Bloque[
         {g && w ? <><b>{sel} · {nombres[sel!]}</b>: {g.share.toFixed(1)}% of {nombre}’s workers (world {w.share.toFixed(1)}%), ADI {g.adi.toFixed(1)}% in this mix,
           adding <b>{g.contrib.toFixed(1)} points</b> to {nombre}’s {adiPais.toFixed(1)}%.</> : <>Hover a block to read one group. Shade: the group’s ADI, light 10% to dark 85%.</>}
       </p>
-      <table className="tabla desc-tabla">
+      <div className="tabla-marco"><table className="tabla desc-tabla">
         <thead><tr><th>Major group</th><th className="n">Employment</th><th className="n">World</th><th className="n">ADI of group</th><th className="n">Points of ADI</th></tr></thead>
         <tbody>{de(pais).map((x) => {
           const y = mundo.find((z) => z.gg === x.gg)!;
@@ -52,7 +52,7 @@ export function Descomposicion({ pais, mundo, nombre, nombres }: { pais: Bloque[
             </tr>
           );
         })}</tbody>
-      </table>
+      </table></div>
     </div>
   );
 }

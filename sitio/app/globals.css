@@ -425,3 +425,21 @@ svg.mapa.lienzo { max-width: 100%; }
 .explorador-pie { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px 32px; flex-wrap: wrap; margin-top: 14px; }
 .lectura { font: 500 17px/1.45 var(--sans); max-width: 70ch; margin: 0; text-wrap: pretty; flex: 1 1 420px; }
 .escala.ancha span { min-width: 0; flex: 1 1 96px; padding-right: 8px; }
+.titulo-pais { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); flex-wrap: wrap; }
+.titulo-pais img { width: clamp(64px, 7vw, 96px); height: auto; border-radius: 4px; box-shadow: 0 0 0 1px var(--filete); }
+.etiqueta-posicion { margin: 16px 0 0; font: 600 16px/1.4 var(--sans); color: var(--tinta-2); }
+.etiqueta-posicion.arriba { color: var(--teal-osc); }
+.etiqueta-posicion span { font-weight: 400; color: var(--gris); }
+.vecinos { display: flex; gap: 8px 22px; flex-wrap: wrap; margin-top: 12px; font: 400 12.5px/1.3 var(--mono); }
+.vecinos a { color: var(--tinta-2); text-decoration: none; } .vecinos a:hover { color: var(--teal); text-decoration: underline; }
+.barra-color .barra .relleno { background: var(--relleno); opacity: 0.75; }
+.gemelos { margin-top: 28px; }
+.gemelos ul { list-style: none; padding: 0; margin: 12px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.gemelos li { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 2px 10px; padding: 12px 14px; border: 1px solid var(--filete); background: var(--superficie); border-radius: 3px; }
+.gemelos li img { grid-row: span 2; border-radius: 2px; box-shadow: 0 0 0 1px var(--filete); }
+.gemelos li > a:first-of-type { font-weight: 600; color: var(--tinta); text-decoration: none; }
+.gemelos li .num { font-weight: 600; text-align: right; } .gemelos li .nota { font-size: 12.5px; }
+.gemelos .comparar { font: 500 11.5px/1 var(--mono); text-align: right; }
+.descomposicion, .desc-grupo { grid-template-columns: minmax(0, 1fr); }
+.desc-pista { overflow: hidden; }
+.gemelos li .num { border: 0; }

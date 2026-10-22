@@ -24,7 +24,7 @@ export type Pais = {
   iso3: string; nombre: string; region: string; region_nombre: string; ingreso: string; ingreso_nombre: string; anio: number; res: number;
   l2: number; lo: number; hi: number; l3: number; s: number; l2_iguales: number; emp: number; pib: number | null; inf: number | null; uso: number | null; rk: number;
   iso2: string; pob: number | null; uso_pct: number | null; brecha: number | null; esperado: number | null; residuo: number | null; l3_iguales: number; s_iguales: number;
-  grupos: { gg: string; share: number; adi: number; contrib: number }[]; b: number[]; gemelos: string[];
+  grupos: { gg: string; share: number; adi: number | null; contrib: number }[]; b: number[]; gemelos: string[];
   perfil: { hallazgo: string; hallazgo_fig: string; n_region: number; region_l2: string; mundo_l2: string; filas: FilaPerfil[]; barras: [string, string, number][] };
 };
 export type Tarea = { id: number; t: string; o: string; w: number; n: number; s: number; m: number | null; h: number | null; so: number | null; b: (number | null)[]; core: boolean };
