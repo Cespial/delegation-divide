@@ -154,9 +154,9 @@ exceptions.
 - Static JSON API: release/v2026.1/api/index.json, release/v2026.1/api/isco/<isco08>.json
   (e.g. isco/2512.json), release/v2026.1/api/country/<ISO3>.json (e.g. country/COL.json).
   Each document carries `version`, `license` and `cite` (BibTeX + preregistration DOI
-  10.17605/OSF.IO/9ZNTF). Schema: release/v2026.1/api/README.md. Planned public mirror:
+  10.17605/OSF.IO/9ZNTF). Schema: release/v2026.1/api/README.md. Public mirror:
   https://cespial.github.io/delegation-divide/adi/v2026.1/ (same paths below api/).
-- Planned: Zenodo DOI and Hugging Face dataset `cespial/adi` (pending release).
+- Dataset and code DOI (Zenodo): https://doi.org/10.5281/zenodo.23552918 (all versions: https://doi.org/10.5281/zenodo.23552917). Hugging Face dataset `cespial/adi` (pending).
 
 ## 6. How to cite
 

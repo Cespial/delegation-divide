@@ -23,6 +23,7 @@ DATA_VERSION = "v2026.1"
 REPO_URL = "https://github.com/Cespial/delegation-divide"
 BIBTEX_KEY = "espinal2026delegation"
 PREREG_DOI = "10.17605/OSF.IO/9ZNTF"
+DATA_DOI = "10.5281/zenodo.23552918"
 
 SYNTHETIC_WARNING = (
     "SYNTHETIC/PLACEHOLDER data: these values come from example rows marked "
@@ -33,7 +34,7 @@ SYNTHETIC_WARNING = (
 _LEVELS = {"l2": "adi_l2", "l3": "adi_l3", "share": "adi_share"}
 
 __all__ = [
-    "lookup", "search", "country", "top", "cite", "version", "PREREG_DOI",
+    "lookup", "search", "country", "top", "cite", "version", "PREREG_DOI", "DATA_DOI",
     "SYNTHETIC_WARNING", "DATA_VERSION", "__version__", "data_dir", "is_synthetic",
 ]
 
@@ -225,13 +226,13 @@ def cite(format: str = "bibtex") -> str:
             "  journal = {arXiv preprint},\n"
             "  year    = {2026},\n"
             f"  url     = {{{REPO_URL}}},\n"
-            f"  note    = {{Preregistration: doi:{PREREG_DOI}}}\n"
+            f"  note    = {{Data: doi:{DATA_DOI}. Preregistration: doi:{PREREG_DOI}}}\n"
             "}"
         )
     if fmt == "apa":
         return (
             f"Espinal Maya, C., & Jiménez Londoño, S. (2026). {_TITLE}. "
-            f"arXiv preprint. {REPO_URL}. Preregistration: https://doi.org/{PREREG_DOI}"
+            f"arXiv preprint. Data: https://doi.org/{DATA_DOI}. Preregistration: https://doi.org/{PREREG_DOI}"
         )
     if fmt == "text":
         return (

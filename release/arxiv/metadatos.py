@@ -53,7 +53,7 @@ ABSTRACT = (
     "We release the index, the atlas, the prompts and an MCP server at https://github.com/Cespial/delegation-divide."
 )
 COMENTARIOS = ("31 pages, 6 figures, 4 tables. Preregistered at OSF: 10.17605/OSF.IO/9ZNTF. "
-               "Data, code and MCP server: https://github.com/Cespial/delegation-divide")
+               "Data and code: doi:10.5281/zenodo.23552918; repository and MCP server: https://github.com/Cespial/delegation-divide")
 
 
 def main() -> int:

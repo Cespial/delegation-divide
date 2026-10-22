@@ -32,6 +32,7 @@ RATINGS = RAIZ / "scoring" / "salidas" / "main"
 TITLE = "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries"
 REPO = "https://github.com/Cespial/delegation-divide"
 PREREG_DOI = "10.17605/OSF.IO/9ZNTF"
+DATA_DOI = "10.5281/zenodo.23552918"
 LICENSE = "CC-BY-4.0"
 BIBTEX = (
     "@article{espinal2026delegation,\n"
@@ -40,13 +41,15 @@ BIBTEX = (
     "  journal = {arXiv preprint},\n"
     "  year    = {2026},\n"
     f"  url     = {{{REPO}}},\n"
-    f"  note    = {{Agent Delegability Index (ADI) {VERSION}. Preregistration: doi:{PREREG_DOI}}}\n"
+    f"  note    = {{Agent Delegability Index (ADI) {VERSION}. Data: doi:{DATA_DOI}. Preregistration: doi:{PREREG_DOI}}}\n"
     "}"
 )
 CITE = {
     "bibtex": BIBTEX,
     "bibtex_key": "espinal2026delegation",
     "text": f"Espinal Maya, C., & Jiménez Londoño, S. (2026). {TITLE}. arXiv preprint. {REPO}",
+    "data_doi": DATA_DOI,
+    "data_url": f"https://doi.org/{DATA_DOI}",
     "preregistration_doi": PREREG_DOI,
     "preregistration_url": f"https://doi.org/{PREREG_DOI}",
 }

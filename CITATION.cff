@@ -35,6 +35,12 @@ authors:
     affiliation: "Universidad EAFIT"
 identifiers:
   - type: doi
+    value: "10.5281/zenodo.23552918"
+    description: "Dataset and code, ADI v2026.1 (Zenodo)"
+  - type: doi
+    value: "10.5281/zenodo.23552917"
+    description: "Dataset and code, all versions (Zenodo concept DOI)"
+  - type: doi
     value: "10.17605/OSF.IO/9ZNTF"
     description: "Preregistration (OSF Registries)"
 references:
