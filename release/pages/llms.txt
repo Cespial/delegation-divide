@@ -1,3 +1,5 @@
+# Canonical site: https://balamlabs.org/adi (this GitHub Pages mirror keeps the v2026.1 JSON)
+
 # The Delegation Divide — Agent Delegability Index (ADI)
 
 > Open index of AI-agent delegability for 433 ISCO-08 occupations and 146 countries (v2026.1).

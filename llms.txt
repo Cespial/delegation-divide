@@ -10,8 +10,8 @@
 > Preregistered at OSF: https://doi.org/10.17605/OSF.IO/9ZNTF · Data and code: https://doi.org/10.5281/zenodo.23552918
 
 ## How to use
-- Occupation lookup (static JSON): https://cespial.github.io/delegation-divide/adi/v2026.1/isco/<4-digit ISCO-08>.json (e.g. https://cespial.github.io/delegation-divide/adi/v2026.1/isco/2512.json)
-- Country lookup (static JSON): https://cespial.github.io/delegation-divide/adi/v2026.1/country/<ISO3>.json (e.g. https://cespial.github.io/delegation-divide/adi/v2026.1/country/COL.json); index: https://cespial.github.io/delegation-divide/adi/v2026.1/index.json
+- Occupation lookup (static JSON): https://balamlabs.org/adi/v2026.1/isco/<4-digit ISCO-08>.json (e.g. https://balamlabs.org/adi/v2026.1/isco/2512.json)
+- Country lookup (static JSON): https://balamlabs.org/adi/v2026.1/country/<ISO3>.json (e.g. https://balamlabs.org/adi/v2026.1/country/COL.json); index: https://balamlabs.org/adi/v2026.1/index.json
 - Tables: release/v2026.1/adi_isco.csv, adi_pais.csv, adi_tarea.csv (+ .parquet); columns in release/v2026.1/DATA_DICTIONARY.md
 - MCP server: adi-mcp (tools: lookup_occupation, country_profile, top_occupations, cite)
 - Python: pip install adi-index
