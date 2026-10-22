@@ -1,256 +1,378 @@
 /* The Delegation Divide — informe ADI v2026.1. Paged.js sobre Chrome (Playwright). Carta.
-   Retícula: margen izq. 0,9 in, der. 0,6 in → caja 7,0 in = cuerpo 5,3 in + medianil 0,15 in + lateral 1,55 in. */
-@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-Regular.otf); font-weight: 400; }
-@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-It.otf); font-weight: 400; font-style: italic; }
-@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-Semibold.otf); font-weight: 600; }
-@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-SemiboldIt.otf); font-weight: 600; font-style: italic; }
-@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-Bold.otf); font-weight: 700; }
-@font-face { font-family: "Inter"; src: url(../fonts/Inter-Light.ttf); font-weight: 300; }
-@font-face { font-family: "Inter"; src: url(../fonts/Inter-Regular.ttf); font-weight: 400; }
-@font-face { font-family: "Inter"; src: url(../fonts/Inter-Italic.ttf); font-weight: 400; font-style: italic; }
-@font-face { font-family: "Inter"; src: url(../fonts/Inter-Medium.ttf); font-weight: 500; }
-@font-face { font-family: "Inter"; src: url(../fonts/Inter-SemiBold.ttf); font-weight: 600; }
-@font-face { font-family: "Inter"; src: url(../fonts/Inter-Bold.ttf); font-weight: 700; }
-@font-face { font-family: "Inter Display"; src: url(../fonts/InterDisplay-Medium.otf); font-weight: 500; }
-@font-face { font-family: "Inter Display"; src: url(../fonts/InterDisplay-SemiBold.otf); font-weight: 600; }
+   Referente: Informe Nacional de Competitividad (Consejo Privado de Competitividad): partes con color propio y separadores a sangre,
+   pestaña de color en el borde, texto a dos columnas justificado, títulos condensados en mayúscula, recuadro de mensaje antes de cada
+   figura, tabla de perfil de país. Caja de texto 7,0 × 9,3 in; dos columnas de 3,35 in con medianil de 0,3 in. */
+@font-face { font-family: "Barlow"; src: url(../fonts/Barlow-Light.ttf); font-weight: 300; }
+@font-face { font-family: "Barlow"; src: url(../fonts/Barlow-LightItalic.ttf); font-weight: 300; font-style: italic; }
+@font-face { font-family: "Barlow"; src: url(../fonts/Barlow-Regular.ttf); font-weight: 400; }
+@font-face { font-family: "Barlow"; src: url(../fonts/Barlow-Italic.ttf); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Barlow"; src: url(../fonts/Barlow-Medium.ttf); font-weight: 500; }
+@font-face { font-family: "Barlow"; src: url(../fonts/Barlow-SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: "Barlow"; src: url(../fonts/Barlow-SemiBoldItalic.ttf); font-weight: 600; font-style: italic; }
+@font-face { font-family: "Barlow"; src: url(../fonts/Barlow-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Barlow Semi Condensed"; src: url(../fonts/BarlowSemiCondensed-Regular.ttf); font-weight: 400; }
+@font-face { font-family: "Barlow Semi Condensed"; src: url(../fonts/BarlowSemiCondensed-Medium.ttf); font-weight: 500; }
+@font-face { font-family: "Barlow Semi Condensed"; src: url(../fonts/BarlowSemiCondensed-SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: "Barlow Condensed"; src: url(../fonts/BarlowCondensed-Light.ttf); font-weight: 300; }
+@font-face { font-family: "Barlow Condensed"; src: url(../fonts/BarlowCondensed-Medium.ttf); font-weight: 500; }
+@font-face { font-family: "Barlow Condensed"; src: url(../fonts/BarlowCondensed-SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: "Barlow Condensed"; src: url(../fonts/BarlowCondensed-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Barlow Condensed"; src: url(../fonts/BarlowCondensed-ExtraBold.ttf); font-weight: 800; }
 @font-face { font-family: "JetBrains Mono"; src: url(../fonts/JetBrainsMono-Regular.ttf); font-weight: 400; }
+@font-face { font-family: "Noto Sans Math"; src: url(../fonts/NotoSansMath-Regular.ttf); font-weight: 400; }
 
 :root {
-  --tinta: #1a1918; --tinta-2: #4b5058; --gris: #6b7280; --filete: #e5e3e0; --papel: #ffffff; --hueso: #f6f5f3;
-  --teal: #0d7d74; --teal-osc: #0a4a45; --teal-med: #2f8f86; --teal-cla: #9ccbc6; --niebla: #e8f3f1;
+  --tinta: #22252a; --tinta-2: #4a5059; --gris: #6b7078; --filete: #dcdad6; --hueso: #f5f4f1; --papel: #fff;
+  --marca: #0d7d74; --marca-osc: #0a4a45; --marca-prof: #062f2c; --marca-tinte: #eaf4f2; --menta: #bfe3dd;
+  /* partes: I medir (azul acero), II la brecha (teal de la marca), III probar (ocre). Blanco sobre cada una ≥ 5:1. */
+  --p1: #2e5a8c; --p1-osc: #1c3a5e; --p1-tinte: #edf2f8;
+  --p2: #0d7d74; --p2-osc: #0a4a45; --p2-tinte: #eaf4f2;
+  --p3: #9a6216; --p3-osc: #5e3c0d; --p3-tinte: #f7f0e5;
   --l0: #eef5f4; --l1: #d9ebe9; --l2: #9ccbc6; --l3: #0d7d74;
-  --b-fis: #5b6fae; --b-res: #c4862f; --b-con: #8e4f8f; --b-acc: #5f8f3a;
-  --serif: "Source Serif 4", Georgia, serif; --sans: "Inter", "Helvetica Neue", sans-serif; --mono: "JetBrains Mono", monospace;
-  --cuerpo: 5.3in; --lateral: 1.55in; --medianil: 0.15in;
+  --sans: "Barlow", "Helvetica Neue", sans-serif; --cond: "Barlow Condensed", "Barlow", sans-serif; --semi: "Barlow Semi Condensed", "Barlow", sans-serif;
+  --mono: "JetBrains Mono", monospace;
+  --p: var(--marca); --p-osc: var(--marca-osc); --p-tinte: var(--marca-tinte);
 }
+.parte-1 { --p: var(--p1); --p-osc: var(--p1-osc); --p-tinte: var(--p1-tinte); }
+.parte-2 { --p: var(--p2); --p-osc: var(--p2-osc); --p-tinte: var(--p2-tinte); }
+.parte-3 { --p: var(--p3); --p-osc: var(--p3-osc); --p-tinte: var(--p3-tinte); }
 
 /* ---------- páginas ---------- */
-@page { size: letter; margin: 0.78in 0.6in 0.85in 0.9in;
-  @bottom-left { content: string(capitulo); font: 400 7.6pt var(--sans); color: var(--gris); vertical-align: top; padding-top: 14pt; }
-  @bottom-right { content: counter(page); font: 500 7.6pt var(--sans); color: var(--tinta); vertical-align: top; padding-top: 14pt;
-                  font-variant-numeric: tabular-nums; }
-  @top-left { content: "The Delegation Divide"; font: 400 7.6pt var(--sans); color: var(--gris); vertical-align: bottom; padding-bottom: 14pt; }
+@page { size: letter; margin: 0.92in 0.75in 0.8in 0.75in;
+  @top-left { content: "AGENT DELEGABILITY INDEX\A The Delegation Divide 2026"; white-space: pre; font: 600 6.6pt/1.35 var(--semi); color: var(--gris);
+              letter-spacing: 0.04em; vertical-align: bottom; padding-bottom: 16pt; }
+  @top-right { content: string(capitulo); text-align: right; font: 600 6.6pt/1.35 var(--semi); color: var(--marca);
+               letter-spacing: 0.04em; text-transform: uppercase; vertical-align: bottom; padding-bottom: 16pt; }
+  @top-right-corner { content: string(capnum); }
+  @bottom-center { content: counter(page); font: 600 8pt var(--cond); color: var(--tinta); vertical-align: top; padding-top: 18pt; }
 }
-@page portada { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } @top-left { content: none; } }
-@page apertura { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } @top-left { content: none; } }
-@page limpia { @top-left { content: none; } @bottom-left { content: none; } }
-@page contra { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } @top-left { content: none; } }
-@page :blank { @top-left { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+@page p1 { @top-right { content: string(capitulo); color: var(--p1); } @top-right-corner { content: string(capnum); } }
+@page p2 { @top-right { content: string(capitulo); color: var(--p2); } @top-right-corner { content: string(capnum); } }
+@page p3 { @top-right { content: string(capitulo); color: var(--p3); } @top-right-corner { content: string(capnum); } }
+@page frente { @top-right { content: none; } @top-right-corner { content: ""; } }
+@page fondo { @top-right { content: string(seccion); } @top-right-corner { content: ""; } }
+@page sangre { margin: 0; @top-left { content: none; } @top-right { content: none; } @top-right-corner { content: none; } @bottom-center { content: none; } }
+@page :blank { @top-left { content: none; } @top-right { content: none; } @top-right-corner { content: none; } @bottom-center { content: none; } }
+
+/* pestaña de color en el borde derecho, con el número de capítulo (como la pestaña de pilar del INC) */
+.pagedjs_page .pagedjs_margin-top-right-corner { position: relative; }
+.pagedjs_margin-top-left .pagedjs_margin-content::after { white-space: pre; }
+/* la parte va en una línea propia sobre el capítulo: Paged.js no admite string() + "\A" + string() en un mismo bloque */
+:is(.pagedjs_p1_page, .pagedjs_p2_page, .pagedjs_p3_page) .pagedjs_margin-top-right .pagedjs_margin-content::before { content: var(--pagedjs-string-first-parte); display: block; color: var(--gris); }
+.pagedjs_page .pagedjs_margin-top-right-corner .pagedjs_margin-content { position: absolute; right: 0; top: 0.38in; width: 0.42in; height: 0.36in;
+  display: flex; align-items: center; justify-content: center; font: 700 12pt var(--cond); color: #fff; background: var(--marca); border-radius: 4pt 0 0 4pt; }
+.pagedjs_p1_page .pagedjs_margin-top-right-corner .pagedjs_margin-content { background: var(--p1); }
+.pagedjs_p2_page .pagedjs_margin-top-right-corner .pagedjs_margin-content { background: var(--p2); }
+.pagedjs_p3_page .pagedjs_margin-top-right-corner .pagedjs_margin-content { background: var(--p3); }
+.pagedjs_frente_page .pagedjs_margin-top-right-corner .pagedjs_margin-content,
+.pagedjs_fondo_page .pagedjs_margin-top-right-corner .pagedjs_margin-content,
+.pagedjs_blank_page .pagedjs_margin-top-right-corner .pagedjs_margin-content { display: none; }
+/* filete fino sobre el folio */
+.pagedjs_page:not(.pagedjs_sangre_page):not(.pagedjs_blank_page) .pagedjs_margin-bottom-center .pagedjs_margin-content { border-top: 0.6pt solid var(--filete); padding-top: 5pt; width: 0.5in; margin: 0 auto; text-align: center; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--papel); }
-body { font: 400 10.4pt/1.5 var(--serif); color: var(--tinta); font-feature-settings: "kern", "liga", "onum" 0;
-       hyphens: auto; -webkit-hyphens: auto; text-rendering: geometricPrecision; orphans: 3; widows: 3; }
-p { margin: 0 0 7pt; text-align: left; }
+body { font: 400 9.5pt/1.43 var(--sans); color: var(--tinta); font-feature-settings: "kern", "liga";
+       hyphens: auto; -webkit-hyphens: auto; text-rendering: geometricPrecision; orphans: 2; widows: 2; }
+p { margin: 0 0 6pt; }
 a { color: inherit; text-decoration: none; }
 em, i { font-style: italic; }
 strong, b { font-weight: 600; }
-code { font: 400 8.6pt var(--mono); color: var(--tinta-2); hyphens: none; word-break: break-word; }
-math { font-size: 1.02em; }
-math[display="block"] { margin: 8pt 0 10pt; }
-.cf { font-variant-numeric: lining-nums; white-space: nowrap; }
+code { font: 400 7.9pt var(--mono); color: var(--tinta-2); hyphens: none; }
+pre code { font: inherit; color: inherit; }  /* en bloque manda el tamaño del <pre> */
+/* fórmulas en sans: en línea con Barlow (lo que Barlow no tiene, como griegas e itálicas matemáticas, cae en Noto Sans Math);
+   en bloque, Noto Sans Math primero para que su tabla MATH dé sumatorias y fracciones bien compuestas */
+math { font-size: 1em; font-family: "Barlow", "Noto Sans Math", math; }
+math[display="block"] { margin: 6pt 0 8pt; font-family: "Noto Sans Math", math; font-size: 1.04em; }
+.cf { font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
 .cf.falta { color: #b3261e; font-weight: 700; }
-.cite { color: var(--tinta-2); }
 sup { line-height: 0; }
 
-/* ---------- cuerpo con columna lateral ---------- */
-.cap > :is(p, h3, h4, ul, ol, dl, math, .eq, blockquote, .box, .fig.col, .tabla.col, .lista-num) { margin-right: calc(var(--lateral) + var(--medianil)); }
-.lat { float: right; clear: right; width: var(--lateral); margin: 2pt 0 8pt var(--medianil);
-       font: 400 7.6pt/1.42 var(--sans); color: var(--tinta-2); hyphens: manual; }
-.lat strong { color: var(--tinta); font-weight: 600; }
-.lat .lat-t { display: block; color: var(--teal); font-weight: 600; margin-bottom: 2pt; }
-.lat .lat-cifra { display: block; font: 500 22pt/1 "Inter Display", var(--sans); color: var(--teal-osc); margin: 2pt 0 3pt; font-variant-numeric: tabular-nums; }
+/* ---------- cuerpo a dos columnas ---------- */
+.dos-col { column-count: 2; column-gap: 0.3in; column-fill: balance; }
+/* justificado solo en párrafos: Paged.js justifica la última línea de un elemento justificado que parte, y eso se hereda */
+.dos-col > p, .dos-col > ul > li, .dos-col > ol > li, .dos-col > dl > dd, .dos-col > dl > dd > p { text-align: justify; }
+.dos-col > :is(.fig, .tabla, .box.ancho, .mensajes, .perfil, .tabla-ancha, pre.ancho), .dos-col > div:has(> .tabla, > .fig) { column-span: all; text-align: left; }
+.una-col { text-align: left; }
 
-h2, h3, h4 { break-after: avoid; hyphens: manual; }
-.cap h2.titulo-cap { string-set: capitulo content(text); }
-h3 { font: 600 12.4pt/1.25 var(--serif); margin: 17pt 0 6pt; color: var(--tinta); }
-h3 .num { font: 600 9pt var(--sans); color: var(--teal); margin-right: 7pt; font-variant-numeric: tabular-nums; }
-h4 { font: 600 9.6pt/1.3 var(--sans); margin: 12pt 0 4pt; }
-ul, ol { margin: 0 0 8pt; padding-left: 14pt; }
-li { margin-bottom: 4pt; }
-li::marker { color: var(--teal); }
-.cap p.tesis strong:first-child, .tesis > strong:first-child { font-weight: 600; }
+h2, h3, h4 { break-after: avoid; hyphens: manual; text-align: left; }
+h3 { font: 700 12.6pt/1.12 var(--cond); text-transform: uppercase; letter-spacing: 0.01em; color: var(--p); margin: 14pt 0 6pt; break-inside: avoid; }
+/* el título arrastra tres líneas invisibles: si no caben con él al pie de la columna, salta entero a la siguiente (Chrome ignora break-after en columnas balanceadas) */
+h3::after { content: ""; display: block; height: 3.6em; margin-bottom: -3.6em; }
+h3 .num { display: inline-block; font: 600 8.6pt/1 var(--cond); color: var(--p); border: 1pt solid var(--p); border-radius: 8pt; padding: 2pt 5pt 1.6pt;
+          margin-right: 6pt; vertical-align: 1.5pt; letter-spacing: 0.02em; }
+h4 { font: 600 9.6pt/1.3 var(--sans); color: var(--p-osc); margin: 10pt 0 3pt; }
+ul, ol { margin: 0 0 7pt; padding-left: 13pt; text-align: left; }
+li { margin-bottom: 3pt; }
+li::marker { color: var(--p); font-weight: 600; }
+dl { margin: 2pt 0 9pt; text-align: left; }
+dt { font: 600 8.8pt/1.3 var(--sans); color: var(--p-osc); margin-top: 6pt; }
+dd { margin: 1pt 0 0 0; padding-left: 9pt; border-left: 2pt solid var(--p-tinte); }
+dd p { margin: 0; }
+blockquote, .cap pre { font: 400 7.6pt/1.45 var(--mono); background: var(--hueso); padding: 6pt 8pt; margin: 4pt 0 8pt; white-space: pre-wrap; text-align: left; border-left: 2pt solid var(--p); }
+
+/* ---------- cifra en columna (antes nota al margen) ---------- */
+.lat { display: block; break-inside: avoid; margin: 4pt 0 9pt; padding: 6pt 0 6pt 9pt; border-left: 3pt solid var(--p);
+       font: 400 7.9pt/1.38 var(--sans); color: var(--tinta-2); text-align: left; hyphens: manual; }
+.lat strong { color: var(--tinta); }
+.lat .lat-t { display: block; font: 700 8.4pt var(--cond); color: var(--p); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 1pt; }
+.lat .lat-cifra { display: block; font: 700 25pt/1 var(--cond); color: var(--p-osc); margin: 1pt 0 2pt; }
+
+/* ---------- títulos de página (introducción, conclusión, anexos, frente) ---------- */
+.titulo-pag { margin: 0 0 16pt; }
+.titulo-pag .kicker { font: 600 8.4pt var(--semi); color: var(--p); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 4pt; }
+.titulo-pag h2 { font: 800 32pt/0.96 var(--cond); color: var(--p-osc); text-transform: uppercase; letter-spacing: 0.005em; margin: 0; }
+.titulo-pag h2::after { content: ""; display: block; width: 0.55in; height: 3.5pt; background: var(--p); margin-top: 9pt; }
+.titulo-pag .intro { font: 300 12pt/1.42 var(--sans); color: var(--tinta-2); margin: 10pt 0 0; width: 5.6in; text-align: left; hyphens: manual; }
 
 /* ---------- portada ---------- */
-.portada { page: portada; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--papel); }
-.portada .marca { position: absolute; left: 0.9in; top: 0.7in; display: flex; align-items: center; gap: 9pt; }
-.portada .marca svg { height: 22pt; width: auto; }
-.portada .marca span { font: 400 8.4pt/1.3 var(--sans); color: var(--tinta-2); }
-.portada .edicion { position: absolute; right: 0.6in; top: 0.74in; font: 500 8.4pt var(--sans); color: var(--teal); text-align: right; }
-.portada h1 { position: absolute; left: 0.9in; top: 1.55in; width: 6.6in; margin: 0; font: 400 58pt/0.98 var(--serif); letter-spacing: -0.02em; color: var(--tinta); hyphens: none; }
-.portada .sub { position: absolute; left: 0.9in; top: 3.62in; width: 5.2in; font: 400 15pt/1.32 var(--serif); color: var(--tinta-2); margin: 0; hyphens: none; }
-.portada .autores { position: absolute; left: 0.9in; top: 4.45in; width: 6.8in; display: grid; grid-template-columns: 1fr 1fr; gap: 0 20pt;
-                    font: 400 8.6pt/1.45 var(--sans); color: var(--tinta-2); }
-.portada .autores b { display: block; color: var(--tinta); font-weight: 600; font-size: 9.4pt; }
-.escalera { position: absolute; left: 0; right: 0; bottom: 0; height: 4.85in; display: grid; grid-template-columns: repeat(4, 1fr); align-items: end; }
-.escalera .peldano { position: relative; padding: 12pt 14pt 0 14pt; }
-.escalera .peldano .cifra { font: 500 40pt/1 "Inter Display", var(--sans); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.escalera .peldano .cifra small { font-size: 0.45em; margin-left: 2pt; vertical-align: 0.95em; }
-.escalera .peldano .et { font: 500 8.6pt/1.3 var(--sans); margin-top: 4pt; }
-.escalera .peldano .et2 { font: 400 7.6pt/1.3 var(--sans); opacity: 0.85; }
-.escalera .p1 { background: var(--l1); color: var(--teal-osc); }
-.escalera .p2 { background: var(--teal-cla); color: var(--teal-osc); }
-.escalera .p3 { background: var(--teal-med); color: #fff; }
-.escalera .p4 { background: var(--teal-osc); color: #fff; }
-.escalera .leyenda { position: absolute; left: 0.9in; top: 0; width: 5.0in; font: 400 8.2pt/1.4 var(--sans); color: var(--tinta-2); }
-.escalera .leyenda b { color: var(--tinta); font-weight: 600; }
+.portada { page: sangre; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--marca-prof); color: #fff; }
+.portada .img { position: absolute; left: 0; top: 3.9in; width: 8.5in; height: 3.95in; }
+.portada .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.portada .img::before, .portada .img::after { content: ""; position: absolute; left: 0; right: 0; height: 0.6in; z-index: 1; }
+.portada .img::before { top: 0; background: linear-gradient(var(--marca-prof), rgba(6,47,44,0)); }
+.portada .img::after { bottom: 0; background: linear-gradient(rgba(6,47,44,0), var(--marca-prof)); }
+.portada .arriba { position: absolute; left: 0.75in; right: 0.75in; top: 0.62in; display: flex; justify-content: space-between; align-items: center; }
+.portada .arriba svg { height: 24pt; width: auto; }
+.portada .arriba .ed { font: 600 8.4pt/1.35 var(--semi); letter-spacing: 0.06em; text-transform: uppercase; color: var(--menta); text-align: right; }
+.portada .kicker { position: absolute; left: 0.75in; top: 1.32in; font: 500 13pt var(--cond); letter-spacing: 0.14em; text-transform: uppercase; color: var(--menta); margin: 0; }
+.portada h1 { position: absolute; left: 0.72in; top: 1.56in; margin: 0; font: 800 66pt/0.88 var(--cond); text-transform: uppercase; letter-spacing: -0.005em; color: #fff; }
+.portada .sub { position: absolute; left: 0.75in; top: 3.3in; width: 6.6in; margin: 0; font: 300 13.4pt/1.32 var(--sans); color: #d7ece8; hyphens: none; }
+.portada .datos { position: absolute; left: 0.75in; right: 0.75in; top: 7.95in; }
+.portada .datos .ley { font: 400 8.2pt/1.35 var(--sans); color: var(--menta); margin: 0 0 7pt; }
+.portada .datos .ley b { color: #fff; font-weight: 600; }
+.portada .esc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5pt; align-items: end; height: 1.16in; }
+.portada .esc .pel { padding: 6pt 8pt 7pt; border-top: 2.5pt solid var(--menta); background: rgba(191,227,221,0.08); }
+.portada .esc .pel:nth-child(2) { background: rgba(191,227,221,0.14); } .portada .esc .pel:nth-child(3) { background: rgba(191,227,221,0.21); }
+.portada .esc .pel:nth-child(4) { background: rgba(191,227,221,0.3); border-top-color: #fff; }
+.portada .esc .c { font: 700 27pt/1 var(--cond); color: #fff; }
+.portada .esc .c small { font-size: 0.5em; margin-left: 1pt; vertical-align: 0.8em; }
+.portada .esc .e { font: 600 8pt/1.25 var(--semi); color: #fff; margin-top: 2pt; }
+.portada .esc .e2 { font: 400 7.2pt var(--sans); color: var(--menta); }
+.portada .autores { position: absolute; left: 0.75in; top: 9.6in; display: flex; gap: 0.5in; font: 400 7.8pt/1.35 var(--sans); color: var(--menta); }
+.portada .autores b { display: block; font: 600 9pt var(--sans); color: #fff; }
+.portada .franja { position: absolute; left: 0; right: 0; bottom: 0; height: 0.62in; background: #fff; display: flex; align-items: center; gap: 30pt; padding: 0 0.75in; }
+.portada .franja img, .portada .franja svg { height: 23pt; width: auto; } .portada .franja .inplux { height: 18pt; }
 
-/* ---------- interior de portada / créditos ---------- */
-.creditos { page: limpia; break-before: page; font: 400 8.4pt/1.5 var(--sans); color: var(--tinta-2); }
-.creditos h2 { font: 600 9pt var(--sans); color: var(--tinta); margin: 16pt 0 4pt; }
-.creditos h2:first-child { margin-top: 0; }
-.creditos pre { font: 400 7.4pt/1.45 var(--mono); background: var(--hueso); border-left: 2pt solid var(--teal); padding: 7pt 9pt; white-space: pre-wrap; margin: 4pt 0 8pt; color: var(--tinta); }
-.creditos .cita-recomendada { font: 400 9.6pt/1.45 var(--serif); color: var(--tinta); }
-.logos { display: flex; align-items: center; gap: 26pt; margin: 6pt 0; flex-wrap: wrap; }
-.logos img, .logos svg { height: 30pt; width: auto; }
-.logos .inplux { height: 17pt; }
-.creditos .pie-logos { position: relative; margin-top: 26pt; padding-top: 12pt; border-top: 0.6pt solid var(--filete); }
+/* ---------- créditos ---------- */
+.creditos { page: frente; break-before: page; font: 400 8.3pt/1.48 var(--sans); color: var(--tinta-2); }
+.creditos .rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: 0 0.3in; }
+.creditos h4 { font: 700 9pt var(--cond); color: var(--marca); text-transform: uppercase; letter-spacing: 0.04em; margin: 13pt 0 3pt; }
+.creditos h4:first-child { margin-top: 0; }
+.creditos pre { font: 400 6.7pt/1.45 var(--mono); white-space: pre; background: var(--hueso); border-left: 2pt solid var(--marca); padding: 6pt 8pt; margin: 4pt 0 8pt; color: var(--tinta); }
+.creditos .cita { font: 400 9.2pt/1.45 var(--sans); color: var(--tinta); }
+.creditos .equipo b { color: var(--tinta); font-weight: 600; }
+.creditos .pie-logos { margin-top: 22pt; padding-top: 12pt; border-top: 0.6pt solid var(--filete); }
+.logos { display: flex; align-items: center; gap: 26pt; flex-wrap: wrap; }
+.logos img, .logos svg { height: 28pt; width: auto; } .logos .inplux { height: 21pt; }
 
-/* ---------- contenido ---------- */
-.contenido { page: limpia; break-before: page; }
-.contenido h2 { font: 400 30pt/1 var(--serif); margin: 0 0 14pt; letter-spacing: -0.01em; }
-.toc { list-style: none; padding: 0; margin: 0 0 18pt; }
-.toc li { display: grid; grid-template-columns: 0.42in 1fr auto; align-items: baseline; padding: 3.6pt 0; border-bottom: 0.5pt solid var(--filete); margin: 0; }
-.toc .n { font: 600 9pt var(--sans); color: var(--teal); }
-.toc .t { font: 400 11.2pt/1.3 var(--serif); }
-.toc .p { font: 500 9pt var(--sans); font-variant-numeric: tabular-nums; }
-.toc .p::after { content: target-counter(attr(data-ref), page); }
-.toc.menor { column-count: 2; column-gap: 0.3in; }
-.toc.menor li { padding: 2.4pt 0; grid-template-columns: 0.62in 1fr auto; break-inside: avoid; }
-.toc.menor .t { font: 400 8.6pt/1.3 var(--sans); color: var(--tinta-2); }
-.toc.menor .n { font-weight: 500; }
-.contenido h3 { font: 600 9pt var(--sans); color: var(--tinta); margin: 14pt 0 4pt; }
+/* ---------- contenido visual ---------- */
+.contenido { page: frente; break-before: page; }
+.contenido .titulo-pag { margin-bottom: 12pt; }
+.toc-frente { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6pt; margin: 0 0 12pt; }
+.toc-frente a, .toc-cierre a { display: flex; align-items: center; gap: 7pt; padding: 6pt 8pt; background: var(--hueso); border-radius: 5pt; font: 600 9pt/1.2 var(--sans); }
+.toc-frente svg, .toc-cierre svg, .tocp .tcap svg { width: 15pt; height: 15pt; flex: none; color: var(--marca); }
+.toc-frente .pg, .toc-cierre .pg, .tocp .pg { margin-left: auto; font: 700 9pt var(--cond); color: var(--tinta-2); }
+.pg::after { content: target-counter(attr(data-ref), page); }
+.tocp { display: grid; grid-template-columns: 1.72in 1fr; gap: 0 10pt; margin: 0 0 9pt; break-inside: avoid; }
+.tocp .bloque { background: var(--p); color: #fff; border-radius: 6pt; padding: 9pt 10pt; display: flex; flex-direction: column; justify-content: center; }
+.tocp .bloque .k { font: 600 7.6pt var(--semi); letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+.tocp .bloque .t { font: 700 15pt/1 var(--cond); text-transform: uppercase; margin: 2pt 0 4pt; }
+.tocp .bloque .pg { margin: 0; color: #fff; opacity: 0.9; font-size: 8.4pt; } .tocp .bloque .pg::before { content: "Page "; }
+.tocp .caps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5pt; }
+.tocp .tcap { display: flex; flex-direction: column; gap: 3pt; border: 0.8pt dashed color-mix(in srgb, var(--p) 55%, white); border-radius: 6pt; padding: 7pt 8pt; min-height: 0.82in; }
+.tocp .tcap svg { color: var(--p); }
+.tocp .tcap .n { font: 700 8pt var(--cond); color: var(--p); letter-spacing: 0.05em; text-transform: uppercase; }
+.tocp .tcap .t { font: 600 8.8pt/1.2 var(--sans); color: var(--tinta); }
+.tocp .tcap .pg { margin-left: 0; margin-top: auto; font-size: 8pt; color: var(--gris); } .tocp .tcap .pg::before { content: "p. "; }
+.toc-cierre { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6pt; margin: 3pt 0 14pt; }
+.indice-fig h4 { font: 700 9pt var(--cond); color: var(--marca); text-transform: uppercase; letter-spacing: 0.04em; margin: 0 0 4pt; }
+.indice-fig ol { list-style: none; padding: 0; margin: 0; column-count: 2; column-gap: 0.3in; }
+.indice-fig li a { display: grid; grid-template-columns: 0.66in 1fr auto; gap: 4pt; }
+.indice-fig li { font: 400 7.9pt/1.3 var(--sans); color: var(--tinta-2); padding: 2.2pt 0; border-bottom: 0.4pt solid var(--filete); margin: 0; break-inside: avoid; }
+.indice-fig li .n { font-weight: 600; color: var(--tinta); }
+.indice-fig li .pg { font: 600 7.9pt var(--sans); color: var(--tinta); }
 
 /* ---------- ten things to know ---------- */
-.diez { break-before: page; }
-.diez h2, .glance h2 { font: 400 30pt/1.05 var(--serif); margin: 0 0 6pt; letter-spacing: -0.01em; }
-.diez .intro, .glance .intro { font: 400 10.4pt/1.45 var(--serif); color: var(--tinta-2); margin: 0 0 14pt; width: 5.3in; }
-.diez ol { list-style: none; padding: 0; margin: 0; counter-reset: d; }
-.diez li { counter-increment: d; display: grid; grid-template-columns: 0.44in 1fr; padding: 8pt 0 7pt; border-top: 0.6pt solid var(--filete); margin: 0; break-inside: avoid; }
-.diez li::before { content: counter(d); font: 500 17pt/1 "Inter Display", var(--sans); color: var(--teal); font-variant-numeric: tabular-nums; }
-.diez li p { margin: 0; font-size: 9.9pt; line-height: 1.45; }
-.diez li p strong { font-weight: 600; }
+.diez { page: frente; break-before: page; }
+.diez ol { list-style: none; padding: 0; margin: 0; column-count: 2; column-gap: 0.3in; }
+.diez li { display: grid; grid-template-columns: 0.36in 1fr; padding: 0 0 9pt; margin: 0 0 9pt; border-bottom: 0.6pt solid var(--filete); break-inside: avoid; }
+.diez li .n { width: 0.26in; height: 0.26in; border-radius: 50%; border: 1.2pt solid var(--marca); color: var(--marca); font: 700 10pt/0.24in var(--cond); text-align: center; }
+.diez li p { margin: 0; font-size: 8.9pt; line-height: 1.42; text-align: left; }
+.diez li p strong { display: block; font: 700 10.4pt/1.2 var(--sans); color: var(--marca-osc); margin-bottom: 2pt; }
 
 /* ---------- at a glance ---------- */
-.glance { break-before: page; }
+.glance { page: frente; break-before: page; }
 .baldosas { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
-.baldosa { background: var(--hueso); padding: 11pt 12pt 10pt; break-inside: avoid; min-height: 2.42in; display: flex; flex-direction: column; }
-.baldosa h4 { font: 600 9.6pt/1.3 var(--sans); margin: 0 0 3pt; color: var(--tinta); }
-.baldosa .u { font: 400 7.4pt/1.35 var(--sans); color: var(--gris); margin: 0 0 6pt; }
-.baldosa .grande { font: 500 34pt/1 "Inter Display", var(--sans); color: var(--teal-osc); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.baldosa { background: var(--hueso); border-top: 3pt solid var(--marca); border-radius: 0 0 6pt 6pt; padding: 10pt 12pt 9pt; break-inside: avoid; min-height: 2.4in; display: flex; flex-direction: column; }
+.baldosa h4 { font: 700 11.2pt/1.1 var(--cond); text-transform: uppercase; margin: 0 0 3pt; color: var(--marca-osc); letter-spacing: 0.01em; }
+.baldosa .u { font: 400 7.6pt/1.35 var(--sans); color: var(--gris); margin: 0 0 6pt; }
+.baldosa .grande { font: 700 36pt/1 var(--cond); color: var(--marca); }
 .baldosa .grande small { font-size: 0.45em; vertical-align: 0.9em; margin-left: 1pt; }
 .baldosa svg { width: 100%; height: auto; margin-top: auto; }
-.baldosa .lee { font: 400 7.8pt/1.4 var(--sans); color: var(--tinta-2); margin: 6pt 0 0; }
-.glance .fuente { font: 400 7pt/1.4 var(--sans); color: var(--gris); margin-top: 8pt; }
+.baldosa .lee { font: 400 7.9pt/1.4 var(--sans); color: var(--tinta-2); margin: 6pt 0 0; }
+.glance .fuente { font: 400 7.2pt/1.4 var(--sans); color: var(--gris); margin-top: 8pt; }
 
-/* ---------- aperturas de capítulo ---------- */
-.apertura { page: apertura; break-before: page; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--papel); }
-.apertura .img { position: absolute; left: 0; right: 0; top: 0; height: 4.7in; background: var(--niebla); overflow: hidden; }
-.apertura .img img { width: 100%; height: 100%; object-fit: cover; display: block; }  /* duotono hecho al generar el JPEG */
+/* ---------- separador de parte (a sangre) ---------- */
+.separador { page: sangre; break-before: page; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--p); color: #fff; }
+.separador .motivo { position: absolute; right: -0.4in; bottom: -0.1in; width: 6.4in; opacity: 0.11; }
+.separador .k { position: absolute; left: 0.75in; top: 0.9in; font: 600 13pt var(--cond); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+.separador h2 { position: absolute; left: 0.72in; top: 1.22in; width: 7in; margin: 0; font: 800 64pt/0.9 var(--cond); text-transform: uppercase; }
+.separador .marca-parte { string-set: parte content(text); height: 0; overflow: hidden; font-size: 1pt; color: transparent; }
+.separador .intro { position: absolute; left: 0.75in; top: 3.75in; width: 5.6in; margin: 0; font: 300 12.6pt/1.45 var(--sans); color: rgba(255,255,255,0.92); hyphens: manual; }
+.separador .lista { position: absolute; left: 0.75in; top: 5.75in; width: 7in; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 18pt; }
+.separador .item { display: flex; flex-direction: column; gap: 6pt; border-top: 1pt solid rgba(255,255,255,0.45); padding-top: 9pt; }
+.separador .item svg { width: 26pt; height: 26pt; color: #fff; }
+.separador .item .n { font: 600 8.4pt var(--semi); letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+.separador .item .t { font: 700 15pt/1.05 var(--cond); text-transform: uppercase; }
+.separador .item .pg { margin: 0; font: 600 9pt var(--cond); color: rgba(255,255,255,0.8); } .separador .item .pg::before { content: "Page "; }
 
-.apertura .texto { position: absolute; left: 0.9in; top: 5.05in; width: 6.3in; }
-.apertura .num { font: 500 64pt/1 "Inter Display", var(--sans); color: var(--teal); letter-spacing: -0.03em; }
-.apertura h2 { margin: 10pt 0 18pt; font: 400 34pt/1.05 var(--serif); letter-spacing: -0.015em; hyphens: none; }
-.apertura .lead { width: 5.4in; font: 400 12pt/1.45 var(--serif); color: var(--tinta-2); margin: 0; hyphens: none; }
-.apertura.sin-img .img { background: var(--niebla); }
-.apertura.sin-img .img::after { display: none; }
+/* ---------- apertura de capítulo (imagen arriba, panel de color abajo) ---------- */
+.apertura { page: sangre; break-before: page; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--p); color: #fff; }
+.apertura .img { position: absolute; left: 0; top: 0; width: 8.5in; height: 4.78in; }
+.apertura .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.apertura .k { position: absolute; left: 0.75in; top: 5.22in; font: 600 9pt var(--semi); letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+.apertura .num { position: absolute; right: 0.6in; top: 4.7in; font: 800 200pt/1 var(--cond); color: rgba(255,255,255,0.13); }
+.apertura .icono { position: absolute; left: 0.75in; top: 5.55in; width: 30pt; height: 30pt; color: #fff; }
+.apertura .icono svg { width: 100%; height: 100%; display: block; }
+.apertura h2 { position: absolute; left: 0.72in; top: 6.15in; width: 6.4in; margin: 0; font: 800 44pt/0.94 var(--cond); text-transform: uppercase; hyphens: none; }
+.apertura .lead { position: absolute; left: 0.75in; top: 8.15in; width: 5.8in; margin: 0; font: 300 12.2pt/1.45 var(--sans); color: rgba(255,255,255,0.93); hyphens: manual; }
+
+/* ---------- capítulos ---------- */
 .cap { break-before: page; }
-.cap > h2.titulo-cap { font: 400 9pt var(--sans); color: transparent; height: 0; margin: 0; overflow: hidden; }
+.cap.parte-1 { page: p1; } .cap.parte-2 { page: p2; } .cap.parte-3 { page: p3; }
+.cap > .marcas { height: 0; overflow: hidden; margin: 0; font-size: 1pt; color: transparent; }
+.cap > .marcas .capnum { string-set: capnum content(text); }
+.cap > .marcas .captit { string-set: capitulo content(text); }
+.cap-libre { page: fondo; break-before: page; }
+.cap-libre .titulo-pag h2, .anexo .titulo-pag h2 { string-set: seccion content(text); }
 
-/* ---------- figuras ---------- */
-.fig { margin: 8pt 0 14pt; break-inside: avoid; }
-.fig .fn { font: 600 7.6pt var(--sans); color: var(--teal); margin: 0 0 2pt; }
-.fig .ft { font: 600 11pt/1.28 var(--serif); margin: 0 0 2pt; color: var(--tinta); hyphens: manual; }
-.fig .fs { font: 400 7.8pt/1.35 var(--sans); color: var(--gris); margin: 0 0 6pt; }
+/* mensajes clave al abrir el capítulo */
+.mensajes { background: var(--p-tinte); border-radius: 7pt; padding: 11pt 14pt 6pt 14pt; margin: 0 0 14pt; break-inside: avoid; display: grid; grid-template-columns: 1.55in 1fr; gap: 0 14pt; }
+.mensajes .cab { border-right: 1pt solid color-mix(in srgb, var(--p) 35%, white); padding-right: 12pt; }
+.mensajes .cab svg { width: 30pt; height: auto; display: block; margin-bottom: 7pt; }
+.mensajes .cab b { display: block; font: 800 15pt/1 var(--cond); color: var(--p); text-transform: uppercase; }
+.mensajes .cab span { display: block; font: 400 7.6pt/1.35 var(--sans); color: var(--tinta-2); margin-top: 4pt; }
+.mensajes ul { list-style: none; padding: 0; margin: 0; }
+.mensajes li { position: relative; padding-left: 13pt; margin: 0 0 6pt; font: 500 9.2pt/1.38 var(--sans); color: var(--tinta); }
+.mensajes li::before { content: ""; position: absolute; left: 0; top: 4.2pt; width: 6pt; height: 6pt; border-radius: 1.5pt; background: var(--p); }
+
+/* ---------- figuras: rótulo, recuadro con el hallazgo, gráfico, nota y fuente ---------- */
+.fig { margin: 6pt 0 14pt; break-inside: avoid; }
+.fig .ft { font: 600 9.6pt/1.3 var(--sans); color: var(--tinta); margin: 0 0 6pt; }
+.fig .ft .fn, .tabla .ft .fn { font: 700 9.6pt var(--cond); color: var(--p); text-transform: uppercase; letter-spacing: 0.04em; margin-right: 5pt; }
+.hallazgo { position: relative; border: 1pt solid var(--p); border-radius: 8pt; padding: 7pt 12pt 7pt 42pt; margin: 0 0 9pt; min-height: 30pt; display: flex; align-items: center;
+            font: 500 9.6pt/1.35 var(--sans); color: var(--tinta); }
+.hallazgo .ic { position: absolute; left: 9pt; top: 50%; transform: translateY(-50%); width: 23pt; height: 23pt; border-radius: 50%; background: var(--p); display: flex; align-items: center; justify-content: center; }
+.hallazgo .ic svg { width: 13pt; height: auto; }
+.fig .fs { font: 400 7.6pt/1.35 var(--sans); color: var(--gris); margin: 0 0 5pt; }
 .fig .lienzo svg { width: 100%; height: auto; display: block; }
-.fig .notas { font: 400 7pt/1.4 var(--sans); color: var(--tinta-2); margin-top: 5pt; border-top: 0.5pt solid var(--filete); padding-top: 4pt; }
-.fig .notas b { font-weight: 600; color: var(--tinta); }
-.fig.ancho { margin-right: 0; }
-.fig.pagina { break-before: page; }
+.fig .notas, .tabla .notas { font: 400 7.1pt/1.4 var(--sans); color: var(--tinta-2); margin-top: 5pt; border-top: 0.5pt solid var(--filete); padding-top: 4pt; text-align: left; }
+.fig .notas b, .tabla .notas b { font-weight: 600; color: var(--tinta); }
 
-/* ---------- tablas ---------- */
-.tabla { margin: 8pt 0 14pt; break-inside: avoid; }
-.tabla .fn { font: 600 7.6pt var(--sans); color: var(--teal); margin: 0 0 2pt; }
-.tabla .ft { font: 600 11pt/1.28 var(--serif); margin: 0 0 6pt; }
-table { border-collapse: collapse; width: 100%; font: 400 7.9pt/1.3 var(--sans); }
-thead th { font-weight: 600; text-align: left; border-bottom: 0.8pt solid var(--tinta); padding: 4pt 5pt 3pt; vertical-align: bottom; }
-tbody td, tbody th { padding: 3.2pt 5pt; border-bottom: 0.4pt solid var(--filete); vertical-align: top; text-align: left; font-weight: 400; }
+/* ---------- tablas (cabecera en el color de la parte) ---------- */
+.tabla { margin: 6pt 0 14pt; break-inside: avoid; }
+.tabla .ft { font: 600 9.6pt/1.3 var(--sans); margin: 0 0 6pt; }
+table { border-collapse: collapse; width: 100%; font: 400 7.7pt/1.3 var(--sans); }
+thead th { font: 600 7.5pt/1.2 var(--semi); text-align: left; background: var(--p); color: #fff; padding: 5pt 5pt 4pt; vertical-align: bottom; border: none; }
+thead tr:not(:last-child) th { border-bottom: 0.5pt solid rgba(255,255,255,0.35); }
+tbody td, tbody th { padding: 2.5pt 5pt; border-bottom: 0.4pt solid var(--filete); vertical-align: top; text-align: left; font-weight: 400; }
+tbody tr:nth-child(even) td, tbody tr:nth-child(even) th { background: #fafaf8; }
 table.num td { text-align: right; font-variant-numeric: tabular-nums; }
 table.num thead th:not(:first-child) { text-align: right; }
 table.ocup thead th:nth-child(2) { text-align: left; }
 table.ocup td.cod { text-align: left; color: var(--gris); }
-table .grupo td { font-weight: 600; color: var(--teal); text-align: left !important; padding-top: 7pt; border-bottom: 0.6pt solid var(--teal-cla); }
+table.ocup tbody :is(td, th) { padding-top: 1.5pt; padding-bottom: 1.5pt; }  /* 20 filas: compacta para compartir página con la Figura 4.1 */
+table.ocup .grupo td { padding-top: 5pt; }
+table .grupo td { font-weight: 700; color: var(--p); text-align: left !important; padding-top: 7pt; border-bottom: 0.8pt solid var(--p); background: #fff !important; }
 table .total th, table .total td { font-weight: 600; border-top: 0.8pt solid var(--tinta); }
 table.reg .se td { color: var(--gris); padding-top: 0; }
 table.reg tbody tr:not(.se) td, table.reg tbody tr:not(.se) th { border-bottom: none; padding-bottom: 0; }
-.tabla .notas { font: 400 7pt/1.4 var(--sans); color: var(--tinta-2); margin-top: 5pt; }
-.cap table:not(.t) { font-size: 7.4pt; }
+table.reg tbody tr td, table.reg tbody tr th { background: #fff !important; }
+.tabla caption { display: none; }
 
 /* ---------- cajas ---------- */
-.box { background: var(--niebla); padding: 11pt 13pt 6pt; margin: 10pt 0 14pt; break-inside: avoid; }
-.box .bn { font: 600 7.6pt var(--sans); color: var(--teal); margin: 0 0 2pt; }
-.box h4 { font: 600 11pt/1.28 var(--serif); margin: 0 0 6pt; }
-.box p, .box li { font: 400 8.8pt/1.48 var(--sans); }
+.box { background: var(--p-tinte); border-top: 3pt solid var(--p); border-radius: 0 0 6pt 6pt; padding: 9pt 12pt 5pt; margin: 6pt 0 12pt; break-inside: avoid; text-align: left; }
+.box .bn { font: 700 8.4pt var(--cond); color: var(--p); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 1pt; }
+.box h4 { font: 700 12pt/1.15 var(--cond); text-transform: uppercase; margin: 0 0 5pt; color: var(--p-osc); }
+.box p, .box li { font: 400 8.5pt/1.45 var(--sans); }
+
+/* ---------- perfil de Colombia ---------- */
+.perfil { break-before: page; }
+.perfil .titulo-pag { margin-bottom: 8pt; }
+.perfil .fig { margin-top: 2pt; }
+.perfil .titulo-pag h2 { font-size: 26pt; }
+.perfil table { font-size: 7.8pt; }
+.perfil thead th { text-align: center; } .perfil thead th:nth-child(-n+2) { text-align: left; }
+.perfil tbody td { vertical-align: middle; padding: 3.6pt 5pt; }
+.perfil td.v { text-align: center; font-variant-numeric: tabular-nums; }
+.perfil td.col { text-align: center; font: 700 9.4pt var(--cond); color: var(--p-osc); background: var(--p-tinte) !important; }
+.perfil td.tema { width: 0.3in; padding: 0; background: var(--p) !important; border-bottom: 1.5pt solid #fff; }
+.perfil td.tema span { display: block; writing-mode: vertical-rl; transform: rotate(180deg); margin: 0 auto; font: 600 7.4pt var(--semi); color: #fff; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+.perfil td.fuente { font-size: 7pt; color: var(--gris); }
 
 /* ---------- infografía de la escalera (figura 1.1) ---------- */
-.ladder { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4pt; align-items: end; margin-top: 4pt; }
-.ladder .n { padding: 9pt 9pt 8pt; color: var(--teal-osc); }
-.ladder .n .c { font: 600 15pt/1 "Inter Display", var(--sans); }
-.ladder .n .nom { font: 600 8.6pt/1.25 var(--sans); margin: 3pt 0 5pt; }
-.ladder .n p { font: 400 7.5pt/1.38 var(--sans); margin: 0 0 4pt; }
-.ladder .n .rol { font: 400 7.1pt/1.35 var(--sans); border-top: 0.5pt solid currentColor; padding-top: 4pt; opacity: 0.9; }
-.ladder .n .pct { font: 500 20pt/1 "Inter Display", var(--sans); margin-top: 8pt; font-variant-numeric: tabular-nums; }
-.ladder .n .pct small { font: 400 6.8pt/1.2 var(--sans); display: block; margin-top: 2pt; }
+.ladder { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4pt; align-items: end; margin-top: 2pt; }
+.ladder .n { padding: 9pt 9pt 8pt; color: var(--marca-osc); border-radius: 6pt 6pt 0 0; }
+.ladder .n .c { font: 800 17pt/1 var(--cond); }
+.ladder .n .nom { font: 700 9.4pt/1.15 var(--cond); text-transform: uppercase; margin: 3pt 0 5pt; }
+.ladder .n p { font: 400 7.6pt/1.38 var(--sans); margin: 0 0 4pt; }
+.ladder .n .rol { font: 500 7.2pt/1.35 var(--sans); border-top: 0.5pt solid currentColor; padding-top: 4pt; }
+.ladder .n .pct { font: 800 24pt/1 var(--cond); margin-top: 8pt; }
+.ladder .n .pct small { font: 400 7pt/1.2 var(--sans); display: block; margin-top: 2pt; }
 .ladder .n0 { background: var(--l0); } .ladder .n1 { background: var(--l1); } .ladder .n2 { background: var(--l2); }
 .ladder .n3 { background: var(--l3); color: #fff; }
-.barreras-ley { display: flex; gap: 16pt; margin-top: 8pt; font: 400 7.6pt var(--sans); color: var(--tinta-2); flex-wrap: wrap; }
-.barreras-ley span::before { content: ""; display: inline-block; width: 8pt; height: 8pt; margin-right: 4pt; vertical-align: -1pt; background: var(--c); }
+.barreras-ley { display: flex; gap: 16pt; margin-top: 8pt; font: 400 7.8pt var(--sans); color: var(--tinta-2); flex-wrap: wrap; }
+.barreras-ley span::before { content: ""; display: inline-block; width: 8pt; height: 8pt; margin-right: 4pt; vertical-align: -1pt; border-radius: 2pt; background: var(--c); }
 .barreras-ley b { color: var(--tinta); font-weight: 600; }
 
 /* ---------- flujo (figura 3.1) ---------- */
-.flujo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 4pt; }
-.flujo .paso { position: relative; padding: 8pt 12pt 8pt 8pt; border-top: 2pt solid var(--teal); }
-.flujo .paso:not(:last-child)::after { content: ""; position: absolute; right: 2pt; top: -5.5pt; border: 4.5pt solid transparent; border-left: 6pt solid var(--teal); }
-.flujo .paso .k { font: 600 7.4pt var(--sans); color: var(--teal); }
-.flujo .paso .c { font: 500 15pt/1.05 "Inter Display", var(--sans); color: var(--teal-osc); margin: 4pt 0 2pt; font-variant-numeric: tabular-nums; }
+.flujo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5pt; margin-top: 2pt; }
+.flujo .paso { position: relative; padding: 8pt 10pt 9pt 9pt; background: var(--hueso); border-radius: 6pt; border-top: 3pt solid var(--marca); }
+.flujo .paso:not(:last-child)::after { content: ""; position: absolute; right: -6.5pt; top: 26pt; z-index: 2; border: 5pt solid transparent; border-left: 6pt solid var(--marca); }
+.flujo .paso .k { font: 700 8.4pt var(--cond); color: var(--marca); text-transform: uppercase; letter-spacing: 0.05em; }
+.flujo .paso .c { font: 800 20pt/1 var(--cond); color: var(--marca-osc); margin: 4pt 0 2pt; }
 .flujo .paso .t { font: 600 8pt/1.25 var(--sans); margin-bottom: 4pt; }
-.flujo .paso p { font: 400 7.2pt/1.38 var(--sans); color: var(--tinta-2); margin: 0; }
+.flujo .paso p { font: 400 7.3pt/1.38 var(--sans); color: var(--tinta-2); margin: 0; }
 
 /* ---------- tarjetas de validación ---------- */
-.tarjetas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8pt; margin: 8pt 0 14pt; break-inside: avoid; }
-.tarjeta { border-top: 2pt solid var(--teal); padding: 7pt 0 0; }
-.tarjeta .c { font: 500 26pt/1 "Inter Display", var(--sans); color: var(--teal-osc); font-variant-numeric: tabular-nums; }
-.tarjeta .t { font: 600 8pt/1.3 var(--sans); margin: 4pt 0 2pt; }
-.tarjeta p { font: 400 7.4pt/1.38 var(--sans); color: var(--tinta-2); margin: 0; }
+.tarjetas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7pt; margin: 6pt 0 14pt; break-inside: avoid; column-span: all; }
+.tarjeta { background: var(--p-tinte); border-radius: 6pt; padding: 8pt 10pt; text-align: left; }
+.tarjeta .c { font: 800 28pt/1 var(--cond); color: var(--p); }
+.tarjeta .t { font: 700 9pt/1.2 var(--cond); text-transform: uppercase; margin: 3pt 0 2pt; color: var(--p-osc); }
+.tarjeta p { font: 400 7.6pt/1.38 var(--sans); color: var(--tinta-2); margin: 0; }
 
 /* ---------- anexos, referencias ---------- */
-.anexo { break-before: page; }
-.anexo > h2 { font: 400 26pt/1.05 var(--serif); margin: 0 0 14pt; letter-spacing: -0.01em; string-set: capitulo content(text); }
-.anexo > h2 .num { font: 500 11pt var(--sans); color: var(--teal); display: block; margin-bottom: 6pt; }
-.anexo { font-size: 9.6pt; }
-.anexo pre { font: 400 7.4pt/1.45 var(--mono); background: var(--hueso); padding: 7pt 9pt; white-space: pre-wrap; border-left: 2pt solid var(--teal); }
-.referencias .csl-entry { font: 400 8.2pt/1.42 var(--serif); padding-left: 14pt; text-indent: -14pt; margin-bottom: 4pt; break-inside: avoid; }
-.referencias .csl-entry a { word-break: break-all; color: var(--tinta-2); }
-.referencias #refs { column-count: 2; column-gap: 0.25in; }
+.anexo { page: fondo; break-before: page; font-size: 9pt; }
+.anexo pre { font: 400 7.1pt/1.45 var(--mono); background: var(--hueso); padding: 7pt 9pt; white-space: pre-wrap; border-left: 2pt solid var(--marca); text-align: left; }
+.anexo table { font-size: 7.5pt; }
+.referencias #refs { column-count: 3; column-gap: 0.22in; }
+.referencias .csl-entry { font: 400 7.2pt/1.4 var(--sans); padding-left: 10pt; text-indent: -10pt; margin-bottom: 3.5pt; break-inside: avoid; text-align: left; hyphens: manual; }
+.referencias .csl-entry a { color: var(--tinta-2); }
 
 /* ---------- contraportada ---------- */
-.contra { page: contra; break-before: left; width: 8.5in; height: 11in; position: relative; background: var(--teal-osc); color: #fff; }
-.contra .bloque { position: absolute; left: 0.9in; top: 1.1in; width: 5.2in; font: 400 11pt/1.5 var(--serif); }
-.contra .bloque h2 { font: 400 24pt/1.1 var(--serif); margin: 0 0 14pt; }
-.contra .bloque p { margin: 0 0 9pt; color: #d6e9e6; }
-.contra .datos { position: absolute; left: 0.9in; top: 5.6in; width: 6.9in; font: 400 8.2pt/1.6 var(--sans); color: #d6e9e6; display: grid; grid-template-columns: 1.3in 1fr; gap: 2pt 12pt; }
-.contra .datos b { color: #fff; font-weight: 600; }
-.contra .logos { position: absolute; left: 0.9in; bottom: 0.9in; background: #fff; padding: 12pt 18pt; gap: 28pt; }
+.contra { page: sangre; break-before: page; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--marca-prof); color: #fff; }
+.contra .motivo { position: absolute; right: -0.4in; bottom: 0.9in; width: 6.4in; opacity: 0.08; }
+.contra .marca-g { position: absolute; left: 0.75in; top: 0.9in; } .contra .marca-g svg { height: 36pt; width: auto; }
+.contra h2 { position: absolute; left: 0.72in; top: 1.75in; margin: 0; font: 800 44pt/0.92 var(--cond); text-transform: uppercase; }
+.contra .bloque { position: absolute; left: 0.75in; top: 3.05in; width: 5.6in; font: 300 11.6pt/1.5 var(--sans); }
+.contra .bloque p { margin: 0 0 9pt; color: #d7ece8; }
+.contra .datos { position: absolute; left: 0.75in; top: 6.2in; width: 7in; font: 400 8.4pt/1.6 var(--sans); color: #d7ece8; display: grid; grid-template-columns: 1.3in 1fr; gap: 3pt 12pt; border-top: 1pt solid rgba(191,227,221,0.4); padding-top: 12pt; }
+.contra .datos b { color: #fff; font: 700 8.6pt var(--cond); text-transform: uppercase; letter-spacing: 0.06em; }
+.contra .franja { position: absolute; left: 0; right: 0; bottom: 0; height: 0.9in; background: #fff; display: flex; align-items: center; gap: 34pt; padding: 0 0.75in; }
+.contra .franja img, .contra .franja svg { height: 28pt; width: auto; } .contra .franja .inplux { height: 23pt; }
 
 /* ---------- marca sintética ---------- */
-/* modo sintético: marca diagonal en todas las páginas (Paged.js crea .pagedjs_page por hoja) */
 body.sintetico .pagedjs_page { position: relative; }
 body.sintetico .pagedjs_page::after { content: "SYNTHETIC — NOT RESULTS"; position: absolute; top: 46%; left: 6%; z-index: 100; pointer-events: none;
   font: 700 46pt var(--sans); color: rgba(178,34,34,.2); transform: rotate(-32deg); white-space: nowrap; }
-
-.tabla caption { display: none; }
-.cap > h2.titulo-cap.visible { font: 400 30pt/1.05 var(--serif); color: var(--tinta); height: auto; overflow: visible; margin: 0 0 16pt; letter-spacing: -0.01em; }
-dl { margin: 2pt 0 10pt; }
-dt { font: 600 8.8pt/1.3 var(--sans); color: var(--teal-osc); margin-top: 6pt; }
-dd { margin: 1pt 0 0 0; padding-left: 10pt; border-left: 1.5pt solid var(--l2); }
-dd p { margin: 0; font-size: 9.8pt; }
+.mensajes .cab svg { color: var(--p); }
+/* Anexo A: la rúbrica va carácter por carácter, sin reflujo; a 6.5 pt la línea más larga (124 caracteres) cabe en la caja */
+#anexoA pre { font-size: 6.5pt; line-height: 1.42; white-space: pre; }
+/* Anexo C: bloques de código dentro de la columna, sin reflujo (las líneas se cortaron a mano a ≤ 55 caracteres) */
+#anexoC pre { font-size: 6.8pt; white-space: pre; }
+#anexoB table th:first-child, #anexoB table td:first-child { white-space: nowrap; }
+.url { hyphens: none; }  /* direcciones sin guion de partición: se cortan solo en los <wbr> */
+/* término de una definición: no queda solo al pie de la columna (mismo recurso que h3) */
+dt { break-inside: avoid; }
+dt::after { content: ""; display: block; height: 2.8em; margin-bottom: -2.8em; }

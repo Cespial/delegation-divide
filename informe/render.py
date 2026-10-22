@@ -16,10 +16,23 @@ threading.Thread(target=srv.serve_forever, daemon=True).start()
 DESBORDE = """() => [...document.querySelectorAll('.pagedjs_page')].map((p, i) => {
   const area = p.querySelector('.pagedjs_page_content'); if (!area) return null;
   const a = area.getBoundingClientRect(); let maxR = 0, maxB = 0, quien = '';
-  area.querySelectorAll('*').forEach(e => { if (e.closest('svg') && e.tagName !== 'svg') return; const r = e.getBoundingClientRect();
+  area.querySelectorAll('*').forEach(e => { if ((e.closest('svg') && e.tagName !== 'svg') || e.closest('.motivo')) return; const r = e.getBoundingClientRect();
     if (r.width && r.height) { if (r.right > maxR) { maxR = r.right; quien = e.tagName + '.' + (e.className && e.className.baseVal === undefined ? e.className : ''); } maxB = Math.max(maxB, r.bottom); } });
   return {n: i + 1, der: Math.round(maxR - a.right), abajo: Math.round(maxB - a.bottom), quien: quien.slice(0, 40)};
 }).filter(x => x && ((x.der > 2 && x.der < 400) || (x.abajo > 2 && x.abajo < 400)))"""
+# huecos: páginas con más de 18 % del área de texto vacía al pie, y qué abre la página siguiente (para ubicar figuras y tablas a mano).
+HUECOS = """() => { const P = [...document.querySelectorAll('.pagedjs_page')]; return P.map((p, i) => {
+  const area = p.querySelector('.pagedjs_page_content'); if (!area || !area.querySelector('.cap, .cap-libre, .anexo')) return null;
+  const a = area.getBoundingClientRect(); let maxB = a.top;
+  area.querySelectorAll('p, li, h2, h3, figure, .fig, .tabla, .lat, .mensajes, pre, dl, .box, .tarjetas, table').forEach(e => { const r = e.getBoundingClientRect(); if (r.height) maxB = Math.max(maxB, r.bottom); });
+  const sig = P[i + 1] && [...P[i + 1].querySelectorAll('.pagedjs_page_content section > *')].find(e => e.getBoundingClientRect().height > 0);
+  const nombre = !sig ? '' : sig.matches('section.cap, section.cap-libre, section.anexo') ? '(nueva sección)' : (sig.id || sig.getAttribute('class') || sig.tagName) + ' «' + sig.textContent.trim().slice(0, 24) + '»';
+  return {n: i + 1, hueco: Math.round(100 * (a.bottom - maxB) / a.height), sig: nombre};
+}).filter(x => x && x.hueco > 18); }"""
+# marcadores del PDF: cada elemento con data-outline (título limpio y nivel puestos por la plantilla), en orden y con su página
+MARCADORES = """() => { const P = [...document.querySelectorAll('.pagedjs_page')], vistos = new Set();
+  return [...document.querySelectorAll('[data-outline]:not([data-split-from])')].map(e => ({t: e.dataset.outline, n: +e.dataset.nivel, p: P.indexOf(e.closest('.pagedjs_page'))}))
+    .filter(m => m.p >= 0 && !vistos.has(m.t) && vistos.add(m.t)); }"""  # los fragmentos que Paged.js parte heredan el atributo: cuenta solo el primero
 with sync_playwright() as p:
     br = p.chromium.launch(channel="chrome"); pg = br.new_page()
     pg.on("console", lambda m: msgs.append(f"{m.type}: {m.text}") if m.type in ("error", "warning") else None)
@@ -32,17 +45,23 @@ with sync_playwright() as p:
         stable = stable + 1 if n == last else 0; last = n
         if (done or stable >= 10) and n > 0: break
     pg.wait_for_timeout(800)
-    malas = pg.evaluate(DESBORDE)
-    pg.pdf(path=PDF, prefer_css_page_size=True, print_background=True); br.close()
+    malas = pg.evaluate(DESBORDE); huecos = pg.evaluate(HUECOS); marcadores = pg.evaluate(MARCADORES)
+    pg.pdf(path=PDF, prefer_css_page_size=True, print_background=True, tagged=True)  # PDF etiquetado; los marcadores se arman abajo; br.close()
 print("páginas:", n)
 print("\n".join(msgs[:20]) if msgs else "consola: sin errores")
 print("desbordes:", malas if malas else "ninguno")
+print("huecos >18 %:", " · ".join(f"p{h['n']} {h['hueco']}% → {h['sig']}" for h in huecos))
 from pypdf import PdfReader, PdfWriter
 w = PdfWriter(clone_from=PDF)
 w.add_metadata({"/Title": "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries",
                 "/Author": "Cristian Espinal Maya; Santiago Jiménez Londoño", "/Subject": "Agent Delegability Index (ADI) v2026.1 report",
                 "/Keywords": "AI agents, delegation, labour markets, ISCO-08, ILOSTAT, ADI, doi:10.5281/zenodo.23552918",
                 "/Creator": "", "/Producer": ""})
+padres = {}
+for m in marcadores:
+    padres[m["n"]] = w.add_outline_item(m["t"], m["p"], parent=padres.get(m["n"] - 1) if m["n"] else None)
+w.page_mode = "/UseOutlines"
 w.write(PDF); srv.shutdown()
+print("marcadores:", len(marcadores))
 subprocess.run(["pdftoppm", "-r", "80", PDF, "out/qa/page", "-png"])
 print("png:", len(glob.glob("out/qa/page-*.png")))

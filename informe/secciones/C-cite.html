@@ -3,12 +3,14 @@
 <h3 id="citation">Citation</h3>
 <p>Please cite the paper for any use of the index, the atlas, the rubric or the tools.</p>
 <pre><code>@article{espinal2026delegation,
-  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability
-             across Occupations and Countries},
-  author  = {Espinal Maya, Cristian and Jim{\&#39;e}nez Londo{\~n}o, Santiago},
+  title = {The Delegation Divide: An Open Index of
+    AI-Agent Delegability across Occupations
+    and Countries},
+  author = {Espinal Maya, Cristian and
+    Jim{\&#39;e}nez Londo{\~n}o, Santiago},
   journal = {arXiv preprint},
-  year    = {2026},
-  url     = {https://github.com/Cespial/delegation-divide}
+  year = {2026},
+  url = {https://github.com/Cespial/delegation-divide}
 }</code></pre>
 <p>The repository carries the same entry in <code>CITATION.cff</code> and at the top of <code>README.md</code>; the dataset and code of this version have their own DOI on Zenodo, <a href="https://doi.org/10.5281/zenodo.23552918"><code>10.5281/zenodo.23552918</code></a> (all versions: <code>10.5281/zenodo.23552917</code>), which should be cited together with the paper when the data are used directly. The index is versioned: this paper describes <code>v2026.1</code>. Later versions re-rate tasks against a later reference technology and are not interchangeable with this one.</p>
 <h3 id="files">Files</h3>
@@ -21,18 +23,19 @@
 </ul>
 <h3 id="static-json">Static JSON</h3>
 <p>Each occupation and each country is also served as a static JSON document, so that a tool or an agent can fetch one record without downloading the dataset:</p>
-<pre><code>https://cespial.github.io/delegation-divide/adi/v2026.1/isco/2512.json
-https://cespial.github.io/delegation-divide/adi/v2026.1/country/COL.json</code></pre>
+<pre><code>BASE=https://cespial.github.io/delegation-divide
+$BASE/adi/v2026.1/isco/2512.json
+$BASE/adi/v2026.1/country/COL.json</code></pre>
 <p>The documents carry the version, the licence and the citation string in their body.</p>
 <h3 id="python-package">Python package</h3>
 <pre><code>pip install adi-index
 
 import adi
-adi.lookup(&quot;2512&quot;)             # ISCO-08 code
-adi.search(&quot;software&quot;)         # title substring
-adi.country(&quot;COL&quot;)             # ISO 3166-1 alpha-3
-adi.top(10)                    # most delegable occupations
-adi.cite()                     # BibTeX string</code></pre>
+adi.lookup(&quot;2512&quot;)      # ISCO-08 code
+adi.search(&quot;software&quot;)  # title substring
+adi.country(&quot;COL&quot;)      # ISO 3166-1 alpha-3
+adi.top(10)             # most delegable occupations
+adi.cite()              # BibTeX string</code></pre>
 <p>The package ships the index as data and needs no network access; it exposes the same operations as the server below.</p>
 <h3 id="mcp-server">MCP server</h3>
 <p>The Model Context Protocol (MCP) is an open standard that lets an AI agent call external tools <span class="cite">(Anthropic 2024)</span>. The server <code>adi-mcp</code> (PyPI; listed in the MCP registry) offers four tools:</p>
@@ -55,7 +58,9 @@ adi.cite()                     # BibTeX string</code></pre>
 </dd>
 </dl>
 <p>A typical configuration for a Claude Code or similar client is:</p>
-<pre><code>{&quot;mcpServers&quot;: {&quot;adi&quot;: {&quot;command&quot;: &quot;uvx&quot;, &quot;args&quot;: [&quot;adi-mcp&quot;]}}}</code></pre>
+<pre><code>{&quot;mcpServers&quot;: {
+  &quot;adi&quot;: {&quot;command&quot;: &quot;uvx&quot;, &quot;args&quot;: [&quot;adi-mcp&quot;]}
+}}</code></pre>
 <p>Every response includes the citation string.</p>
 <h3 id="llms.txt">llms.txt</h3>
 <p>The repository root and the dataset site carry <code>llms.txt</code> and <code>llms-full.txt</code>, which summarise the paper, the headline number, the file layout and the citation in a form meant to be read by language models. Agents that index repositories should start there.</p>

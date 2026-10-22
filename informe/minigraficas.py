@@ -2,14 +2,15 @@
 import pandas as pd, pathlib
 R = pathlib.Path(__file__).resolve().parents[1]
 TINTA, GRIS, FIL = "#1a1918", "#6b7280", "#e5e3e0"
-T = lambda x, y, s, anc="start", tam=7, peso=400, col=TINTA: f'<text x="{x:.1f}" y="{y:.1f}" font-family="Inter" font-size="{tam}" font-weight="{peso}" fill="{col}" text-anchor="{anc}">{s}</text>'
+T = lambda x, y, s, anc="start", tam=7, peso=400, col=TINTA: f'<text x="{x:.1f}" y="{y:.1f}" font-family="Barlow" font-size="{tam}" font-weight="{peso}" fill="{col}" text-anchor="{anc}">{s}</text>'
 
 
 def titular(l2, l3):
     w = 300; s = f'<svg viewBox="0 0 {w} 46" xmlns="http://www.w3.org/2000/svg">'
     a, b = w * l3 / 100, w * (l2 - l3) / 100
-    s += f'<rect x="0" y="10" width="{w}" height="14" fill="#eef5f4"/><rect x="0" y="10" width="{a + b:.1f}" height="14" fill="#9ccbc6"/><rect x="0" y="10" width="{a:.1f}" height="14" fill="#0a4a45"/>'
-    s += T(0, 38, f"L3 full: {l3:.1f}%", tam=7.2, peso=600) + T(a + b / 2, 38, f"L2 partial: {l2 - l3:.1f}%", "middle", 7.2) + T(w, 38, f"L0–L1: {100 - l2:.1f}%", "end", 7.2, col=GRIS)
+    s += f'<rect x="0" y="12" width="{w}" height="14" fill="#eef5f4"/><rect x="0" y="12" width="{a + b:.1f}" height="14" fill="#9ccbc6"/><rect x="0" y="12" width="{a:.1f}" height="14" fill="#0a4a45"/>'
+    # L3 es una franja de pocos puntos: su rótulo va arriba, el de L2 abajo, para que no se monten
+    s += T(0, 8, f"L3 full: {l3:.1f}%", tam=7.2, peso=600) + T(a + b / 2, 39, f"L2 partial: {l2 - l3:.1f}%", "middle", 7.2) + T(w, 39, f"L0–L1: {100 - l2:.1f}%", "end", 7.2, col=GRIS)
     return s + "</svg>"
 
 

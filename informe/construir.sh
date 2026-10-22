@@ -8,6 +8,8 @@ PY=(.venv/bin/python -I); PYR=${PYR:-/opt/homebrew/bin/python3}
 $PY informe/cifras.py
 $PY analisis/figuras.py --estilo informe fig3 fig4 fig5 fig6
 $PY analisis/tablas.py --html
+[[ -d informe/img-src ]] && $PY informe/duotono.py   # originales de Midjourney fuera de git; sin ellos se usan los JPEG ya derivados
+$PY informe/perfil.py
 $PY informe/ensamblar.py
 $PYR informe/render.py
 $PY informe/verificar.py

@@ -1,0 +1,99 @@
+{
+ "grupos": [
+  [
+   "Delegability",
+   [
+    {
+     "nombre": "ADI: task time at least partly delegable (L2–L3)",
+     "unidad": "%",
+     "col": "38.3",
+     "puesto": "10 of 25",
+     "mejor": "Puerto Rico (49.9)",
+     "region": "37.7",
+     "alto": "48.7",
+     "mundo": "35.2",
+     "fuente": "ADI v2026.1",
+     "v": 38.279999999999994
+    },
+    {
+     "nombre": "ADI3: task time fully delegable (L3)",
+     "unidad": "%",
+     "col": "2.9",
+     "puesto": "13 of 25",
+     "mejor": "Puerto Rico (4.9)",
+     "region": "3.0",
+     "alto": "3.7",
+     "mundo": "2.5",
+     "fuente": "ADI v2026.1",
+     "v": 2.86
+    },
+    {
+     "nombre": "ADIs: expected share of working time delegable",
+     "unidad": "%",
+     "col": "31.0",
+     "puesto": "12 of 25",
+     "mejor": "Puerto Rico (38.7)",
+     "region": "31.0",
+     "alto": "37.4",
+     "mundo": "29.5",
+     "fuente": "ADI v2026.1",
+     "v": 31.04
+    }
+   ]
+  ],
+  [
+   "Adoption",
+   [
+    {
+     "nombre": "AI use per working-age adult (index)ᵃ",
+     "unidad": "index",
+     "col": "1.14",
+     "puesto": "7 of 18",
+     "mejor": "Uruguay (1.83)",
+     "region": "0.96",
+     "alto": "2.80",
+     "mundo": "1.53",
+     "fuente": "Anthropic Economic Index",
+     "v": 1.14
+    }
+   ]
+  ],
+  [
+   "Context",
+   [
+    {
+     "nombre": "GDP per capita, PPP (constant 2021 international $)ᵃ",
+     "unidad": "$",
+     "col": "18,779",
+     "puesto": "15 of 25",
+     "mejor": "Guyana (83,659)",
+     "region": "24,615",
+     "alto": "56,341",
+     "mundo": "27,620",
+     "fuente": "World Bank WDI",
+     "v": 18778.6482631901
+    },
+    {
+     "nombre": "Informal employment, % of total employmentᵃ ᵇ",
+     "unidad": "%",
+     "col": "56.0",
+     "puesto": "12 of 22",
+     "mejor": "Bahamas (15.5)",
+     "region": "53.4",
+     "alto": "12.5",
+     "mundo": "50.2",
+     "fuente": "ILOSTAT",
+     "v": 56.012
+    }
+   ]
+  ]
+ ],
+ "hallazgo": "Colombia ranks 10 of 25 countries in Latin America and the Caribbean: 38.3% of its task time is at least partly delegable, above the world figure of 35.2% and 10.4 points below high-income countries.",
+ "hallazgo_fig": "Colombia sits between Brazil (39.9%) and Uruguay (38.2%); Puerto Rico leads the region at 49.9% and Ecuador closes it at 29.3%.",
+ "n_region": 25,
+ "intervalo": "36.8–40.0",
+ "anio": 2025,
+ "resolucion": 2,
+ "region_l2": "37.7",
+ "mundo_l2": "35.2"
+}

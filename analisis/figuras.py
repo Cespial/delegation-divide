@@ -1,7 +1,7 @@
 """Paso 21: figuras del artículo (PDF vectorial en articulo/fig/, estilo sobrio, fuente serif). Si el índice es sintético cada
 figura lleva la marca de agua diagonal «SYNTHETIC». Lee salidas/ (indice.py) y datos/atlas/. Uso: analisis/figuras.py [fig1 fig4 …]
-Con --estilo informe: SVG con texto vivo (Inter) en informe/fig/, paleta teal del informe (barreras validadas con el validador de dataviz:
-pasa banda de luminosidad, croma, separación CVD y contraste) y tamaños de la retícula del informe (columna 5,6 in; ancho total 7,6 in)."""
+Con --estilo informe: SVG con texto vivo (Barlow) en informe/fig/, paleta teal del informe (barreras validadas con el validador de dataviz:
+pasa banda de luminosidad, croma, separación CVD y contraste) y tamaños de la retícula del informe (caja de texto de 7,0 in)."""
 import sys, zipfile; sys.path.insert(0, "noche")
 from comun import *
 import numpy as np, pandas as pd
@@ -25,8 +25,10 @@ GG = {"1": "Managers", "2": "Professionals", "3": "Technicians and associate pro
 BARRERAS = [("barrera_fisica", "Physical", "#5b6b7c"), ("barrera_responsabilidad", "Accountability", "#9c6b3f"),
             ("barrera_confianza", "Trust", "#b9a26b"), ("barrera_acceso", "Access", "#8fa9bf")]
 if INFORME:
-    plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Inter", "Helvetica Neue", "DejaVu Sans"], "mathtext.fontset": "custom",
-                         "mathtext.rm": "Inter", "mathtext.it": "Inter:italic", "font.size": 8.5, "svg.fonttype": "none",
+    from matplotlib import font_manager
+    for f in sorted((RAIZ / "informe/fonts").glob("Barlow-*.ttf")): font_manager.fontManager.addfont(str(f))
+    plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Barlow", "Helvetica Neue", "DejaVu Sans"], "mathtext.fontset": "custom",
+                         "mathtext.rm": "Barlow", "mathtext.it": "Barlow:italic", "font.size": 8.6, "svg.fonttype": "none",
                          "axes.edgecolor": "#6b7280", "axes.labelcolor": "#1a1918", "xtick.color": "#6b7280", "ytick.color": "#1a1918",
                          "xtick.labelcolor": "#4b5058", "ytick.labelcolor": "#1a1918", "axes.spines.left": False, "ytick.major.size": 0})
     TINTA, GRIS, CLARO = "#1a1918", "#6b7280", "#e5e3e0"
@@ -35,8 +37,8 @@ if INFORME:
                 ("barrera_confianza", "Trust", "#8e4f8f"), ("barrera_acceso", "Access", "#5f8f3a")]
     P = dict(l2="#9ccbc6", l3="#0a5c56", cmap=matplotlib.colors.LinearSegmentedColormap.from_list("adi", ["#e8f3f1", "#9ccbc6", "#2f8f86", "#0a4a45"]),
              tonos=["#eef5f4", "#d9ebe9", "#9ccbc6", "#4fa39c"], caja="#f3f1ee", sin_dato="#ebe9e5")
-W = 5.6 if INFORME else 6.5     # ancho de columna (in)
-WW = 7.6 if INFORME else 6.5    # ancho total (in)
+W = 7.0 if INFORME else 6.5     # ancho de la caja de texto del informe (in)
+WW = 7.0 if INFORME else 6.5    # ancho total (in)
 SINT = (SAL / "adi_isco.csv").exists() and pd.read_csv(SAL / "adi_isco.csv").sintetico.astype(str).str.lower().eq("true").any()
 
 
@@ -106,12 +108,14 @@ def fig2_flujo():
 
 def fig3_isco():
     g = pd.read_csv(SAL / "indice_gg.csv", dtype={"gg": str}).sort_values("adi_l2")
-    fig, ax = plt.subplots(figsize=(W if INFORME else 6.0, 3.2)); y = np.arange(len(g))
+    fig, ax = plt.subplots(figsize=(W, 2.62) if INFORME else (6.0, 3.2)); y = np.arange(len(g))
     ax.barh(y, 100 * g.adi_l2, color=P["l2"], height=0.62, label="ADI (L2 or L3)")
     ax.barh(y, 100 * g.adi_l3, color=P["l3"], height=0.62, label="ADI3 (L3 only)")
     ax.errorbar(100 * g.adi_l2, y, xerr=[100 * (g.adi_l2 - g.lo), 100 * (g.hi - g.adi_l2)], fmt="none", ecolor=TINTA, elinewidth=0.7, capsize=2)
     ax.set_yticks(y, [f"{k}  {GG.get(k, k)}" for k in g.gg]); ax.set_xlabel("Share of task weight delegable to AI agents (%)")
     ax.set_xlim(0, 100); ax.legend(frameon=False, loc="lower right", fontsize=8); ax.grid(axis="x", color=CLARO, lw=0.5); ax.set_axisbelow(True)
+    if INFORME:  # etiqueta de valor al final de cada barra, después del bigote
+        for yy, v, h in zip(y, 100 * g.adi_l2, 100 * g.hi): ax.text(h + 1.2, yy, f"{v:.1f}", va="center", fontsize=7.6, color=TINTA, fontweight="semibold")
     guardar(fig, "fig3_isco")
 
 
@@ -132,10 +136,18 @@ def fig4_mapa():
         if shp is None: raise RuntimeError("sin Natural Earth")
         w = gpd.read_file(shp); iso = w["ISO_A3_EH"].where(w["ISO_A3_EH"] != "-99", w["ADM0_A3"]); w["iso3"] = iso
         w = w[w.iso3 != "ATA"].merge(p[["iso3", "adi_l2"]], on="iso3", how="left"); w["v"] = 100 * w.adi_l2
-        fig, ax = plt.subplots(figsize=(WW, 3.95) if INFORME else (6.5, 3.4))
+        fig, ax = plt.subplots(figsize=(WW, 2.84) if INFORME else (6.5, 3.4))
+        if INFORME: fig.subplots_adjust(left=0, right=1, bottom=0, top=1)  # el mapa ocupa el ancho de la caja: el SVG sale a escala 1:1
         w[w.v.isna()].plot(ax=ax, color=P["sin_dato"], edgecolor="white", linewidth=0.2)
-        w[w.v.notna()].plot(ax=ax, column="v", cmap=P["cmap"], edgecolor="white", linewidth=0.2, legend=True,
-                            legend_kwds={"shrink": 0.55, "label": "ADI$_c$ (% of employment-weighted task time at L2–L3)", "orientation": "horizontal", "pad": 0.02})
+        if INFORME:  # leyenda dentro del mapa, sobre el Pacífico sur: el mapa gana alto sin crecer la página
+            cax = ax.inset_axes([0.015, 0.13, 0.25, 0.035])
+            w[w.v.notna()].plot(ax=ax, column="v", cmap=P["cmap"], edgecolor="white", linewidth=0.2, legend=True, cax=cax,
+                                legend_kwds={"orientation": "horizontal"})
+            cax.tick_params(labelsize=7, length=2, width=0.5, pad=1.5); cax.set_title("ADI$_c$, % of task time at L2–L3", fontsize=7, loc="left", pad=3)
+            for s_ in cax.spines.values(): s_.set_visible(False)
+        else:
+            w[w.v.notna()].plot(ax=ax, column="v", cmap=P["cmap"], edgecolor="white", linewidth=0.2, legend=True,
+                                legend_kwds={"shrink": 0.55, "label": "ADI$_c$ (% of employment-weighted task time at L2–L3)", "orientation": "horizontal", "pad": 0.02})
         ax.set_axis_off(); ax.set_xlim(-170, 180); ax.set_ylim(-57, 84)
     except Exception as e:
         lg.warning(f"mapa con geopandas falló ({e}); gráfico de puntos por país")
@@ -148,7 +160,7 @@ def fig4_mapa():
 def fig5_ingreso():
     p = pd.read_csv(SAL / "indice_pais_detalle.csv").dropna(subset=["pib_pc_ppp"])
     x, y = np.log(p.pib_pc_ppp), 100 * p.adi_l2
-    fig, ax = plt.subplots(figsize=(WW, 4.3) if INFORME else (5.2, 3.6))
+    fig, ax = plt.subplots(figsize=(WW, 3.1) if INFORME else (5.2, 3.6))
     for ing, col in INGRESO_COL.items():
         d = p[p.ingreso == ing]; ax.scatter(np.log(d.pib_pc_ppp), 100 * d.adi_l2, s=22 if INFORME else 14, color=col, alpha=1 if INFORME else 0.85,
                    lw=0.6 if INFORME else 0, edgecolors="#0a5c56" if INFORME else "none", label=INGRESO_EN[ing])

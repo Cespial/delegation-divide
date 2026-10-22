@@ -1,17 +1,28 @@
 {# Componentes del informe. c(id) imprime una cifra de cifras.json (la llena ensamblar.py). #}
 {% macro c(i, m="txt") %}<span class="cf" data-cifra="{{ i }}" data-modo="{{ m }}"></span>{% endmacro %}
 
-{% macro figura(n, titulo, sub, lienzo, notas, fuente, clase="col") %}
+{# glifo de la marca: escalera de cuatro peldaños (L0–L3); en blanco dentro del círculo del hallazgo #}
+{% macro escalera(color="currentColor") %}<svg viewBox="0 0 24.5 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="{{ color }}"><rect x="0" y="19" width="5" height="9" opacity=".45"/><rect x="6.5" y="13" width="5" height="15" opacity=".65"/><rect x="13" y="6" width="5" height="22" opacity=".85"/><rect x="19.5" y="0" width="5" height="28"/></g></svg>{% endmacro %}
+
+{% macro hallazgo(texto) %}<div class="hallazgo"><span class="ic">{{ escalera("#fff") }}</span><span>{{ texto }}</span></div>{% endmacro %}
+
+{# figura: «Figure n» + título descriptivo; recuadro con el hallazgo; gráfico; nota y fuente #}
+{% macro figura(n, titulo, sub, lienzo, notas, fuente, clase="") %}
 <figure class="fig {{ clase }}" id="fig-{{ n|replace('.', '-') }}">
-  <p class="fn">Figure {{ n }}</p><p class="ft">{{ titulo }}</p><p class="fs">{{ sub }}</p>
+  <p class="ft"><span class="fn">Figure {{ n }}</span>{{ sub }}</p>
+  {{ hallazgo(titulo) }}
   <div class="lienzo">{{ lienzo }}</div>
   <div class="notas">{% if notas %}<b>Note:</b> {{ notas }} {% endif %}<b>Source:</b> {{ fuente }}</div>
 </figure>{% endmacro %}
 
-{% macro tabla(n, titulo, cuerpo, notas, clase="ancho") %}
+{% macro tabla(n, titulo, cuerpo, notas, clase="") %}
 <div class="tabla {{ clase }}" id="tab-{{ n|replace('.', '-') }}">
-  <p class="fn">Table {{ n }}</p><p class="ft">{{ titulo }}</p>{{ cuerpo }}
+  <p class="ft"><span class="fn">Table {{ n }}</span>{{ titulo }}</p>{{ cuerpo }}
   {% if notas %}<div class="notas">{{ notas }}</div>{% endif %}
 </div>{% endmacro %}
 
 {% macro lat(titulo, cifra, texto) %}<aside class="lat">{% if titulo %}<span class="lat-t">{{ titulo }}</span>{% endif %}{% if cifra %}<span class="lat-cifra">{{ cifra }}</span>{% endif %}{{ texto }}</aside>{% endmacro %}
+
+{% macro mensajes(lista) %}
+<div class="mensajes"><div class="cab">{{ escalera() }}<b>Key messages</b><span>What this chapter shows, in brief.</span></div>
+<ul>{% for m in lista %}<li>{{ m }}</li>{% endfor %}</ul></div>{% endmacro %}
