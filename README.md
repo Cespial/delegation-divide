@@ -2,6 +2,8 @@
 
 **An open index of AI-agent delegability for 433 ISCO-08 occupations and 146 countries (v2026.1).**
 
+**Explore it at [balamlabs.org/adi](https://balamlabs.org/adi)** · Data: [doi:10.5281/zenodo.23552918](https://doi.org/10.5281/zenodo.23552918) · Published by [Balam Labs](https://balamlabs.org)
+
 ```bibtex
 @article{espinal2026delegation,
   title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},

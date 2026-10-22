@@ -45,7 +45,8 @@ of GDP per capita, 146 countries).
 
 Dataset of the paper *The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries*
 (Espinal Maya & Jiménez Londoño, 2026). Preregistered at OSF: [doi:10.17605/OSF.IO/9ZNTF](https://doi.org/10.17605/OSF.IO/9ZNTF).
-Code, rubric, MCP server and full pipeline: <https://github.com/Cespial/delegation-divide>.
+Explore every occupation and country, with charts and citations: **<https://balamlabs.org/adi>** (Balam Labs).
+Dataset DOI: [10.5281/zenodo.23552918](https://doi.org/10.5281/zenodo.23552918). Code, rubric, MCP server and full pipeline: <https://github.com/Cespial/delegation-divide>.
 
 ## Configs
 
