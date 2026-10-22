@@ -21,6 +21,7 @@ paso enoe         $PY analisis/microdatos_enoe.py
 paso diseno       $PY analisis/claims_diseno.py
 paso pesos_oes    $PY analisis/pesos_oes.py
 paso indice       $PY analisis/indice.py $MODO
+paso descomposicion $PY analisis/pais_descomposicion.py
 [[ -f salidas/claims.jsonl ]] || { echo "sin salidas/claims.jsonl: el índice falló, ver $OUT/indice.log"; exit 1; }
 cp salidas/claims.jsonl $OUT/claims.jsonl
 paso robustez_esco $PY analisis/robustez_esco.py

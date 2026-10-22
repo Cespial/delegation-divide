@@ -2,12 +2,13 @@
 1) cada cifra de datos/resumen.json es fmt_html(valor) leído ahora de los claims (sin HTML);
 2) ocupaciones, grandes grupos, países y Colombia (GEIH) en datos/*.json coinciden con salidas/ y salidas_microdatos/;
 3) el sitio construido (.next) tiene la portada del lab, el about y una página por ruta del ADI (/adi/…), sin «NaN», «undefined» ni «null%», y cada ficha muestra su ADI;
-4) los archivos públicos (/data, /adi) son copias exactas de release/v2026.1.
+4) los archivos públicos (/data, /adi) son copias exactas de release/v2026.1;
+5) los cálculos solo del sitio por país (descomposición, barreras, residuo H1a, gemelos, bandera) cuadran con las salidas.
 Uso (desde la raíz, después de `npm run build` en sitio/): .venv/bin/python -I sitio/datos/verificar.py"""
 import re, sys, json, filecmp, pathlib, html as H
 R = pathlib.Path(__file__).resolve().parents[2]; S = R / "sitio"; D = S / "datos"
 sys.path[:0] = [str(R / "analisis"), str(R / "informe")]
-import pandas as pd
+import numpy as np, pandas as pd
 from formato_cifras import CL, fmt_html, pval_html
 
 malas = []
@@ -85,4 +86,22 @@ def comparar(c, ruta="adi/v2026.1"):
     for k, sub in c.subdirs.items(): comparar(sub, f"{ruta}/{k}")
 comparar(filecmp.dircmp(S / "public/adi/v2026.1", R / "release/v2026.1/api"))
 print(f"4) archivos públicos: {len(malas) - n2} diferencias con release/v2026.1")
+
+# 5) cálculos del sitio por país
+n3 = len(malas)
+dv = json.loads((D / "divide.json").read_text()); h1 = json.loads((R / "salidas/regresiones.json").read_text())["h1a"]
+igual("recta const", dv["const"], h1["coef"]["const"], 1e-9); igual("recta pendiente", dv["pendiente"], h1["coef"]["lpib"], 1e-9)
+igual("mundo Σ aportes", sum(g["contrib"] for g in dv["grupos_mundo"]), CL["titular.global.l2"]["valor"], 0.06)
+ingreso = {x["iso3"]: x["ingreso"] for x in pa}
+for x in pa:
+    k = x["iso3"]; f = p.loc[k]
+    # contra el valor publicado sin redondear: 9 aportes a 2 decimales (±0,045) y el ADI por ocupación del CSV (±0,006)
+    igual(f"país {k} Σ aportes", sum(g["contrib"] for g in x["grupos"]), 100 * f.adi_l2, 0.06)
+    igual(f"país {k} Σ empleo", sum(g["share"] for g in x["grupos"]), 100, 0.6)
+    igual(f"país {k} residuo", x["residuo"], 100 * f.adi_l2 - (h1["coef"]["const"] + h1["coef"]["lpib"] * np.log(f.pib_pc_ppp)), 0.051)
+    if not all(0 <= b <= 100 for b in x["b"]): malas.append((f"país {k} barreras", x["b"], "fuera de 0–100"))
+    if len(x["gemelos"]) != 3 or any(ingreso[g] == x["ingreso"] for g in x["gemelos"]): malas.append((f"país {k} gemelos", x["gemelos"], "no son de otro ingreso"))
+    for suf in ("", "@4"):
+        if not (S / "public/flags" / f"{x['iso2']}{suf}.webp").exists(): malas.append((f"país {k} bandera", x["iso2"] + suf, "falta"))
+print(f"5) cálculos del sitio para {len(pa)} países: {len(malas) - n3} diferencias" + (f": {malas[n3:n3 + 5]}" if len(malas) > n3 else ""))
 sys.exit(1 if m1 or malas else 0)

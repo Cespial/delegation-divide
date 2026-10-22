@@ -14,14 +14,23 @@
     "verificar": "cd .. && .venv/bin/python -I sitio/datos/verificar.py"
   },
   "dependencies": {
-    "next": "16.2.10",
+    "d3-scale": "^4.0.2",
+    "d3-selection": "^3.0.0",
+    "d3-shape": "^3.2.0",
+    "d3-zoom": "^3.0.0",
+    "next": "^16.3.8",
     "react": "19.2.7",
     "react-dom": "19.2.7"
   },
   "devDependencies": {
+    "@types/d3-scale": "^4.0.9",
+    "@types/d3-selection": "^3.0.12",
+    "@types/d3-shape": "^3.2.0",
+    "@types/d3-zoom": "^3.0.9",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "flag-icons": "^7.6.0",
     "typescript": "^5"
   }
 }

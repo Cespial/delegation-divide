@@ -66,6 +66,20 @@ for isco, d in p.groupby("isco08"):
 # --- países (146) con el perfil del informe para cada uno
 d = pd.read_csv(R / "salidas/indice_pais_detalle.csv"); d["region"] = d.region.str.strip()
 d["rank_l2"] = d.adi_l2.rank(ascending=False, method="min").astype(int)
+# Cálculos solo del sitio (no entran en la API v2026.1): descomposición por gran grupo y barreras por país
+# (analisis/pais_descomposicion.py), posición respecto a la recta H1a (regresiones.json), ISO2 para la bandera.
+H1 = json.loads((R / "salidas/regresiones.json").read_text())["h1a"]
+d["esperado"] = H1["coef"]["const"] + H1["coef"]["lpib"] * np.log(d.pib_pc_ppp)
+d["residuo"] = 100 * d.adi_l2 - d.esperado
+PG = pd.read_csv(R / "salidas/pais_grupos.csv", dtype={"gg": str})
+PB = pd.read_csv(R / "salidas/pais_barreras.csv").set_index("iso3")
+META = pd.read_csv(R / "datos/atlas/paises_meta.csv").set_index("iso3")
+AEI = pd.read_csv(R / "datos/aei_pais.csv").set_index("iso3")
+ISO2 = {x["id"]: x["iso2Code"].lower() for x in json.loads((R / "datos/worldbank/paises.json").read_text())[1]}
+def gemelos(f, n=3):
+    """Los n países con el ADI más cercano entre los de otro grupo de ingreso."""
+    otros = d[d.ingreso != f.ingreso].assign(dist=lambda x: (x.adi_l2 - f.adi_l2).abs()).nsmallest(n, "dist")
+    return otros.iso3.tolist()
 paises = []
 for f in d.itertuples():
     pf = PF.calcular(f.iso3)
@@ -73,10 +87,28 @@ for f in d.itertuples():
                        anio=int(f.anio), res=int(f.resolucion), l2=r1(100 * f.adi_l2), lo=r1(100 * f.l2_lo), hi=r1(100 * f.l2_hi), l3=r1(100 * f.adi_l3, 2),
                        s=r1(f.adi_share), l2_iguales=r1(100 * f.adi_l2_iguales), emp=r1(f.empleo_total / 1e6, 2), pib=r1(f.pib_pc_ppp, 0),
                        inf=r1(f.informalidad_pct), uso=r1(f.usage_per_capita_index, 2), rk=int(f.rank_l2),
+                       iso2=ISO2[f.iso3], pob=r1(META.poblacion.get(f.iso3) / 1e6, 2), uso_pct=r1(AEI.usage_pct.get(f.iso3), 2) if f.iso3 in AEI.index else None,
+                       brecha=r1(f.brecha_h2, 2), esperado=r1(f.esperado), residuo=r1(f.residuo),
+                       l3_iguales=r1(100 * f.adi_l3_iguales, 2), s_iguales=r1(f.adi_share_iguales),
+                       grupos=[dict(gg=g.gg, share=r1(g.empleo_share), adi=r1(g.adi_l2_grupo), contrib=r1(g.contrib_l2, 2))
+                               for g in PG[PG.iso3 == f.iso3].sort_values("gg").itertuples()],
+                       b=[r1(PB.loc[f.iso3, c]) for c in ("barrera_fisica", "barrera_responsabilidad", "barrera_confianza", "barrera_acceso")],
+                       gemelos=gemelos(f),
                        perfil=dict(hallazgo=pf["hallazgo"], hallazgo_fig=pf["hallazgo_fig"], n_region=pf["n_region"], region_l2=pf["region_l2"], mundo_l2=pf["mundo_l2"],
                                    filas=[dict(tema=tema, **{k: v for k, v in fl.items() if k != "v"}) for tema, fs in pf["grupos"] for fl in fs],
                                    barras=[[b[0], b[1], r1(b[2])] for b in pf["barras"]])))
 escribir("paises.json", paises)
+# Recta del «delegation divide» (H1a, OLS de ADI en % sobre ln PIB per cápita PPA) y referencias mundiales
+# (empleo por gran grupo y barreras ponderados por el empleo de los 146 países) para las gráficas del sitio
+emp = d.set_index("iso3").empleo_total
+PG["e"] = PG.empleo_share * PG.iso3.map(emp); PG["a"] = PG.contrib_l2 * PG.iso3.map(emp)
+mundo = PG.groupby("gg")[["e", "a"]].sum()
+B4 = ("barrera_fisica", "barrera_responsabilidad", "barrera_confianza", "barrera_acceso")
+escribir("divide.json", dict(const=H1["coef"]["const"], pendiente=H1["coef"]["lpib"], r2=H1["r2"], n=H1["n"],
+                             pendiente_lo=C["h1.pendiente.lo"]["v"], pendiente_hi=C["h1.pendiente.hi"]["v"],
+                             grupos_mundo=[dict(gg=g, share=r1(100 * x.e / mundo.e.sum()), adi=r1(100 * x.a / x.e), contrib=r1(100 * x.a / mundo.e.sum(), 2))
+                                           for g, x in mundo.iterrows()],
+                             b_mundo=[r1(np.average(PB.loc[d.iso3, c], weights=d.empleo_total)) for c in B4]))
 
 # --- mapa: Natural Earth 1:110m en Equal Earth, trazos simplificados por ISO3
 import geopandas as gpd  # noqa: E402
