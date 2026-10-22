@@ -1,6 +1,7 @@
 # Plan de cierre y envío — The Delegation Divide (ADI v2026.1)
 
-Estado al 21-oct-2026 17:40. Paper completo con cifras reales (corrida 2026-10-21-1539), QA 0 errores, tarball arXiv compila.
+Estado al 21-oct-2026 noche. HECHO: repo público (GitHub), Pages con API, release v2026.1 con DOI Zenodo 10.5281/zenodo.23552918, dataset HF Cespial/adi (subido por la sesión web, 12 archivos), referencias verificadas. PENDIENTE: PyPI (token de Cristian), aprobación de embargo OSF (Santiago), lectura de Santiago, endoso arXiv, envío arXiv.
+Estado anterior: 21-oct-2026 17:40. Paper completo con cifras reales (corrida 2026-10-21-1539), QA 0 errores, tarball arXiv compila.
 Lo que queda son acciones externas con cuenta de Cristian y la lectura de Santiago. Orden recomendado; cada paso dice quién lo hace.
 
 ## 0. Hoy (21-oct)
