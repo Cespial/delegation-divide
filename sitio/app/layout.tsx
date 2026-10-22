@@ -5,7 +5,7 @@ import "./globals.css";
 import { MarcaLab } from "@/components/Marca";
 import { Nav } from "@/components/Nav";
 import { JsonLd } from "@/components/JsonLd";
-import { APOYO, AUTORES, HF, LAB, REPO, SITE, cifra, resumen } from "@/lib/datos";
+import { APOYO, AUTORES, HF, INDEXAR, LAB, REPO, SITE, cifra, resumen } from "@/lib/datos";
 
 const barlow = localFont({
   variable: "--f-barlow", display: "swap",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: { type: "website", siteName: LAB, locale: "en_US" },
   twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
+  robots: INDEXAR ? { index: true, follow: true } : { index: false, follow: false },
 };
 export const viewport: Viewport = { themeColor: "#f8f8f7", width: "device-width", initialScale: 1 };
 

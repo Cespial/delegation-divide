@@ -80,6 +80,8 @@ export const minutos = (m: number | null) => {
 export const ordinal = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" } as Record<number, string>)[n % 10] ?? "th"}`;
 
 // Site URL: explicit env var, else the Vercel production domain, else local.
+// Search engines index the site only when INDEXAR=1 is set (off until the coauthor signs off the new text).
+export const INDEXAR = process.env.INDEXAR === "1";
 export const SITE =
   process.env.NEXT_PUBLIC_SITE_URL ??
   (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
