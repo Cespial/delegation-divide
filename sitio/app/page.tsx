@@ -1,15 +1,41 @@
 import Link from "next/link";
+import { Buscador, type ItemBusqueda, type Sugerencia } from "@/components/Buscador";
 import { JsonLd } from "@/components/JsonLd";
 import { Leaderboard } from "@/components/Leaderboard";
 import { Marca } from "@/components/Marca";
-import { LAB, N_OCUP, N_PAISES, SITE, cifra, resumen } from "@/lib/datos";
+import { GG, LAB, N_OCUP, N_PAISES, SITE, cifra, ocupaciones, ordinal, paises, resumen } from "@/lib/datos";
 import { NOVEDADES, fechaCorta } from "@/lib/novedades";
 
-// Lab home, laid out like vals.ai/home: dated strip, hero without buttons, the index leaderboard with tabs,
+// Lab home, laid out like vals.ai/home: dated strip, hero with quick lookup, the index leaderboard with tabs,
 // latest reports with findings, then the products. Identity (paper, ink, teal, Barlow) is the ADI's.
 const externo = (h: string) => h.startsWith("http");
 
+const SUGERENCIAS: Sugerencia[] = [
+  { etiqueta: "Software developers", q: "2512" },
+  { etiqueta: "Economists", q: "2631" },
+  { etiqueta: "Colombia", q: "Colombia" },
+  { etiqueta: "United States", q: "United States" },
+  { etiqueta: "Singapore", q: "Singapore" },
+];
+
 export default function InicioLab() {
+  const items: ItemBusqueda[] = [
+    ...ocupaciones.map((o) => ({
+      href: `/adi/occupations/${o.isco}`,
+      nombre: o.titulo,
+      codigo: o.isco,
+      valor: `${o.l2.toFixed(1)}%`,
+      subtitulo: `${GG[o.gg]} · ${ordinal(o.rk)} of ${N_OCUP}`,
+    })),
+    ...paises.map((p) => ({
+      href: `/adi/countries/${p.iso3}`,
+      nombre: p.nombre,
+      codigo: p.iso3,
+      iso2: p.iso2,
+      valor: `${p.l2.toFixed(1)}%`,
+      subtitulo: `${p.ingreso_nombre} · ${ordinal(p.rk)} of ${N_PAISES}`,
+    })),
+  ];
   return (
     <>
       <div className="tira">
@@ -27,6 +53,9 @@ export default function InicioLab() {
           <h1 className="titulo">Measuring how much of the world’s work AI agents can take over</h1>
           <p className="entrada">{LAB} builds open, preregistered indices of AI agents at work, task by task, and publishes every rating, score and line of code
             behind the numbers. The first is the Agent Delegability Index, covering {N_OCUP} occupations and {N_PAISES} countries.</p>
+          <div style={{ maxWidth: 640, marginTop: 26 }}>
+            <Buscador items={items} placeholder="Quick lookup: occupation, ISCO-08 code, country or ISO3…" sugerencias={SUGERENCIAS} />
+          </div>
         </div>
       </section>
 
@@ -35,7 +64,10 @@ export default function InicioLab() {
           <div className="tablero">
             <div className="tablero-cabeza">
               <Link href="/adi" className="sello"><Marca decorativa /><span>Agent Delegability Index<br /><b>v{resumen.version}</b> · updated 22 Oct 2026</span></Link>
-              <Link className="boton" href="/adi/occupations">View full results</Link>
+              <div className="botones">
+                <Link className="boton" href="/adi/countries">Country atlas ({N_PAISES})</Link>
+                <Link className="boton lleno" href="/adi/occupations">View full results ({N_OCUP})</Link>
+              </div>
             </div>
             <div className="tablero-cuerpo">
               <div>

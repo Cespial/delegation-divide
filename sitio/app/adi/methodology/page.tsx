@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Nivel } from "@/components/Barra";
 import { JsonLd } from "@/components/JsonLd";
-import { NIVELES, SITE, cifra, resumen } from "@/lib/datos";
+import { CurvaDuracion } from "@/components/graficas/CurvaDuracion";
+import { NIVELES, SITE, cifra, h4, resumen } from "@/lib/datos";
 
 export const metadata: Metadata = {
   title: "Methodology",
@@ -77,6 +78,9 @@ export default function Metodologia() {
             <li><b>Full delegation peaks for tasks of about {cifra("h4.pico.minutos")} minutes</b> of human time and falls for longer ones.</li>
             <li><b>Use follows delegability.</b> Across {cifra("h2.n")} countries observed AI use correlates with the index at r = {cifra("h2.r.adi_uso")}; the preregistered adoption gap in middle-income countries is not supported.</li>
           </ul>
+          <div style={{ margin: "24px 0 8px" }}>
+            <CurvaDuracion datos={h4} picoTxt={cifra("h4.pico.minutos")} />
+          </div>
 
           <h2 className="titulo-2" id="method">Method</h2>
           <h3 className="titulo-3">Rubric and raters</h3>

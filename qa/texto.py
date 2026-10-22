@@ -22,6 +22,7 @@ PERMIT |= {"0110", "0210", "0310",                       # ISCO-08 fuerzas armad
            "702", "70",                                  # Frey y Osborne (2017): 702 ocupaciones, 70 etiquetadas a mano
            "888,000",                                    # Lee et al. (2026): archivos de habilidades de agentes en GitHub
            "100",                                        # escala 0–100 de share_delegable (rúbrica), denominador de ADIs
+           "15", "24", "25", "54", "55",                 # tramos de edad de la GEIH (15–24, 25–54, 55 y más; D4)
            "5.5",                                        # versión de Claude Sonnet 5.5 y Claude Haiku 5.5 (docs/MODELOS.md)
            "0.80"}                                       # umbral preregistrado de κ para aceptar lotes (docs/MODELOS.md)
 for nombre, t in tex.items():

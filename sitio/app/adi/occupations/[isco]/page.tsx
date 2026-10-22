@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { Barra, Barreras, Nivel } from "@/components/Barra";
 import { Cita } from "@/components/Cita";
 import { JsonLd } from "@/components/JsonLd";
-import { GG, N_OCUP, NIVELES, SITE, comparadores, minutos, ocupacion, ocupaciones, ordinal, tareas } from "@/lib/datos";
+import { TablaTareas } from "@/components/TablaTareas";
+import { GG, N_OCUP, NIVELES, SITE, comparadores, ocupacion, ocupaciones, ordinal, tareas } from "@/lib/datos";
 import { citaRegistro } from "@/lib/citar";
 
 export const dynamicParams = false;
@@ -22,31 +23,18 @@ export async function generateMetadata({ params }: { params: Promise<{ isco: str
   };
 }
 
-const TEXTO_B = ["Physical presence", "Accountability", "Trust and care", "Access to systems"];
-
 export default async function Ocupacion({ params }: { params: Promise<{ isco: string }> }) {
   const o = ocupacion((await params).isco);
   if (!o) notFound();
   const ts = tareas(o.isco);
   const porNivel = [0, 1, 2, 3].map((n) => ts.filter((t) => t.n === n).reduce((a, t) => a + t.w, 0));
   const vecinos = ocupaciones.filter((x) => x.sub === o.sub && x.isco !== o.isco).sort((a, b) => b.l2 - a.l2);
+  const porRk = [...ocupaciones].sort((a, b) => a.rk - b.rk || b.s - a.s || b.l3 - a.l3);
+  const idxRk = porRk.findIndex((x) => x.isco === o.isco);
+  const [antes, despues] = [porRk[idxRk - 1], porRk[idxRk + 1]];
   const url = `${SITE}/adi/occupations/${o.isco}`;
   const cita = citaRegistro(`${o.titulo} (ISCO-08 ${o.isco})`, url);
-  const mostrar = 15;
-  const filaTarea = (t: (typeof ts)[number]) => (
-    <tr key={t.id}>
-      <td className="texto-tarea">{t.t}<small>{t.o}{t.core ? "" : " · supplemental task"}</small></td>
-      <td className="n num">{t.w.toFixed(1)}%</td>
-      <td><Nivel n={t.n} /></td>
-      <td><span className="modelos"><Nivel n={t.so} /><Nivel n={t.h} /></span></td>
-      <td className="n num">{t.s.toFixed(0)}%</td>
-      <td className="n num">{minutos(t.m)}</td>
-      <td className="nota">{t.b.map((v, i) => (v !== null && v >= 0.5 ? TEXTO_B[i] : null)).filter(Boolean).join(", ") || "–"}</td>
-    </tr>
-  );
-  const cabTareas = (
-    <thead><tr><th>Task statement (O*NET occupation)</th><th className="n">Weight</th><th>Level</th><th>Sonnet · Haiku</th><th className="n">Share</th><th className="n">Human time</th><th>Barriers</th></tr></thead>
-  );
+  const pctAdi = Math.round(100 * (1 - (o.rk - 1) / N_OCUP));
   return (
     <>
       <section className="seccion">
@@ -54,7 +42,14 @@ export default async function Ocupacion({ params }: { params: Promise<{ isco: st
           <nav className="miga" aria-label="Breadcrumb"><Link href="/adi/occupations">Occupations</Link><span aria-hidden>/</span>
             <Link href={`/adi/occupations?group=${o.gg}`}>{o.gg} · {GG[o.gg]}</Link><span aria-hidden>/</span><span>{o.isco}</span></nav>
           <div className="ficha-cab">
-            <div><span className="codigo-grande">ISCO-08 {o.isco}{o.imp ? " · imputed from its three-digit group" : ""}</span><h1 className="titulo">{o.titulo}</h1></div>
+            <div>
+              <span className="codigo-grande">ISCO-08 {o.isco}{o.imp ? " · imputed from its three-digit group" : ""}</span>
+              <h1 className="titulo">{o.titulo}</h1>
+              <nav className="vecinos" aria-label="Neighbours in the ranking">
+                {antes && <Link href={`/adi/occupations/${antes.isco}`}>← {ordinal(antes.rk)} {antes.titulo}</Link>}
+                {despues && <Link href={`/adi/occupations/${despues.isco}`}>{ordinal(despues.rk)} {despues.titulo} →</Link>}
+              </nav>
+            </div>
             <div className="titular" style={{ borderLeft: 0, paddingLeft: 0 }}>
               <span className="cifra" style={{ fontSize: "clamp(72px, 10vw, 120px)" }}>{o.l2.toFixed(1)}<small>%</small></span>
               <div className="intervalo">ADI · {ordinal(o.rk)} of {N_OCUP} · 95% interval {o.l2_lo.toFixed(1)}–{o.l2_hi.toFixed(1)}</div>
@@ -102,14 +97,7 @@ export default async function Ocupacion({ params }: { params: Promise<{ isco: st
       <section className="seccion">
         <div className="envoltura">
           <span className="rotulo">{ts.length} task statements, heaviest first</span>
-          <div className="tabla-marco tareas" style={{ marginTop: 14 }}>
-            <table className="tabla">{cabTareas}<tbody>{ts.slice(0, mostrar).map(filaTarea)}</tbody></table>
-          </div>
-          {ts.length > mostrar && (
-            <details className="mas"><summary>Show the other {ts.length - mostrar} tasks</summary>
-              <div className="tabla-marco tareas"><table className="tabla">{cabTareas}<tbody>{ts.slice(mostrar).map(filaTarea)}</tbody></table></div>
-            </details>
-          )}
+          <TablaTareas ts={ts} />
           <p className="nota" style={{ marginTop: 12 }}>Level: consensus of the two models (the lower level when they disagree). Share: part of the task’s working time an
             agent could take over. Human time: minutes a competent person needs for one instance, as estimated by the models.</p>
         </div>
@@ -120,11 +108,13 @@ export default async function Ocupacion({ params }: { params: Promise<{ isco: st
           <div>
             <span className="rotulo">Against other measures</span>
             <h2 className="titulo-2" style={{ margin: "10px 0 18px" }}>Exposure is not delegation</h2>
-            <div className="tabla-marco"><table className="tabla"><thead><tr><th>Measure</th><th className="n">Value</th><th className="n">Percentile</th></tr></thead>
+            <div className="tabla-marco"><table className="tabla"><thead><tr><th>Measure</th><th className="n">Value</th><th className="barra-celda">Percentile</th><th className="n">Pct</th></tr></thead>
               <tbody>
-                <tr className="destacada"><td>ADI (this index)</td><td className="n valor">{o.l2.toFixed(1)}%</td><td className="n num">{Math.round(100 * (1 - (o.rk - 1) / N_OCUP))}</td></tr>
+                <tr className="destacada"><td>ADI (this index)</td><td className="n valor">{o.l2.toFixed(1)}%</td><td className="barra-celda"><Barra v={pctAdi} fuerte /></td><td className="n num">{pctAdi}</td></tr>
                 {Object.entries(comparadores).map(([k, nom]) => (
-                  <tr key={k}><td>{nom}</td><td className="n num">{o.comp[k] ? o.comp[k]!.v : "–"}</td><td className="n num">{o.comp[k] ? o.comp[k]!.p : "–"}</td></tr>
+                  <tr key={k}><td>{nom}</td><td className="n num">{o.comp[k] ? o.comp[k]!.v : "–"}</td>
+                    <td className="barra-celda">{o.comp[k] ? <Barra v={o.comp[k]!.p} marca={pctAdi} /> : <span className="nota">–</span>}</td>
+                    <td className="n num">{o.comp[k] ? o.comp[k]!.p : "–"}</td></tr>
                 ))}
               </tbody></table></div>
             <p className="nota" style={{ marginTop: 10 }}>Earlier indices measure whether AI can touch a task; ADI measures how much of it an agent can carry out from a goal. – : the source does not cover this occupation.</p>

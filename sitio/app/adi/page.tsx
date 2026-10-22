@@ -1,12 +1,14 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Buscador } from "@/components/Buscador";
+import { Buscador, type ItemBusqueda, type Sugerencia } from "@/components/Buscador";
+import { CurvaDuracion } from "@/components/graficas/CurvaDuracion";
 import { Dispersion } from "@/components/graficas/Dispersion";
 import { PUNTOS, divide } from "@/lib/graficas-datos";
 import { JsonLd } from "@/components/JsonLd";
 import { Leaderboard } from "@/components/Leaderboard";
+import { Pestanas } from "@/components/Pestanas";
 import { jsonDataset } from "@/lib/jsonld";
-import { ENLACE_INFORME, INGRESOS, INSTALAR, LAB, N_OCUP, REPO, cifra, informe, ocupaciones, resumen } from "@/lib/datos";
+import { ENLACE_INFORME, GG, INGRESOS, INSTALAR, LAB, N_OCUP, N_PAISES, REPO, cifra, h4, informe, ocupaciones, ordinal, paises, resumen } from "@/lib/datos";
 
 export const metadata: Metadata = {
   title: { absolute: `Agent Delegability Index (ADI): how much work can AI agents take over? · ${LAB}` },
@@ -14,10 +16,48 @@ export const metadata: Metadata = {
   alternates: { canonical: "/adi" },
 };
 
+const SUGERENCIAS: Sugerencia[] = [
+  { etiqueta: "Software developers", q: "2512" },
+  { etiqueta: "Economists", q: "2631" },
+  { etiqueta: "Lawyers", q: "2611" },
+  { etiqueta: "Colombia", q: "Colombia" },
+  { etiqueta: "United States", q: "United States" },
+  { etiqueta: "Singapore", q: "Singapore" },
+];
+
 export default function Inicio() {
-  const top = [...ocupaciones].sort((a, b) => a.rk - b.rk);
-  const items = ocupaciones.map((o) => ({ href: `/adi/occupations/${o.isco}`, nombre: o.titulo, codigo: o.isco, valor: `${o.l2.toFixed(1)}%` }));
+  const porL2 = [...ocupaciones].sort((a, b) => a.rk - b.rk || b.s - a.s);
+  const porL3 = [...ocupaciones].sort((a, b) => b.l3 - a.l3 || b.l2 - a.l2);
+  const porS = [...ocupaciones].sort((a, b) => b.s - a.s || b.l2 - a.l2);
+  const items: ItemBusqueda[] = [
+    ...ocupaciones.map((o) => ({
+      href: `/adi/occupations/${o.isco}`,
+      nombre: o.titulo,
+      codigo: o.isco,
+      valor: `${o.l2.toFixed(1)}%`,
+      subtitulo: `${GG[o.gg]} · ${ordinal(o.rk)} of ${N_OCUP}`,
+    })),
+    ...paises.map((p) => ({
+      href: `/adi/countries/${p.iso3}`,
+      nombre: p.nombre,
+      codigo: p.iso3,
+      iso2: p.iso2,
+      valor: `${p.l2.toFixed(1)}%`,
+      subtitulo: `${p.ingreso_nombre} · ${ordinal(p.rk)} of ${N_PAISES}`,
+    })),
+  ];
   const dataset = jsonDataset();
+  const tablaExtremos = (lista: typeof ocupaciones, campo: "l2" | "l3" | "s", etq: string) => (
+    <div className="tabla-marco" key={campo}>
+      <table className="tabla">
+        <thead><tr><th>Most delegable</th><th className="n">{etq}</th></tr></thead>
+        <tbody>{lista.slice(0, 5).map((o) => <tr key={o.isco}><td><Link href={`/adi/occupations/${o.isco}`}>{o.titulo}</Link> <span className="codigo">{o.isco}</span></td><td className="n valor">{o[campo].toFixed(1)}</td></tr>)}</tbody>
+        <thead><tr><th>Least delegable</th><th className="n">{etq}</th></tr></thead>
+        <tbody>{lista.slice(-5).reverse().map((o) => <tr key={o.isco}><td><Link href={`/adi/occupations/${o.isco}`}>{o.titulo}</Link> <span className="codigo">{o.isco}</span></td><td className="n valor">{o[campo].toFixed(1)}</td></tr>)}</tbody>
+      </table>
+    </div>
+  );
+
   return (
     <>
       <section className="portada">
@@ -83,17 +123,21 @@ export default function Inicio() {
       <section className="seccion">
         <div className="envoltura dos">
           <div>
-            <span className="rotulo">Look up an occupation</span>
-            <h2 className="titulo-2" style={{ margin: "10px 0 18px" }}>Find your job in the index</h2>
-            <Buscador items={items} placeholder="Occupation title or ISCO-08 code, e.g. accountant or 2411" />
+            <span className="rotulo">Look up an occupation or country</span>
+            <h2 className="titulo-2" style={{ margin: "10px 0 18px" }}>Find your job or country in the index</h2>
+            <Buscador items={items} placeholder="Occupation, ISCO-08 code, country or ISO3 (e.g. economist, 2512, Colombia)" sugerencias={SUGERENCIAS} />
           </div>
           <div>
             <span className="rotulo">At the extremes</span>
-            <div className="tabla-marco" style={{ marginTop: 18 }}><table className="tabla"><thead><tr><th>Most delegable</th><th className="n">ADI</th></tr></thead>
-              <tbody>{top.slice(0, 5).map((o) => <tr key={o.isco}><td><Link href={`/adi/occupations/${o.isco}`}>{o.titulo}</Link> <span className="codigo">{o.isco}</span></td><td className="n valor">{o.l2.toFixed(1)}</td></tr>)}</tbody>
-              <thead><tr><th>Least delegable</th><th className="n">ADI</th></tr></thead>
-              <tbody>{top.slice(-5).reverse().map((o) => <tr key={o.isco}><td><Link href={`/adi/occupations/${o.isco}`}>{o.titulo}</Link> <span className="codigo">{o.isco}</span></td><td className="n valor">{o.l2.toFixed(1)}</td></tr>)}</tbody>
-            </table></div>
+            <div style={{ marginTop: 8 }}>
+              <Pestanas etiquetas={["ADI (L2+)", "Full (ADI3)", "Share (ADIs)"]}>
+                {[
+                  tablaExtremos(porL2, "l2", "ADI"),
+                  tablaExtremos(porL3, "l3", "ADI3"),
+                  tablaExtremos(porS, "s", "ADIs"),
+                ]}
+              </Pestanas>
+            </div>
           </div>
         </div>
       </section>
@@ -105,6 +149,16 @@ export default function Inicio() {
             <p>Each flag is one of {cifra("cobertura.paises")} countries. The ADI rises {cifra("h1.pendiente")} points per log point of GDP per capita; income alone explains {Math.round(divide.r2 * 100)}% of the spread.</p></div>
             <Link className="boton lleno" href="/adi/countries">Explore {cifra("cobertura.paises")} countries</Link></div>
           <Dispersion puntos={PUNTOS} y="l2" x="pib" divide={divide} alto={460} etiquetas={2} titulo="ADI against GDP per capita, 146 countries" />
+        </div>
+      </section>
+
+      <section className="seccion">
+        <div className="envoltura">
+          <div className="encabezado"><div><span className="rotulo">Task length · Hypothesis H4</span>
+            <h2 className="titulo-2" style={{ marginTop: 10 }}>Full delegation peaks for tasks of about twelve minutes</h2>
+            <p>The chance that an agent can finish a task end to end on its own rises with task duration up to {cifra("h4.pico.minutos")} minutes of human work and falls for longer, multi-step tasks.</p></div>
+            <Link className="boton" href="/adi/methodology#takeaways">Methodology</Link></div>
+          <CurvaDuracion datos={h4} picoTxt={cifra("h4.pico.minutos")} />
         </div>
       </section>
 

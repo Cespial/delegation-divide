@@ -2,8 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
 import { Cita } from "@/components/Cita";
+import { Copiar } from "@/components/Copiar";
 import { JsonLd } from "@/components/JsonLd";
-import { HF, INSTALAR, INSTALAR_MCP, REPO, cifra, resumen } from "@/lib/datos";
+import { HF, INSTALAR, INSTALAR_MCP, REPO, SITE, cifra, resumen } from "@/lib/datos";
 import { citaDatos } from "@/lib/citar";
 import { jsonDataset } from "@/lib/jsonld";
 
@@ -24,6 +25,10 @@ const TABLAS: [string, string, string[]][] = [
   ["Claims", "Every number in the paper, the report and this site, with its identifier and the script that produced it.", ["claims.jsonl"]],
   ["Dictionary and checksums", "Column definitions for every table, and SHA-256 sums of the release.", ["DATA_DICTIONARY.md", "SHA256SUMS"]],
 ];
+
+const COD_PY = `${INSTALAR}\n\nadi lookup 2512\nadi country COL\nadi top -n 10\nadi cite bibtex`;
+const COD_MCP = `${INSTALAR_MCP}\n\nclaude mcp add adi -- adi-mcp`;
+const COD_CURL = `curl -s ${SITE}/adi/v2026.1/isco/2512.json | jq '{titulo, adi_l2, adi_l3, cite: .cite.text}'`;
 
 export default function Datos() {
   return (
@@ -59,6 +64,10 @@ export default function Datos() {
             <tr><td><a href="/adi/v2026.1/isco/2512.json"><code>/adi/v2026.1/isco/&#123;ISCO-08&#125;.json</code></a></td><td>One occupation: the three indices with 95% intervals, barrier shares, rank and a <code>cite</code> field.</td></tr>
             <tr><td><a href="/adi/v2026.1/country/COL.json"><code>/adi/v2026.1/country/&#123;ISO3&#125;.json</code></a></td><td>One country: indices, intervals, income group and a <code>cite</code> field.</td></tr>
           </tbody></table></div>
+          <div className="cita" style={{ marginTop: 18 }}>
+            <div className="cita-cab"><span className="rotulo">Example · curl + jq</span><Copiar texto={COD_CURL} rotulo="Copy command" /></div>
+            <pre>{COD_CURL}</pre>
+          </div>
         </div>
       </section>
 
@@ -66,11 +75,17 @@ export default function Datos() {
         <div className="envoltura dos">
           <div><span className="rotulo">Python</span>
             <h2 className="titulo-2" style={{ margin: "10px 0 14px" }}>adi-index</h2>
-            <pre className="bloque">{`${INSTALAR}\n\nadi lookup 2512\nadi country COL\nadi top -n 10\nadi cite bibtex`}</pre>
+            <div className="cita" style={{ marginBottom: 10 }}>
+              <div className="cita-cab"><span className="rotulo">Install & CLI</span><Copiar texto={COD_PY} rotulo="Copy" /></div>
+              <pre>{COD_PY}</pre>
+            </div>
             <p className="nota">Command line and library. The tables travel inside the package, so it works offline.</p></div>
           <div><span className="rotulo">MCP server</span>
             <h2 className="titulo-2" style={{ margin: "10px 0 14px" }}>adi-mcp</h2>
-            <pre className="bloque">{`${INSTALAR_MCP}\n\nclaude mcp add adi -- adi-mcp`}</pre>
+            <div className="cita" style={{ marginBottom: 10 }}>
+              <div className="cita-cab"><span className="rotulo">Install & register</span><Copiar texto={COD_MCP} rotulo="Copy" /></div>
+              <pre>{COD_MCP}</pre>
+            </div>
             <p className="nota">Four tools for AI assistants: <code>lookup_occupation</code>, <code>country_profile</code>, <code>top_occupations</code>, <code>cite</code>.</p></div>
         </div>
       </section>

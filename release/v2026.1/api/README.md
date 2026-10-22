@@ -80,7 +80,7 @@ Percentages in `headline` are in percent 0–100; per-record `adi_l2`/`adi_l3` a
 ## Example
 
 ```sh
-curl -s https://cespial.github.io/delegation-divide/adi/v2026.1/isco/2512.json | jq '{titulo, adi_l2, adi_l3, cite: .cite.text}'
+curl -s https://balamlabs.org/adi/v2026.1/isco/2512.json | jq '{titulo, adi_l2, adi_l3, cite: .cite.text}'
 ```
 
 Full column definitions and the verbatim L0–L3 levels: `../DATA_DICTIONARY.md`.

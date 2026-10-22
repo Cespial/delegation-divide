@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function Ocupaciones() {
-  const filas = ocupaciones.map((o) => ({ isco: o.isco, titulo: o.titulo, gg: o.gg, l2: o.l2, lo: o.l2_lo, hi: o.l2_hi, l3: o.l3, s: o.s, n: o.n, rk: o.rk }));
+  const filas = ocupaciones.map((o) => ({ isco: o.isco, titulo: o.titulo, gg: o.gg, l2: o.l2, lo: o.l2_lo, hi: o.l2_hi, l3: o.l3, s: o.s, n: o.n, rk: o.rk, b: o.b }));
   return (
     <section className="seccion">
       <div className="envoltura">
@@ -25,7 +25,7 @@ export default function Ocupaciones() {
         </div>
         <TablaOcupaciones filas={filas} grupos={GG} />
         <p className="nota" style={{ marginTop: 14 }}>Task statements from O*NET 30.2, bridged to ISCO-08 and weighted by importance and frequency. Intervals: 1,000 bootstrap
-          draws with tasks resampled within occupation. Rank 1 is the most delegable; ties share a rank.</p>
+          draws with tasks resampled within occupation. Rank 1 is the most delegable; ties share a rank and are ordered by ADIs.</p>
       </div>
     </section>
   );

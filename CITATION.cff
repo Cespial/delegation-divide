@@ -12,7 +12,7 @@ version: "2026.1"
 date-released: "2026-10-22"
 license: "CC-BY-4.0"
 repository-code: "https://github.com/Cespial/delegation-divide"
-url: "https://github.com/Cespial/delegation-divide"
+url: "https://balamlabs.org/adi"
 keywords:
   - AI agents
   - delegation
