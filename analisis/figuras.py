@@ -32,7 +32,9 @@ if INFORME:
                          "axes.edgecolor": "#6b7280", "axes.labelcolor": "#1a1918", "xtick.color": "#6b7280", "ytick.color": "#1a1918",
                          "xtick.labelcolor": "#4b5058", "ytick.labelcolor": "#1a1918", "axes.spines.left": False, "ytick.major.size": 0})
     TINTA, GRIS, CLARO = "#1a1918", "#6b7280", "#e5e3e0"
-    INGRESO_COL = {"high": "#0a5c56", "upper-middle": "#2f8f86", "lower-middle": "#7dbdb5", "low": "#bfe0dc"}
+    # rampa ordinal validada con validate_palette.js de dataviz (--ordinal, superficie #fff: tono único, L monótona, contraste del extremo claro 2,16:1);
+    # cada grupo lleva además su forma, para que el ingreso no dependa solo del color
+    INGRESO_COL = {"high": "#0a4540", "upper-middle": "#1d7770", "lower-middle": "#43998f", "low": "#7cbcb5"}
     BARRERAS = [("barrera_fisica", "Physical", "#5b6fae"), ("barrera_responsabilidad", "Accountability", "#c4862f"),
                 ("barrera_confianza", "Trust", "#8e4f8f"), ("barrera_acceso", "Access", "#5f8f3a")]
     P = dict(l2="#9ccbc6", l3="#0a5c56", cmap=matplotlib.colors.LinearSegmentedColormap.from_list("adi", ["#e8f3f1", "#9ccbc6", "#2f8f86", "#0a4a45"]),
@@ -157,13 +159,16 @@ def fig4_mapa():
     guardar(fig, "fig4_mapa")
 
 
+MARCA = {"high": "D", "upper-middle": "^", "lower-middle": "s", "low": "o"}; MARCA_S = {"high": 24, "upper-middle": 34, "lower-middle": 26, "low": 30}  # áreas parejas a la vista
+
+
 def fig5_ingreso():
     p = pd.read_csv(SAL / "indice_pais_detalle.csv").dropna(subset=["pib_pc_ppp"])
     x, y = np.log(p.pib_pc_ppp), 100 * p.adi_l2
     fig, ax = plt.subplots(figsize=(WW, 3.1) if INFORME else (5.2, 3.6))
     for ing, col in INGRESO_COL.items():
-        d = p[p.ingreso == ing]; ax.scatter(np.log(d.pib_pc_ppp), 100 * d.adi_l2, s=22 if INFORME else 14, color=col, alpha=1 if INFORME else 0.85,
-                   lw=0.6 if INFORME else 0, edgecolors="#0a5c56" if INFORME else "none", label=INGRESO_EN[ing])
+        d = p[p.ingreso == ing]; ax.scatter(np.log(d.pib_pc_ppp), 100 * d.adi_l2, s=MARCA_S[ing] if INFORME else 14, color=col, alpha=1 if INFORME else 0.85,
+                   marker=MARCA[ing] if INFORME else "o", lw=0.7 if INFORME else 0, edgecolors="white" if INFORME else "none", label=INGRESO_EN[ing], zorder=3)
     b, a = np.polyfit(x, y, 1); xx = np.linspace(x.min(), x.max(), 50); ax.plot(xx, a + b * xx, color=TINTA, lw=0.9)
     import matplotlib.patheffects as pe
     desp = {"COL": (-34, -8), "MEX": (10, -10), "BRA": (-30, 10), "USA": (-8, 9), "IND": (5, -8), "DEU": (6, -9), "NGA": (-22, 5)}
@@ -188,7 +193,31 @@ def fig6_barreras():
     guardar(fig, "fig6_barreras")
 
 
-TODAS = {"fig1": fig1_escalera, "fig2": fig2_flujo, "fig3": fig3_isco, "fig4": fig4_mapa, "fig5": fig5_ingreso, "fig6": fig6_barreras}
+def fig7_h4():
+    """H4: probabilidad de delegación total (L3) según la duración humana de la tarea. Curva = logit preregistrado (regresiones.json);
+    puntos = proporción observada de tareas en L3 por veintiles de duración (control visual del ajuste)."""
+    import json
+    k = json.load(open(SAL / "regresiones.json"))["h4"]["coef"]
+    t = pd.read_csv(SAL / "adi_tarea.csv"); t = t[(t.n_modelos.fillna(0) > 0) & t.minutos.notna()]
+    lm = np.log(np.clip(t.minutos, 1, 4800)); y = (t.nivel == 3).astype(float)
+    q = pd.qcut(lm, 20, duplicates="drop"); g = pd.DataFrame({"lm": lm, "y": y}).groupby(q, observed=True).agg(lm=("lm", "median"), y=("y", "mean"))
+    xx = np.linspace(0, np.log(4800), 300); pp = 100 / (1 + np.exp(-(k["const"] + k["lmin"] * xx + k["lmin2"] * xx ** 2)))
+    pico = -k["lmin"] / (2 * k["lmin2"]); ppico = 100 / (1 + np.exp(-(k["const"] + k["lmin"] * pico + k["lmin2"] * pico ** 2)))
+    fig, ax = plt.subplots(figsize=(W, 2.5) if INFORME else (5.2, 3.0))
+    ax.scatter(g.lm, 100 * g.y, s=26, color=P["l2"], edgecolors=P["l3"], lw=0.6, zorder=3, label="Observed share at L3 (task-length twentieths)")
+    ax.plot(xx, pp, color=P["l3"], lw=1.6, zorder=4, label="Preregistered logit fit (H4)")
+    ax.axvline(pico, color=GRIS, lw=0.7, ls=(0, (3, 2)), zorder=2)
+    ax.annotate(f"Peak at {np.exp(pico):.1f} minutes: {ppico:.1f}% of tasks fully delegable", (pico, ppico), xytext=(14, 4), textcoords="offset points",
+                fontsize=7.8, color=TINTA, fontweight="semibold" if INFORME else "normal")
+    tk = [1, 5, 15, 60, 240, 960, 4800]; ax.set_xticks(np.log(tk), ["1 min", "5", "15", "1 h", "4 h", "16 h", "80 h"])
+    ax.set_xlim(-0.1, np.log(4800) + 0.1); ax.set_ylim(0, max(100 * g.y.max(), ppico) * 1.3)
+    ax.set_xlabel("Minutes a competent person needs for one instance of the task (log scale)"); ax.set_ylabel("Tasks rated L3 (%)")
+    ax.legend(frameon=False, fontsize=8, loc="upper right"); ax.grid(color=CLARO, lw=0.5); ax.set_axisbelow(True)
+    if INFORME: ax.spines["left"].set_visible(True); ax.spines["left"].set_color("#6b7280"); ax.tick_params(axis="y", length=3)
+    guardar(fig, "fig7_h4")
+
+
+TODAS = {"fig1": fig1_escalera, "fig2": fig2_flujo, "fig3": fig3_isco, "fig4": fig4_mapa, "fig5": fig5_ingreso, "fig6": fig6_barreras, "fig7": fig7_h4}
 if __name__ == "__main__":
     pedidas = [a.split("_")[0] for a in sys.argv[1:]] or list(TODAS)
     lg.info(f"figuras {'SINTÉTICAS' if SINT else 'reales'}: {pedidas}")

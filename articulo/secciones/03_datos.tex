@@ -46,10 +46,12 @@ The same database supplies the informality rate and mean monthly earnings by occ
 
 Income groups follow the World Bank classification for fiscal year 2026, and GDP per capita is at purchasing power parity in constant 2021 international dollars \citep{worldbank2026income}.
 Observed adoption comes from the Anthropic Economic Index (AEI), which reports usage of Claude by country per working-age adult in its latest release \citep{anthropic2025economic}.
-For convergence tests we use the occupation-level scores of \citet{eloundou2024gpts}, \citet{felten2021occupational}, \citet{webb2020impact}, \citet{eisfeldt2023generative} and \citet{gmyrek2025generative}, each carried to ISCO-08 with the same bridge where it is not already in ISCO-08.
+For convergence tests we use the occupation-level scores of \citet{eloundou2024gpts}, \citet{felten2021occupational}, \citet{webb2020impact} and \citet{eisfeldt2023generative}, each carried to ISCO-08 with the same bridge where it is not already in ISCO-08.
 
 \subsection{Household microdata}
 
-For breakdowns by sex, age and informality we use four household surveys that code occupation at four digits in national adaptations of ISCO-08: the Gran Encuesta Integrada de Hogares of Colombia (GEIH) \citep{dane2026geih}, the Pesquisa Nacional por Amostra de Domic\'ilios Cont\'inua of Brazil (PNADC) \citep{ibge2026pnadc}, the Encuesta Nacional de Ocupaci\'on y Empleo of Mexico (ENOE) \citep{inegi2026enoe} and the Encuesta Nacional de Hogares of Peru (ENAHO) \citep{inei2026enaho}.
-For Colombia we also use the 2023--2026 monthly series to relate delegability to wage dynamics (Section~\ref{sec:validacion}).
+For breakdowns by sex, age and formality we use the Gran Encuesta Integrada de Hogares of Colombia (GEIH) \citep{dane2026geih}, a monthly household survey that codes occupation at four digits in the national adaptation of ISCO-08.
+We pool the \cifra{geih.n.meses} monthly files from January 2024 to August 2026, \cifra{geih.n.obs} person-month records of employed people; the same panel supplies the within-group employment weights of Section~\ref{sec:metodo} for middle- and low-income countries.
+A worker is informal if they do not contribute to a pension fund.
+The household surveys of Brazil (PNADC) \citep{ibge2026pnadc}, Mexico (ENOE) \citep{inegi2026enoe} and Peru (ENAHO) \citep{inei2026enaho} have been downloaded but are not used in this version: the Mexican file codes occupation at one digit only, and the Brazilian and Peruvian files are not yet processed (deviation D4).
 Every input file is listed with its SHA-256 hash and download date in \texttt{datos/MANIFIESTO.jsonl}.

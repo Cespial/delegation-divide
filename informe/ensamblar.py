@@ -28,6 +28,37 @@ def icono(nombre):
     t = t.replace(raiz, re.sub(r'\s(width|height|class)="[^"]*"', "", raiz)).replace('stroke-width="2"', 'stroke-width="1.6"')
     return M(t.replace("<svg", '<svg aria-hidden="true"', 1))
 c = K.c
+def svg_gradientes():
+    import csv
+    filas = list(csv.DictReader(open(R / "salidas_microdatos/gradientes_col.csv")))
+    NOM = {("total", "todos"): "All workers", ("sexo", "mujeres"): "Women", ("sexo", "hombres"): "Men", ("edad", "15_24"): "Aged 15–24",
+           ("edad", "25_54"): "Aged 25–54", ("edad", "55_mas"): "Aged 55 and over", ("informal", "no"): "Formal", ("informal", "si"): "Informal"}
+    TEMA = {"total": "", "sexo": "Sex", "edad": "Age", "informal": "Formality"}
+    orden = [("total", "todos"), ("sexo", "mujeres"), ("sexo", "hombres"), ("edad", "15_24"), ("edad", "25_54"), ("edad", "55_mas"), ("informal", "no"), ("informal", "si")]
+    d = {(f["grupo"], f["categoria"]): f for f in filas}
+    W, x0, x1, top, paso, alto = 504, 150, 430, 60, 13, 7.6
+    X = lambda v: x0 + (x1 - x0) * v / top
+    T = lambda x, y, t, anc="start", tam=7.2, peso=400, col="#1a1918": f'<text x="{x:.1f}" y="{y:.1f}" font-family="Barlow" font-size="{tam}" font-weight="{peso}" fill="{col}" text-anchor="{anc}">{t}</text>'
+    y, s, prev = 14, "", None; H = 14 + paso * len(orden) + 3 * 6 + 18
+    for v in range(0, top + 1, 10):
+        s += f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="8" y2="{H - 16:.1f}" stroke="#dcdad6" stroke-width="{0.8 if v == 0 else 0.4}"/>' + T(X(v), H - 7, f"{v}", "middle", 6.6, col="#5d636b")
+    s += T(x1 + 4, H - 7, "%", tam=6.6, col="#5d636b") + T(x1 + 22, 10, "Share of", tam=6.4, col="#5d636b") + T(x1 + 22, 17.5, "employment", tam=6.4, col="#5d636b")
+    total = float(d[("total", "todos")]["adi_l2"])
+    for k in orden:
+        f = d[k]
+        if prev is not None and k[0] != prev: y += 6; s += f'<line x1="0" x2="{W}" y1="{y - 5:.1f}" y2="{y - 5:.1f}" stroke="#dcdad6" stroke-width="0.5"/>'
+        if k[0] != prev and TEMA[k[0]]: s += T(0, y + 5.7, TEMA[k[0]], tam=6.6, peso=600, col="#5d636b")
+        prev = k[0]; v, lo, hi = float(f["adi_l2"]), float(f["l2_lo"]), float(f["l2_hi"]); tot = k[0] == "total"
+        c_ = "#0a4a45" if tot else "#2f8f86"
+        s += T(x0 - 8, y + 5.7, NOM[k], "end", 7.6, 700 if tot else 500)
+        s += f'<path d="M{x0},{y} H{X(v) - 1.6:.1f} q1.6,0 1.6,1.6 V{y + alto - 1.6:.1f} q0,1.6 -1.6,1.6 H{x0} Z" fill="{c_ if tot else "#9ccbc6"}"/>'
+        s += f'<line x1="{X(lo):.1f}" x2="{X(hi):.1f}" y1="{y + alto / 2:.1f}" y2="{y + alto / 2:.1f}" stroke="#1a1918" stroke-width="0.7"/>'
+        s += "".join(f'<line x1="{X(z):.1f}" x2="{X(z):.1f}" y1="{y + 2:.1f}" y2="{y + alto - 2:.1f}" stroke="#1a1918" stroke-width="0.7"/>' for z in (lo, hi))
+        s += T(X(hi) + 4, y + 5.7, f"{v:.1f}", tam=7.4, peso=700)
+        if not tot: s += T(x1 + 22, y + 5.7, f'{float(f["empleo_pct"]):.0f}%', tam=7.2, col="#5d636b")
+        y += paso
+    s += f'<line x1="{X(total):.1f}" x2="{X(total):.1f}" y1="{14 + paso:.1f}" y2="{H - 16:.1f}" stroke="#1a1918" stroke-width="0.7" stroke-dasharray="3 2"/>'
+    return f'<svg viewBox="0 0 {W} {H:.0f}" xmlns="http://www.w3.org/2000/svg">{s}</svg>'
 FUENTE = "Agent Delegability Index v2026.1 (doi:10.5281/zenodo.23552918)"
 
 # ---------- componentes que reemplazan marcadores <!--@x--> ----------
@@ -80,11 +111,31 @@ COMP = {
  "tab4_1": lambda: K.tabla("4.1", "The ten most and ten least delegable occupations", tab("tab3_ocupaciones"),
         "ISCO-08 unit groups. ADI: task-weighted share at L2 or L3; ADI3: at L3; ADIs: weighted mean share of task time delegable, with 95% bootstrap interval (1,000 draws). Source: " + FUENTE + "."),
  "tab5_1": lambda: K.tabla("5.1", "Delegability rises with income across countries", tab("tab4_h1"),
-        "Columns (1)–(3): ADI in percent (H1); column (3) uses equal weights within reported groups. Column (4): standardized gap between ADI and Anthropic Economic Index usage per working-age person (H2). Reference: high income. Standard errors in parentheses; stars refer to the preregistered one-sided tests (* p < 0.05, ** p < 0.01, *** p < 0.001)."),
+        "Columns (1)–(3): ADI in percent (H1); column (3) uses equal weights within reported groups (sensitivity check, not a preregistered test; no stars). Column (4): standardized gap between ADI and Anthropic Economic Index usage per working-age person (H2). Reference: high income. Standard errors in parentheses; stars refer to the preregistered one-sided tests (* p < 0.05, ** p < 0.01, *** p < 0.001)."),
  "box1": lambda: M('<div class="box" id="box-1"><p class="bn">Box 1</p><h4>What the rubric asks of each task</h4>'
         '<p>The rating model receives one occupation title and one task statement, and a fixed definition of the reference technology: publicly available AI agents as of October 2026, able to use tools, run code, browse the web, operate a computer and handle files, with no physical body.</p>'
         '<p>It returns a level from L0 to L3, the share of the task’s working time an agent could take over, the minutes a competent human needs for one instance, four yes-or-no barriers (physical presence, accountability, trust and care, access to systems) and its confidence. It rates what is technically feasible, not what employers do today or what the law allows.</p>'
         '<p>The rubric was frozen at preregistration; its full text is in Annex A.</p></div>'),
+ "box2": lambda: M('<div class="box" id="box-2"><p class="bn">Box 2</p><h4>What changed after preregistration</h4>'
+        '<p><b>Weights inside reported groups.</b> No country reports four-digit employment to ILOSTAT, so the registered pooled weights could not be built. '
+        'Unit groups take United States weights (BLS Occupational Employment and Wage Statistics) in high-income countries and Colombian weights (GEIH) elsewhere; '
+        f'equal weights remain the sensitivity check ({c("titular.global.l2.iguales")}% world headline).</p>'
+        '<p><b>Human validation.</b> Three human raters on 1,500 tasks became one blind human rating of 300 tasks, led by a coauthor with student raters, '
+        f'plus an agentic panel that rated all 1,500 tasks with web search. The panel is reported as non-human validation.</p>'
+        f'<p><b>Country exclusions.</b> A data-quality rule set after the first results drops four country-years whose occupations cover too little of employment. '
+        f'With all 150 countries the headline is {c("d3.titular.l2.150")}% and the income slope {c("d3.h1.pendiente.150")}; no conclusion changes.</p>'
+        '<p><b>Household microdata.</b> Breakdowns by sex, age and formality are reported for Colombia only: Mexico\'s survey codes occupation at one digit, and the '
+        'Brazilian and Peruvian files are not yet processed. The registered comparisons with the ILO 2025 index and the Agentic Adoption Index are left for a later version.</p>'
+        '<p>Dates and reasons for each change are logged in the repository, in <code>docs/DESVIACIONES.md</code>.</p></div>'),
+ "fig4_3": lambda: K.figura("4.3", M(f"Full delegation is most likely for tasks of about {c('h4.pico.minutos')} minutes"),
+        "Share of task statements rated L3, by the minutes a competent person needs for one instance of the task", svg("fig7_h4"),
+        M(f"Curve: preregistered logit of L3 on log minutes and its square (H4), {c('h4.n')} tasks, errors clustered by O*NET occupation. "
+          "Points: observed share at L3 in twenty equal-count bins of task length; their x position is the bin median."), FUENTE + "; O*NET 30.2."),
+ "fig5_3": lambda: K.figura("5.3", M(f"Formal workers hold the more delegable jobs in Colombia: {c('geih.informal.no.l2')}% of their task time, against {c('geih.informal.si.l2')}% for informal workers"),
+        "ADI by sex, age and formality, Colombia, January 2024 to August 2026, % of task time at L2 or L3", M(svg_gradientes()),
+        M(f"Exploratory analysis registered on OSF. Each group's ADI weights occupation scores by that group's employment in the GEIH ({c('geih.n.meses')} monthly samples pooled with "
+          f"survey expansion factors; occupations in the index hold {c('geih.cobertura.empleo.pct')}% of employment). Informal: does not contribute to a pension. "
+          "Whiskers: 95% bootstrap interval of the ratings; survey sampling error is not included."), FUENTE + "; DANE, Gran Encuesta Integrada de Hogares (GEIH)."),
  "tarjetas": tarjetas,
  "lat:isco": lambda: K.lat("ISCO-08", "", "The International Standard Classification of Occupations, maintained by the ILO. Its 436 unit groups are the finest level most countries use to report employment."),
  "lat:onet": lambda: K.lat("O*NET", c("cobertura.tareas"), "task statements in O*NET 30.2, the United States occupational database, the largest public bank of written job tasks."),
@@ -95,10 +146,12 @@ COMP = {
 }
 INDICE = [("fig-1-1", "Figure 1.1", "Four levels of delegation"), ("tab-1-1", "Table 1.1", "Measures of AI and work compared"), ("tab-2-1", "Table 2.1", "Coverage of the country atlas"),
           ("fig-3-1", "Figure 3.1", "From task statements to a country atlas"), ("box-1", "Box 1", "What the rubric asks of each task"),
+          ("box-2", "Box 2", "What changed after preregistration"),
           ("fig-4-1", "Figure 4.1", "ADI by occupational major group"), ("tab-4-1", "Table 4.1", "The most and least delegable occupations"),
-          ("fig-4-2", "Figure 4.2", "Barriers by occupational major group"), ("fig-5-1", "Figure 5.1", "ADI by country"),
+          ("fig-4-2", "Figure 4.2", "Barriers by occupational major group"), ("fig-4-3", "Figure 4.3", "Full delegation and task length"), ("fig-5-1", "Figure 5.1", "ADI by country"),
           ("fig-5-2", "Figure 5.2", "ADI and income"), ("tab-5-1", "Table 5.1", "Country-level regressions"),
-          ("tab-5-2", "Table 5.2", "Colombia's profile in the atlas"), ("fig-5-3", "Figure 5.3", "ADI in Latin America and the Caribbean")]
+          ("fig-5-3", "Figure 5.3", "Colombia by sex, age and formality"), ("tab-5-2", "Table 5.2", "Colombia's profile in the atlas"),
+          ("fig-5-4", "Figure 5.4", "ADI in Latin America and the Caribbean")]
 
 # capítulo: archivo, número, id, parte, icono (Lucide)
 CAPS = [("01-delegation", "1", "cap1", 1, "layers"), ("02-data", "2", "cap2", 1, "database"), ("03-method", "3", "cap3", 1, "workflow"),
@@ -123,7 +176,7 @@ MENSAJES = {
           M(f"Partial delegation is the most common rating, given to {c('tareas.nivel2.pct')}% of task statements; full delegation is the rarest, at {c('tareas.nivel3.pct')}%.")],
  "cap2": [M(f"{c('cobertura.tareas')} task statements from O*NET 30.2 are bridged to {c('diseno.puente.isco')} of the 436 ISCO-08 unit groups in three documented steps."),
           M(f"Employment weights come from ILOSTAT for {c('cobertura.paises')} countries with occupational data from 2019 onward, at the finest level each country reports."),
-          M("ESCO skills serve as a second task bank, and household surveys from Colombia, Brazil, Mexico and Peru supply breakdowns by sex, age and informality.")],
+          M("ESCO skills serve as a second task bank, and Colombia's monthly household survey supplies breakdowns by sex, age and formality.")],
  "cap3": [M("Two language models rate every task with a rubric frozen at preregistration; when they disagree, the lower level is kept."),
           M("Tasks are weighted by importance and frequency into occupations, and occupations by employment into countries; bootstrap draws carry the uncertainty to every estimate."),
           M("Hypotheses, rater set and sample seeds were registered on the Open Science Framework before the main pass.")],
@@ -141,6 +194,9 @@ MENSAJES = {
           M("The raters come from one developer and the human check is weaker than the one registered; three independent human raters are left for a second version.")],
 }
 
+
+import itertools
+NUM_EQ = itertools.count(1)  # numeración de ecuaciones en orden del documento, como en el paper
 
 def procesar(nombre, num):
     s = re.sub(r"<!-- convertido.*?-->\n?", "", leer(f"secciones/{nombre}.html"))
@@ -163,6 +219,7 @@ def procesar(nombre, num):
     s = re.sub(r"<!--@tab1_1:inicio-->(.*?)<!--@tab1_1:fin-->", lambda mm: str(K.tabla("1.1", "Measures of AI and work compared with ADI", M(mm[1].replace("<table>", '<table class="comparativa">')),
                "? = the source does not state it. Source: authors’ review of the cited sources.")), s, flags=re.S)
     s = re.sub(r"<!--@([a-z0-9_:]+)-->", lambda mm: str(COMP[mm[1]]()), s)
+    s = re.sub(r'<math display="block".*?</math>', lambda mm: f'<span class="ecuacion">{mm[0]}<span class="eq-num">({next(NUM_EQ)})</span></span>', s, flags=re.S)
     return titulo, M(lead), M(s)
 
 
@@ -185,8 +242,8 @@ def perfil():
               f"the countries with data. ᵇ ILOSTAT informality rate, latest year. Colombia's employment data: ILOSTAT, {PERF['anio']}, ISCO-08 sub-major groups "
               f"({'two' if PERF['resolucion'] == 2 else 'one'} digits); 95% bootstrap interval of its ADI: {PERF['intervalo']}%. Source: " + FUENTE + ", table indice_pais_detalle.csv; ILOSTAT; World Bank; Anthropic Economic Index.")
     h = ('<div class="perfil" data-outline="Colombia in the atlas" data-nivel="2"><div class="titulo-pag"><p class="kicker">Country profile</p><h2>Colombia in the atlas</h2></div>'
-         + str(K.hallazgo(PERF["hallazgo"])) + str(K.tabla("5.2", "Colombia's profile in the atlas: delegability, adoption and context", M(t), notas))
-         + str(K.figura("5.3", M(PERF["hallazgo_fig"]), "ADI in Latin America and the Caribbean: share of task time at L2 or L3, by country, %", svg("perfil_alc"),
+         + str(K.hallazgo(PERF["hallazgo"])) + str(K.tabla("5.2", "Colombia's profile in the atlas: delegability, adoption and context", M(t), notas)) + str(COMP["fig5_3"]())
+         + str(K.figura("5.4", M(PERF["hallazgo_fig"]), "ADI in Latin America and the Caribbean: share of task time at L2 or L3, by country, %", svg("perfil_alc"),
                         "Colombia in dark teal. Dashed line: regional employment-weighted mean; dotted line: world.", FUENTE + "; ILOSTAT."))
          + "</div>")
     return M(h)

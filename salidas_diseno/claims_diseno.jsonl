@@ -10,6 +10,7 @@
 {"id": "diseno.puente.tareas_grupo.max", "valor": 860, "fuente": "datos/pares_isco_tarea.parquet", "sintetico": false}
 {"id": "diseno.agro.tareas", "valor": 193, "fuente": "datos/pares_isco_tarea.parquet: gran grupo de mayor peso = 6", "sintetico": false}
 {"id": "diseno.agro.en_muestra", "valor": 193, "fuente": "validacion/muestra_1500.csv", "sintetico": false}
+{"id": "diseno.agro.en_humano", "valor": 39, "fuente": "validacion/santiago/muestra_300.csv: submuestra de la calificación humana", "sintetico": false}
 {"id": "diseno.onet10_19.codigos2010", "valor": 1110, "fuente": "datos/crosswalks/onet_2010_to_2019.csv", "sintetico": false}
 {"id": "diseno.onet10_19.codigos2019", "valor": 1012, "fuente": "datos/crosswalks/onet_2010_to_2019.csv", "sintetico": false}
 {"id": "diseno.onet10_19.multiples", "valor": 97, "fuente": "datos/crosswalks/onet_2010_to_2019.csv: códigos 2019 con varios ancestros 2010", "sintetico": false}

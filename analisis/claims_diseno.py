@@ -28,6 +28,8 @@ agro = set(q.loc[q.isco08.str[0] == "6", "Task ID"])
 claim("agro.tareas", len(agro), f + ": gran grupo de mayor peso = 6")
 m = pd.read_csv(R / "validacion/muestra_1500.csv")
 claim("agro.en_muestra", len(agro & set(m.task_id)), "validacion/muestra_1500.csv")
+h = pd.read_csv(R / "validacion/santiago/muestra_300.csv")
+claim("agro.en_humano", len(agro & set(h.task_id)), "validacion/santiago/muestra_300.csv: submuestra de la calificación humana")
 
 # O*NET-SOC 2010 → 2019
 c = pd.read_csv(D / "crosswalks/onet_2010_to_2019.csv"); f = "datos/crosswalks/onet_2010_to_2019.csv"

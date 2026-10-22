@@ -58,4 +58,8 @@ The least delegable are agrarian, low- and lower-middle-income economies in Afri
 Among large economies, Colombia stands at \cifra{pais.COL.l2}\%, Mexico at \cifra{pais.MEX.l2}\% and Brazil at \cifra{pais.BRA.l2}\%, against \cifra{pais.USA.l2}\% in the United States and \cifra{pais.IND.l2}\% in India.
 The three Latin American countries sit above the upper-middle-income average, close to the world headline.
 The full country table, with bootstrap intervals and the equal-weight variant, is released as \texttt{salidas/adi\_pais.csv}.
-% TODO (exploratorio): gradientes por sexo, edad e informalidad con GEIH, ENOE y PNADC (datos/microdatos/*_resumen.csv).
+\paragraph{Colombia by sex, age and formality (exploratory).}
+Weighting each occupation by its Colombian employment in the GEIH, \cifra{geih.total.l2}\% of Colombian task time is at least partly delegable (95\% interval \cifra{geih.total.l2.lo}--\cifra{geih.total.l2.hi}\%); the atlas figure, built from ILOSTAT sub-major groups, is \cifra{pais.COL.l2}\%.
+Formal workers hold the more delegable jobs: \cifra{geih.informal.no.l2}\% of their task time, against \cifra{geih.informal.si.l2}\% for informal workers, who are \cifra{geih.informal.si.empleo.pct}\% of employment.
+Women's task time is more delegable than men's (\cifra{geih.sexo.mujeres.l2}\% against \cifra{geih.sexo.hombres.l2}\%), and delegability peaks among workers aged 25 to 54 (\cifra{geih.edad.25_54.l2}\%), against \cifra{geih.edad.15_24.l2}\% for those aged 15 to 24 and \cifra{geih.edad.55_mas.l2}\% for those aged 55 and over.
+By construction these differences come only from the occupations each group holds, since the index rates tasks, not people; the intervals carry the uncertainty of the ratings, not that of the survey sample.

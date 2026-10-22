@@ -46,27 +46,28 @@ def calcular():
 
 
 def svg(p):
-    # viewBox en puntos tipográficos al ancho de la caja (7 in = 504 pt): font-size 7 se imprime a 7 pt
-    W, H, x0, x1, y0, y1 = 504, 164, 24, 446, 12, 104; top = 60; vals = [b[2] for b in p["barras"]]
-    Y = lambda v: y1 - (y1 - y0) * v / top; n = len(vals); paso = (x1 - x0) / n; ancho = paso * 0.66
-    T = lambda x, y, s, anc="start", tam=7, peso=400, col=TINTA, rot=None, halo=False: (f'<text x="{x:.1f}" y="{y:.1f}" font-family="Barlow" font-size="{tam}" '
-         f'font-weight="{peso}" fill="{col}" text-anchor="{anc}"' + (f' transform="rotate({rot} {x:.1f} {y:.1f})"' if rot else "")
-         + (' stroke="#fff" stroke-width="2.2" paint-order="stroke"' if halo else "") + f">{s}</text>")
-    s = f'<svg viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg">'
+    # barras horizontales, una fila por país (los nombres se leen sin girar); viewBox en puntos al ancho de la caja (7 in = 504 pt)
+    W, x0, x1, top, paso, alto, y0 = 504, 118, 470, 60, 9.6, 6.4, 22
+    filas = p["barras"]; n = len(filas); H = y0 + paso * n + 16
+    X = lambda v: x0 + (x1 - x0) * v / top
+    T = lambda x, y, s, anc="start", tam=7, peso=400, col=TINTA, halo=False: (f'<text x="{x:.1f}" y="{y:.1f}" font-family="Barlow" font-size="{tam}" '
+         f'font-weight="{peso}" fill="{col}" text-anchor="{anc}"' + (' stroke="#fff" stroke-width="2.2" paint-order="stroke"' if halo else "") + f">{s}</text>")
+    s = f'<svg viewBox="0 0 {W} {H:.0f}" xmlns="http://www.w3.org/2000/svg">'
     for v in range(0, top + 1, 10):
-        s += f'<line x1="{x0}" x2="{x1}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="{FIL}" stroke-width="{0.8 if v == 0 else 0.4}"/>' + T(x0 - 5, Y(v) + 2.4, f"{v}", "end", 6.6, col=GRIS)
-    s += T(x0 - 18, y0 - 6, "% of task time at L2–L3", tam=6.6, col=GRIS)
-    for val, dash in ((float(p["region_l2"]), "4 2.4"), (float(p["mundo_l2"]), "1.2 2")):
-        s += f'<line x1="{x0}" x2="{x1 + 4}" y1="{Y(val):.1f}" y2="{Y(val):.1f}" stroke="{TINTA}" stroke-width="0.7" stroke-dasharray="{dash}"/>'
-    for k, (iso, nom, v) in enumerate(p["barras"]):
-        cx = x0 + paso * (k + 0.5); c = "#0a4a45" if iso == PAIS else "#9ccbc6"; yo = iso == PAIS
-        s += f'<path d="M{cx - ancho / 2:.1f},{y1} V{Y(v) + 1.6:.1f} q0,-1.6 1.6,-1.6 h{ancho - 3.2:.1f} q1.6,0 1.6,1.6 V{y1} Z" fill="{c}"/>'
-        s += T(cx, Y(v) - 2.6, f"{v:.1f}", "middle", 6.3, 700 if yo else 500, halo=True)
-        s += T(cx + 2.4, y1 + 7.5, nom, "end", 6.8, 700 if yo else 400, rot=-55)
-    # rótulos de las líneas de referencia en el canal derecho, fuera de las barras
-    s += T(x1 + 8, Y(float(p["region_l2"])) - 1.2, f"Region {p['region_l2']}", tam=6.8, peso=600)
-    s += T(x1 + 8, Y(float(p["mundo_l2"])) + 6.8, f"World {p['mundo_l2']}", tam=6.8, peso=600)
-    return s + "</svg>"
+        s += f'<line x1="{X(v):.1f}" x2="{X(v):.1f}" y1="{y0 - 3}" y2="{H - 13:.1f}" stroke="{FIL}" stroke-width="{0.8 if v == 0 else 0.4}"/>' + T(X(v), H - 4, f"{v}", "middle", 6.6, col=GRIS)
+    s += T(x1 + 6, H - 4, "%", tam=6.6, col=GRIS)
+    et = ""
+    for k, (iso, nom, v) in enumerate(filas):
+        y = y0 + paso * k; c = "#0a4a45" if iso == PAIS else "#9ccbc6"; yo = iso == PAIS
+        s += f'<path d="M{x0},{y:.1f} H{X(v) - 1.6:.1f} q1.6,0 1.6,1.6 V{y + alto - 1.6:.1f} q0,1.6 -1.6,1.6 H{x0} Z" fill="{c}"/>'
+        s += T(x0 - 6, y + 5.4, nom, "end", 7, 700 if yo else 400)
+        et += T(X(v) + 3, y + 5.4, f"{v:.1f}", tam=6.6, peso=700 if yo else 500, halo=True)
+    # líneas de referencia sobre las barras y bajo las cifras (el halo blanco de la cifra corta la línea); rótulos arriba
+    ref = sorted(((float(p["region_l2"]), "4 2.4", f"Region {p['region_l2']}"), (float(p["mundo_l2"]), "1.2 2", f"World {p['mundo_l2']}")))
+    for (val, dash, rot), anc in zip(ref, ("end", "start")):  # la línea de la izquierda rotula hacia la izquierda y la otra hacia la derecha
+        s += f'<line x1="{X(val):.1f}" x2="{X(val):.1f}" y1="{y0 - 9}" y2="{H - 13:.1f}" stroke="{TINTA}" stroke-width="0.7" stroke-dasharray="{dash}"/>'
+        s += T(X(val) + (-3 if anc == "end" else 3), y0 - 11, rot, anc, 6.8, 600)
+    return s + et + "</svg>"
 
 
 if __name__ == "__main__":

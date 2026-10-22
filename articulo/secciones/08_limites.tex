@@ -18,10 +18,10 @@ The task statements, and the importance and frequency weights, come from surveys
 The same occupation elsewhere may contain different tasks, in different proportions, with different tools.
 The crosswalk to ISCO-08 carries the United States task mix to every country; it does not adapt it.
 The problem is sharpest in agriculture.
-O*NET has only \cifra{diseno.agro.tareas} task statements whose main ISCO group lies in major group 6, skilled agricultural, forestry and fishery workers, which employs a large share of workers in low-income countries, and \cifra{diseno.agro.en_muestra} of them fall in the human-validation sample.
+O*NET has only \cifra{diseno.agro.tareas} task statements whose main ISCO group lies in major group 6, skilled agricultural, forestry and fishery workers, which employs a large share of workers in low-income countries, all \cifra{diseno.agro.en_muestra} of them are in the 1,500-task sample rated by the agentic panel, and \cifra{diseno.agro.en_humano} in the 300-task human sample.
 Since the delegation divide (H1) depends on that group, we rerun the country regression with the ESCO skill bank in place of O*NET tasks for major group 6 and for all groups; the slope is \cifra{robustez.esco.h1.pendiente} with ESCO for all groups and \cifra{robustez.esco.h1.pendiente.gg6} with ESCO for major group 6 only, against \cifra{h1.pendiente} with O*NET.
 The same transfer problem is known from the measurement of teleworkability: a task-based feasibility measure built on O*NET \citep{dingel2020how} overstates what can be done at home in poorer countries, where the same occupations are performed with fewer digital tools \citep{gottlieb2021working}, and the access barrier in ADI plays the role that connectivity plays there \citep{gmyrek2024buffer}.
-Informal and subsistence work, which household surveys capture better than labour-force statistics by occupation, is treated in the microdata breakdowns rather than in the headline.
+Informal and subsistence work, which household surveys capture better than labour-force statistics by occupation, is examined for Colombia in the household-survey breakdowns of Section~\ref{sec:atlas} rather than in the headline.
 
 \subsection{Language models as raters}
 
@@ -34,7 +34,7 @@ Agreement with that rating bounds the bias only as far as a few informed readers
 The agentic panel does not fill that gap: Claude Opus 5.5 with web search brings evidence about how tasks are done, but it comes from the same developer as the two raters and may share their view of which work suits a model, so its agreement with them is a check of consistency, not of validity.
 Three independent human raters on the full 1,500 tasks remain the registered standard and are left for a second version.
 The second is circularity: if the same family of models both rates delegability and generates the usage data, agreement between the two could reflect a shared view of the world rather than validation.
-We address it by testing convergence against indices built by other methods and other raters \citep{eloundou2024gpts, felten2021occupational, gmyrek2025generative}, by comparing with the Agentic Adoption Index, which uses no model rating \citep{lee2026delegates}, and by reporting the Colombian wage dynamics, which involve no model at all.
+We address it by testing convergence against indices built by other methods and other raters \citep{eloundou2024gpts, felten2021occupational, webb2020impact}; an index that uses no model rating, such as the Agentic Adoption Index \citep{lee2026delegates}, is the natural next comparison and is left for a later version.
 The third is instability: the command-line interface exposes no temperature setting, so the same prompt can return different levels on different days.
 The test--retest statistics in Section~\ref{sec:metodo} quantify this, and the consensus rule across models dampens it; the raw outputs of every pass are released so that others can recompute.
 A fourth risk is framing.

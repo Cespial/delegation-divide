@@ -14,6 +14,11 @@ ESCO = R / "salidas_robustez/claims_esco.jsonl"
 if ESCO.exists():
     for l in open(ESCO):
         if l.strip() and (d := json.loads(l))["id"] not in CL: CL[d["id"]] = d
+# gradientes GEIH de Colombia (analisis/gradientes_geih.py, exploratorio): igual, sin pisar
+GEIH = R / "salidas_microdatos/claims_geih.jsonl"
+if GEIH.exists():
+    for l in open(GEIH):
+        if l.strip() and (d := json.loads(l))["id"] not in CL: CL[d["id"]] = d
 SINT = any(d.get("sintetico") for d in CL.values())
 UNO = ("pct", "l2", "l3", "share", "lo", "hi", "minutos", "millones")
 

@@ -56,7 +56,7 @@ The package ships the index as data and needs no network access; it exposes the 
 The Model Context Protocol (MCP) is an open standard that lets an AI agent call external tools \citep{anthropic2024mcp}.
 The server \texttt{adi-mcp} (PyPI; listed in the MCP registry) offers four tools:
 \begin{description}
-  \item[\texttt{lookup\_occupation}] takes an ISCO-08 code, an ESCO occupation identifier or a free-text title and returns the occupation's levels, barriers, intervals and version.
+  \item[\texttt{lookup\_occupation}] takes an ISCO-08 code or a free-text title and returns the occupation's levels, barriers, intervals and version.
   \item[\texttt{country\_profile}] takes an ISO 3166-1 alpha-3 code and returns the country's index, its variants, the ISCO level and year of the employment data, and the income group.
   \item[\texttt{top\_occupations}] returns the $n$ most delegable occupations at level L2+ or L3.
   \item[\texttt{cite}] returns the BibTeX entry above and the dataset DOI, so that an agent that uses the index can cite it in its output.

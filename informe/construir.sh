@@ -6,7 +6,7 @@ set -e -o pipefail
 cd ${0:A:h:h}
 PY=(.venv/bin/python -I); PYR=${PYR:-/opt/homebrew/bin/python3}
 $PY informe/cifras.py
-$PY analisis/figuras.py --estilo informe fig3 fig4 fig5 fig6
+$PY analisis/figuras.py --estilo informe fig3 fig4 fig5 fig6 fig7
 $PY analisis/tablas.py --html
 [[ -d informe/img-src ]] && $PY informe/duotono.py   # originales de Midjourney fuera de git; sin ellos se usan los JPEG ya derivados
 $PY informe/perfil.py

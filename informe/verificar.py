@@ -1,7 +1,7 @@
 """Verifica el informe contra la fuente de verdad, sin pasar por cifras.json:
 1) cada <span data-cifra> de informe.html imprime exactamente fmt_html(valor) leído ahora de los claims (detecta cifras.json viejo);
 2) el texto del PDF contiene las cifras titulares; 3) todas las fuentes del PDF están embebidas;
-4) el perfil de Colombia (Tabla 5.2, Figura 5.3) coincide con perfil.calcular() rehecho desde la tabla publicada.
+4) el perfil de Colombia (Tabla 5.2, Figuras 5.3 y 5.4) coincide con perfil.calcular() rehecho desde la tabla publicada.
 Uso: .venv/bin/python -I informe/verificar.py"""
 import re, sys, json, subprocess, pathlib, html as H
 INF = pathlib.Path(__file__).resolve().parent; sys.path[:0] = [str(INF.parent / "analisis"), str(INF)]
@@ -24,7 +24,8 @@ print(f"3) {len(f)} fuentes; no embebidas: {len(no_emb)}" + (f": {no_emb}" if no
 # 4) perfil de Colombia: se recalcula desde salidas/indice_pais_detalle.csv y cada valor de la Tabla 5.2 y de los hallazgos debe estar en el HTML
 import perfil as PF
 P = PF.calcular(); viejo = json.load(open(INF / "perfil.json")) != json.loads(json.dumps({k: v for k, v in P.items() if k != "barras"}))
-m = re.search(r'<div class="perfil.*?</figure>', h, re.S); bloque = re.sub(r"\s+", " ", H.unescape(re.sub(r"<[^>]+>", "", m[0]))) if m else ""
+# hasta el cierre de la sección: el perfil lleva las figuras 5.3 y 5.4
+m = re.search(r'<div class="perfil.*?</section>', h, re.S); bloque = re.sub(r"\s+", " ", H.unescape(re.sub(r"<[^>]+>", "", m[0]))) if m else ""
 esperados = [P["hallazgo"], P["hallazgo_fig"]] + [f[c] for _, filas in P["grupos"] for f in filas for c in ("col", "puesto", "mejor", "region", "alto", "mundo")]
 ausentes = [e for e in esperados if e not in bloque]
 print(f"4) perfil: {len(esperados) - len(ausentes)}/{len(esperados)} valores recalculados presentes" + ("; perfil.json desactualizado" if viejo else "")

@@ -55,3 +55,21 @@ con los 150 países originales (sensibilidad).
 
 Sensibilidad con los 150 países originales (corrida 2026-10-21-1103): titular L2 35,20 % · H1 pendiente 7,30 (IC 6,61–7,89).
 Con 146 países (corrida 2026-10-21-1104): titular L2 35,17 % · H1 pendiente 7,23 (IC 6,52–7,83). La exclusión no cambia ninguna conclusión.
+
+## D4 — 2026-10-22 (después de ver los resultados del índice, antes de calcular cualquier gradiente) · Microdatos de hogares: gradientes solo para Colombia; comparaciones exploratorias aplazadas
+
+**Preregistro (Exploratory analysis):** «gender, age and informality gradients using GEIH, PNADC, ENOE and ENAHO; […] comparison
+with the ILO 2025 index and the Agentic Adoption Index».
+
+**Qué pasó:** ENOE (México) codifica la ocupación a 1 dígito, que no alcanza para cruzar con el índice a 4 dígitos; de PNADC (Brasil)
+solo hay 2 trimestres descargados y sin procesar; ENAHO (Perú) está descargada y sin procesar. Las comparaciones con el índice de la
+OIT 2025 y con el Agentic Adoption Index no se corrieron. El borrador del informe y del paper prometía desgloses para los cuatro países
+y una dinámica salarial con el panel GEIH (esta última nunca estuvo preregistrada) sin mostrar resultados; lo detectó la revisión de
+Santiago Jiménez Londoño el 22-oct-2026.
+
+**Qué hacemos:** gradientes por sexo, edad (15–24, 25–54, 55 y más) e informalidad (no cotiza a pensión) solo para Colombia, con la GEIH
+de ene-2024 a ago-2026 (32 meses, 946.760 registros persona-mes de ocupados; 96,8 % del empleo cae en ocupaciones del índice),
+`analisis/gradientes_geih.py` → `salidas_microdatos/gradientes_col.csv` y claims `geih.*`. Los intervalos salen del mismo bootstrap
+del índice (el script lo reproduce y comprueba contra `indice_isco_detalle.csv`); no incluyen el error muestral de la encuesta, y así
+se declara. Se retiran del texto la dinámica salarial y la promesa para Brasil, México y Perú; las comparaciones con OIT 2025 y AAI
+quedan para una versión posterior. El informe lo declara en el Box 2 y el paper en la sección de datos.

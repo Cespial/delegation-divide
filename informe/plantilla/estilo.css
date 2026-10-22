@@ -84,6 +84,9 @@ pre code { font: inherit; color: inherit; }  /* en bloque manda el tamaño del <
    en bloque, Noto Sans Math primero para que su tabla MATH dé sumatorias y fracciones bien compuestas */
 math { font-size: 1em; font-family: "Barlow", "Noto Sans Math", math; }
 math[display="block"] { margin: 6pt 0 8pt; font-family: "Noto Sans Math", math; font-size: 1.04em; }
+.ecuacion { display: flex; align-items: center; gap: 4pt; margin: 6pt 0 8pt; }
+.ecuacion math[display="block"] { flex: 1; min-width: 0; margin: 0; font-size: 1em; }
+.ecuacion .eq-num { flex: none; font: 400 8.6pt var(--sans); color: var(--tinta-2); font-variant-numeric: tabular-nums; }
 .cf { font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
 .cf[data-cifra$=".nombre"] { white-space: normal; } /* nombres de ocupaciones y países: parten como el resto del texto */
 .cf.falta { color: #b3261e; font-weight: 700; }
@@ -150,10 +153,8 @@ blockquote, .cap pre { font: 400 7.6pt/1.45 var(--mono); background: var(--hueso
 .portada .esc .c small { font-size: 0.5em; margin-left: 1pt; vertical-align: 0.8em; }
 .portada .esc .e { font: 600 8pt/1.25 var(--semi); color: #fff; margin-top: 2pt; }
 .portada .esc .e2 { font: 400 7.2pt var(--sans); color: var(--menta); }
-.portada .autores { position: absolute; left: 0.75in; top: 9.6in; display: flex; gap: 0.5in; font: 400 7.8pt/1.35 var(--sans); color: var(--menta); }
+.portada .autores { position: absolute; left: 0.75in; top: 9.9in; display: flex; gap: 0.5in; font: 400 7.8pt/1.35 var(--sans); color: var(--menta); }
 .portada .autores b { display: block; font: 600 9pt var(--sans); color: #fff; }
-.portada .franja { position: absolute; left: 0; right: 0; bottom: 0; height: 0.62in; background: #fff; display: flex; align-items: center; gap: 30pt; padding: 0 0.75in; }
-.portada .franja img { height: 22pt; width: auto; margin-left: -4pt; }
 
 /* ---------- créditos ---------- */
 .creditos { page: frente; break-before: page; font: 400 8.3pt/1.48 var(--sans); color: var(--tinta-2); }
@@ -163,9 +164,6 @@ blockquote, .cap pre { font: 400 7.6pt/1.45 var(--mono); background: var(--hueso
 .creditos pre { font: 400 6.7pt/1.45 var(--mono); white-space: pre; background: var(--hueso); border-left: 2pt solid var(--marca); padding: 6pt 8pt; margin: 4pt 0 8pt; color: var(--tinta); }
 .creditos .cita { font: 400 9.2pt/1.45 var(--sans); color: var(--tinta); }
 .creditos .equipo b { color: var(--tinta); font-weight: 600; }
-.creditos .pie-logos { margin-top: 22pt; padding-top: 12pt; border-top: 0.6pt solid var(--filete); }
-.logos { display: flex; align-items: center; gap: 26pt; flex-wrap: wrap; }
-.logos img { height: 24pt; width: auto; margin-left: -4pt; }
 
 /* ---------- contenido visual ---------- */
 .contenido { page: frente; break-before: page; }
