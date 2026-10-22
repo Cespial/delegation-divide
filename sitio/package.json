@@ -1,0 +1,27 @@
+{
+  "name": "adi-sitio",
+  "version": "2026.1.0",
+  "private": true,
+  "description": "Website of the Agent Delegability Index (ADI): occupations, countries, methodology, report and data.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "datos": "cd .. && .venv/bin/python -I sitio/datos/exportar.py",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "verificar": "cd .. && .venv/bin/python -I sitio/datos/verificar.py"
+  },
+  "dependencies": {
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}

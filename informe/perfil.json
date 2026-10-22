@@ -95,5 +95,9 @@
  "anio": 2025,
  "resolucion": 2,
  "region_l2": "37.7",
- "mundo_l2": "35.2"
+ "mundo_l2": "35.2",
+ "iso3": "COL",
+ "nombre": "Colombia",
+ "region": "Latin America & Caribbean",
+ "region_nombre": "Latin America and the Caribbean"
 }

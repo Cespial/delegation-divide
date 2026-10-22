@@ -8,21 +8,34 @@ import json, pathlib
 import pandas as pd
 INF = pathlib.Path(__file__).resolve().parent; R = INF.parent
 PAIS, REGION = "COL", "Latin America & Caribbean"
-NOMBRE = {"Puerto Rico (US)": "Puerto Rico", "Bahamas, The": "Bahamas", "St. Lucia": "Saint Lucia", "Curacao": "Curaçao"}
+NOMBRE = {"Puerto Rico (US)": "Puerto Rico", "Bahamas, The": "Bahamas", "St. Lucia": "Saint Lucia", "Curacao": "Curaçao",
+          # nombres de uso común para el sitio (fuera de América Latina no salen en el informe)
+          "Naoero": "Nauru", "Turkiye": "Türkiye", "Cote d'Ivoire": "Côte d’Ivoire", "Gambia, The": "The Gambia", "Egypt, Arab Rep.": "Egypt",
+          "Iran, Islamic Rep.": "Iran", "Congo, Dem. Rep.": "DR Congo", "Lao PDR": "Laos", "Kyrgyz Republic": "Kyrgyzstan", "Slovak Republic": "Slovakia",
+          "Somalia, Fed. Rep.": "Somalia", "Korea, Rep.": "South Korea", "Brunei Darussalam": "Brunei", "Russian Federation": "Russia"}
 TINTA, GRIS, FIL = "#1a1918", "#5d636b", "#dcdad6"
 
 
-def calcular():
-    d = pd.read_csv(R / "salidas/indice_pais_detalle.csv"); d["nombre"] = d.pais.map(lambda x: NOMBRE.get(x, x))
+# nombres de región para el texto (las de la tabla son las del Banco Mundial, con «&» y espacios sobrantes)
+REGIONES = {"Latin America & Caribbean": "Latin America and the Caribbean", "Europe & Central Asia": "Europe and Central Asia",
+            "East Asia & Pacific": "East Asia and Pacific", "Sub-Saharan Africa": "Sub-Saharan Africa", "South Asia": "South Asia",
+            "North America": "North America", "Middle East, North Africa, Afghanistan & Pakistan": "the Middle East, North Africa, Afghanistan and Pakistan"}
+
+
+def calcular(pais=PAIS):
+    """Perfil de un país frente a su región (Banco Mundial), los países de ingreso alto y el mundo. El informe lo pide para Colombia;
+    el sitio web (sitio/datos/exportar.py) para los 146 países, con la misma función."""
+    d = pd.read_csv(R / "salidas/indice_pais_detalle.csv"); d["nombre"] = d.pais.map(lambda x: NOMBRE.get(x, x)); d["region"] = d.region.str.strip()
     for c in ("adi_l2", "adi_l3"): d[c] = 100 * d[c]
-    reg = d[d.region.str.strip() == REGION]; col = d[d.iso3 == PAIS].iloc[0]
+    col = d[d.iso3 == pais].iloc[0]; reg = d[d.region == col.region]; nom_reg = REGIONES.get(col.region, col.region)
     pond = lambda x, c: (x[c] * x.empleo_total).sum() / x.empleo_total.sum()
     def fila(c, nombre, unidad, fmt, mayor_mejor=True, ponderar=True, fuente=""):
         x = reg.dropna(subset=[c]); orden = x.sort_values(c, ascending=not mayor_mejor).reset_index(drop=True)
-        puesto = int(orden.index[orden.iso3 == PAIS][0]) + 1; mejor = orden.iloc[0]
+        hay = pd.notna(col[c]); puesto = int(orden.index[orden.iso3 == pais][0]) + 1 if hay else None; mejor = orden.iloc[0] if len(orden) else None
         agr = (lambda z: pond(z.dropna(subset=[c]), c)) if ponderar else (lambda z: z[c].mean())
-        return dict(nombre=nombre, unidad=unidad, col=fmt(col[c]), puesto=f"{puesto} of {len(x)}", mejor=f"{mejor.nombre} ({fmt(mejor[c])})",
-                    region=fmt(agr(reg)), alto=fmt(agr(d[d.ingreso == "high"])), mundo=fmt(agr(d)), fuente=fuente, v=float(col[c]))
+        return dict(nombre=nombre, unidad=unidad, col=fmt(col[c]) if hay else "–", puesto=f"{puesto} of {len(x)}" if hay else "–",
+                    mejor=f"{mejor.nombre} ({fmt(mejor[c])})" if mejor is not None else "–", region=fmt(agr(reg)) if len(x) else "–",
+                    alto=fmt(agr(d[d.ingreso == "high"])), mundo=fmt(agr(d)), fuente=fuente, v=float(col[c]) if hay else None)
     f1, f2 = (lambda v: f"{v:.1f}"), (lambda v: f"{v:.2f}")
     grupos = [
         ("Delegability", [fila("adi_l2", "ADI: task time at least partly delegable (L2–L3)", "%", f1, fuente="ADI v2026.1"),
@@ -34,15 +47,22 @@ def calcular():
                      fila("informalidad_pct", "Informal employment, % of total employmentᵃ ᵇ", "%", f1, mayor_mejor=False, ponderar=False, fuente="ILOSTAT")]),
     ]
     a = grupos[0][1][0]; n_reg = len(reg); lo, hi = f1(100 * col.l2_lo), f1(100 * col.l2_hi)
-    mundo, alto = float(a["mundo"]), float(a["alto"])
-    hallazgo = (f"Colombia ranks {a['puesto'].split()[0]} of {n_reg} countries in Latin America and the Caribbean: {a['col']}% of its task time is at least "
-                f"partly delegable, {'above' if a['v'] > mundo else 'below'} the world figure of {a['mundo']}% and {alto - a['v']:.1f} points below high-income countries.")
+    mundo, alto = float(a["mundo"]), float(a["alto"]); dif = alto - a["v"]
+    sujeto = f"{col.nombre} ranks {a['puesto'].split()[0]} of {n_reg} countries in {nom_reg}" if n_reg > 1 else f"{col.nombre} is the only country of {nom_reg} in the atlas"
+    hallazgo = (f"{sujeto}: {a['col']}% of its task time is at least "
+                f"partly delegable, {'above' if a['v'] > mundo else 'below'} the world figure of {a['mundo']}% and {abs(dif):.1f} points "
+                f"{'below' if dif > 0 else 'above'} high-income countries.")
     barras = reg.sort_values("adi_l2", ascending=False)[["iso3", "nombre", "adi_l2"]].values.tolist()
-    k = [b[0] for b in barras].index(PAIS); ant, sig = barras[k - 1], barras[k + 1]
-    hallazgo_fig = (f"Colombia sits between {ant[1]} ({ant[2]:.1f}%) and {sig[1]} ({sig[2]:.1f}%); {barras[0][1]} leads the region at {barras[0][2]:.1f}% "
-                    f"and {barras[-1][1]} closes it at {barras[-1][2]:.1f}%.")
+    k = [b[0] for b in barras].index(pais)
+    if n_reg == 1: hallazgo_fig = f"{col.nombre} is the only country of {nom_reg} in the atlas."
+    elif k == 0: hallazgo_fig = f"{col.nombre} leads {nom_reg} at {barras[0][2]:.1f}%, ahead of {barras[1][1]} ({barras[1][2]:.1f}%); {barras[-1][1]} closes the region at {barras[-1][2]:.1f}%."
+    elif k == n_reg - 1: hallazgo_fig = f"{col.nombre} closes {nom_reg} at {barras[k][2]:.1f}%, behind {barras[k - 1][1]} ({barras[k - 1][2]:.1f}%); {barras[0][1]} leads the region at {barras[0][2]:.1f}%."
+    else:
+        ant, sig = barras[k - 1], barras[k + 1]
+        hallazgo_fig = (f"{col.nombre} sits between {ant[1]} ({ant[2]:.1f}%) and {sig[1]} ({sig[2]:.1f}%); {barras[0][1]} leads the region at {barras[0][2]:.1f}% "
+                        f"and {barras[-1][1]} closes it at {barras[-1][2]:.1f}%.")
     return dict(grupos=grupos, hallazgo=hallazgo, hallazgo_fig=hallazgo_fig, n_region=n_reg, intervalo=f"{lo}–{hi}", anio=int(col.anio), resolucion=int(col.resolucion),
-                region_l2=a["region"], mundo_l2=a["mundo"], barras=barras)
+                region_l2=a["region"], mundo_l2=a["mundo"], barras=barras, iso3=pais, nombre=col.nombre, region=col.region, region_nombre=nom_reg)
 
 
 def svg(p):
