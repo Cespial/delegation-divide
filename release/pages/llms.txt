@@ -6,7 +6,7 @@
 > (the "delegation divide": +7.23 pp per log point of GDP per capita). Full delegation peaks for tasks
 > that take a human about twelve minutes. Source of every number: salidas/claims.jsonl.
 > Four levels per task: L0 no role, L1 augmentation, L2 partial delegation, L3 full delegation.
-> Rated by Claude Sonnet 5.5 and Claude Haiku 5.5 on 18,796 O*NET 30.2 tasks; human validation in progress.
+> Rated by Claude Sonnet 5.5 and Claude Haiku 5.5 on 18,796 O*NET 30.2 tasks; blind human rating of 300 tasks agrees at kappa 0.85.
 > Preregistered at OSF: https://doi.org/10.17605/OSF.IO/9ZNTF · Data and code: https://doi.org/10.5281/zenodo.23552918
 
 ## How to use

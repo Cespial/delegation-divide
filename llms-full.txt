@@ -25,8 +25,8 @@ secondary; consensus = lower level on disagreement) -> crosswalk O*NET-SOC 2019 
 ISCO-08 (433 of 436 unit groups; the three armed-forces groups have no tasks) -> weighted by
 ILOSTAT employment into a country atlas (146 countries with occupational data from 2019 on).
 Validation: model agreement (quadratic-weighted kappa 0.77), test-retest, an agentic panel and a
-blind human rater on a stratified 1,500-task sample (human results still in progress), and
-convergence with Eloundou et al. (r = 0.93) and Felten et al. (r = 0.89). ESCO v1.2 skills are
+blind human rating of 300 tasks (kappa 0.85 with the model consensus) and an agentic panel on 1,500 tasks (kappa 0.87), and
+convergence with Eloundou et al. (r = 0.93) and Felten et al. (r = 0.89). ESCO v1.2.1 skills are
 a secondary robustness bank.
 
 Reference technology (fixed): publicly available AI agents as of October 2026 — frontier

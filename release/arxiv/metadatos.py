@@ -49,10 +49,15 @@ ABSTRACT = (
     f"Fourth, the preregistered adoption gap is not supported: across {int(v('h2.n'))} countries, delegability and "
     f"observed AI usage correlate at r = {f2('h2.r.adi_uso')}, and the gap between them is not wider in middle-income "
     f"countries (p = {p_h2:.2f}). "
-    f"Model agreement is kappa = {f2('agree.kappa.sonnet_haiku')}; human validation is in progress. "
+    f"Model agreement is kappa = {f2('agree.kappa.sonnet_haiku')}; a blind human rating of {int(v('n.humano'))} tasks "
+    f"agrees with the model consensus at kappa = {f2('agree.kappa.humano.modelo')}, and an agentic panel with web search "
+    f"at kappa = {f2('agree.kappa.panel.modelo')}. "
     "We release the index, the atlas, the prompts and an MCP server at https://github.com/Cespial/delegation-divide."
 )
-COMENTARIOS = ("31 pages, 6 figures, 4 tables. Preregistered at OSF: 10.17605/OSF.IO/9ZNTF. "
+import subprocess
+PAGS = subprocess.run(["pdfinfo", str(RAIZ / "articulo/main.pdf")], capture_output=True, text=True).stdout
+PAGS = next((l.split()[-1] for l in PAGS.splitlines() if l.startswith("Pages:")), "32")
+COMENTARIOS = (f"{PAGS} pages, 6 figures, 4 tables. Preregistered at OSF: 10.17605/OSF.IO/9ZNTF. "
                "Data and code: doi:10.5281/zenodo.23552918; repository and MCP server: https://github.com/Cespial/delegation-divide")
 
 

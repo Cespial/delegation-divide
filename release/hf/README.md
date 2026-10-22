@@ -103,8 +103,8 @@ ISCO) with within-group four-digit weights from BLS OES (high income) or Colombi
 
 ## Limitations
 
-- Ratings come from two models of one developer; human validation (blind rater, 300 tasks) is in progress and not yet
-  reported in v2026.1.
+- Ratings come from two models of one developer; a blind human rating of 300 tasks agrees with the model consensus at
+  kappa = 0.85, and an agentic panel on 1,500 tasks at kappa = 0.87 (see the paper, section 7).
 - O\*NET describes work in the United States; the same task mix is carried to every country, so cross-country
   differences are compositional.
 - Technical delegability is an upper bound on delegation, not a forecast of employment effects.
