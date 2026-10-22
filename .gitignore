@@ -37,3 +37,8 @@ __pycache__/
 release/arxiv/*.tar.gz
 release/arxiv/prueba-compilacion.pdf
 dist/
+
+# informe: derivados y originales de Midjourney fuera de git
+informe/out/qa/
+informe/img-src/
+informe/informe.html

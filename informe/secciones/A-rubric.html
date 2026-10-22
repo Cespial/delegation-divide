@@ -1,0 +1,43 @@
+<!-- convertido de articulo/secciones/A_rubrica.tex por convertir_tex.py; editar aquí desde ahora -->
+<h2 id="scoring-rubric">Scoring rubric</h2>
+<p>The rubric below is the file <code>scoring/prompts/rubrica_v1.md</code> as frozen at preregistration, reproduced character for character. Its SHA-256 hash is</p>
+<div class="center">
+<p><code>bcd076fb705f0f363f4a7eb2c2a403f16653f22f898eeb7d83bada74a0ea0e46</code></p>
+</div>
+<p>and the scoring script (<code>scoring/puntuar.py</code>) refuses to run the main pass unless the file on disk matches this value. The prompt sent to the model is the text from “You are rating” onward, with and replaced by the O*NET occupation title and the task statement; the doubled braces in the output block are Python format escapes and reach the model as single braces. It is sent as the user message of a call that carries one task, to Claude Sonnet 5.5 and Claude Haiku 5.5, with the fixed one-line system prompt quoted in Section 3.2 and no tools. The same text, with no model output, is the second sheet of each human rater’s workbook; the rater guide is <code>validacion/GUIA_EVALUADORES.md</code>.</p>
+<pre><code># ADI scoring rubric v1 (frozen at preregistration)
+
+You are rating ONE occupational task for how much of it a current AI agent could carry out.
+
+**Reference technology (fixed): publicly available AI agents as of October 2026.** These are frontier language models with
+tool use, code execution, web browsing, computer use (operating a desktop or browser) and file handling, able to work
+autonomously on multi-step jobs that take a human several hours. They have **no physical body or robotics**. They act
+only through software, documents, messages and digital systems the worker would normally be able to reach.
+
+OCCUPATION: {occupation_title}
+TASK: {task_text}
+
+## Definitions (use exactly these)
+
+- **L0 — No meaningful role.** The agent cannot perform or materially speed up any substantial part of the task.
+- **L1 — Augmentation.** A human performs the task; the AI assists step by step (drafts, searches, suggestions). The human
+  stays in the loop at each step and produces the output.
+- **L2 — Partial delegation.** An agent can execute substantial sub-steps of the task end to end from a goal
+  specification. A human still has to perform at least one essential step or review and correct the work before use.
+- **L3 — Full delegation.** An agent can complete the whole task end to end, to the quality a competent worker would
+  accept, given only the goal and access. The human&#39;s role is limited to assigning it and accepting the result.
+
+Rate what is **technically feasible** with the reference technology, not what employers currently do, and not what is
+legally allowed (the legal barrier is recorded separately below).
+
+## Output
+
+Return ONLY this JSON (no markdown, no commentary):
+{{&quot;level&quot;: &lt;0|1|2|3&gt;,
+ &quot;share_delegable&quot;: &lt;int 0-100, percent of the task&#39;s working time an agent could take over&gt;,
+ &quot;minutes_human&quot;: &lt;int, typical minutes a competent human needs for one instance of the task&gt;,
+ &quot;barrier_physical&quot;: &lt;true|false, task needs physical presence or manipulation&gt;,
+ &quot;barrier_accountability&quot;: &lt;true|false, law, licence or professional liability requires a human to perform or sign&gt;,
+ &quot;barrier_trust&quot;: &lt;true|false, task depends on in-person trust, care or persuasion&gt;,
+ &quot;barrier_access&quot;: &lt;true|false, task depends on systems, data or places an agent would normally not reach&gt;,
+ &quot;confidence&quot;: &quot;&lt;LOW|MEDIUM|HIGH&gt;&quot;}}</code></pre>

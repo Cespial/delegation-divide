@@ -1,0 +1,63 @@
+<!-- convertido de articulo/secciones/F_citar.tex por convertir_tex.py; editar aquí desde ahora -->
+<h2 id="how-to-cite-and-use-adi">How to cite and use ADI</h2>
+<h3 id="citation">Citation</h3>
+<p>Please cite the paper for any use of the index, the atlas, the rubric or the tools.</p>
+<pre><code>@article{espinal2026delegation,
+  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability
+             across Occupations and Countries},
+  author  = {Espinal Maya, Cristian and Jim{\&#39;e}nez Londo{\~n}o, Santiago},
+  journal = {arXiv preprint},
+  year    = {2026},
+  url     = {https://github.com/Cespial/delegation-divide}
+}</code></pre>
+<p>The repository carries the same entry in <code>CITATION.cff</code> and at the top of <code>README.md</code>; the dataset and code of this version have their own DOI on Zenodo, <a href="https://doi.org/10.5281/zenodo.23552918"><code>10.5281/zenodo.23552918</code></a> (all versions: <code>10.5281/zenodo.23552917</code>), which should be cited together with the paper when the data are used directly. The index is versioned: this paper describes <code>v2026.1</code>. Later versions re-rate tasks against a later reference technology and are not interchangeable with this one.</p>
+<h3 id="files">Files</h3>
+<p>The release contains, under <code>salidas/</code>:</p>
+<ul>
+<li><p><code>adi_isco.csv</code>: one row per ISCO-08 unit group with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">I</mi></mrow><mi>o</mi></msub><annotation encoding="application/x-tex">\mathrm{ADI}_o</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">I</mi><mn mathvariant="normal">3</mn></mrow><mi>o</mi></msub><annotation encoding="application/x-tex">\mathrm{ADI3}_o</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">I</mi><mi mathvariant="normal">s</mi></mrow><mi>o</mi></msub><annotation encoding="application/x-tex">\mathrm{ADIs}_o</annotation></semantics></math>, the bootstrap interval, the four barrier shares and the number of tasks.</p></li>
+<li><p><code>adi_pais.csv</code>: one row per country with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mrow><mi mathvariant="normal">A</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">I</mi></mrow><mi>c</mi></msub><annotation encoding="application/x-tex">\mathrm{ADI}_c</annotation></semantics></math> and its variants, the ISCO level used, the reference year, the income group and total employment.</p></li>
+<li><p><code>adi_tarea.csv</code>, with the task statement, the consensus level and each model’s level, and the raw model outputs (<code>ratings_sonnet.jsonl.gz</code>, <code>ratings_haiku.jsonl.gz</code>), so that any aggregation rule can be recomputed.</p></li>
+<li><p><code>claims.jsonl</code>: every number in this paper with its identifier, value, interval and the script that produces it. The LaTeX source reads numbers from this file only.</p></li>
+</ul>
+<h3 id="static-json">Static JSON</h3>
+<p>Each occupation and each country is also served as a static JSON document, so that a tool or an agent can fetch one record without downloading the dataset:</p>
+<pre><code>https://cespial.github.io/delegation-divide/adi/v2026.1/isco/2512.json
+https://cespial.github.io/delegation-divide/adi/v2026.1/country/COL.json</code></pre>
+<p>The documents carry the version, the licence and the citation string in their body.</p>
+<h3 id="python-package">Python package</h3>
+<pre><code>pip install adi-index
+
+import adi
+adi.lookup(&quot;2512&quot;)             # ISCO-08 code
+adi.search(&quot;software&quot;)         # title substring
+adi.country(&quot;COL&quot;)             # ISO 3166-1 alpha-3
+adi.top(10)                    # most delegable occupations
+adi.cite()                     # BibTeX string</code></pre>
+<p>The package ships the index as data and needs no network access; it exposes the same operations as the server below.</p>
+<h3 id="mcp-server">MCP server</h3>
+<p>The Model Context Protocol (MCP) is an open standard that lets an AI agent call external tools <span class="cite">(Anthropic 2024)</span>. The server <code>adi-mcp</code> (PyPI; listed in the MCP registry) offers four tools:</p>
+<dl>
+<dt><code>lookup_occupation</code></dt>
+<dd>
+<p>takes an ISCO-08 code, an ESCO occupation identifier or a free-text title and returns the occupation’s levels, barriers, intervals and version.</p>
+</dd>
+<dt><code>country_profile</code></dt>
+<dd>
+<p>takes an ISO 3166-1 alpha-3 code and returns the country’s index, its variants, the ISCO level and year of the employment data, and the income group.</p>
+</dd>
+<dt><code>top_occupations</code></dt>
+<dd>
+<p>returns the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> most delegable occupations at level L2+ or L3.</p>
+</dd>
+<dt><code>cite</code></dt>
+<dd>
+<p>returns the BibTeX entry above and the dataset DOI, so that an agent that uses the index can cite it in its output.</p>
+</dd>
+</dl>
+<p>A typical configuration for a Claude Code or similar client is:</p>
+<pre><code>{&quot;mcpServers&quot;: {&quot;adi&quot;: {&quot;command&quot;: &quot;uvx&quot;, &quot;args&quot;: [&quot;adi-mcp&quot;]}}}</code></pre>
+<p>Every response includes the citation string.</p>
+<h3 id="llms.txt">llms.txt</h3>
+<p>The repository root and the dataset site carry <code>llms.txt</code> and <code>llms-full.txt</code>, which summarise the paper, the headline number, the file layout and the citation in a form meant to be read by language models. Agents that index repositories should start there.</p>
+<h3 id="licences">Licences</h3>
+<p>Code is released under the MIT licence; data, figures and the rubric under Creative Commons Attribution 4.0 (CC BY 4.0). O*NET, ESCO, ILOSTAT and World Bank inputs keep their own licences; O*NET task statements are redistributed verbatim under its CC BY 4.0 licence, and the other inputs only as derived aggregates.</p>

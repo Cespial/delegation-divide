@@ -1,0 +1,249 @@
+/* The Delegation Divide — informe ADI v2026.1. Paged.js sobre Chrome (Playwright). Carta.
+   Retícula: margen izq. 0,9 in, der. 0,6 in → caja 7,0 in = cuerpo 5,3 in + medianil 0,15 in + lateral 1,55 in. */
+@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-Regular.otf); font-weight: 400; }
+@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-It.otf); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-Semibold.otf); font-weight: 600; }
+@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-SemiboldIt.otf); font-weight: 600; font-style: italic; }
+@font-face { font-family: "Source Serif 4"; src: url(../fonts/SourceSerif4-Bold.otf); font-weight: 700; }
+@font-face { font-family: "Inter"; src: url(../fonts/Inter-Light.ttf); font-weight: 300; }
+@font-face { font-family: "Inter"; src: url(../fonts/Inter-Regular.ttf); font-weight: 400; }
+@font-face { font-family: "Inter"; src: url(../fonts/Inter-Italic.ttf); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Inter"; src: url(../fonts/Inter-Medium.ttf); font-weight: 500; }
+@font-face { font-family: "Inter"; src: url(../fonts/Inter-SemiBold.ttf); font-weight: 600; }
+@font-face { font-family: "Inter"; src: url(../fonts/Inter-Bold.ttf); font-weight: 700; }
+@font-face { font-family: "Inter Display"; src: url(../fonts/InterDisplay-Medium.otf); font-weight: 500; }
+@font-face { font-family: "Inter Display"; src: url(../fonts/InterDisplay-SemiBold.otf); font-weight: 600; }
+@font-face { font-family: "JetBrains Mono"; src: url(../fonts/JetBrainsMono-Regular.ttf); font-weight: 400; }
+
+:root {
+  --tinta: #1a1918; --tinta-2: #4b5058; --gris: #6b7280; --filete: #e5e3e0; --papel: #ffffff; --hueso: #f6f5f3;
+  --teal: #0d7d74; --teal-osc: #0a4a45; --teal-med: #2f8f86; --teal-cla: #9ccbc6; --niebla: #e8f3f1;
+  --l0: #eef5f4; --l1: #d9ebe9; --l2: #9ccbc6; --l3: #0d7d74;
+  --b-fis: #5b6fae; --b-res: #c4862f; --b-con: #8e4f8f; --b-acc: #5f8f3a;
+  --serif: "Source Serif 4", Georgia, serif; --sans: "Inter", "Helvetica Neue", sans-serif; --mono: "JetBrains Mono", monospace;
+  --cuerpo: 5.3in; --lateral: 1.55in; --medianil: 0.15in;
+}
+
+/* ---------- páginas ---------- */
+@page { size: letter; margin: 0.78in 0.6in 0.85in 0.9in;
+  @bottom-left { content: string(capitulo); font: 400 7.6pt var(--sans); color: var(--gris); vertical-align: top; padding-top: 14pt; }
+  @bottom-right { content: counter(page); font: 500 7.6pt var(--sans); color: var(--tinta); vertical-align: top; padding-top: 14pt;
+                  font-variant-numeric: tabular-nums; }
+  @top-left { content: "The Delegation Divide"; font: 400 7.6pt var(--sans); color: var(--gris); vertical-align: bottom; padding-bottom: 14pt; }
+}
+@page portada { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } @top-left { content: none; } }
+@page apertura { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } @top-left { content: none; } }
+@page limpia { @top-left { content: none; } @bottom-left { content: none; } }
+@page contra { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } @top-left { content: none; } }
+@page :blank { @top-left { content: none; } @bottom-left { content: none; } @bottom-right { content: none; } }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--papel); }
+body { font: 400 10.4pt/1.5 var(--serif); color: var(--tinta); font-feature-settings: "kern", "liga", "onum" 0;
+       hyphens: auto; -webkit-hyphens: auto; text-rendering: geometricPrecision; orphans: 3; widows: 3; }
+p { margin: 0 0 7pt; text-align: left; }
+a { color: inherit; text-decoration: none; }
+em, i { font-style: italic; }
+strong, b { font-weight: 600; }
+code { font: 400 8.6pt var(--mono); color: var(--tinta-2); hyphens: none; word-break: break-word; }
+math { font-size: 1.02em; }
+math[display="block"] { margin: 8pt 0 10pt; }
+.cf { font-variant-numeric: lining-nums; white-space: nowrap; }
+.cf.falta { color: #b3261e; font-weight: 700; }
+.cite { color: var(--tinta-2); }
+sup { line-height: 0; }
+
+/* ---------- cuerpo con columna lateral ---------- */
+.cap > :is(p, h3, h4, ul, ol, math, .eq, blockquote, .box, .fig.col, .tabla.col, .lista-num) { margin-right: calc(var(--lateral) + var(--medianil)); }
+.lat { float: right; clear: right; width: var(--lateral); margin: 2pt 0 8pt var(--medianil);
+       font: 400 7.6pt/1.42 var(--sans); color: var(--tinta-2); hyphens: manual; }
+.lat strong { color: var(--tinta); font-weight: 600; }
+.lat .lat-t { display: block; color: var(--teal); font-weight: 600; margin-bottom: 2pt; }
+.lat .lat-cifra { display: block; font: 500 22pt/1 "Inter Display", var(--sans); color: var(--teal-osc); margin: 2pt 0 3pt; font-variant-numeric: tabular-nums; }
+
+h2, h3, h4 { break-after: avoid; hyphens: manual; }
+.cap h2.titulo-cap { string-set: capitulo content(text); }
+h3 { font: 600 12.4pt/1.25 var(--serif); margin: 17pt 0 6pt; color: var(--tinta); }
+h3 .num { font: 600 9pt var(--sans); color: var(--teal); margin-right: 7pt; font-variant-numeric: tabular-nums; }
+h4 { font: 600 9.6pt/1.3 var(--sans); margin: 12pt 0 4pt; }
+ul, ol { margin: 0 0 8pt; padding-left: 14pt; }
+li { margin-bottom: 4pt; }
+li::marker { color: var(--teal); }
+.cap p.tesis strong:first-child, .tesis > strong:first-child { font-weight: 600; }
+
+/* ---------- portada ---------- */
+.portada { page: portada; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--papel); }
+.portada .marca { position: absolute; left: 0.9in; top: 0.7in; display: flex; align-items: center; gap: 9pt; }
+.portada .marca svg { height: 22pt; width: auto; }
+.portada .marca span { font: 400 8.4pt/1.3 var(--sans); color: var(--tinta-2); }
+.portada .edicion { position: absolute; right: 0.6in; top: 0.74in; font: 500 8.4pt var(--sans); color: var(--teal); text-align: right; }
+.portada h1 { position: absolute; left: 0.9in; top: 1.55in; width: 6.6in; margin: 0; font: 400 58pt/0.98 var(--serif); letter-spacing: -0.02em; color: var(--tinta); hyphens: none; }
+.portada .sub { position: absolute; left: 0.9in; top: 3.62in; width: 5.2in; font: 400 15pt/1.32 var(--serif); color: var(--tinta-2); margin: 0; hyphens: none; }
+.portada .autores { position: absolute; left: 0.9in; top: 4.45in; width: 6.8in; display: grid; grid-template-columns: 1fr 1fr; gap: 0 20pt;
+                    font: 400 8.6pt/1.45 var(--sans); color: var(--tinta-2); }
+.portada .autores b { display: block; color: var(--tinta); font-weight: 600; font-size: 9.4pt; }
+.escalera { position: absolute; left: 0; right: 0; bottom: 0; height: 4.85in; display: grid; grid-template-columns: repeat(4, 1fr); align-items: end; }
+.escalera .peldano { position: relative; padding: 12pt 14pt 0 14pt; }
+.escalera .peldano .cifra { font: 500 40pt/1 "Inter Display", var(--sans); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.escalera .peldano .cifra small { font-size: 0.45em; margin-left: 2pt; vertical-align: 0.95em; }
+.escalera .peldano .et { font: 500 8.6pt/1.3 var(--sans); margin-top: 4pt; }
+.escalera .peldano .et2 { font: 400 7.6pt/1.3 var(--sans); opacity: 0.85; }
+.escalera .p1 { background: var(--l1); color: var(--teal-osc); }
+.escalera .p2 { background: var(--teal-cla); color: var(--teal-osc); }
+.escalera .p3 { background: var(--teal-med); color: #fff; }
+.escalera .p4 { background: var(--teal-osc); color: #fff; }
+.escalera .leyenda { position: absolute; left: 0.9in; top: 0; width: 5.0in; font: 400 8.2pt/1.4 var(--sans); color: var(--tinta-2); }
+.escalera .leyenda b { color: var(--tinta); font-weight: 600; }
+
+/* ---------- interior de portada / créditos ---------- */
+.creditos { page: limpia; break-before: page; font: 400 8.4pt/1.5 var(--sans); color: var(--tinta-2); }
+.creditos h2 { font: 600 9pt var(--sans); color: var(--tinta); margin: 16pt 0 4pt; }
+.creditos h2:first-child { margin-top: 0; }
+.creditos pre { font: 400 7.4pt/1.45 var(--mono); background: var(--hueso); border-left: 2pt solid var(--teal); padding: 7pt 9pt; white-space: pre-wrap; margin: 4pt 0 8pt; color: var(--tinta); }
+.creditos .cita-recomendada { font: 400 9.6pt/1.45 var(--serif); color: var(--tinta); }
+.logos { display: flex; align-items: center; gap: 26pt; margin: 6pt 0; flex-wrap: wrap; }
+.logos img, .logos svg { height: 30pt; width: auto; }
+.logos .inplux { height: 17pt; }
+.creditos .pie-logos { position: relative; margin-top: 26pt; padding-top: 12pt; border-top: 0.6pt solid var(--filete); }
+
+/* ---------- contenido ---------- */
+.contenido { page: limpia; break-before: page; }
+.contenido h2 { font: 400 30pt/1 var(--serif); margin: 0 0 14pt; letter-spacing: -0.01em; }
+.toc { list-style: none; padding: 0; margin: 0 0 18pt; }
+.toc li { display: grid; grid-template-columns: 0.42in 1fr auto; align-items: baseline; padding: 3.6pt 0; border-bottom: 0.5pt solid var(--filete); margin: 0; }
+.toc .n { font: 600 9pt var(--sans); color: var(--teal); }
+.toc .t { font: 400 11.2pt/1.3 var(--serif); }
+.toc .p { font: 500 9pt var(--sans); font-variant-numeric: tabular-nums; }
+.toc .p::after { content: target-counter(attr(data-ref), page); }
+.toc.menor { column-count: 2; column-gap: 0.3in; }
+.toc.menor li { padding: 2.4pt 0; grid-template-columns: 0.62in 1fr auto; break-inside: avoid; }
+.toc.menor .t { font: 400 8.6pt/1.3 var(--sans); color: var(--tinta-2); }
+.toc.menor .n { font-weight: 500; }
+.contenido h3 { font: 600 9pt var(--sans); color: var(--tinta); margin: 14pt 0 4pt; }
+
+/* ---------- ten things to know ---------- */
+.diez { break-before: page; }
+.diez h2, .glance h2 { font: 400 30pt/1.05 var(--serif); margin: 0 0 6pt; letter-spacing: -0.01em; }
+.diez .intro, .glance .intro { font: 400 10.4pt/1.45 var(--serif); color: var(--tinta-2); margin: 0 0 14pt; width: 5.3in; }
+.diez ol { list-style: none; padding: 0; margin: 0; counter-reset: d; }
+.diez li { counter-increment: d; display: grid; grid-template-columns: 0.44in 1fr; padding: 8pt 0 7pt; border-top: 0.6pt solid var(--filete); margin: 0; break-inside: avoid; }
+.diez li::before { content: counter(d); font: 500 17pt/1 "Inter Display", var(--sans); color: var(--teal); font-variant-numeric: tabular-nums; }
+.diez li p { margin: 0; font-size: 9.9pt; line-height: 1.45; }
+.diez li p strong { font-weight: 600; }
+
+/* ---------- at a glance ---------- */
+.glance { break-before: page; }
+.baldosas { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt; }
+.baldosa { background: var(--hueso); padding: 11pt 12pt 10pt; break-inside: avoid; min-height: 2.42in; display: flex; flex-direction: column; }
+.baldosa h4 { font: 600 9.6pt/1.3 var(--sans); margin: 0 0 3pt; color: var(--tinta); }
+.baldosa .u { font: 400 7.4pt/1.35 var(--sans); color: var(--gris); margin: 0 0 6pt; }
+.baldosa .grande { font: 500 34pt/1 "Inter Display", var(--sans); color: var(--teal-osc); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.baldosa .grande small { font-size: 0.45em; vertical-align: 0.9em; margin-left: 1pt; }
+.baldosa svg { width: 100%; height: auto; margin-top: auto; }
+.baldosa .lee { font: 400 7.8pt/1.4 var(--sans); color: var(--tinta-2); margin: 6pt 0 0; }
+.glance .fuente { font: 400 7pt/1.4 var(--sans); color: var(--gris); margin-top: 8pt; }
+
+/* ---------- aperturas de capítulo ---------- */
+.apertura { page: apertura; break-before: page; width: 8.5in; height: 11in; position: relative; overflow: hidden; background: var(--papel); }
+.apertura .img { position: absolute; left: 0; right: 0; top: 0; height: 4.7in; background: var(--niebla); overflow: hidden; }
+.apertura .img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); mix-blend-mode: multiply; opacity: 0.92; }
+.apertura .img::after { content: ""; position: absolute; inset: 0; background: var(--teal); mix-blend-mode: screen; opacity: 0.38; }
+.apertura .texto { position: absolute; left: 0.9in; top: 5.05in; width: 6.3in; }
+.apertura .num { font: 500 64pt/1 "Inter Display", var(--sans); color: var(--teal); letter-spacing: -0.03em; }
+.apertura h2 { margin: 10pt 0 18pt; font: 400 34pt/1.05 var(--serif); letter-spacing: -0.015em; hyphens: none; }
+.apertura .lead { width: 5.4in; font: 400 12pt/1.45 var(--serif); color: var(--tinta-2); margin: 0; hyphens: none; }
+.apertura.sin-img .img { background: var(--niebla); }
+.apertura.sin-img .img::after { display: none; }
+.cap { break-before: page; }
+.cap > h2.titulo-cap { font: 400 9pt var(--sans); color: transparent; height: 0; margin: 0; overflow: hidden; }
+
+/* ---------- figuras ---------- */
+.fig { margin: 8pt 0 14pt; break-inside: avoid; }
+.fig .fn { font: 600 7.6pt var(--sans); color: var(--teal); margin: 0 0 2pt; }
+.fig .ft { font: 600 11pt/1.28 var(--serif); margin: 0 0 2pt; color: var(--tinta); hyphens: manual; }
+.fig .fs { font: 400 7.8pt/1.35 var(--sans); color: var(--gris); margin: 0 0 6pt; }
+.fig .lienzo svg { width: 100%; height: auto; display: block; }
+.fig .notas { font: 400 7pt/1.4 var(--sans); color: var(--tinta-2); margin-top: 5pt; border-top: 0.5pt solid var(--filete); padding-top: 4pt; }
+.fig .notas b { font-weight: 600; color: var(--tinta); }
+.fig.ancho { margin-right: 0; }
+.fig.pagina { break-before: page; }
+
+/* ---------- tablas ---------- */
+.tabla { margin: 8pt 0 14pt; break-inside: avoid; }
+.tabla .fn { font: 600 7.6pt var(--sans); color: var(--teal); margin: 0 0 2pt; }
+.tabla .ft { font: 600 11pt/1.28 var(--serif); margin: 0 0 6pt; }
+table { border-collapse: collapse; width: 100%; font: 400 7.9pt/1.3 var(--sans); }
+thead th { font-weight: 600; text-align: left; border-bottom: 0.8pt solid var(--tinta); padding: 4pt 5pt 3pt; vertical-align: bottom; }
+tbody td, tbody th { padding: 3.2pt 5pt; border-bottom: 0.4pt solid var(--filete); vertical-align: top; text-align: left; font-weight: 400; }
+table.num td { text-align: right; font-variant-numeric: tabular-nums; }
+table.num thead th:not(:first-child) { text-align: right; }
+table.ocup thead th:nth-child(2) { text-align: left; }
+table.ocup td.cod { text-align: left; color: var(--gris); }
+table .grupo td { font-weight: 600; color: var(--teal); text-align: left !important; padding-top: 7pt; border-bottom: 0.6pt solid var(--teal-cla); }
+table .total th, table .total td { font-weight: 600; border-top: 0.8pt solid var(--tinta); }
+table.reg .se td { color: var(--gris); padding-top: 0; }
+table.reg tbody tr:not(.se) td, table.reg tbody tr:not(.se) th { border-bottom: none; padding-bottom: 0; }
+.tabla .notas { font: 400 7pt/1.4 var(--sans); color: var(--tinta-2); margin-top: 5pt; }
+.cap table:not(.t) { font-size: 7.4pt; }
+
+/* ---------- cajas ---------- */
+.box { background: var(--niebla); padding: 11pt 13pt 6pt; margin: 10pt 0 14pt; break-inside: avoid; }
+.box .bn { font: 600 7.6pt var(--sans); color: var(--teal); margin: 0 0 2pt; }
+.box h4 { font: 600 11pt/1.28 var(--serif); margin: 0 0 6pt; }
+.box p, .box li { font: 400 8.8pt/1.48 var(--sans); }
+
+/* ---------- infografía de la escalera (figura 1.1) ---------- */
+.ladder { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4pt; align-items: end; margin-top: 4pt; }
+.ladder .n { padding: 9pt 9pt 8pt; color: var(--teal-osc); }
+.ladder .n .c { font: 600 15pt/1 "Inter Display", var(--sans); }
+.ladder .n .nom { font: 600 8.6pt/1.25 var(--sans); margin: 3pt 0 5pt; }
+.ladder .n p { font: 400 7.5pt/1.38 var(--sans); margin: 0 0 4pt; }
+.ladder .n .rol { font: 400 7.1pt/1.35 var(--sans); border-top: 0.5pt solid currentColor; padding-top: 4pt; opacity: 0.9; }
+.ladder .n .pct { font: 500 20pt/1 "Inter Display", var(--sans); margin-top: 8pt; font-variant-numeric: tabular-nums; }
+.ladder .n .pct small { font: 400 6.8pt/1.2 var(--sans); display: block; margin-top: 2pt; }
+.ladder .n0 { background: var(--l0); } .ladder .n1 { background: var(--l1); } .ladder .n2 { background: var(--l2); }
+.ladder .n3 { background: var(--l3); color: #fff; }
+.barreras-ley { display: flex; gap: 16pt; margin-top: 8pt; font: 400 7.6pt var(--sans); color: var(--tinta-2); flex-wrap: wrap; }
+.barreras-ley span::before { content: ""; display: inline-block; width: 8pt; height: 8pt; margin-right: 4pt; vertical-align: -1pt; background: var(--c); }
+.barreras-ley b { color: var(--tinta); font-weight: 600; }
+
+/* ---------- flujo (figura 3.1) ---------- */
+.flujo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 4pt; }
+.flujo .paso { position: relative; padding: 8pt 12pt 8pt 8pt; border-top: 2pt solid var(--teal); }
+.flujo .paso:not(:last-child)::after { content: ""; position: absolute; right: 2pt; top: -5.5pt; border: 4.5pt solid transparent; border-left: 6pt solid var(--teal); }
+.flujo .paso .k { font: 600 7.4pt var(--sans); color: var(--teal); }
+.flujo .paso .c { font: 500 15pt/1.05 "Inter Display", var(--sans); color: var(--teal-osc); margin: 4pt 0 2pt; font-variant-numeric: tabular-nums; }
+.flujo .paso .t { font: 600 8pt/1.25 var(--sans); margin-bottom: 4pt; }
+.flujo .paso p { font: 400 7.2pt/1.38 var(--sans); color: var(--tinta-2); margin: 0; }
+
+/* ---------- tarjetas de validación ---------- */
+.tarjetas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8pt; margin: 8pt 0 14pt; break-inside: avoid; }
+.tarjeta { border-top: 2pt solid var(--teal); padding: 7pt 0 0; }
+.tarjeta .c { font: 500 26pt/1 "Inter Display", var(--sans); color: var(--teal-osc); font-variant-numeric: tabular-nums; }
+.tarjeta .t { font: 600 8pt/1.3 var(--sans); margin: 4pt 0 2pt; }
+.tarjeta p { font: 400 7.4pt/1.38 var(--sans); color: var(--tinta-2); margin: 0; }
+
+/* ---------- anexos, referencias ---------- */
+.anexo { break-before: page; }
+.anexo > h2 { font: 400 26pt/1.05 var(--serif); margin: 0 0 14pt; letter-spacing: -0.01em; string-set: capitulo content(text); }
+.anexo > h2 .num { font: 500 11pt var(--sans); color: var(--teal); display: block; margin-bottom: 6pt; }
+.anexo { font-size: 9.6pt; }
+.anexo pre { font: 400 7.4pt/1.45 var(--mono); background: var(--hueso); padding: 7pt 9pt; white-space: pre-wrap; border-left: 2pt solid var(--teal); }
+.referencias .csl-entry { font: 400 8.2pt/1.42 var(--serif); padding-left: 14pt; text-indent: -14pt; margin-bottom: 4pt; break-inside: avoid; }
+.referencias .csl-entry a { word-break: break-all; color: var(--tinta-2); }
+.referencias #refs { column-count: 2; column-gap: 0.25in; }
+
+/* ---------- contraportada ---------- */
+.contra { page: contra; break-before: left; width: 8.5in; height: 11in; position: relative; background: var(--teal-osc); color: #fff; }
+.contra .bloque { position: absolute; left: 0.9in; top: 1.1in; width: 5.2in; font: 400 11pt/1.5 var(--serif); }
+.contra .bloque h2 { font: 400 24pt/1.1 var(--serif); margin: 0 0 14pt; }
+.contra .bloque p { margin: 0 0 9pt; color: #d6e9e6; }
+.contra .datos { position: absolute; left: 0.9in; top: 5.6in; width: 6.9in; font: 400 8.2pt/1.6 var(--sans); color: #d6e9e6; display: grid; grid-template-columns: 1.3in 1fr; gap: 2pt 12pt; }
+.contra .datos b { color: #fff; font-weight: 600; }
+.contra .logos { position: absolute; left: 0.9in; bottom: 0.9in; background: #fff; padding: 12pt 18pt; gap: 28pt; }
+
+/* ---------- marca sintética ---------- */
+body.sintetico .cap::before { content: "SYNTHETIC — NOT RESULTS"; position: fixed; top: 45%; left: 10%; font: 700 40pt var(--sans); color: rgba(178,34,34,.18); transform: rotate(-30deg); }
+
+.tabla caption { display: none; }
+.cap > h2.titulo-cap.visible { font: 400 30pt/1.05 var(--serif); color: var(--tinta); height: auto; overflow: visible; margin: 0 0 16pt; letter-spacing: -0.01em; }

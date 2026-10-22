@@ -1,5 +1,7 @@
 """Paso 21: figuras del artículo (PDF vectorial en articulo/fig/, estilo sobrio, fuente serif). Si el índice es sintético cada
-figura lleva la marca de agua diagonal «SYNTHETIC». Lee salidas/ (indice.py) y datos/atlas/. Uso: analisis/figuras.py [fig1 fig4 …]"""
+figura lleva la marca de agua diagonal «SYNTHETIC». Lee salidas/ (indice.py) y datos/atlas/. Uso: analisis/figuras.py [fig1 fig4 …]
+Con --estilo informe: SVG con texto vivo (Inter) en informe/fig/, paleta teal del informe (barreras validadas con el validador de dataviz:
+pasa banda de luminosidad, croma, separación CVD y contraste) y tamaños de la retícula del informe (columna 5,6 in; ancho total 7,6 in)."""
 import sys, zipfile; sys.path.insert(0, "noche")
 from comun import *
 import numpy as np, pandas as pd
@@ -7,24 +9,41 @@ import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
-lg = log("21_figuras"); SAL = RAIZ / "salidas"; FIG = RAIZ / "articulo/fig"; FIG.mkdir(parents=True, exist_ok=True)
+INFORME = "--estilo" in sys.argv and sys.argv[sys.argv.index("--estilo") + 1] == "informe"
+if "--estilo" in sys.argv: i = sys.argv.index("--estilo"); del sys.argv[i:i + 2]
+lg = log("21_figuras"); SAL = RAIZ / "salidas"; FIG = RAIZ / ("informe/fig" if INFORME else "articulo/fig"); FIG.mkdir(parents=True, exist_ok=True)
 plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "Times", "DejaVu Serif"], "mathtext.fontset": "stix",
                      "font.size": 9, "axes.spines.top": False, "axes.spines.right": False, "axes.linewidth": 0.6, "xtick.major.width": 0.6,
                      "ytick.major.width": 0.6, "pdf.fonttype": 42, "savefig.bbox": "tight", "savefig.pad_inches": 0.03})
 TINTA, GRIS, CLARO = "#1f2a36", "#7d8794", "#d9dde2"
 INGRESO_COL = {"high": "#1f4e79", "upper-middle": "#4f86b8", "lower-middle": "#d08c3f", "low": "#a8432f"}
+# paleta del paper (por defecto) y del informe: L2+ claro / L3 oscuro, cmap del mapa, tonos de la escalera, relleno de cajas
+P = dict(l2="#a9c2da", l3="#1f4e79", cmap="Blues", tonos=["#eef1f4", "#dfe6ee", "#c6d5e4", "#a9c2da"], caja="#f3f5f7", sin_dato="#eceef0")
 INGRESO_EN = {"high": "High income", "upper-middle": "Upper-middle income", "lower-middle": "Lower-middle income", "low": "Low income"}
 GG = {"1": "Managers", "2": "Professionals", "3": "Technicians and associate prof.", "4": "Clerical support", "5": "Service and sales",
       "6": "Skilled agricultural", "7": "Craft and related trades", "8": "Plant and machine operators", "9": "Elementary occupations"}
 BARRERAS = [("barrera_fisica", "Physical", "#5b6b7c"), ("barrera_responsabilidad", "Accountability", "#9c6b3f"),
             ("barrera_confianza", "Trust", "#b9a26b"), ("barrera_acceso", "Access", "#8fa9bf")]
+if INFORME:
+    plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Inter", "Helvetica Neue", "DejaVu Sans"], "mathtext.fontset": "custom",
+                         "mathtext.rm": "Inter", "mathtext.it": "Inter:italic", "font.size": 8.5, "svg.fonttype": "none",
+                         "axes.edgecolor": "#6b7280", "axes.labelcolor": "#1a1918", "xtick.color": "#6b7280", "ytick.color": "#1a1918",
+                         "xtick.labelcolor": "#4b5058", "ytick.labelcolor": "#1a1918", "axes.spines.left": False, "ytick.major.size": 0})
+    TINTA, GRIS, CLARO = "#1a1918", "#6b7280", "#e5e3e0"
+    INGRESO_COL = {"high": "#0a5c56", "upper-middle": "#2f8f86", "lower-middle": "#7dbdb5", "low": "#bfe0dc"}
+    BARRERAS = [("barrera_fisica", "Physical", "#5b6fae"), ("barrera_responsabilidad", "Accountability", "#c4862f"),
+                ("barrera_confianza", "Trust", "#8e4f8f"), ("barrera_acceso", "Access", "#5f8f3a")]
+    P = dict(l2="#9ccbc6", l3="#0a5c56", cmap=matplotlib.colors.LinearSegmentedColormap.from_list("adi", ["#e8f3f1", "#9ccbc6", "#2f8f86", "#0a4a45"]),
+             tonos=["#eef5f4", "#d9ebe9", "#9ccbc6", "#4fa39c"], caja="#f3f1ee", sin_dato="#ebe9e5")
+W = 5.6 if INFORME else 6.5     # ancho de columna (in)
+WW = 7.6 if INFORME else 6.5    # ancho total (in)
 SINT = (SAL / "adi_isco.csv").exists() and pd.read_csv(SAL / "adi_isco.csv").sintetico.astype(str).str.lower().eq("true").any()
 
 
 def guardar(fig, nombre):
     if SINT:
         fig.text(0.5, 0.5, "SYNTHETIC", rotation=30, ha="center", va="center", fontsize=54, color="#b22222", alpha=0.18, weight="bold", zorder=100)
-    p = FIG / f"{nombre}.pdf"; fig.savefig(p); plt.close(fig); registrar(p, "derivado: figuras.py", nota="SINTÉTICO" if SINT else "")
+    p = FIG / f"{nombre}.{'svg' if INFORME else 'pdf'}"; fig.savefig(p, transparent=INFORME); plt.close(fig); registrar(p, "derivado: figuras.py", nota="SINTÉTICO" if SINT else "")
     lg.info(f"{p.name}")
 
 
@@ -43,7 +62,7 @@ def fig1_escalera():
                ("L2", "Partial delegation", "Agent executes\nsub-steps end to end;\nhuman does a key\nstep or reviews"),
                ("L3", "Full delegation", "Agent completes the\ntask from goal and\naccess; human\nassigns and accepts")]
     fig, ax = plt.subplots(figsize=(6.5, 3.0)); ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
-    tonos = ["#eef1f4", "#dfe6ee", "#c6d5e4", "#a9c2da"]
+    tonos = P["tonos"]
     for k, (cod, nom, defi) in enumerate(niveles):
         x, y, w, h = 0.02 + k * 0.205, 0.08 + k * 0.15, 0.19, 0.42
         ax.add_patch(plt.Rectangle((x, 0.08), w, y - 0.08 + h, fc=tonos[k], ec=TINTA, lw=0.6))
@@ -76,7 +95,7 @@ def fig2_flujo():
     pasos = [(f"O*NET 30.2\n{nt:,} task\nstatements", 0.0), ("Crosswalk\nO*NET-SOC 2019\n→ SOC 2010\n→ ISCO-08", 0.205),
              (f"Ratings\n{nm} language models\n+ validation\nsample (1,500 tasks)", 0.41), (f"ISCO-08\n{ni} unit groups\ntask-weighted\nADI, ADI3, ADIs", 0.615),
              (f"Countries\nILOSTAT\nemployment\n{npai} countries\n→ world headline", 0.82)]
-    for t, x in pasos: caja(ax, x + 0.005, 0.38, 0.17, 0.5, t, fc="#f3f5f7", fs=7.2)
+    for t, x in pasos: caja(ax, x + 0.005, 0.38, 0.17, 0.5, t, fc=P["caja"], fs=7.2)
     for (_, x1), (_, x2) in zip(pasos, pasos[1:]): flecha(ax, (x1 + 0.178, 0.63), (x2 + 0.003, 0.63))
     notas = ["importance × frequency\nweights", "SOC → k ISCO groups:\nweight 1/k", "modal level; ties →\nlower; median share",
              "bootstrap over tasks\nwithin occupation", "4-digit weights within\nreported groups"]
@@ -86,9 +105,9 @@ def fig2_flujo():
 
 def fig3_isco():
     g = pd.read_csv(SAL / "indice_gg.csv", dtype={"gg": str}).sort_values("adi_l2")
-    fig, ax = plt.subplots(figsize=(6.0, 3.2)); y = np.arange(len(g))
-    ax.barh(y, 100 * g.adi_l2, color="#a9c2da", height=0.62, label="ADI (L2 or L3)")
-    ax.barh(y, 100 * g.adi_l3, color="#1f4e79", height=0.62, label="ADI3 (L3 only)")
+    fig, ax = plt.subplots(figsize=(W if INFORME else 6.0, 3.2)); y = np.arange(len(g))
+    ax.barh(y, 100 * g.adi_l2, color=P["l2"], height=0.62, label="ADI (L2 or L3)")
+    ax.barh(y, 100 * g.adi_l3, color=P["l3"], height=0.62, label="ADI3 (L3 only)")
     ax.errorbar(100 * g.adi_l2, y, xerr=[100 * (g.adi_l2 - g.lo), 100 * (g.hi - g.adi_l2)], fmt="none", ecolor=TINTA, elinewidth=0.7, capsize=2)
     ax.set_yticks(y, [f"{k}  {GG.get(k, k)}" for k in g.gg]); ax.set_xlabel("Share of task weight delegable to AI agents (%)")
     ax.set_xlim(0, 100); ax.legend(frameon=False, loc="lower right", fontsize=8); ax.grid(axis="x", color=CLARO, lw=0.5); ax.set_axisbelow(True)
@@ -112,9 +131,9 @@ def fig4_mapa():
         if shp is None: raise RuntimeError("sin Natural Earth")
         w = gpd.read_file(shp); iso = w["ISO_A3_EH"].where(w["ISO_A3_EH"] != "-99", w["ADM0_A3"]); w["iso3"] = iso
         w = w[w.iso3 != "ATA"].merge(p[["iso3", "adi_l2"]], on="iso3", how="left"); w["v"] = 100 * w.adi_l2
-        fig, ax = plt.subplots(figsize=(6.5, 3.4))
-        w[w.v.isna()].plot(ax=ax, color="#eceef0", edgecolor="white", linewidth=0.2)
-        w[w.v.notna()].plot(ax=ax, column="v", cmap="Blues", edgecolor="white", linewidth=0.2, legend=True,
+        fig, ax = plt.subplots(figsize=(WW, 3.95) if INFORME else (6.5, 3.4))
+        w[w.v.isna()].plot(ax=ax, color=P["sin_dato"], edgecolor="white", linewidth=0.2)
+        w[w.v.notna()].plot(ax=ax, column="v", cmap=P["cmap"], edgecolor="white", linewidth=0.2, legend=True,
                             legend_kwds={"shrink": 0.55, "label": "ADI$_c$ (% of employment-weighted task time at L2–L3)", "orientation": "horizontal", "pad": 0.02})
         ax.set_axis_off(); ax.set_xlim(-170, 180); ax.set_ylim(-57, 84)
     except Exception as e:
@@ -128,9 +147,10 @@ def fig4_mapa():
 def fig5_ingreso():
     p = pd.read_csv(SAL / "indice_pais_detalle.csv").dropna(subset=["pib_pc_ppp"])
     x, y = np.log(p.pib_pc_ppp), 100 * p.adi_l2
-    fig, ax = plt.subplots(figsize=(5.2, 3.6))
+    fig, ax = plt.subplots(figsize=(WW, 4.3) if INFORME else (5.2, 3.6))
     for ing, col in INGRESO_COL.items():
-        d = p[p.ingreso == ing]; ax.scatter(np.log(d.pib_pc_ppp), 100 * d.adi_l2, s=14, color=col, alpha=0.85, lw=0, label=INGRESO_EN[ing])
+        d = p[p.ingreso == ing]; ax.scatter(np.log(d.pib_pc_ppp), 100 * d.adi_l2, s=22 if INFORME else 14, color=col, alpha=1 if INFORME else 0.85,
+                   lw=0.6 if INFORME else 0, edgecolors="#0a5c56" if INFORME else "none", label=INGRESO_EN[ing])
     b, a = np.polyfit(x, y, 1); xx = np.linspace(x.min(), x.max(), 50); ax.plot(xx, a + b * xx, color=TINTA, lw=0.9)
     import matplotlib.patheffects as pe
     desp = {"COL": (-34, -8), "MEX": (10, -10), "BRA": (-30, 10), "USA": (-8, 9), "IND": (5, -8), "DEU": (6, -9), "NGA": (-22, 5)}
@@ -146,7 +166,7 @@ def fig5_ingreso():
 
 def fig6_barreras():
     g = pd.read_csv(SAL / "indice_gg.csv", dtype={"gg": str}).sort_values("gg", ascending=False)
-    fig, ax = plt.subplots(figsize=(6.0, 3.2)); y = np.arange(len(g)); base = np.zeros(len(g))
+    fig, ax = plt.subplots(figsize=(W if INFORME else 6.0, 3.2)); y = np.arange(len(g)); base = np.zeros(len(g))
     for col, nom, c in BARRERAS:
         v = 100 * g[col].values; ax.barh(y, v, left=base, color=c, height=0.65, label=nom, edgecolor="white", lw=0.3); base += v
     ax.set_yticks(y, [f"{k}  {GG[k]}" for k in g.gg]); ax.set_xlabel("Task weight flagged by each barrier (%; barriers are not exclusive and stack)")

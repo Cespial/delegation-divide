@@ -1,0 +1,151 @@
+{% from "componentes.html" import c, figura, tabla, lat %}<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries</title>
+<meta name="author" content="Cristian Espinal Maya; Santiago Jiménez Londoño">
+<meta name="description" content="Agent Delegability Index (ADI) v2026.1: 18,796 O*NET tasks, 433 ISCO-08 occupations, 146 countries.">
+<meta name="keywords" content="AI agents, delegation, labour markets, ISCO-08, ILOSTAT, Agent Delegability Index, ADI">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="plantilla/estilo.css">
+</head><body{% if sintetico %} class="sintetico"{% endif %}>
+
+<!-- ================= PORTADA ================= -->
+<section class="portada">
+  <div class="marca">{{ marca }}<span>Agent Delegability Index</span></div>
+  <div class="edicion">Report<br>Version 2026.1, October 2026</div>
+  <h1>The Delegation Divide</h1>
+  <p class="sub">An open index of how much work AI agents can take over, for 433 occupations and {{ c("cobertura.paises") }} countries</p>
+  <div class="autores">
+    <div><b>Cristian Espinal Maya</b>Universidad Nacional de Colombia, Facultad de Minas</div>
+    <div><b>Santiago Jiménez Londoño</b>Universidad EAFIT</div>
+  </div>
+  <div class="escalera">
+    <div class="leyenda"><b>Share of task time that AI agents can at least partly take over</b>, by country income group, 2026. Employment-weighted, {{ c("cobertura.paises") }} countries.</div>
+    {% for p in peldanos %}
+    <div class="peldano p{{ loop.index }}" style="height: {{ p.alto }}in">
+      <div class="cifra">{{ c(p.id) }}<small>%</small></div><div class="et">{{ p.nombre }}</div><div class="et2">{{ c(p.paises) }} countries</div>
+    </div>{% endfor %}
+  </div>
+</section>
+
+<!-- ================= CRÉDITOS ================= -->
+<section class="creditos">
+  <h2>Recommended citation</h2>
+  <p class="cita-recomendada">Espinal Maya, Cristian, and Santiago Jiménez Londoño. 2026. <em>The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries.</em> Agent Delegability Index, version 2026.1. https://github.com/Cespial/delegation-divide</p>
+  <pre>@article{espinal2026delegation,
+  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability
+             across Occupations and Countries},
+  author  = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
+  journal = {arXiv preprint},
+  year    = {2026},
+  url     = {https://github.com/Cespial/delegation-divide},
+  note    = {Preregistration: doi:10.17605/OSF.IO/9ZNTF}
+}</pre>
+  <h2>Data and code</h2>
+  <p>Dataset and code, version 2026.1: Zenodo, doi:10.5281/zenodo.23552918 (all versions: doi:10.5281/zenodo.23552917). Repository: github.com/Cespial/delegation-divide. Static JSON for every occupation and country: cespial.github.io/delegation-divide/adi/v2026.1/. Python package <code>adi-index</code> and MCP server <code>adi-mcp</code>.</p>
+  <h2>Preregistration</h2>
+  <p>Hypotheses, rubric and analysis plan were registered before the main scoring run: OSF, doi:10.17605/OSF.IO/9ZNTF. The rubric file carries a SHA-256 hash that the scoring script checks before it runs. Deviations from the registered plan are listed in the repository.</p>
+  <h2>Reproducibility</h2>
+  <p>Every number in this report is read from <code>salidas/claims.jsonl</code> by identifier; no number is typed by hand. The report, the paper and the dataset are built from the same files by one script.</p>
+  <h2>Licences</h2>
+  <p>Text, data, figures and rubric: Creative Commons Attribution 4.0 (CC BY 4.0). Code: MIT. O*NET, ESCO, ILOSTAT and World Bank inputs keep their own licences.</p>
+  <h2>About this report</h2>
+  <p>This report presents the same results as the paper of the same title, in a form meant for policy and general readers. Where the two differ in wording, the paper is the reference. Illustrations are original and were generated for this report; they carry no data.</p>
+  <div class="pie-logos"><div class="logos">{{ logos }}</div></div>
+</section>
+
+<!-- ================= CONTENIDO ================= -->
+<section class="contenido">
+  <h2>Contents</h2>
+  <ol class="toc">
+    <li><span class="n"></span><span class="t">Ten things to know</span><span class="p" data-ref="#diez"></span></li>
+    <li><span class="n"></span><span class="t">At a glance</span><span class="p" data-ref="#glance"></span></li>
+    {% for k in capitulos %}<li><span class="n">{{ k.num or "" }}</span><span class="t">{{ k.titulo }}</span><span class="p" data-ref="#{{ k.id }}"></span></li>
+    {% endfor %}
+    {% for a in anexos %}<li><span class="n">{{ a.num }}</span><span class="t">{{ a.titulo }}</span><span class="p" data-ref="#{{ a.id }}"></span></li>
+    {% endfor %}
+    <li><span class="n"></span><span class="t">References</span><span class="p" data-ref="#referencias"></span></li>
+  </ol>
+  <h3>Figures and tables</h3>
+  <ol class="toc menor">
+    {% for f in indice_fig %}<li><span class="n">{{ f.n }}</span><span class="t">{{ f.titulo }}</span><span class="p" data-ref="#{{ f.id }}"></span></li>
+    {% endfor %}
+  </ol>
+</section>
+
+<!-- ================= TEN THINGS TO KNOW ================= -->
+<section class="diez" id="diez">
+  <h2>Ten things to know</h2>
+  <p class="intro">The Agent Delegability Index rates every one of {{ c("cobertura.tareas") }} occupational task statements for how much of it a current AI agent could carry out, and carries the ratings to {{ c("cobertura.isco") }} occupations and {{ c("cobertura.paises") }} countries.</p>
+  <ol>
+    <li><p><strong>About a third of the world's working time is at least partly delegable to AI agents.</strong> {{ c("titular.global.l2") }}% of task time in world employment can be partly handed to an agent in 2026 (95% interval {{ c("titular.global.l2.lo") }}–{{ c("titular.global.l2.hi") }}%), across {{ c("cobertura.empleo_millones") }} million workers.</p></li>
+    <li><p><strong>Full delegation is rare.</strong> Only {{ c("titular.global.l3") }}% of task time can be handed over in full. Partial delegation is the most common rating of a task ({{ c("tareas.nivel2.pct") }}% of statements), full delegation the least common ({{ c("tareas.nivel3.pct") }}%).</p></li>
+    <li><p><strong>Delegable work rises with income: the delegation divide.</strong> The index goes from {{ c("titular.ingreso.bajo.l2") }}% in low-income countries to {{ c("titular.ingreso.alto.l2") }}% in high-income countries, {{ c("h1.pendiente") }} percentage points for each log point of GDP per capita (R² = {{ c("h1.r2") }}, {{ c("h1.n") }} countries).</p></li>
+    <li><p><strong>The divide comes from what people do, not from where they do it.</strong> Poorer countries employ more people in farming, crafts and elementary jobs, where the physical barrier is flagged on {{ c("gg.9.barrera_fisica.pct") }}% of task weight in elementary occupations against {{ c("gg.1.barrera_fisica.pct") }}% for managers.</p></li>
+    <li><p><strong>Office work is the most delegable.</strong> Managers reach {{ c("gg.1.l2") }}% and clerical support workers {{ c("gg.4.l2") }}%; elementary occupations reach {{ c("gg.9.l2") }}%. {{ c("extremo.isco.n.max") }} unit groups, led by coding and proof-reading clerks, are delegable on every task.</p></li>
+    <li><p><strong>Countries range from Burundi to Singapore.</strong> The index runs from {{ c("extremo.pais.bot1.l2") }}% in Burundi to {{ c("extremo.pais.top1.l2") }}% in Singapore. Colombia stands at {{ c("pais.COL.l2") }}%, Mexico at {{ c("pais.MEX.l2") }}%, Brazil at {{ c("pais.BRA.l2") }}% and the United States at {{ c("pais.USA.l2") }}%.</p></li>
+    <li><p><strong>Delegation tracks exposure, and adds levels and barriers to it.</strong> Across occupations the index correlates with earlier exposure measures at r = {{ c("h3.r.eloundou") }} and {{ c("h3.r.felten") }}, above the preregistered bound of 0.80. What ADI adds is how far delegation goes, what stops it, and global reach.</p></li>
+    <li><p><strong>Full delegation peaks for tasks of about twelve minutes.</strong> The chance that an agent can finish a task alone rises with task length up to about {{ c("h4.pico.minutos") }} minutes of human time and falls after it.</p></li>
+    <li><p><strong>Use follows delegability.</strong> Across {{ c("h2.n") }} countries, observed AI use correlates with the index at r = {{ c("h2.r.adi_uso") }}. The preregistered adoption gap in middle-income countries is not supported ({{ c("h2.brecha.medio.p", "p") }}).</p></li>
+    <li><p><strong>The ratings hold up against people and agents.</strong> The two rating models agree at κ = {{ c("agree.kappa.sonnet_haiku") }}; a blind human rating of {{ c("n.humano") }} tasks agrees with them at κ = {{ c("agree.kappa.humano.modelo") }}, and an agentic panel with web search at κ = {{ c("agree.kappa.panel.modelo") }}. Data, prompts and tools are open.</p></li>
+  </ol>
+</section>
+
+<!-- ================= AT A GLANCE ================= -->
+<section class="glance" id="glance">
+  <h2>At a glance</h2>
+  <p class="intro">Six results from the 2026 edition of the index. Each panel is drawn from the published dataset.</p>
+  <div class="baldosas">
+    <div class="baldosa"><h4>A third of work is partly delegable</h4><p class="u">World employment, share of task time by level, %</p>
+      <div class="grande">{{ c("titular.global.l2") }}<small>%</small></div>{{ mini.titular }}<p class="lee">Full delegation is a thin slice of the total.</p></div>
+    <div class="baldosa"><h4>Richer countries have more delegable work</h4><p class="u">ADI by World Bank income group, %</p>
+      <div class="grande">{{ c("h1.pendiente") }}<small>pp</small></div>{{ mini.ingreso }}<p class="lee">Percentage points per log point of GDP per capita.</p></div>
+    <div class="baldosa"><h4>Office work tops the index</h4><p class="u">ADI by ISCO-08 major group, %</p>{{ mini.grupos }}</div>
+    <div class="baldosa"><h4>The physical barrier holds manual work back</h4><p class="u">Task weight flagged as needing physical presence, %</p>{{ mini.fisica }}</div>
+    <div class="baldosa"><h4>From Burundi to Singapore</h4><p class="u">ADI by country, {{ c("cobertura.paises") }} countries, %</p>
+      <div class="grande">{{ c("extremo.pais.bot1.l2") }}–{{ c("extremo.pais.top1.l2") }}<small>%</small></div>{{ mini.paises }}</div>
+    <div class="baldosa"><h4>People and agents confirm the ratings</h4><p class="u">Agreement with the model consensus, quadratic-weighted κ</p>{{ mini.kappa }}<p class="lee">Values above 0.80 indicate strong agreement.</p></div>
+  </div>
+  <p class="fuente">Source: Agent Delegability Index v2026.1; ILOSTAT; World Bank; Anthropic Economic Index. Definitions in Chapter 1.</p>
+</section>
+
+<!-- ================= CAPÍTULOS ================= -->
+{% for k in capitulos %}
+{% if k.apertura %}
+<section class="apertura{% if not k.img %} sin-img{% endif %}" id="{{ k.id }}">
+  <div class="img">{% if k.img %}<img src="{{ k.img }}" alt="">{% endif %}</div>
+  <div class="texto">{% if k.num %}<div class="num">{{ k.num }}</div>{% endif %}
+  <h2>{{ k.titulo }}</h2>
+  {% if k.lead %}<p class="lead">{{ k.lead }}</p>{% endif %}</div>
+</section>
+{% endif %}
+<section class="cap" {% if not k.apertura %}id="{{ k.id }}"{% endif %}>
+  <h2 class="titulo-cap{% if not k.apertura %} visible{% endif %}">{{ k.titulo }}</h2>
+  {{ k.cuerpo }}
+</section>
+{% endfor %}
+
+{% for a in anexos %}
+<section class="anexo" id="{{ a.id }}"><h2><span class="num">Annex {{ a.num }}</span>{{ a.titulo }}</h2>{{ a.cuerpo }}</section>
+{% endfor %}
+<section class="anexo referencias" id="referencias"><h2>References</h2>{{ referencias }}</section>
+
+<!-- ================= CONTRAPORTADA ================= -->
+<section class="contra">
+  <div class="bloque">
+    <h2>The Delegation Divide</h2>
+    <p>Most measures of artificial intelligence and work ask which jobs are exposed. This report asks how much of each task an AI agent can take over, from helping a person to finishing the job alone, and what stops it.</p>
+    <p>It rates {{ c("cobertura.tareas") }} task statements, maps them to {{ c("cobertura.isco") }} occupations and weights them by employment in {{ c("cobertura.paises") }} countries. The result is an open index, an atlas and a set of tools that people and AI agents can query and cite.</p>
+  </div>
+  <div class="datos">
+    <b>Version</b><span>2026.1, October 2026</span>
+    <b>Dataset</b><span>doi:10.5281/zenodo.23552918</span>
+    <b>Preregistration</b><span>doi:10.17605/OSF.IO/9ZNTF</span>
+    <b>Repository</b><span>github.com/Cespial/delegation-divide</span>
+    <b>Tools</b><span>pip install adi-index; MCP server adi-mcp</span>
+    <b>Licence</b><span>CC BY 4.0 (data and text), MIT (code)</span>
+  </div>
+  <div class="logos">{{ logos }}</div>
+</section>
+<script>window.PagedConfig={after:function(){window.__pagedDone=true;}};</script>
+<script src="lib/paged.polyfill.js"></script>
+</body></html>

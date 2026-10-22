@@ -91,7 +91,47 @@ $R^2$ & """ + r2 + r""" \\
 \end{table}""")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and "--html" not in sys.argv:
     for f in (tab2, tab3, tab4):
         try: f()
         except Exception as e: lg.error(f"{f.__name__}: {e}")
+
+
+# ---- salida HTML para el informe (informe/tablas/*.html): mismas cifras que las tablas LaTeX, sin título (lo pone el informe) ----
+def html_tablas():
+    import html as H
+    T = RAIZ / "informe/tablas"; T.mkdir(parents=True, exist_ok=True)
+    def w(nombre, txt): (T / f"{nombre}.html").write_text(f"<!-- generado por analisis/tablas.py — no editar a mano -->\n{txt}\n"); lg.info(f"{nombre}.html")
+    m = pd.read_csv(DATOS / "atlas/paises_meta.csv"); filas = []
+    for ing, et in ING + [(None, "Total")]:
+        d = m if ing is None else m[m.ingreso == ing]
+        filas.append(f'<tr{" class=\"total\"" if ing is None else ""}><th>{et}</th><td>{len(d)}</td><td>{(d.resolucion == 2).sum()}</td><td>{(d.resolucion == 1).sum()}</td>'
+                     f'<td>{int(d.anio.median())}</td><td>{d.empleo_total.sum() / 1e6:,.0f}</td><td>{d.pib_pc_ppp.notna().sum()}</td></tr>')
+    w("tab2_cobertura", '<table class="t num"><thead><tr><th>Income group</th><th>Countries</th><th>2-digit</th><th>1-digit</th><th>Median year</th>'
+      '<th>Employment (M)</th><th>With GDP pc</th></tr></thead><tbody>' + "".join(filas) + "</tbody></table>")
+    o = pd.read_csv(SAL / "adi_isco.csv", dtype={"isco08": str}).sort_values(["adi_l2", "adi_share"], ascending=False)
+    fila = lambda r: (f'<tr><td class="cod">{r.isco08}</td><th>{H.escape(str(r.titulo))}</th><td>{100 * r.adi_l2:.1f}</td><td>{100 * r.adi_l3:.1f}</td>'
+                      f'<td>{r.adi_share:.1f}</td><td class="ic">{r.ic_lo:.1f}–{r.ic_hi:.1f}</td><td>{int(r.n_tareas)}</td></tr>')
+    cab = '<thead><tr><th>ISCO</th><th>Unit group</th><th>ADI</th><th>ADI3</th><th>ADIs</th><th>95% CI</th><th>Tasks</th></tr></thead>'
+    w("tab3_ocupaciones", f'<table class="t num ocup">{cab}<tbody><tr class="grupo"><td colspan="7">Most delegable</td></tr>'
+      + "".join(fila(r) for r in o.head(10).itertuples()) + '<tr class="grupo"><td colspan="7">Least delegable</td></tr>'
+      + "".join(fila(r) for r in o.tail(10).itertuples()) + "</tbody></table>")
+    r = json.load(open(SAL / "regresiones.json")); MS = ("h1a", "h1b", "h1a_iguales", "h2")
+    def celda(mm, k):
+        if mm not in r or k not in r[mm]["coef"]: return "", ""
+        b, se = r[mm]["coef"][k], r[mm]["se"][k]; p = r[mm].get("p_una_cola", {}).get(k)
+        est = "" if p is None else ("***" if p < 0.001 else "**" if p < 0.01 else "*" if p < 0.05 else "")
+        return f"{b:.2f}".replace("-", "−") + (f"<sup>{est}</sup>" if est else ""), f"({se:.2f})"
+    filas = []
+    for k, et in (("lpib", "log GDP per capita (PPP)"), ("upper-middle", "Upper-middle income"), ("lower-middle", "Lower-middle income"), ("low", "Low income"), ("const", "Constant")):
+        cs = [celda(mm, k) for mm in MS]
+        filas.append(f"<tr><th>{et}</th>" + "".join(f"<td>{c[0]}</td>" for c in cs) + "</tr>")
+        filas.append('<tr class="se"><th></th>' + "".join(f"<td>{c[1]}</td>" for c in cs) + "</tr>")
+    filas.append('<tr class="total"><th>Countries</th>' + "".join(f"<td>{r[mm]['n'] if mm in r else ''}</td>" for mm in MS) + "</tr>")
+    filas.append('<tr><th>R²</th>' + "".join(f"<td>{r[mm]['r2']:.2f}</td>" if mm in r else "<td></td>" for mm in MS) + "</tr>")
+    w("tab4_h1", '<table class="t num reg"><thead><tr><th></th><th>(1) H1</th><th>(2) H1</th><th>(3) H1, equal weights</th><th>(4) H2 gap</th></tr></thead><tbody>'
+      + "".join(filas) + "</tbody></table>")
+
+
+if __name__ == "__main__" and "--html" in sys.argv:
+    html_tablas()

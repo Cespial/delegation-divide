@@ -1,0 +1,63 @@
+<!-- convertido de articulo/secciones/B_crosswalk.tex por convertir_tex.py; editar aquí desde ahora -->
+<h2 id="crosswalk-onet-to-isco-08">Crosswalk O*NET to ISCO-08</h2>
+<p>This appendix documents the bridge from O*NET 30.2 task statements to ISCO-08 unit groups implemented in <code>datos/construir_crosswalk.py</code>. Every count below is printed by the script’s log and is reproducible from the input files listed in <code>datos/MANIFIESTO.jsonl</code>.</p>
+<h3 id="inputs">Inputs</h3>
+<ul>
+<li><p>O*NET 30.2 <em>Task Statements</em> (<span class="cf" data-cifra="diseno.onet.tareas" data-modo="txt"></span> statements for <span class="cf" data-cifra="diseno.onet.ocupaciones" data-modo="txt"></span> O*NET-SOC 2019 occupations), <em>Task Ratings</em> (scales IM, importance, and FT, frequency) and <em>Occupation Data</em> (titles) <span class="cite">(National Center for O*NET Development 2026)</span>.</p></li>
+<li><p>O*NET-SOC 2010 to O*NET-SOC 2019 crosswalk, O*NET Resource Center (CSV; <span class="cf" data-cifra="diseno.onet10_19.codigos2010" data-modo="txt"></span> codes of 2010 to <span class="cf" data-cifra="diseno.onet10_19.codigos2019" data-modo="txt"></span> codes of 2019).</p></li>
+<li><p>SOC 2010 to ISCO-08 crosswalk of <span class="cite">Hardy et al. (2018)</span>, Institute for Structural Research (IBS), file <code>soc10_isco08.dta</code>: <span class="cf" data-cifra="diseno.ibs.filas" data-modo="txt"></span> rows linking <span class="cf" data-cifra="diseno.ibs.soc" data-modo="txt"></span> six-digit SOC 2010 codes to all <span class="cf" data-cifra="diseno.ibs.isco" data-modo="txt"></span> ISCO-08 unit groups.</p></li>
+</ul>
+<h3 id="steps">Steps</h3>
+<ol>
+<li><p><strong>Task weights within O*NET occupation.</strong> For each task, importance is the mean of the IM scale (1–5) and frequency is the mean category of the FT distribution (1–7, from yearly or less to hourly or more), computed as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>∑</mo><mi>k</mi></msub><msub><mi>p</mi><mi>k</mi></msub><mi>k</mi><mi>/</mi><mn>100</mn></mrow><annotation encoding="application/x-tex">\sum_k p_k k / 100</annotation></semantics></math> over the seven category percentages. Missing values are imputed with the median of each scale. The task weight is importance <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>×</mi><annotation encoding="application/x-tex">\times</annotation></semantics></math> frequency, normalised to sum to one within the O*NET-SOC 2019 occupation, following <span class="cite">Acemoglu and Autor (2011)</span>.</p></li>
+<li><p><strong>O*NET-SOC 2019 to O*NET-SOC 2010.</strong> The official crosswalk is used in reverse. The six-digit SOC 2010 code is the 2010 O*NET-SOC code with its two-digit suffix removed. An O*NET-SOC 2019 code that descends from several 2010 codes (<span class="cf" data-cifra="diseno.onet10_19.multiples" data-modo="txt"></span> cases) divides its mapping weight equally among them.</p></li>
+<li><p><strong>Rescue of SOC 2010 codes absent from the IBS file.</strong> Two codes used by O*NET-SOC 2010 are not in the IBS crosswalk: 19-1020 (biological scientists, broad group used as a detailed code) and 29-2055 (surgical technologists). The rule tries, in order, the “all other” residual of the same broad group (code ending in 9), then the other detailed codes of the same broad group in ascending order, then the codes of the same minor group. It assigns 19-1020 to 19-1029, which the IBS file maps to ISCO 2131 (biologists, botanists, zoologists and related professionals), and 29-2055 to 29-2051, mapped to ISCO 3259 (health associate professionals not elsewhere classified). Both are documented here because the second is a group-level approximation rather than a conceptual match.</p></li>
+<li><p><strong>New occupations without a 2010 ancestor.</strong> Four O*NET-SOC 2019 codes were created after the 2010 taxonomy and have no row in the crosswalk: 15-1299.04 (penetration testers), 15-1299.05 (information security engineers), 15-1299.06 (digital forensics analysts) and 15-1299.07 (blockchain engineers). They are assigned by hand to SOC 2010 15-1199 (computer occupations, all other), which the IBS file maps to ISCO 2519 (software and applications developers and analysts not elsewhere classified) and 2529 (database and network professionals not elsewhere classified), with weight one half each.</p></li>
+<li><p><strong>SOC 2010 to ISCO-08.</strong> Each SOC 2010 code maps to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> ISCO-08 unit groups with weight <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>k</mi></mrow><annotation encoding="application/x-tex">1/k</annotation></semantics></math>. In the IBS file <span class="cf" data-cifra="diseno.ibs.k1" data-modo="txt"></span> codes map to one group, <span class="cf" data-cifra="diseno.ibs.k2" data-modo="txt"></span> to two, <span class="cf" data-cifra="diseno.ibs.k3" data-modo="txt"></span> to three and <span class="cf" data-cifra="diseno.ibs.k4mas" data-modo="txt"></span> to four or more (maximum <span class="cf" data-cifra="diseno.ibs.kmax" data-modo="txt"></span>). The mapping weight is multiplied by the within-occupation task weight to give the weight of each (ISCO group, task) pair, then renormalised within the ISCO group.</p></li>
+<li><p><strong>Aggregation to pairs.</strong> The same task reached through several O*NET occupations is summed into one pair per ISCO group. The result is <span class="cf" data-cifra="diseno.puente.pares" data-modo="txt"></span> pairs covering <span class="cf" data-cifra="diseno.puente.tareas" data-modo="txt"></span> distinct tasks and <span class="cf" data-cifra="diseno.puente.isco" data-modo="txt"></span> unit groups, with a median of <span class="cf" data-cifra="diseno.puente.tareas_grupo.mediana" data-modo="txt"></span> tasks per group (minimum <span class="cf" data-cifra="diseno.puente.tareas_grupo.min" data-modo="txt"></span>, maximum <span class="cf" data-cifra="diseno.puente.tareas_grupo.max" data-modo="txt"></span>), and <span class="cf" data-cifra="diseno.puente.conjuntos" data-modo="txt"></span> distinct task sets, since some groups share exactly the same O*NET sources.</p></li>
+</ol>
+<h3 id="exclusions-and-imputations">Exclusions and imputations</h3>
+<p><strong>Military.</strong> The three armed-forces groups, 0110 (commissioned armed forces officers), 0210 (non-commissioned armed forces officers) and 0310 (armed forces occupations, other ranks), have no O*NET tasks and are excluded from the index and from the country weights.</p>
+<p><strong>Seven imputed groups.</strong> Seven unit groups receive no task through the chain because their SOC counterparts are residual “all other” codes that the IBS file routes elsewhere. Each inherits the task set of its three-digit minor group (all non-imputed unit groups with the same first three digits), with weights renormalised, and is flagged <code>imputado = True</code> so that it can be dropped in the robustness check without imputed groups:</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">ISCO-08</th>
+<th style="text-align: left;">Unit group</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">3413</td>
+<td style="text-align: left;">Religious associate professionals</td>
+</tr>
+<tr>
+<td style="text-align: left;">3511</td>
+<td style="text-align: left;">Information and communications technology operations technicians</td>
+</tr>
+<tr>
+<td style="text-align: left;">4213</td>
+<td style="text-align: left;">Pawnbrokers and money-lenders</td>
+</tr>
+<tr>
+<td style="text-align: left;">7133</td>
+<td style="text-align: left;">Building structure cleaners</td>
+</tr>
+<tr>
+<td style="text-align: left;">8155</td>
+<td style="text-align: left;">Fur and leather preparing machine operators</td>
+</tr>
+<tr>
+<td style="text-align: left;">8159</td>
+<td style="text-align: left;">Textile, fur and leather products machine operators not elsewhere classified</td>
+</tr>
+<tr>
+<td style="text-align: left;">9613</td>
+<td style="text-align: left;">Sweepers and related labourers</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="why-not-the-earlier-matrix">Why not the earlier matrix</h3>
+<p>The first author’s earlier work on augmented human capital <span class="cite">(Espinal Maya 2026a, 2026b)</span> bridged SOC to the Colombian adaptation of ISCO-08 at one digit and distributed tasks downward, so that <span class="cf" data-cifra="diseno.previo.ocupaciones" data-modo="txt"></span> four-digit occupations shared <span class="cf" data-cifra="diseno.previo.conjuntos" data-modo="txt"></span> task sets and the median task belonged to <span class="cf" data-cifra="diseno.previo.ocupaciones_por_tarea.mediana" data-modo="txt"></span> occupations. That matrix cannot separate a surgeon from a statistician. The chain above keeps <span class="cf" data-cifra="diseno.puente.conjuntos" data-modo="txt"></span> distinct task sets across <span class="cf" data-cifra="diseno.puente.isco" data-modo="txt"></span> groups and is the only bridge used in this paper. The occupation-level comparison indices of Chapter 3 are carried to ISCO-08 with the same chain, applied at the occupation rather than the task level.</p>

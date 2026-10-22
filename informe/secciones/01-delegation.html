@@ -1,0 +1,142 @@
+<!-- convertido de articulo/secciones/02_delegacion.tex por convertir_tex.py; editar aquí desde ahora -->
+<h2 id="from-exposure-to-delegation">From exposure to delegation</h2>
+<h3 id="three-layers">Three layers</h3>
+<p>ADI rates a task, not an occupation, and rates it at one of four levels. The choice follows the task-based view of technological change, in which technology substitutes for some tasks within a job and complements others <span class="cite">(Autor et al. 2003; Acemoglu and Autor 2011; Autor 2015)</span>; occupation-level scores of automation risk shrink substantially once the variation of tasks within occupations is taken into account <span class="cite">(Arntz et al. 2016; Nedelkoska and Quintini 2018)</span>. The reference technology is fixed: publicly available AI agents as of October 2026, that is, frontier language models with tool use, code execution, web browsing, computer use and file handling, with no body and no robotics. The rater judges what is technically feasible with that technology, not what employers do and not what the law allows. The four levels, in the wording of the frozen rubric (Annex A), are:</p>
+<!--@lat:isco-->
+<dl>
+<dt>L0, no meaningful role.</dt>
+<dd>
+<p>The agent cannot perform or materially speed up any substantial part of the task.</p>
+</dd>
+<dt>L1, augmentation.</dt>
+<dd>
+<p>A human performs the task while the AI assists step by step with drafts, searches or suggestions; the human stays in the loop at each step and produces the output.</p>
+</dd>
+<dt>L2, partial delegation.</dt>
+<dd>
+<p>An agent can execute substantial sub-steps of the task end to end from a goal specification, while a human still has to perform at least one essential step or review and correct the work before use.</p>
+</dd>
+<dt>L3, full delegation.</dt>
+<dd>
+<p>An agent can complete the whole task end to end, to the quality a competent worker would accept, given only the goal and access, so that the human’s role is limited to assigning the task and accepting the result.</p>
+</dd>
+</dl>
+<p>The levels form a ladder (Figure 1.1). Each step adds one thing: at L1 the machine contributes, at L2 it executes, at L3 it finishes. What moves a task up the ladder is not model quality alone but the shape of the task: whether it can be specified as a goal, whether its inputs and outputs are digital, and whether someone other than the worker is allowed to accept the result. The rubric therefore records four barriers alongside the level: <em>physical</em> (the task needs presence or manipulation), <em>accountability</em> (law, licence or liability requires a human to perform or sign), <em>trust</em> (the task depends on in-person trust, care or persuasion) and <em>access</em> (the task depends on systems, data or places an agent would normally not reach). It also records the share of the task’s working time an agent could take over and the minutes a competent human needs for one instance, which Chapter 3 uses to test whether full delegation peaks at intermediate task lengths.</p>
+<!--@fig1_1-->
+<h3 id="why-delegation-is-not-exposure">Why delegation is not exposure</h3>
+<p>The exposure indices that most of the literature uses answer a different question. <span class="cite">Eloundou et al. (2024)</span> label a task as exposed if access to a large language model, alone or with software built on it, would reduce the time needed to complete the task with equal quality by at least 50%. <span class="cite">Felten et al. (2021)</span> link ten AI application areas to the 52 O*NET abilities and score an occupation by the abilities it needs; the result, the AI Occupational Exposure index (AIOE), does not refer to tasks at all. <span class="cite">Webb (2020)</span> measures overlap between patent texts and task descriptions, and <span class="cite">Brynjolfsson et al. (2018)</span> score each task’s suitability for machine learning. All of them ask how much AI <em>touches</em> the work. ADI asks whether an agent can <em>do</em> the work.</p>
+<p>The two constructs can separate, in principle, in both directions. A task can be highly exposed and not delegable: writing a radiology report is faster with a model, but a licensed radiologist must read the images and sign, so the task stays at L1 or L2 with an accountability barrier. A task can be delegable and barely exposed: reconciling a bank statement against an accounting ledger saved little time when the model could only talk, but an agent with access to both systems completes it end to end. The experimental evidence on generative AI at work is evidence about this first case: customer-support agents, professional writers and consultants who keep the task and do it faster or better with a model <span class="cite">(Brynjolfsson et al. 2023; Noy and Zhang 2023; Dell’Acqua et al. 2023)</span>. Exposure measures the intensity of assistance on a task whose owner does not change. Delegation measures a change of owner. That the constructs can come apart on a given task does not mean that they do across the economy; Chapter 6 measures how far they do in practice and finds that, at the level of occupations, they separate little.</p>
+<p>Delegation is also not adoption. The Anthropic Economic Index <span class="cite">(Anthropic 2025; Handa et al. 2025)</span> observes which O*NET tasks people actually bring to a model and, in later releases, which they hand to a coding agent; <span class="cite">Tomlinson et al. (2025)</span> do the same with conversations with Microsoft Copilot. The Agentic Adoption Index <span class="cite">(Lee et al. 2026)</span> scores a task by how closely it matches the agent configurations practitioners publish on GitHub, a measure its authors call delegated exposure. Both record what has happened. ADI records what the technology permits, so it is an upper bound on delegation that adoption data can be compared against. The gap between the two is itself an object of study (Chapter 6), and it is where the delegation divide appears.</p>
+<h3 id="comparison-with-existing-measures">Comparison with existing measures</h3>
+<p>Table 1.1 places ADI next to the measures it builds on. The columns record what each index measures (construct), the unit it rates, who or what rates it, the occupational classification, the countries it covers, whether the data are open, and whether the construct refers to AI agents rather than to language models or to earlier automation. ADI is the only task-level index that is natively in ISCO-08, rated for agents, checked against a blind human rating and an agentic panel, and released with tools for agents to query it.</p>
+<div id="tab:comparativa">
+<!--@tab1_1:inicio-->
+<table>
+<caption>Measures of AI and work compared with ADI. ? = the source does not state it.</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Measure</th>
+<th style="text-align: left;">Construct</th>
+<th style="text-align: left;">Unit</th>
+<th style="text-align: left;">Rater</th>
+<th style="text-align: left;">Classification</th>
+<th style="text-align: left;">Countries</th>
+<th style="text-align: center;">Open</th>
+<th style="text-align: center;">Agents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="cite">Frey and Osborne (2017)</span></td>
+<td style="text-align: left;">Probability of computerisation</td>
+<td style="text-align: left;">Occupation (702)</td>
+<td style="text-align: left;">70 hand-labelled occupations, Gaussian process classifier</td>
+<td style="text-align: left;">SOC 2010</td>
+<td style="text-align: left;">US</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">N</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="cite">Webb (2020)</span></td>
+<td style="text-align: left;">Exposure to AI via patent–task text overlap</td>
+<td style="text-align: left;">Task</td>
+<td style="text-align: left;">Text-similarity algorithm</td>
+<td style="text-align: left;">O*NET-SOC</td>
+<td style="text-align: left;">US</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">N</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="cite">Felten et al. (2021)</span> (AIOE)</td>
+<td style="text-align: left;">Occupational exposure via abilities</td>
+<td style="text-align: left;">Ability (52)</td>
+<td style="text-align: left;">Expert links, AI progress scores</td>
+<td style="text-align: left;">O*NET-SOC</td>
+<td style="text-align: left;">US</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">N</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="cite">Eloundou et al. (2024)</span></td>
+<td style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>≥</mo><annotation encoding="application/x-tex">\geq</annotation></semantics></math>50% time reduction with LLM (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ζ</mi><annotation encoding="application/x-tex">\zeta</annotation></semantics></math>)</td>
+<td style="text-align: left;">Task</td>
+<td style="text-align: left;">Human annotators and GPT-4</td>
+<td style="text-align: left;">O*NET-SOC</td>
+<td style="text-align: left;">US</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">N</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="cite">Eisfeldt et al. (2026)</span></td>
+<td style="text-align: left;">Generative-AI exposure of occupations and firms</td>
+<td style="text-align: left;">Task</td>
+<td style="text-align: left;">ChatGPT</td>
+<td style="text-align: left;">O*NET-SOC</td>
+<td style="text-align: left;">US</td>
+<td style="text-align: center;">?</td>
+<td style="text-align: center;">N</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="cite">Gmyrek et al. (2025)</span> (ILO)</td>
+<td style="text-align: left;">Generative-AI exposure, refined</td>
+<td style="text-align: left;">Task</td>
+<td style="text-align: left;">LLM scores checked by survey and expert review</td>
+<td style="text-align: left;">ISCO-08</td>
+<td style="text-align: left;">Global via ILO employment</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">N</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="cite">Anthropic (2025)</span> (AEI)</td>
+<td style="text-align: left;">Observed usage of Claude by task</td>
+<td style="text-align: left;">Conversation mapped to task</td>
+<td style="text-align: left;">Automated classifier</td>
+<td style="text-align: left;">O*NET-SOC</td>
+<td style="text-align: left;">US; country series in later releases</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">Partial</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="cite">Lee et al. (2026)</span> (AAI)</td>
+<td style="text-align: left;">Delegated exposure: match to published agent skills</td>
+<td style="text-align: left;">Task</td>
+<td style="text-align: left;">Embedding similarity to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>∼</mo><annotation encoding="application/x-tex">\sim</annotation></semantics></math>888,000 agent skill files</td>
+<td style="text-align: left;">O*NET-SOC</td>
+<td style="text-align: left;">US (GitHub corpus is global)</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">Y</td>
+</tr>
+<tr>
+<td style="text-align: left;">ADI (this paper)</td>
+<td style="text-align: left;">Delegability to an agent, four levels and four barriers</td>
+<td style="text-align: left;">Task (18,796)</td>
+<td style="text-align: left;">2 LLMs + blind human rating (300) + agentic panel</td>
+<td style="text-align: left;">ISCO-08 (433 unit groups)</td>
+<td style="text-align: left;"><span class="cf" data-cifra="diseno.atlas.paises" data-modo="txt"></span></td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">Y</td>
+</tr>
+</tbody>
+</table>
+<!--@tab1_1:fin-->
+</div>
