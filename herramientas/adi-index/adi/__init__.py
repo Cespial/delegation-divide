@@ -18,7 +18,7 @@ import os
 from functools import lru_cache
 from pathlib import Path
 
-__version__ = "2026.1.dev0"
+__version__ = "2026.1"
 DATA_VERSION = "v2026.1"
 REPO_URL = "https://github.com/Cespial/delegation-divide"
 BIBTEX_KEY = "espinal2026delegation"

@@ -9,7 +9,7 @@ abstract: >-
   weighted by ILOSTAT employment for 146 countries. 35.2% of task time in world employment is at
   least partly delegable to AI agents in 2026; 2.5% can be handed over in full.
 version: "2026.1"
-date-released: "2026-12-15"
+date-released: "2026-10-22"
 license: "CC-BY-4.0"
 repository-code: "https://github.com/Cespial/delegation-divide"
 url: "https://github.com/Cespial/delegation-divide"

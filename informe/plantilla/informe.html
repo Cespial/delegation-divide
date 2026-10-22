@@ -10,7 +10,7 @@
 
 <!-- ================= PORTADA ================= -->
 <section class="portada" data-outline="Cover" data-nivel="0">
-  <div class="arriba">{{ marca_blanca }}<div class="ed">Report · Version 2026.1<br>October 2026</div></div>
+  <div class="arriba">{{ marca_blanca }}<div class="ed">Report · Version 2026.1<br>October 2026{% if doi %}<br>doi:{{ doi }}{% endif %}</div></div>
   <p class="kicker">Agent Delegability Index 2026</p>
   <h1>The Delegation<br>Divide</h1>
   <p class="sub">An open index of how much work AI agents can take over, for {{ c("cobertura.isco") }} occupations and {{ c("cobertura.paises") }} countries</p>
@@ -27,17 +27,21 @@
   <div class="rejilla">
     <div>
       <h4>Recommended citation</h4>
-      <p class="cita">Espinal Maya, Cristian, and Santiago Jiménez Londoño. 2026. <em>The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries.</em> Agent Delegability Index, version 2026.1. <span class="url">https://<wbr>github.com/<wbr>Cespial/<wbr>delegation-divide</span></p>
-      <pre>@article{espinal2026delegation,
+      <p class="cita">Espinal Maya, Cristian, and Santiago Jiménez Londoño. 2026. <em>The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries.</em> ADI Report 2026.1. Medellín: Agent Delegability Index. {% if doi %}<span class="url">https://<wbr>doi.org/<wbr>{{ doi }}</span>{% else %}<span class="url">https://<wbr>github.com/<wbr>Cespial/<wbr>delegation-divide</span>{% endif %}</p>
+      <pre>@techreport{espinal2026delegationreport,
   title = {The Delegation Divide: An Open Index of
     AI-Agent Delegability across Occupations
     and Countries},
   author = {Espinal Maya, Cristian and
     Jim{\'e}nez Londo{\~n}o, Santiago},
-  journal = {arXiv preprint},
-  year = {2026},
-  url = {https://github.com/Cespial/delegation-divide},
-  note = {Preregistration: doi:10.17605/OSF.IO/9ZNTF}
+  institution = {Agent Delegability Index},
+  type = {ADI Report},
+  number = {2026.1},
+  address = {Medell{\'i}n},
+  year = {2026},{% if doi %}
+  doi = {{ '{' }}{{ doi }}{{ '}' }},{% endif %}
+  note = {Data: doi:10.5281/zenodo.23552918;
+    preregistration: doi:10.17605/OSF.IO/9ZNTF}
 }</pre>
       <h4>Authors</h4>
       <p class="equipo"><b>Cristian Espinal Maya</b>, Universidad Nacional de Colombia, Facultad de Minas.<br><b>Santiago Jiménez Londoño</b>, Universidad EAFIT.</p>
@@ -177,6 +181,7 @@
   </div>
   <div class="datos">
     <b>Version</b><span>2026.1, October 2026</span>
+    {% if doi %}<b>Report</b><span>doi:{{ doi }}</span>{% endif %}
     <b>Dataset</b><span>doi:10.5281/zenodo.23552918</span>
     <b>Preregistration</b><span>doi:10.17605/OSF.IO/9ZNTF</span>
     <b>Repository</b><span>github.com/Cespial/delegation-divide</span>

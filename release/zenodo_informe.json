@@ -1,0 +1,70 @@
+{
+  "title": "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries (ADI Report 2026.1)",
+  "upload_type": "publication",
+  "publication_type": "report",
+  "version": "2026.1",
+  "language": "eng",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "creators": [
+    {
+      "name": "Espinal Maya, Cristian",
+      "affiliation": "Universidad Nacional de Colombia, Facultad de Minas",
+      "orcid": "0009-0000-1009-8388"
+    },
+    {
+      "name": "Jiménez Londoño, Santiago",
+      "affiliation": "Universidad EAFIT",
+      "orcid": "0009-0007-9862-7133"
+    }
+  ],
+  "keywords": [
+    "AI agents",
+    "delegation",
+    "automation",
+    "future of work",
+    "labour economics",
+    "ISCO-08",
+    "O*NET",
+    "ILOSTAT",
+    "occupations",
+    "country atlas",
+    "delegation divide",
+    "Colombia",
+    "GEIH",
+    "Agent Delegability Index"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23552918",
+      "relation": "isSupplementedBy",
+      "resource_type": "dataset",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.17605/OSF.IO/9ZNTF",
+      "relation": "isDocumentedBy",
+      "resource_type": "other",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "https://github.com/Cespial/delegation-divide",
+      "relation": "isSupplementedBy",
+      "resource_type": "software",
+      "scheme": "url"
+    }
+  ],
+  "notes": "Report edition of the paper of the same title (arXiv identifier pending). Every number in the report is read by identifier from the published outputs of ADI v2026.1.",
+  "description_plantilla": [
+    "<p><strong>ADI Report 2026.1.</strong> The Agent Delegability Index rates how much of each of {cobertura.tareas} O*NET task statements an AI agent with tool use and computer use can take over, on a preregistered four-level scale (L0 no meaningful role, L1 augmentation, L2 partial delegation, L3 full delegation) with four barriers (physical presence, accountability, trust and care, access to systems), and carries the ratings to {cobertura.isco} ISCO-08 occupations and {cobertura.paises} countries.</p>",
+    "<p><strong>Key results</strong></p><ul>",
+    "<li>{titular.global.l2}% of task time in world employment is at least partly delegable to AI agents (95% interval {titular.global.l2.lo}–{titular.global.l2.hi}%); {titular.global.l3}% can be handed over in full.</li>",
+    "<li>The delegation divide: the index rises from {titular.ingreso.bajo.l2}% in low-income to {titular.ingreso.alto.l2}% in high-income countries, {h1.pendiente} percentage points per log point of GDP per capita.</li>",
+    "<li>Managers ({gg.1.l2}%) and clerical support workers ({gg.4.l2}%) do the most delegable work; elementary occupations the least ({gg.9.l2}%).</li>",
+    "<li>Full delegation is most likely for tasks that take a person about {h4.pico.minutos} minutes.</li>",
+    "<li>Colombia stands at {pais.COL.l2}%. In its household survey, formal workers hold the more delegable jobs: {geih.informal.no.l2}% of their task time, against {geih.informal.si.l2}% for informal workers (exploratory).</li>",
+    "<li>The two rating models agree at κ = {agree.kappa.sonnet_haiku}; a blind human rating of {n.humano} tasks, led by a coauthor with student raters, agrees with them at κ = {agree.kappa.humano.modelo}, and an agentic panel with web search at κ = {agree.kappa.panel.modelo}.</li>",
+    "</ul>",
+    "<p>This report presents the results of the paper of the same title for policy and general readers. Data, code and static JSON for every occupation and country: <a href=\"https://doi.org/10.5281/zenodo.23552918\">doi:10.5281/zenodo.23552918</a>. Preregistration: <a href=\"https://doi.org/10.17605/OSF.IO/9ZNTF\">doi:10.17605/OSF.IO/9ZNTF</a>. Text and figures: CC BY 4.0.</p>"
+  ]
+}

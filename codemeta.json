@@ -6,7 +6,7 @@
   "identifier": "adi",
   "version": "2026.1",
   "dateCreated": "2026-10-20",
-  "datePublished": "2026-12-15",
+  "datePublished": "2026-10-22",
   "codeRepository": "https://github.com/Cespial/delegation-divide",
   "issueTracker": "https://github.com/Cespial/delegation-divide/issues",
   "url": "https://github.com/Cespial/delegation-divide",
@@ -56,7 +56,7 @@
       "name": "adi-index",
       "description": "Python package and CLI: lookup, search, country, top, cite.",
       "codeRepository": "https://github.com/Cespial/delegation-divide/tree/main/herramientas/adi-index",
-      "version": "2026.1.dev0",
+      "version": "2026.1",
       "license": "https://spdx.org/licenses/MIT"
     },
     {
@@ -64,7 +64,7 @@
       "name": "adi-mcp",
       "description": "MCP server (stdio): lookup_occupation, country_profile, top_occupations, cite (BibTeX + preregistration DOI).",
       "codeRepository": "https://github.com/Cespial/delegation-divide/tree/main/herramientas/adi-mcp",
-      "version": "2026.1.dev0",
+      "version": "2026.1",
       "license": "https://spdx.org/licenses/MIT"
     },
     {
@@ -121,7 +121,7 @@
     "https://github.com/Cespial/delegation-divide/blob/main/CITATION.cff",
     "https://doi.org/10.17605/OSF.IO/9ZNTF"
   ],
-  "dateModified": "2026-10-21",
+  "dateModified": "2026-10-22",
   "isBasedOn": {
     "@type": "CreativeWork",
     "name": "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries (preregistration)",

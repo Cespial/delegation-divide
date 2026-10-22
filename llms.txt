@@ -10,14 +10,14 @@
 > Preregistered at OSF: https://doi.org/10.17605/OSF.IO/9ZNTF · Data and code: https://doi.org/10.5281/zenodo.23552918
 
 ## How to use
-- Occupation lookup (static JSON): release/v2026.1/api/isco/<4-digit ISCO-08>.json (e.g. isco/2512.json)
-- Country lookup (static JSON): release/v2026.1/api/country/<ISO3>.json (e.g. country/COL.json); index: release/v2026.1/api/index.json
+- Occupation lookup (static JSON): https://cespial.github.io/delegation-divide/adi/v2026.1/isco/<4-digit ISCO-08>.json (e.g. https://cespial.github.io/delegation-divide/adi/v2026.1/isco/2512.json)
+- Country lookup (static JSON): https://cespial.github.io/delegation-divide/adi/v2026.1/country/<ISO3>.json (e.g. https://cespial.github.io/delegation-divide/adi/v2026.1/country/COL.json); index: https://cespial.github.io/delegation-divide/adi/v2026.1/index.json
 - Tables: release/v2026.1/adi_isco.csv, adi_pais.csv, adi_tarea.csv (+ .parquet); columns in release/v2026.1/DATA_DICTIONARY.md
 - MCP server: adi-mcp (tools: lookup_occupation, country_profile, top_occupations, cite)
 - Python: pip install adi-index
 
 ## How to cite
-See CITATION.cff. BibTeX key: espinal2026delegation. Every JSON record carries a `cite` field.
+See CITATION.cff. BibTeX keys: espinal2026delegation (paper), espinal2026adidata (data, doi:10.5281/zenodo.23552918). Every JSON record carries a `cite` field.
 
 ## Files
 - README.md: BibTeX, headline block, summary

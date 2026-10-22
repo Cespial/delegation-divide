@@ -57,9 +57,9 @@ Code, rubric, MCP server and full pipeline: <https://github.com/Cespial/delegati
 
 ```python
 from datasets import load_dataset
-occ = load_dataset("cespial/adi", "adi_isco", split="train")
-countries = load_dataset("cespial/adi", "adi_pais", split="train")
-tasks = load_dataset("cespial/adi", "adi_tarea", split="train")
+occ = load_dataset("Cespial/adi", "adi_isco", split="train")
+countries = load_dataset("Cespial/adi", "adi_pais", split="train")
+tasks = load_dataset("Cespial/adi", "adi_tarea", split="train")
 ```
 
 The repository also carries the same tables as CSV, `claims.jsonl` (every number in the paper), the raw model outputs
@@ -125,5 +125,15 @@ ESCO, ILOSTAT, World Bank, BLS and DANE inputs are used only as derived aggregat
   year    = {2026},
   url     = {https://github.com/Cespial/delegation-divide},
   note    = {Preregistration: doi:10.17605/OSF.IO/9ZNTF}
+}
+
+@misc{espinal2026adidata,
+  title     = {{ADI} v2026.1: Agent Delegability Index data, code and {MCP} server},
+  author    = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {v2026.1},
+  doi       = {10.5281/zenodo.23552918},
+  url       = {https://doi.org/10.5281/zenodo.23552918}
 }
 ```

@@ -11,6 +11,16 @@
   url     = {https://github.com/Cespial/delegation-divide},
   note    = {Preregistration: doi:10.17605/OSF.IO/9ZNTF}
 }
+
+@misc{espinal2026adidata,
+  title     = {{ADI} v2026.1: Agent Delegability Index data, code and {MCP} server},
+  author    = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {v2026.1},
+  doi       = {10.5281/zenodo.23552918},
+  url       = {https://doi.org/10.5281/zenodo.23552918}
+}
 ```
 
 <!-- headline:start -->
@@ -49,7 +59,7 @@ country atlas. Cross-listed econ.GN · cs.CY · cs.AI.
 
 - Paper: arXiv (pending) · source in `articulo/`
 - Preregistration: OSF, [doi:10.17605/OSF.IO/9ZNTF](https://doi.org/10.17605/OSF.IO/9ZNTF) (rubric SHA-256 in `docs/RUBRICA_SHA256.txt`)
-- Dataset: `release/v2026.1/` (CSV + Parquet, data dictionary, checksums) · Zenodo [doi:10.5281/zenodo.23552918](https://doi.org/10.5281/zenodo.23552918) (v2026.1; all versions: [doi:10.5281/zenodo.23552917](https://doi.org/10.5281/zenodo.23552917)) · Hugging Face `cespial/adi` (pending)
+- Dataset: `release/v2026.1/` (CSV + Parquet, data dictionary, checksums) · Zenodo [doi:10.5281/zenodo.23552918](https://doi.org/10.5281/zenodo.23552918) (v2026.1; all versions: [doi:10.5281/zenodo.23552917](https://doi.org/10.5281/zenodo.23552917)) · Hugging Face [`Cespial/adi`](https://huggingface.co/datasets/Cespial/adi)
 - Static JSON for agents: `release/v2026.1/api/isco/<code>.json`, `release/v2026.1/api/country/<ISO3>.json`, `release/v2026.1/api/index.json`
 - Tools for agents: `pip install adi-index` · MCP server `adi-mcp` (`lookup_occupation`, `country_profile`, `top_occupations`, `cite`)
 - Version: `v2026.1`

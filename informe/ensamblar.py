@@ -60,6 +60,9 @@ def svg_gradientes():
     s += f'<line x1="{X(total):.1f}" x2="{X(total):.1f}" y1="{14 + paso:.1f}" y2="{H - 16:.1f}" stroke="#1a1918" stroke-width="0.7" stroke-dasharray="3 2"/>'
     return f'<svg viewBox="0 0 {W} {H:.0f}" xmlns="http://www.w3.org/2000/svg">{s}</svg>'
 FUENTE = "Agent Delegability Index v2026.1 (doi:10.5281/zenodo.23552918)"
+# DOI propio del informe (release/zenodo_informe.py reservar); sin él la cita y la contraportada salen sin la línea del DOI
+EST = R / "release/zenodo_informe.estado.json"
+DOI = json.loads(EST.read_text())["doi"] if EST.exists() and not json.loads(EST.read_text()).get("sandbox") else None
 
 # ---------- componentes que reemplazan marcadores <!--@x--> ----------
 def ladder():
@@ -275,8 +278,10 @@ mini = dict(titular=M(mg.titular(v("titular.global.l2"), v("titular.global.l3"))
             kappa=M(mg.barras([("Models", v("agree.kappa.sonnet_haiku")), ("Human", v("agree.kappa.humano.modelo")), ("Agentic panel", v("agree.kappa.panel.modelo"))],
                               maximo=1, etq_w=70, alto_barra=14, sep=6, sufijo="")))
 
+# limpiadoc (perfil inplux) rechaza enlaces a anthropic.com en la estructura del PDF: la referencia conserva su URL como texto, sin hipervínculo
+sin_enlace_anthropic = lambda t: re.sub(r'<a href="https?://(?:www\.)?anthropic\.com[^"]*"[^>]*>(.*?)</a>', r"\1", t)
 html = env.get_template("informe.html").render(partes=list(partes.values()), libres=libres, anexos=anexos, icono=icono, peldanos=peldanos, mini=mini, sintetico=D["sintetico"],
-        marca_blanca=marca(("#3f8a82", "#6fb3aa", "#a9dcd4", "#ffffff"), "#ffffff"), logos=logos(), referencias=M(leer("secciones/referencias.html")),
+        marca_blanca=marca(("#3f8a82", "#6fb3aa", "#a9dcd4", "#ffffff"), "#ffffff"), logos=logos(), doi=DOI, referencias=M(sin_enlace_anthropic(leer("secciones/referencias.html"))),
         indice_fig=[dict(id=a, n=b, titulo=t) for a, b, t in INDICE])
 faltan = []
 def llenar(m):

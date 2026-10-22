@@ -156,7 +156,7 @@ exceptions.
   Each document carries `version`, `license` and `cite` (BibTeX + preregistration DOI
   10.17605/OSF.IO/9ZNTF). Schema: release/v2026.1/api/README.md. Public mirror:
   https://cespial.github.io/delegation-divide/adi/v2026.1/ (same paths below api/).
-- Dataset and code DOI (Zenodo): https://doi.org/10.5281/zenodo.23552918 (all versions: https://doi.org/10.5281/zenodo.23552917). Hugging Face dataset `cespial/adi` (pending).
+- Dataset and code DOI (Zenodo): https://doi.org/10.5281/zenodo.23552918 (all versions: https://doi.org/10.5281/zenodo.23552917). Hugging Face dataset: https://huggingface.co/datasets/Cespial/adi.
 
 ## 6. How to cite
 
