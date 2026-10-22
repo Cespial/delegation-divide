@@ -22,11 +22,15 @@ const config: NextConfig = {
     ];
   },
   async redirects() {
-    return VIEJAS.flatMap((r) => [
-      { source: `/${r}`, destination: `/adi/${r}`, permanent: true },
-      // /report/*.pdf|webp and /data/*.csv are files, so only page paths (no dot) redirect.
-      ...(r === "report" || r === "data" ? [] : [{ source: `/${r}/:p([^.]+)`, destination: `/adi/${r}/:p`, permanent: true }]),
-    ]);
+    return [
+      // www.balamlabs.org → balamlabs.org, keeping the path
+      { source: "/:path*", has: [{ type: "host" as const, value: "www.balamlabs.org" }], destination: "https://balamlabs.org/:path*", permanent: true },
+      ...VIEJAS.flatMap((r) => [
+        { source: `/${r}`, destination: `/adi/${r}`, permanent: true },
+        // /report/*.pdf|webp and /data/*.csv are files, so only page paths (no dot) redirect.
+        ...(r === "report" || r === "data" ? [] : [{ source: `/${r}/:p([^.]+)`, destination: `/adi/${r}/:p`, permanent: true }]),
+      ]),
+    ];
   },
 };
 
