@@ -1,0 +1,33 @@
+{
+ "type": "country",
+ "id": "NGA",
+ "iso3": "NGA",
+ "pais": "Nigeria",
+ "ingreso": "lower-middle",
+ "anio": 2024,
+ "resolucion": "isco08_2d",
+ "adi_l2": 0.2963,
+ "adi_l3": 0.0204,
+ "adi_share": 26.36,
+ "empleo_total": 71406934,
+ "l2_lo": 0.2713,
+ "l2_hi": 0.3244,
+ "adi_l2_iguales": 0.2873,
+ "adi_l3_iguales": 0.0224,
+ "adi_share_iguales": 26.21,
+ "region": "Sub-Saharan Africa",
+ "pib_pc_ppp": 8145.1481,
+ "rank_l2": 113,
+ "n_countries": 146,
+ "version": "v2026.1",
+ "license": "CC-BY-4.0",
+ "cite": {
+  "bibtex": "@article{espinal2026delegation,\n  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},\n  author  = {Espinal Maya, Cristian and Jim{\\'e}nez Londo{\\~n}o, Santiago},\n  journal = {arXiv preprint},\n  year    = {2026},\n  url     = {https://github.com/Cespial/delegation-divide},\n  note    = {Agent Delegability Index (ADI) v2026.1. Data: doi:10.5281/zenodo.23552918. Preregistration: doi:10.17605/OSF.IO/9ZNTF}\n}",
+  "bibtex_key": "espinal2026delegation",
+  "text": "Espinal Maya, C., & Jiménez Londoño, S. (2026). The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries. arXiv preprint. https://github.com/Cespial/delegation-divide",
+  "data_doi": "10.5281/zenodo.23552918",
+  "data_url": "https://doi.org/10.5281/zenodo.23552918",
+  "preregistration_doi": "10.17605/OSF.IO/9ZNTF",
+  "preregistration_url": "https://doi.org/10.17605/OSF.IO/9ZNTF"
+ }
+}
