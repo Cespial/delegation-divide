@@ -41,7 +41,8 @@ from pypdf import PdfReader, PdfWriter
 w = PdfWriter(clone_from=PDF)
 w.add_metadata({"/Title": "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries",
                 "/Author": "Cristian Espinal Maya; Santiago Jiménez Londoño", "/Subject": "Agent Delegability Index (ADI) v2026.1 report",
-                "/Keywords": "AI agents, delegation, labour markets, ISCO-08, ILOSTAT, ADI, doi:10.5281/zenodo.23552918"})
+                "/Keywords": "AI agents, delegation, labour markets, ISCO-08, ILOSTAT, ADI, doi:10.5281/zenodo.23552918",
+                "/Creator": "", "/Producer": ""})
 w.write(PDF); srv.shutdown()
 subprocess.run(["pdftoppm", "-r", "80", PDF, "out/qa/page", "-png"])
 print("png:", len(glob.glob("out/qa/page-*.png")))

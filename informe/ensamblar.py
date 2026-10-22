@@ -103,7 +103,7 @@ def procesar(nombre, num):
     s = re.sub(r"<!-- convertido.*?-->\n?", "", leer(f"secciones/{nombre}.html"))
     m = re.search(r"<h2[^>]*>(.*?)</h2>", s, re.S); titulo = re.sub("<[^>]+>", "", m[1]).strip(); s = s[:m.start()] + s[m.end():]
     lead = ""
-    if num:  # capítulos numerados: el primer párrafo va a la apertura
+    if num or nombre == "00-introduction":  # capítulos con apertura: las primeras frases van a ella
         p = re.search(r"<p>(.*?)</p>", s, re.S); texto = p[1]
         # la apertura lleva las primeras frases (≤ ~300 caracteres de texto visible); el resto del párrafo sigue en el cuerpo
         cortes = [m.end() for m in re.finditer(r"[.?!](?:</[a-z]+>)?\s+(?=[A-Z<])", texto)]

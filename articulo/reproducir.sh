@@ -37,5 +37,7 @@ NB=$(grep -c "^I was expecting\|^Repeated entry\|error message" articulo/main.bl
 (( LX == 0 )) && echo "  ok    latex → articulo/main.pdf (BibTeX: ${NB:-0} avisos de error en main.blg)" || echo "  FALLO latex → $OUT/latex.log"
 $PY qa/texto.py > $OUT/qa_texto.log 2>&1; tail -3 $OUT/qa_texto.log
 [[ -f articulo/main.pdf ]] && cp articulo/main.pdf $OUT/main.pdf
+# informe diagramado (opcional): INFORME=1 zsh articulo/reproducir.sh …
+[[ -n ${INFORME:-} ]] && { zsh informe/construir.sh > $OUT/informe.log 2>&1 && echo "  ok    informe → informe/out/delegation-divide-report-2026.pdf" || echo "  FALLO informe → $OUT/informe.log"; }
 echo "== corrida $T lista en $OUT ($SECONDS s)"
 exit $LX
