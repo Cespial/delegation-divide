@@ -46,7 +46,8 @@ with sync_playwright() as p:
         if (done or stable >= 10) and n > 0: break
     pg.wait_for_timeout(800)
     malas = pg.evaluate(DESBORDE); huecos = pg.evaluate(HUECOS); marcadores = pg.evaluate(MARCADORES)
-    pg.pdf(path=PDF, prefer_css_page_size=True, print_background=True, tagged=True)  # PDF etiquetado; los marcadores se arman abajo; br.close()
+    # sin etiquetar (tagged): limpiadoc lee el árbol de estructura como rastro; los marcadores se arman abajo con pypdf
+    pg.pdf(path=PDF, prefer_css_page_size=True, print_background=True); br.close()
 print("páginas:", n)
 print("\n".join(msgs[:20]) if msgs else "consola: sin errores")
 print("desbordes:", malas if malas else "ninguno")
