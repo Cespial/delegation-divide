@@ -11,7 +11,7 @@
 <!-- ================= PORTADA ================= -->
 <section class="portada" data-outline="Cover" data-nivel="0">
   <div class="arriba">{{ marca_blanca }}<div class="ed">Report · Version 2026.1<br>October 2026{% if doi %}<br>doi:{{ doi }}{% endif %}</div></div>
-  <p class="kicker">Agent Delegability Index 2026</p>
+  <p class="kicker">Balam Labs · Agent Delegability Index 2026</p>
   <h1>The Delegation<br>Divide</h1>
   <p class="sub">An open index of how much work AI agents can take over, for {{ c("cobertura.isco") }} occupations and {{ c("cobertura.paises") }} countries</p>
   <div class="img"><img src="img/portada.jpg" alt=""></div>
@@ -27,17 +27,16 @@
   <div class="rejilla">
     <div>
       <h4>Recommended citation</h4>
-      <p class="cita">Espinal Maya, Cristian, and Santiago Jiménez Londoño. 2026. <em>The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries.</em> ADI Report 2026.1. Medellín: Agent Delegability Index. {% if doi %}<span class="url">https://<wbr>doi.org/<wbr>{{ doi }}</span>{% else %}<span class="url">https://<wbr>github.com/<wbr>Cespial/<wbr>delegation-divide</span>{% endif %}</p>
+      <p class="cita">Espinal Maya, Cristian, and Santiago Jiménez Londoño. 2026. <em>The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries.</em> ADI Report 2026.1. Balam Labs. {% if doi %}<span class="url">https://<wbr>doi.org/<wbr>{{ doi }}</span>{% else %}<span class="url">https://<wbr>github.com/<wbr>Cespial/<wbr>delegation-divide</span>{% endif %}</p>
       <pre>@techreport{espinal2026delegationreport,
   title = {The Delegation Divide: An Open Index of
     AI-Agent Delegability across Occupations
     and Countries},
   author = {Espinal Maya, Cristian and
     Jim{\'e}nez Londo{\~n}o, Santiago},
-  institution = {Agent Delegability Index},
+  institution = {Balam Labs},
   type = {ADI Report},
   number = {2026.1},
-  address = {Medell{\'i}n},
   year = {2026},{% if doi %}
   doi = {{ '{' }}{{ doi }}{{ '}' }},{% endif %}
   note = {Data: doi:10.5281/zenodo.23552918;
@@ -51,7 +50,7 @@
     </div>
     <div>
       <h4>Data and code</h4>
-      <p>Dataset and code, version 2026.1: Zenodo, doi:10.5281/zenodo.23552918 (all versions: doi:10.5281/zenodo.23552917). Repository: <span class="url">github.com/<wbr>Cespial/<wbr>delegation-divide</span>. Static JSON for every occupation and country: <span class="url">cespial.github.io/<wbr>delegation-divide/<wbr>adi/<wbr>v2026.1/</span>. Python package <code>adi-index</code> and MCP server <code>adi-mcp</code>.</p>
+      <p>Dataset and code, version 2026.1: Zenodo, doi:10.5281/zenodo.23552918 (all versions: doi:10.5281/zenodo.23552917). Repository: <span class="url">github.com/<wbr>Cespial/<wbr>delegation-divide</span>. Static JSON for every occupation and country: <span class="url">balamlabs.org/<wbr>adi/<wbr>v2026.1/</span>. Python package <code>adi-index</code> and MCP server <code>adi-mcp</code>.</p>
       <h4>Preregistration</h4>
       <p>Hypotheses, rubric and analysis plan were registered before the main scoring run: OSF, doi:10.17605/OSF.IO/9ZNTF. The rubric file carries a SHA-256 hash that the scoring script checks before it runs. Deviations from the registered plan are listed in the repository.</p>
       <h4>Reproducibility</h4>
@@ -180,6 +179,7 @@
     <p>It rates {{ c("cobertura.tareas") }} task statements, maps them to {{ c("cobertura.isco") }} occupations and weights them by employment in {{ c("cobertura.paises") }} countries. The result is an open index, an atlas and a set of tools that people and AI agents can query and cite.</p>
   </div>
   <div class="datos">
+    <b>Published by</b><span>Balam Labs, balamlabs.org</span>
     <b>Version</b><span>2026.1, October 2026</span>
     {% if doi %}<b>Report</b><span>doi:{{ doi }}</span>{% endif %}
     <b>Dataset</b><span>doi:10.5281/zenodo.23552918</span>

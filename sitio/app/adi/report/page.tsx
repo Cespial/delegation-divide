@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Cita } from "@/components/Cita";
 import { JsonLd } from "@/components/JsonLd";
-import { AUTORES, PDF_INFORME, REPO, SITE, TITULO_PAPER, cifra, informe, resumen } from "@/lib/datos";
+import { AUTORES, LAB, PDF_INFORME, REPO, SITE, TITULO_PAPER, cifra, informe, resumen } from "@/lib/datos";
 import { citaInforme } from "@/lib/citar";
 
 const TITULO = "The Delegation Divide";
@@ -16,17 +16,18 @@ const RESUMEN = `${cifra("titular.global.l2")}% of task time in world employment
 export const metadata: Metadata = {
   title: `${TITULO}: ADI Report 2026.1`,
   description: RESUMEN.slice(0, 300).replace(/\s\S*$/, "…"),
-  alternates: { canonical: "/report" },
+  alternates: { canonical: "/adi/report" },
   openGraph: { type: "article", title: `${TITULO}: ADI Report 2026.1`, publishedTime: resumen.fecha, authors: AUTORES.map((a) => a.nombre) },
   // Highwire Press tags: what Google Scholar and reference managers read on a landing page.
   other: {
     citation_title: `${TITULO}: ${SUBTITULO}`,
     citation_author: AUTORES.map((a) => a.bib.replace(/\{\\'e\}/g, "é").replace(/\{\\~n\}/g, "ñ")),
     citation_publication_date: resumen.fecha.replaceAll("-", "/"),
-    citation_technical_report_institution: "Agent Delegability Index",
+    citation_technical_report_institution: LAB,
+    citation_publisher: LAB,
     citation_technical_report_number: "ADI Report 2026.1",
     citation_language: "en",
-    citation_abstract_html_url: `${SITE}/report`,
+    citation_abstract_html_url: `${SITE}/adi/report`,
     citation_keywords: "AI agents; delegation; labour markets; ISCO-08; O*NET; delegation divide",
     ...(informe.pdf ? { citation_pdf_url: `${SITE}${PDF_INFORME}` } : {}),
     ...(resumen.doi_informe ? { citation_doi: resumen.doi_informe } : {}),
@@ -72,7 +73,7 @@ export default function Informe() {
                 ? <a className="boton lleno" href={PDF_INFORME} download>Download the PDF · {informe.mb} MB</a>
                 : <span className="boton" aria-disabled="true">PDF on publication</span>}
               <a className="boton" href="#cite">Cite</a>
-              <Link className="boton" href="/data">Data and code</Link>
+              <Link className="boton" href="/adi/data">Data and code</Link>
             </div>
           </div>
         </div>
@@ -115,10 +116,10 @@ export default function Informe() {
       </section>
       <JsonLd datos={{
         "@context": "https://schema.org", "@type": ["Report", "ScholarlyArticle"], name: `${TITULO}: ${SUBTITULO}`, headline: TITULO, alternativeHeadline: SUBTITULO,
-        abstract: RESUMEN, url: `${SITE}/report`, datePublished: resumen.fecha, inLanguage: "en", reportNumber: "ADI Report 2026.1", numberOfPages: informe.paginas,
+        abstract: RESUMEN, url: `${SITE}/adi/report`, datePublished: resumen.fecha, inLanguage: "en", reportNumber: "ADI Report 2026.1", numberOfPages: informe.paginas,
         image: `${SITE}/report/cover.webp`, license: "https://creativecommons.org/licenses/by/4.0/", isAccessibleForFree: true,
         author: AUTORES.map((a) => ({ "@type": "Person", name: a.nombre, affiliation: { "@type": "Organization", name: a.afil }, sameAs: `https://orcid.org/${a.orcid}` })),
-        publisher: { "@type": "Organization", name: "Agent Delegability Index", url: SITE },
+        publisher: { "@type": "Organization", "@id": `${SITE}/#org`, name: LAB, url: SITE },
         isBasedOn: { "@type": "Dataset", name: "Agent Delegability Index (ADI) v2026.1", identifier: `https://doi.org/${resumen.doi_datos}` },
         ...(resumen.doi_informe ? { identifier: `https://doi.org/${resumen.doi_informe}`, sameAs: `https://doi.org/${resumen.doi_informe}` } : {}),
         ...(informe.pdf ? { encoding: { "@type": "MediaObject", contentUrl: `${SITE}${PDF_INFORME}`, encodingFormat: "application/pdf" } } : {}),

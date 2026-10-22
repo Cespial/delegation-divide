@@ -5,7 +5,7 @@ import { GG, N_OCUP, cifra, ocupaciones } from "@/lib/datos";
 export const metadata: Metadata = {
   title: "Occupations: AI-agent delegability for 433 ISCO-08 unit groups",
   description: `Ranking of ${N_OCUP} ISCO-08 occupations by the share of task time AI agents can take over, with 95% intervals, full delegation and barriers.`,
-  alternates: { canonical: "/occupations" },
+  alternates: { canonical: "/adi/occupations" },
 };
 
 export default function Ocupaciones() {

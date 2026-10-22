@@ -59,7 +59,7 @@ est = pathlib.Path(__file__).resolve().parents[1] / "release/zenodo_informe.esta
 doi = json.loads(est.read_text())["doi"] if est.exists() and not json.loads(est.read_text()).get("sandbox") else None  # DOI propio del informe
 w.add_metadata({"/Title": "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries",
                 "/Author": "Cristian Espinal Maya; Santiago Jiménez Londoño",
-                "/Subject": "ADI Report 2026.1, Agent Delegability Index" + (f" · doi:{doi}" if doi else ""),
+                "/Subject": "ADI Report 2026.1 · Balam Labs" + (f" · doi:{doi}" if doi else ""),
                 "/Keywords": "AI agents, delegation, labour markets, ISCO-08, ILOSTAT, ADI" + (f", doi:{doi}" if doi else "") + ", data doi:10.5281/zenodo.23552918",
                 "/Creator": "", "/Producer": ""})
 padres = {}

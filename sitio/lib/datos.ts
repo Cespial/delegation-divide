@@ -86,12 +86,16 @@ export const AUTORES = [
   { nombre: "Cristian Espinal Maya", bib: "Espinal Maya, Cristian", afil: "Universidad Nacional de Colombia, Facultad de Minas", orcid: "0009-0000-1009-8388" },
   { nombre: "Santiago Jiménez Londoño", bib: "Jim{\\'e}nez Londo{\\~n}o, Santiago", afil: "Universidad EAFIT", orcid: "0009-0007-9862-7133" },
 ];
+// Balam Labs is the name the indices are published under (no legal entity); the ADI is its first product and lives at /adi.
+export const LAB = "Balam Labs";
+export const ADI = "/adi";
+export const APOYO = "Produced with the support of INPLUX S.A.S., Medellín.";
 export const REPO = "https://github.com/Cespial/delegation-divide";
 export const HF = "https://huggingface.co/datasets/Cespial/adi";
 export const PDF_INFORME = "/report/delegation-divide-report-2026.pdf";
 // The PDF is served only once the cleaned copy (limpiadoc) exists; until then the site points to /report.
 export const informe = informeJson as { paginas: number; pdf: boolean; mb: number | null };
-export const ENLACE_INFORME = informe.pdf ? PDF_INFORME : "/report";
+export const ENLACE_INFORME = informe.pdf ? PDF_INFORME : "/adi/report";
 export const TITULO_PAPER = "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries";
 
 // PyPI packages: until they are published, the site shows the install-from-GitHub command.

@@ -32,7 +32,8 @@
     "delegation divide",
     "Colombia",
     "GEIH",
-    "Agent Delegability Index"
+    "Agent Delegability Index",
+    "Balam Labs"
   ],
   "related_identifiers": [
     {
@@ -54,7 +55,7 @@
       "scheme": "url"
     }
   ],
-  "notes": "Report edition of the paper of the same title (arXiv identifier pending). Every number in the report is read by identifier from the published outputs of ADI v2026.1.",
+  "notes": "Published by Balam Labs (balamlabs.org). Report edition of the paper of the same title (arXiv identifier pending). Every number in the report is read by identifier from the published outputs of ADI v2026.1.",
   "description_plantilla": [
     "<p><strong>ADI Report 2026.1.</strong> The Agent Delegability Index rates how much of each of {cobertura.tareas} O*NET task statements an AI agent with tool use and computer use can take over, on a preregistered four-level scale (L0 no meaningful role, L1 augmentation, L2 partial delegation, L3 full delegation) with four barriers (physical presence, accountability, trust and care, access to systems), and carries the ratings to {cobertura.isco} ISCO-08 occupations and {cobertura.paises} countries.</p>",
     "<p><strong>Key results</strong></p><ul>",
@@ -66,5 +67,6 @@
     "<li>The two rating models agree at κ = {agree.kappa.sonnet_haiku}; a blind human rating of {n.humano} tasks, led by a coauthor with student raters, agrees with them at κ = {agree.kappa.humano.modelo}, and an agentic panel with web search at κ = {agree.kappa.panel.modelo}.</li>",
     "</ul>",
     "<p>This report presents the results of the paper of the same title for policy and general readers. Data, code and static JSON for every occupation and country: <a href=\"https://doi.org/10.5281/zenodo.23552918\">doi:10.5281/zenodo.23552918</a>. Preregistration: <a href=\"https://doi.org/10.17605/OSF.IO/9ZNTF\">doi:10.17605/OSF.IO/9ZNTF</a>. Text and figures: CC BY 4.0.</p>"
-  ]
+  ],
+  "imprint_publisher": "Balam Labs"
 }

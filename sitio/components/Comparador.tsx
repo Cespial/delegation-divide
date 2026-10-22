@@ -25,7 +25,7 @@ export function Comparador({ ocupaciones, paises }: { ocupaciones: Item[]; paise
     const u = new URL(window.location.href); u.searchParams.set("type", t); u.searchParams.set("a", na); u.searchParams.set("b", nb);
     window.history.replaceState(null, "", u);
   };
-  const ruta = tipo === "country" ? "/countries/" : "/occupations/";
+  const ruta = tipo === "country" ? "/adi/countries/" : "/adi/occupations/";
   const selector = (v: string, set: (x: string) => void, lado: "a" | "b") => (
     <select className="campo" style={{ width: "100%" }} aria-label={lado === "a" ? "First" : "Second"} value={v} onChange={(e) => {
       set(e.target.value); actualizar(tipo, lado === "a" ? e.target.value : a, lado === "b" ? e.target.value : b);

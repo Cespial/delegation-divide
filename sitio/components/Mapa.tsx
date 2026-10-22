@@ -18,7 +18,7 @@ export function Mapa({ resaltar }: { resaltar?: string }) {
           const p = valor.get(f.iso3);
           if (!p) return <path key={f.iso3} d={f.d} fill="#e7e5e1"><title>{`${f.nombre}: no occupation data`}</title></path>;
           return (
-            <Link key={f.iso3} href={`/countries/${p.iso3}`} aria-label={`${p.nombre}: ${p.l2.toFixed(1)}%`}>
+            <Link key={f.iso3} href={`/adi/countries/${p.iso3}`} aria-label={`${p.nombre}: ${p.l2.toFixed(1)}%`}>
               <path d={f.d} fill={color(p.l2)}>
                 <title>{`${p.nombre}: ${p.l2.toFixed(1)}% (rank ${p.rk} of ${paises.length})`}</title>
               </path>
@@ -29,7 +29,7 @@ export function Mapa({ resaltar }: { resaltar?: string }) {
           const p = valor.get(q.iso3);
           if (!p) return null;
           return (
-            <Link key={q.iso3} href={`/countries/${p.iso3}`} aria-label={`${p.nombre}: ${p.l2.toFixed(1)}%`}>
+            <Link key={q.iso3} href={`/adi/countries/${p.iso3}`} aria-label={`${p.nombre}: ${p.l2.toFixed(1)}%`}>
               <circle cx={q.x} cy={q.y} r={4} fill={color(p.l2)}><title>{`${p.nombre}: ${p.l2.toFixed(1)}%`}</title></circle>
             </Link>
           );

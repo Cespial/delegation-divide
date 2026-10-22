@@ -46,7 +46,7 @@ export function TablaPaises({ filas, regiones, ingresos }: { filas: FilaPais[]; 
           <tbody>
             {vista.map((f) => (
               <tr key={f.iso3}>
-                <td className="puesto">{f.rk}</td><td><Link href={`/countries/${f.iso3}`}>{f.nombre}</Link> <span className="codigo">{f.iso3}</span></td>
+                <td className="puesto">{f.rk}</td><td><Link href={`/adi/countries/${f.iso3}`}>{f.nombre}</Link> <span className="codigo">{f.iso3}</span></td>
                 <td className="nota">{f.ingreso_nombre}</td><td className="barra-celda"><Barra v={f.l2} lo={f.lo} hi={f.hi} max={70} /></td>
                 <td className="n valor">{f.l2.toFixed(1)}</td><td className="n num">{f.l3.toFixed(1)}</td><td className="n num">{f.s.toFixed(1)}</td>
                 <td className="n num">{f.pib === null ? "–" : f.pib.toLocaleString("en-US")}</td>

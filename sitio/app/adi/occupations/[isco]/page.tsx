@@ -16,9 +16,9 @@ export async function generateMetadata({ params }: { params: Promise<{ isco: str
   const o = ocupacion((await params).isco);
   if (!o) return {};
   return {
-    title: { absolute: `${o.titulo}: ${o.l2.toFixed(1)}% delegable to AI agents · ADI` },
+    title: { absolute: `${o.titulo}: ${o.l2.toFixed(1)}% delegable to AI agents · ADI · Balam Labs` },
     description: `${o.titulo}: ${o.l2.toFixed(1)}% of task time is at least partly delegable to AI agents (95% interval ${o.l2_lo.toFixed(1)}–${o.l2_hi.toFixed(1)}%), ${o.l3.toFixed(1)}% in full. Ranked ${o.rk} of ${N_OCUP} occupations in the Agent Delegability Index.`,
-    alternates: { canonical: `/occupations/${o.isco}` },
+    alternates: { canonical: `/adi/occupations/${o.isco}` },
   };
 }
 
@@ -30,7 +30,7 @@ export default async function Ocupacion({ params }: { params: Promise<{ isco: st
   const ts = tareas(o.isco);
   const porNivel = [0, 1, 2, 3].map((n) => ts.filter((t) => t.n === n).reduce((a, t) => a + t.w, 0));
   const vecinos = ocupaciones.filter((x) => x.sub === o.sub && x.isco !== o.isco).sort((a, b) => b.l2 - a.l2);
-  const url = `${SITE}/occupations/${o.isco}`;
+  const url = `${SITE}/adi/occupations/${o.isco}`;
   const cita = citaRegistro(`${o.titulo} (ISCO-08 ${o.isco})`, url);
   const mostrar = 15;
   const filaTarea = (t: (typeof ts)[number]) => (
@@ -51,8 +51,8 @@ export default async function Ocupacion({ params }: { params: Promise<{ isco: st
     <>
       <section className="seccion">
         <div className="envoltura">
-          <nav className="miga" aria-label="Breadcrumb"><Link href="/occupations">Occupations</Link><span aria-hidden>/</span>
-            <Link href={`/occupations?group=${o.gg}`}>{o.gg} · {GG[o.gg]}</Link><span aria-hidden>/</span><span>{o.isco}</span></nav>
+          <nav className="miga" aria-label="Breadcrumb"><Link href="/adi/occupations">Occupations</Link><span aria-hidden>/</span>
+            <Link href={`/adi/occupations?group=${o.gg}`}>{o.gg} · {GG[o.gg]}</Link><span aria-hidden>/</span><span>{o.isco}</span></nav>
           <div className="ficha-cab">
             <div><span className="codigo-grande">ISCO-08 {o.isco}{o.imp ? " · imputed from its three-digit group" : ""}</span><h1 className="titulo">{o.titulo}</h1></div>
             <div className="titular" style={{ borderLeft: 0, paddingLeft: 0 }}>
@@ -134,7 +134,7 @@ export default async function Ocupacion({ params }: { params: Promise<{ isco: st
             <h2 className="titulo-2" style={{ margin: "10px 0 18px" }}>Neighbouring occupations</h2>
             <div className="tabla-marco"><table className="tabla"><thead><tr><th>Occupation</th><th className="barra-celda">ADI</th><th className="n">%</th></tr></thead>
               <tbody>{vecinos.slice(0, 12).map((x) => (
-                <tr key={x.isco}><td><Link href={`/occupations/${x.isco}`}>{x.titulo}</Link> <span className="codigo">{x.isco}</span></td>
+                <tr key={x.isco}><td><Link href={`/adi/occupations/${x.isco}`}>{x.titulo}</Link> <span className="codigo">{x.isco}</span></td>
                   <td className="barra-celda"><Barra v={x.l2} marca={o.l2} /></td><td className="n valor">{x.l2.toFixed(1)}</td></tr>
               ))}{vecinos.length === 0 && <tr><td colSpan={3} className="nota">This is the only unit group in its sub-major group.</td></tr>}</tbody></table></div>
             {vecinos.length > 0 && <p className="nota" style={{ marginTop: 10 }}>Dashed line: {o.titulo.toLowerCase()} ({o.l2.toFixed(1)}%).</p>}
@@ -147,14 +147,14 @@ export default async function Ocupacion({ params }: { params: Promise<{ isco: st
           <div><span className="rotulo">Cite this record</span><div style={{ marginTop: 14 }}><Cita titulo="Text" cita={cita} /></div></div>
           <div><span className="rotulo">Machine-readable</span>
             <p style={{ marginTop: 14 }}>The same record as static JSON, with its citation: <a href={`/adi/v2026.1/isco/${o.isco}.json`}><code>/adi/v2026.1/isco/{o.isco}.json</code></a>.</p>
-            <div className="botones"><Link className="boton" href={`/compare?a=${o.isco}`}>Compare with another occupation</Link><Link className="boton" href="/methodology">How it is measured</Link></div>
+            <div className="botones"><Link className="boton" href={`/adi/compare?a=${o.isco}`}>Compare with another occupation</Link><Link className="boton" href="/adi/methodology">How it is measured</Link></div>
           </div>
         </div>
       </section>
       <JsonLd datos={{
         "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Occupations", item: `${SITE}/occupations` },
-          { "@type": "ListItem", position: 2, name: GG[o.gg], item: `${SITE}/occupations?group=${o.gg}` },
+          { "@type": "ListItem", position: 1, name: "Occupations", item: `${SITE}/adi/occupations` },
+          { "@type": "ListItem", position: 2, name: GG[o.gg], item: `${SITE}/adi/occupations?group=${o.gg}` },
           { "@type": "ListItem", position: 3, name: o.titulo, item: url },
         ],
       }} />

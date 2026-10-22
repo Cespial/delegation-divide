@@ -50,7 +50,7 @@ export function TablaOcupaciones({ filas, grupos }: { filas: FilaOcup[]; grupos:
             {vista.map((f) => (
               <tr key={f.isco}>
                 <td className="puesto">{f.rk}</td><td className="codigo">{f.isco}</td>
-                <td><Link href={`/occupations/${f.isco}`}>{f.titulo}</Link></td>
+                <td><Link href={`/adi/occupations/${f.isco}`}>{f.titulo}</Link></td>
                 <td className="barra-celda"><Barra v={f.l2} lo={f.lo} hi={f.hi} /></td>
                 <td className="n valor">{f.l2.toFixed(1)}</td><td className="n num">{f.l3.toFixed(1)}</td><td className="n num">{f.s.toFixed(1)}</td><td className="n num">{f.n}</td>
               </tr>

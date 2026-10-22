@@ -5,7 +5,7 @@ import { GG, N_OCUP, N_PAISES, ocupaciones, ordinal, paises } from "@/lib/datos"
 export const metadata: Metadata = {
   title: "Compare occupations or countries",
   description: "Put two occupations or two countries side by side: delegability, full delegation, share of working time and barriers, with 95% intervals.",
-  alternates: { canonical: "/compare" },
+  alternates: { canonical: "/adi/compare" },
 };
 
 export default function Comparar() {

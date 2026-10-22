@@ -6,7 +6,7 @@ import { INGRESOS, N_PAISES, cifra, paises } from "@/lib/datos";
 export const metadata: Metadata = {
   title: "Countries: the delegation divide in 146 economies",
   description: `How much of each country's work AI agents can take over: ADI for ${N_PAISES} countries, from ${cifra("titular.ingreso.bajo.l2")}% in low-income to ${cifra("titular.ingreso.alto.l2")}% in high-income economies.`,
-  alternates: { canonical: "/countries" },
+  alternates: { canonical: "/adi/countries" },
 };
 
 export default function Paises() {

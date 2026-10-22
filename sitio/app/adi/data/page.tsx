@@ -10,7 +10,7 @@ import { jsonDataset } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Data, API and code",
   description: `Download the Agent Delegability Index v${resumen.version}: CSV and Parquet tables for ${cifra("cobertura.isco")} occupations, ${cifra("cobertura.paises")} countries and every task rating, a static JSON API, a Python package and an MCP server. CC BY 4.0, doi:${resumen.doi_datos}.`,
-  alternates: { canonical: "/data" },
+  alternates: { canonical: "/adi/data" },
 };
 
 const tam = (f: string) => {

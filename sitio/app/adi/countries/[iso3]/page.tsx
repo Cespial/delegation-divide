@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ iso3: str
   const p = pais((await params).iso3);
   if (!p) return {};
   return {
-    title: { absolute: `${p.nombre}: ${p.l2.toFixed(1)}% of work delegable to AI agents · ADI` },
+    title: { absolute: `${p.nombre}: ${p.l2.toFixed(1)}% of work delegable to AI agents · ADI · Balam Labs` },
     description: `${p.perfil.hallazgo} Agent Delegability Index, ${p.nombre} ranks ${p.rk} of ${N_PAISES} countries.`,
-    alternates: { canonical: `/countries/${p.iso3}` },
+    alternates: { canonical: `/adi/countries/${p.iso3}` },
   };
 }
 
@@ -30,7 +30,7 @@ const TEMA_GEIH: Record<string, string> = { total: "", sexo: "Sex", edad: "Age",
 export default async function Pais({ params }: { params: Promise<{ iso3: string }> }) {
   const p = pais((await params).iso3);
   if (!p) notFound();
-  const url = `${SITE}/countries/${p.iso3}`;
+  const url = `${SITE}/adi/countries/${p.iso3}`;
   const cita = citaRegistro(`${p.nombre} (${p.iso3})`, url);
   const regionL2 = Number(p.perfil.region_l2);
   const temas = [...new Set(p.perfil.filas.map((f) => f.tema))];
@@ -39,8 +39,8 @@ export default async function Pais({ params }: { params: Promise<{ iso3: string 
     <>
       <section className="seccion">
         <div className="envoltura">
-          <nav className="miga" aria-label="Breadcrumb"><Link href="/countries">Countries</Link><span aria-hidden>/</span>
-            <Link href={`/countries?region=${encodeURIComponent(p.region_nombre)}`}>{p.region_nombre}</Link><span aria-hidden>/</span><span>{p.iso3}</span></nav>
+          <nav className="miga" aria-label="Breadcrumb"><Link href="/adi/countries">Countries</Link><span aria-hidden>/</span>
+            <Link href={`/adi/countries?region=${encodeURIComponent(p.region_nombre)}`}>{p.region_nombre}</Link><span aria-hidden>/</span><span>{p.iso3}</span></nav>
           <div className="ficha-cab">
             <div><span className="codigo-grande">{p.iso3} · {p.ingreso_nombre} · ILOSTAT {p.anio}, ISCO-08 at {p.res === 2 ? "two digits" : "one digit"}</span><h1 className="titulo">{p.nombre}</h1></div>
             <div className="titular" style={{ borderLeft: 0, paddingLeft: 0 }}>
@@ -103,7 +103,7 @@ export default async function Pais({ params }: { params: Promise<{ iso3: string 
             <div className="tabla-marco"><table className="tabla"><thead><tr><th>Country</th><th className="barra-celda">ADI</th><th className="n">%</th></tr></thead>
               <tbody>{p.perfil.barras.map(([iso, nom, v]) => (
                 <tr key={iso} className={iso === p.iso3 ? "destacada" : undefined}>
-                  <td>{iso === p.iso3 ? <b>{nom}</b> : <Link href={`/countries/${iso}`}>{nom}</Link>}</td>
+                  <td>{iso === p.iso3 ? <b>{nom}</b> : <Link href={`/adi/countries/${iso}`}>{nom}</Link>}</td>
                   <td className="barra-celda"><Barra v={v} max={70} marca={regionL2} fuerte={iso === p.iso3} /></td><td className="n valor">{v.toFixed(1)}</td>
                 </tr>
               ))}</tbody></table></div>
@@ -114,13 +114,13 @@ export default async function Pais({ params }: { params: Promise<{ iso3: string 
             <div style={{ marginTop: 14 }}><Mapa resaltar={p.iso3} /></div>
             <div style={{ marginTop: 36 }}><span className="rotulo">Cite this record</span><div style={{ marginTop: 14 }}><Cita titulo="Text" cita={cita} /></div></div>
             <p style={{ marginTop: 18 }}>Static JSON: <a href={`/adi/v2026.1/country/${p.iso3}.json`}><code>/adi/v2026.1/country/{p.iso3}.json</code></a></p>
-            <div className="botones"><Link className="boton" href={`/compare?type=country&a=${p.iso3}`}>Compare with another country</Link></div>
+            <div className="botones"><Link className="boton" href={`/adi/compare?type=country&a=${p.iso3}`}>Compare with another country</Link></div>
           </div>
         </div>
       </section>
       <JsonLd datos={{
         "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Countries", item: `${SITE}/countries` },
+          { "@type": "ListItem", position: 1, name: "Countries", item: `${SITE}/adi/countries` },
           { "@type": "ListItem", position: 2, name: p.nombre, item: url },
         ],
       }} />

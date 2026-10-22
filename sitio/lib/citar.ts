@@ -1,6 +1,6 @@
 // Citation strings shown on every page. The report keeps its own DOI once reserved (release/zenodo_informe.py);
 // until then it is cited with the repository URL, exactly as the PDF does.
-import { AUTORES, REPO, TITULO_PAPER, resumen } from "./datos";
+import { AUTORES, LAB, REPO, TITULO_PAPER, resumen } from "./datos";
 
 const autoresTexto = "Espinal Maya, Cristian, and Santiago Jiménez Londoño";
 const autoresBib = AUTORES.map((a) => a.bib).join(" and ");
@@ -9,15 +9,14 @@ export function citaInforme() {
   const doi = resumen.doi_informe;
   const url = doi ? `https://doi.org/${doi}` : REPO;
   return {
-    texto: `${autoresTexto}. 2026. ${TITULO_PAPER}. ADI Report 2026.1. Medellín: Agent Delegability Index. ${url}`,
+    texto: `${autoresTexto}. 2026. ${TITULO_PAPER}. ADI Report 2026.1. ${LAB}. ${url}`,
     bibtex: [
       "@techreport{espinal2026delegationreport,",
       `  title       = {${TITULO_PAPER}},`,
       `  author      = {${autoresBib}},`,
-      "  institution = {Agent Delegability Index},",
+      `  institution = {${LAB}},`,
       "  type        = {ADI Report},",
       "  number      = {2026.1},",
-      "  address     = {Medell{\\'i}n},",
       "  year        = {2026},",
       ...(doi ? [`  doi         = {${doi}},`] : []),
       `  url         = {${url}}`,

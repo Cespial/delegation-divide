@@ -277,3 +277,63 @@ details.mas summary { cursor: pointer; font: 500 12.5px/1 var(--mono); text-tran
 .bloque { margin: 0 0 10px; padding: 14px 16px; background: var(--superficie); border: 1px solid var(--filete); overflow-x: auto; font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
 @media (max-width: 640px) { .prosa .feed li { grid-template-columns: minmax(0, 1fr); } }
 .fila-comp > .cifra { text-align: right; }
+
+/* ---------- Balam Labs: logotype, ADI product bar ---------- */
+/* .marca .marca-lab beats the older .marca span rules (mono label, hidden on mobile) */
+.marca .marca-lab, .marca .marca-lab span { position: static; width: auto; height: auto; overflow: visible; clip: auto;
+  font: 800 25px/1 var(--cond); letter-spacing: -0.005em; color: var(--tinta); white-space: nowrap; }
+.marca .marca-lab span { font-weight: 600; color: var(--tinta-2); }
+.producto { border-bottom: 1px solid var(--filete); background: var(--superficie); }
+.producto .envoltura { display: flex; align-items: center; gap: 24px; min-height: 48px; }
+.producto-marca { display: flex; align-items: center; gap: 10px; color: var(--tinta); text-decoration: none; flex: none; }
+.producto-marca svg { height: 18px; width: auto; }
+.producto-marca span { font: 500 12px/1.2 var(--mono); color: var(--tinta-2); letter-spacing: 0.02em; }
+.producto-marca em { font-style: normal; color: var(--gris); }
+.nav-producto a { font-size: 11.5px; padding: 15px 9px 13px; }
+@media (max-width: 1080px) { .producto-marca em { display: none; } }
+@media (max-width: 760px) {
+  .producto .envoltura { flex-wrap: wrap; gap: 0; padding-top: 10px; }
+  .producto-marca span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+/* ---------- lab home ---------- */
+.tira { border-bottom: 1px solid var(--filete); background: var(--hueso); }
+.tira ul { list-style: none; display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; margin: 0 auto; padding-top: 10px; padding-bottom: 10px; }
+.tira ul::-webkit-scrollbar { display: none; }
+.tira li { display: flex; gap: 10px; flex: none; font: 400 12.5px/1.3 var(--mono); }
+.tira time { color: var(--gris); }
+.tira a { color: var(--tinta); text-decoration: none; } .tira a:hover { color: var(--teal); text-decoration: underline; }
+.portada-lab { padding-bottom: clamp(36px, 5vw, 64px); }
+.portada-lab .titulo { max-width: 17ch; }
+.portada-lab .entrada { margin-top: 24px; }
+.lema { font: 500 13px/1.3 var(--mono); color: var(--teal); margin: 0 0 20px; }
+.tablero { border: 1px solid var(--filete); background: var(--superficie); }
+.tablero-cabeza { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 24px; padding: 16px 20px; border-bottom: 1px solid var(--filete); }
+.sello { display: flex; align-items: center; gap: 12px; color: var(--tinta); text-decoration: none; }
+.sello svg { height: 30px; width: auto; }
+.sello span { font: 400 12px/1.35 var(--mono); color: var(--gris); }
+.sello b { color: var(--tinta); font-weight: 500; }
+.tablero-cuerpo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 28px clamp(24px, 4vw, 48px); padding: 4px 20px 22px; align-items: start; }
+.tablero-cuerpo .tabla-marco { border-top: 0; }
+.tablero-cuerpo .titular { margin-top: 28px; }
+.tablero-cuerpo .titular .cifra { font-size: clamp(88px, 10vw, 136px); }
+.tablero-cuerpo .titular p:last-child { font-size: 15px; }
+@media (max-width: 960px) { .tablero-cuerpo { grid-template-columns: minmax(0, 1fr); } .tablero-cuerpo .titular { border-left: 0; padding-left: 0; border-top: 1px solid var(--filete); padding-top: 22px; margin-top: 0; } }
+@media (max-width: 640px) { .tablero-cabeza, .tablero-cuerpo { padding-left: 14px; padding-right: 14px; } }
+.informes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--tinta); }
+.informes > li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 8px 32px; padding: 22px 0 24px; border-bottom: 1px solid var(--filete); }
+.informe-meta { display: flex; flex-direction: column; gap: 6px; font: 400 12.5px/1.3 var(--mono); color: var(--gris); }
+.informe-meta span { color: var(--teal); }
+.informes .titulo-3 { margin: 0 0 8px; } .informes .titulo-3 a { color: var(--tinta); text-decoration: none; } .informes .titulo-3 a:hover { color: var(--teal); }
+.informes p { margin: 0 0 8px; max-width: 70ch; } .informes p b { font-weight: 600; }
+.informes ul { margin: 0; padding-left: 1.1em; color: var(--tinta-2); max-width: 72ch; } .informes ul li { margin: 3px 0; }
+@media (max-width: 640px) { .informes > li { grid-template-columns: minmax(0, 1fr); } .informe-meta { flex-direction: row; gap: 12px; } }
+.productos { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--tinta); }
+.producto-fila { display: grid; grid-template-columns: 74px minmax(0, 1fr) auto; gap: 16px 28px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--filete);
+  color: var(--tinta); text-decoration: none; }
+.producto-fila:hover .titulo-3 { color: var(--teal); }
+.producto-fila svg { width: 74px; height: auto; }
+.producto-fila .titulo-3 { margin: 0 0 4px; } .producto-fila p { margin: 0; color: var(--tinta-2); max-width: 60ch; }
+.producto-fila dl { display: flex; gap: 24px; margin: 0; }
+.producto-fila dt { font: 400 11.5px/1.3 var(--mono); color: var(--gris); } .producto-fila dd { margin: 4px 0 0; font: 700 24px/1 var(--cond); font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) { .producto-fila { grid-template-columns: 56px minmax(0, 1fr); } .producto-fila svg { width: 56px; } .producto-fila dl { grid-column: 1 / -1; flex-wrap: wrap; gap: 14px 24px; } }

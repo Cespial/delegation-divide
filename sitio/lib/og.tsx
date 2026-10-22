@@ -3,7 +3,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";
-import { resumen } from "./datos";
+import { INGRESOS, LAB, cifra, resumen } from "./datos";
 
 export const TAM = { width: 1200, height: 630 };
 const C = { papel: "#f8f8f7", tinta: "#1a1918", tinta2: "#45494f", gris: "#686c73", filete: "#dcdad6", teal: "#0d7d74", osc: "#0a4a45", n: ["#ece9e4", "#cfe6e3", "#5fa9a1", "#0a4a45"] };
@@ -32,6 +32,7 @@ export type Tarjeta = {
   rotulo: string; titulo: string; cifra: string; unidad?: string; texto: string;
   barra?: { partes: { v: number; color: string }[]; etiquetas?: string[] } | { v: number; lo?: number; hi?: number; ref?: number; refTexto?: string; max: number };
   lado?: React.ReactNode;
+  lab?: boolean; // lab card (home): Balam Labs logotype instead of the ADI mark
 };
 
 export async function tarjeta(t: Tarjeta) {
@@ -41,9 +42,18 @@ export async function tarjeta(t: Tarjeta) {
     (
       <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", background: C.papel, padding: "48px 64px 44px", fontFamily: "Barlow", color: C.tinta }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, borderBottom: `1px solid ${C.filete}`, paddingBottom: 20 }}>
-          <Pasos />
-          <div style={{ fontFamily: "Cond", fontWeight: 800, fontSize: 40, letterSpacing: 0.5, marginTop: 4 }}>ADI</div>
-          <div style={{ display: "flex", fontFamily: "Mono", fontSize: 19, color: C.gris, marginLeft: 8 }}>{`Agent Delegability Index · v${resumen.version}`}</div>
+          {t.lab ? (
+            <>
+              <div style={{ fontFamily: "Cond", fontWeight: 800, fontSize: 40, marginTop: 4 }}>{LAB}</div>
+              <div style={{ display: "flex", fontFamily: "Mono", fontSize: 19, color: C.gris, marginLeft: 8 }}>Independent indices of what AI agents can do</div>
+            </>
+          ) : (
+            <>
+              <Pasos />
+              <div style={{ fontFamily: "Cond", fontWeight: 800, fontSize: 40, letterSpacing: 0.5, marginTop: 4 }}>ADI</div>
+              <div style={{ display: "flex", fontFamily: "Mono", fontSize: 19, color: C.gris, marginLeft: 8 }}>{`${LAB} · Agent Delegability Index · v${resumen.version}`}</div>
+            </>
+          )}
         </div>
         <div style={{ display: "flex", flex: 1, gap: 48, marginTop: 34 }}>
           <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
@@ -94,3 +104,26 @@ function Barra({ b }: { b: NonNullable<Tarjeta["barra"]> }) {
 }
 
 export const COLORES_NIVEL = C.n;
+
+// Side chart of the home cards: ADI by country income group.
+const CORTO: Record<string, string> = { low: "Low", "lower-middle": "Lower-mid", "upper-middle": "Upper-mid", high: "High" };
+const TONOS = ["#9ccbc6", "#5fa9a1", "#0d7d74", "#0a4a45"];
+export function LadoIngresos() {
+  const v = INGRESOS.map((g) => Number(cifra(`titular.ingreso.${g.id}.l2`)));
+  return (
+    <div style={{ display: "flex", flexDirection: "column", width: 330 }}>
+      <div style={{ display: "flex", alignItems: "flex-end", gap: 10, height: 300, borderBottom: "2px solid #1a1918" }}>
+        {v.map((x, i) => (
+          <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
+            <div style={{ fontFamily: "Cond", fontWeight: 800, fontSize: 34, color: "#0a4a45", marginBottom: 6 }}>{x.toFixed(1)}</div>
+            <div style={{ width: "100%", height: (x / 55) * 240, background: TONOS[i] }} />
+          </div>
+        ))}
+      </div>
+      <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
+        {INGRESOS.map((g) => <div key={g.k} style={{ flex: 1, display: "flex", justifyContent: "center", fontFamily: "Mono", fontSize: 15, color: "#686c73" }}>{CORTO[g.k]}</div>)}
+      </div>
+      <div style={{ display: "flex", fontFamily: "Mono", fontSize: 15, color: "#686c73", marginTop: 6, justifyContent: "center" }}>ADI by country income group, %</div>
+    </div>
+  );
+}

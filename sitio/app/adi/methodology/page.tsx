@@ -7,7 +7,7 @@ import { NIVELES, SITE, cifra, resumen } from "@/lib/datos";
 export const metadata: Metadata = {
   title: "Methodology",
   description: `How the Agent Delegability Index is built: a frozen, preregistered rubric of four delegation levels and four barriers, two rating models over ${cifra("cobertura.tareas")} O*NET task statements, a crosswalk to ISCO-08 and employment weights for ${cifra("cobertura.paises")} countries.`,
-  alternates: { canonical: "/methodology" },
+  alternates: { canonical: "/adi/methodology" },
 };
 
 const DEF = [
@@ -66,8 +66,8 @@ export default function Metodologia() {
           <p>{cifra("titular.global.l2")}% of task time in world employment is at least partly delegable to AI agents in 2026 (95% interval {cifra("titular.global.l2.lo")}–{cifra("titular.global.l2.hi")}%),
             across {cifra("cobertura.empleo_millones")} million workers in {cifra("cobertura.paises")} countries. Only {cifra("titular.global.l3")}% can be handed over in full.
             The index goes from {cifra("titular.ingreso.bajo.l2")}% in low-income countries to {cifra("titular.ingreso.alto.l2")}% in high-income countries, and from {cifra("extremo.pais.bot1.l2")}%
-            in {cifra("extremo.pais.bot1.nombre")} to {cifra("extremo.pais.top1.l2")}% in {cifra("extremo.pais.top1.nombre")}. Explore it by <Link href="/occupations">occupation</Link> and
-            by <Link href="/countries">country</Link>.</p>
+            in {cifra("extremo.pais.bot1.nombre")} to {cifra("extremo.pais.top1.l2")}% in {cifra("extremo.pais.top1.nombre")}. Explore it by <Link href="/adi/occupations">occupation</Link> and
+            by <Link href="/adi/countries">country</Link>.</p>
 
           <h2 className="titulo-2" id="takeaways">Key takeaways</h2>
           <ul className="claves">
@@ -122,10 +122,10 @@ export default function Metodologia() {
               <p>No country publishes four-digit employment in ILOSTAT, so unit groups are weighted with US OES for high-income countries and Colombia’s GEIH for the rest. Equal weights give {cifra("titular.global.l2.iguales")}%.</p></div></li>
           </ul>
           <p className="nota" style={{ marginTop: 14 }}>Full record of deviations: <a href="https://github.com/Cespial/delegation-divide/blob/main/docs/DESVIACIONES.md">docs/DESVIACIONES.md</a> (Spanish).
-            The rubric is reproduced in Annex A of the <Link href="/report">report</Link>.</p>
+            The rubric is reproduced in Annex A of the <Link href="/adi/report">report</Link>.</p>
         </article>
       </div>
-      <JsonLd datos={{ "@context": "https://schema.org", "@type": "TechArticle", headline: "How the Agent Delegability Index is built", url: `${SITE}/methodology`,
+      <JsonLd datos={{ "@context": "https://schema.org", "@type": "TechArticle", headline: "How the Agent Delegability Index is built", url: `${SITE}/adi/methodology`,
         isPartOf: { "@type": "WebSite", url: SITE }, about: { "@type": "Dataset", identifier: `https://doi.org/${resumen.doi_datos}` } }} />
     </section>
   );

@@ -1,7 +1,7 @@
 """Verifica el sitio contra la fuente de verdad, sin pasar por exportar.py:
 1) cada cifra de datos/resumen.json es fmt_html(valor) leído ahora de los claims (sin HTML);
 2) ocupaciones, grandes grupos, países y Colombia (GEIH) en datos/*.json coinciden con salidas/ y salidas_microdatos/;
-3) el sitio construido (.next) tiene una página por ruta del sitemap, sin «NaN», «undefined» ni «null%», y cada ficha muestra su ADI;
+3) el sitio construido (.next) tiene la portada del lab, el about y una página por ruta del ADI (/adi/…), sin «NaN», «undefined» ni «null%», y cada ficha muestra su ADI;
 4) los archivos públicos (/data, /adi) son copias exactas de release/v2026.1.
 Uso (desde la raíz, después de `npm run build` en sitio/): .venv/bin/python -I sitio/datos/verificar.py"""
 import re, sys, json, filecmp, pathlib, html as H
@@ -57,20 +57,23 @@ print(f"2) {len(oc)} ocupaciones (con sus tareas), {len(g)} grupos, {len(pa)} pa
 A = S / ".next/server/app"
 if not A.exists(): print("3) falta el build: corra `npm run build` en sitio/"); sys.exit(1)
 n1 = len(malas)
-rutas = ["index", "occupations", "countries", "compare", "methodology", "report", "data", "about"] + [f"occupations/{k}" for k in oc] + [f"countries/{x['iso3']}" for x in pa]
+rutas = ["index", "about", "adi"] + [f"adi/{r}" for r in ("occupations", "countries", "compare", "methodology", "report", "data")] + [f"adi/occupations/{k}" for k in oc] + [f"adi/countries/{x['iso3']}" for x in pa]
 for ru in rutas:
     h = A / f"{ru}.html"
     if not h.exists(): malas.append((ru, "sin HTML", "")); continue
     txt = H.unescape(re.sub(r"<script.*?</script>|<[^>]+>", " ", h.read_text(), flags=re.S))
     for mal in ("NaN", "undefined", "null%", "Infinity"):
         if re.search(rf"\b{mal}\b", txt): malas.append((ru, f"contiene {mal}", ""))
-    if ru.startswith("occupations/"): x = oc[ru.split("/")[1]]
-    elif ru.startswith("countries/"): x = next(y for y in pa if y["iso3"] == ru.split("/")[1])
+    if ru.startswith("adi/occupations/"): x = oc[ru.split("/")[2]]
+    elif ru.startswith("adi/countries/"): x = next(y for y in pa if y["iso3"] == ru.split("/")[2])
     else: continue
     if f"{x['l2']:.1f}" not in txt: malas.append((ru, "no muestra su ADI", x["l2"]))
-inicio = H.unescape(re.sub(r"<[^>]+>", " ", (A / "index.html").read_text()))
-faltan = [k for k in ("titular.global.l2", "titular.global.l3", "titular.ingreso.bajo.l2", "titular.ingreso.alto.l2", "h1.pendiente", "agree.kappa.humano.modelo") if r["cifras"][k] not in inicio]
-if faltan: malas.append(("index", "faltan titulares", faltan))
+# titulares: la portada del ADI los muestra todos; la del lab, los tres que cita
+for pag, ids in (("adi", ("titular.global.l2", "titular.global.l3", "titular.ingreso.bajo.l2", "titular.ingreso.alto.l2", "h1.pendiente", "agree.kappa.humano.modelo")),
+                 ("index", ("titular.global.l2", "titular.global.l3", "titular.ingreso.bajo.l2", "titular.ingreso.alto.l2", "h4.pico.minutos"))):
+    txt = H.unescape(re.sub(r"<[^>]+>", " ", (A / f"{pag}.html").read_text()))
+    faltan = [k for k in ids if r["cifras"][k] not in txt]
+    if faltan: malas.append((pag, "faltan titulares", faltan))
 print(f"3) {len(rutas)} páginas revisadas; {len(malas) - n1} problemas" + (f": {malas[n1:n1 + 5]}" if len(malas) > n1 else ""))
 
 # 4) archivos públicos

@@ -8,3 +8,8 @@ export function Marca({ tonos = ["#cfe6e3", "#9ccbc6", "#2f8f86", "#0a4a45"], te
     </svg>
   );
 }
+
+// Balam Labs logotype: the name set in Barlow Condensed, no symbol yet. The ADI steps stay the product's mark.
+export function MarcaLab() {
+  return <span className="marca-lab">Balam<span> Labs</span></span>;
+}
