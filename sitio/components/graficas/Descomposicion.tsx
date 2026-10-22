@@ -10,7 +10,7 @@ export type Bloque = { gg: string; share: number; adi: number; contrib: number }
 const tono = scaleLinear<string>().domain([10, 85]).range(["#d4ebe8", "#083d39"]).clamp(true);
 const tinta = (adi: number) => (adi > 48 ? "#fff" : "#1a1918");
 
-export function Descomposicion({ pais, mundo, nombre, nombres }: { pais: Bloque[]; mundo: Bloque[]; nombre: string; nombres: Record<string, string> }) {
+export function Descomposicion({ pais, mundo, nombre, nombres, referencia: nombreRef = "World" }: { pais: Bloque[]; mundo: Bloque[]; nombre: string; nombres: Record<string, string>; referencia?: string }) {
   const [sel, setSel] = useState<string | null>(null);
   const orden = [...mundo].sort((a, b) => b.adi - a.adi).map((g) => g.gg);
   const de = (lista: Bloque[]) => orden.map((k) => lista.find((g) => g.gg === k)!).filter(Boolean);
@@ -33,17 +33,17 @@ export function Descomposicion({ pais, mundo, nombre, nombres }: { pais: Bloque[
   return (
     <div className="descomposicion">
       <div className="desc-grupo"><span className="rotulo">Share of employment</span>
-        {barra(pais, "share", nombre, 100)}{barra(mundo, "share", "World", 100)}</div>
+        {barra(pais, "share", nombre, 100)}{barra(mundo, "share", nombreRef, 100)}</div>
       <div className="desc-grupo"><span className="rotulo">Points of delegable task time (sum = ADI)</span>
-        {barra(pais, "contrib", nombre, adiPais)}{barra(mundo, "contrib", "World", adiMundo)}</div>
+        {barra(pais, "contrib", nombre, adiPais)}{barra(mundo, "contrib", nombreRef, adiMundo)}</div>
       <p className="desc-lectura" aria-live="polite">
-        {g && w ? <><b>{sel} · {nombres[sel!]}</b>: {g.share.toFixed(1)}% of {nombre}’s workers (world {w.share.toFixed(1)}%), ADI {g.adi.toFixed(1)}% in this mix,
+        {g && w ? <><b>{sel} · {nombres[sel!]}</b>: {g.share.toFixed(1)}% of {nombre}’s workers ({nombreRef === "World" ? "world" : nombreRef} {w.share.toFixed(1)}%), ADI {g.adi.toFixed(1)}% in this mix,
           adding <b>{g.contrib.toFixed(1)} points</b> to {nombre}’s {adiPais.toFixed(1)}%.</> : <>Hover a block to read one group. Shade: the group’s ADI, light 10% to dark 85%.</>}
       </p>
       <div className="tabla-marco"><table className="tabla desc-tabla">
-        <thead><tr><th>Major group</th><th className="n">Employment</th><th className="n">World</th><th className="n">ADI of group</th><th className="n">Points of ADI</th></tr></thead>
+        <thead><tr><th>Major group</th><th className="n">Employment, {nombre}</th><th className="n">{nombreRef}</th><th className="n">ADI of group, {nombre}</th><th className="n">Points of ADI, {nombre}</th></tr></thead>
         <tbody>{de(pais).map((x) => {
-          const y = mundo.find((z) => z.gg === x.gg)!;
+          const y = mundo.find((z) => z.gg === x.gg) ?? { share: 0 };
           return (
             <tr key={x.gg} className={sel === x.gg ? "destacada" : undefined} onPointerEnter={() => setSel(x.gg)} onPointerLeave={() => setSel(null)}>
               <td><i className="desc-muestra" style={{ background: tono(x.adi) }} />{x.gg} · {nombres[x.gg]}</td>

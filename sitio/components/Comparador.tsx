@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { bandera } from "@/lib/graficas";
 import { Barra } from "./Barra";
+import { Descomposicion, type Bloque } from "./graficas/Descomposicion";
 
-export type Item = { id: string; nombre: string; filas: [string, number, number | null, number | null, number][]; nota: string };
+export type Item = { id: string; nombre: string; filas: [string, number, number | null, number | null, number][]; nota: string; iso2?: string; posicion?: string; grupos?: Bloque[] };
 // filas: [label, value, interval low, interval high, scale max]
 
-export function Comparador({ ocupaciones, paises }: { ocupaciones: Item[]; paises: Item[] }) {
+export function Comparador({ ocupaciones, paises, nombresGG }: { ocupaciones: Item[]; paises: Item[]; nombresGG: Record<string, string> }) {
   const [tipo, setTipo] = useState<"occupation" | "country">("occupation");
   const [a, setA] = useState("2512");
   const [b, setB] = useState("2411");
@@ -47,8 +49,9 @@ export function Comparador({ ocupaciones, paises }: { ocupaciones: Item[]; paise
         {[{ it: ia, v: a, set: setA, lado: "a" as const }, { it: ib, v: b, set: setB, lado: "b" as const }].map(({ it, v, set, lado }) => (
           <div key={lado}>
             {selector(v, set, lado)}
-            <h2 className="titulo-2" style={{ margin: "20px 0 4px" }}><Link href={`${ruta}${it.id}`} style={{ color: "inherit", textDecoration: "none" }}>{it.nombre}</Link></h2>
+            <h2 className="titulo-2" style={{ margin: "20px 0 4px" }}><Link href={`${ruta}${it.id}`} className="comp-nombre">{it.iso2 && <img src={bandera(it.iso2)} alt="" width={36} height={27} />}{it.nombre}</Link></h2>
             <p className="nota">{it.nota}</p>
+            {it.posicion && <p className="comp-posicion">{it.posicion}</p>}
             {it.filas.map(([et, val, lo, hi, max]) => (
               <div className="fila-comp" key={et}>
                 <div><span className="rotulo">{et}</span><div style={{ marginTop: 8 }}><Barra v={val} lo={lo ?? undefined} hi={hi ?? undefined} max={max} fuerte={et.startsWith("ADI ")} /></div></div>
@@ -58,6 +61,13 @@ export function Comparador({ ocupaciones, paises }: { ocupaciones: Item[]; paise
           </div>
         ))}
       </div>
+      {tipo === "country" && ia.grupos && ib.grupos && ia.id !== ib.id && (
+        <div style={{ marginTop: 40 }}>
+          <span className="rotulo">Who works where</span>
+          <h2 className="titulo-2" style={{ margin: "10px 0 18px" }}>{ia.nombre} and {ib.nombre} by major occupational group</h2>
+          <Descomposicion pais={ia.grupos} mundo={ib.grupos} nombre={ia.nombre} referencia={ib.nombre} nombres={nombresGG} />
+        </div>
+      )}
     </div>
   );
 }

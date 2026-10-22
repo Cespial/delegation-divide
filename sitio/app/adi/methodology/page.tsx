@@ -89,6 +89,12 @@ export default function Metodologia() {
             groups. A country’s index is the employment-weighted mean over the occupational groups it reports to ILOSTAT, at two digits for {cifra("cobertura.paises.2d")} countries and
             one digit for {cifra("cobertura.paises.1d")}. Within a reported group, unit groups are weighted with microdata: United States OES for high-income countries, Colombia’s
             GEIH for the rest, a stated loan.</p>
+          <h3 className="titulo-3" id="countries">Country decomposition and position relative to income</h3>
+          <p>Country pages split the index into the nine ISCO-08 major groups: each group’s share of employment, its index with that country’s mix of unit groups,
+            and its contribution in points, which sum to the country’s ADI. The “vs income” figure is the country’s ADI minus the delegation-divide line
+            (ADI regressed on log GDP per capita, slope {cifra("h1.pendiente")}) at its GDP per capita; within ±1.5 points it reads as in line with income. Barriers are
+            the employment-weighted share of task weight carrying each flag. These are site calculations from the published v2026.1 figures and are not part of the
+            dataset on Zenodo or the API.</p>
           <h3 className="titulo-3">Uncertainty</h3>
           <p>Every interval is a 95% percentile interval from 1,000 bootstrap draws over tasks, resampled within occupation, that recompute the indices, the headline and
             the regressions. A placebo that shuffles ratings across occupations confirms that the index carries occupation-specific information.</p>

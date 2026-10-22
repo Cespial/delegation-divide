@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Buscador } from "@/components/Buscador";
+import { Dispersion } from "@/components/graficas/Dispersion";
+import { PUNTOS, divide } from "@/lib/graficas-datos";
 import { JsonLd } from "@/components/JsonLd";
 import { Leaderboard } from "@/components/Leaderboard";
 import { jsonDataset } from "@/lib/jsonld";
@@ -93,6 +95,16 @@ export default function Inicio() {
               <tbody>{top.slice(-5).reverse().map((o) => <tr key={o.isco}><td><Link href={`/adi/occupations/${o.isco}`}>{o.titulo}</Link> <span className="codigo">{o.isco}</span></td><td className="n valor">{o.l2.toFixed(1)}</td></tr>)}</tbody>
             </table></div>
           </div>
+        </div>
+      </section>
+
+      <section className="seccion">
+        <div className="envoltura">
+          <div className="encabezado"><div><span className="rotulo">The delegation divide</span>
+            <h2 className="titulo-2" style={{ marginTop: 10 }}>Richer countries have more work agents can take over</h2>
+            <p>Each flag is one of {cifra("cobertura.paises")} countries. The ADI rises {cifra("h1.pendiente")} points per log point of GDP per capita; income alone explains {Math.round(divide.r2 * 100)}% of the spread.</p></div>
+            <Link className="boton lleno" href="/adi/countries">Explore {cifra("cobertura.paises")} countries</Link></div>
+          <Dispersion puntos={PUNTOS} y="l2" x="pib" divide={divide} alto={460} etiquetas={2} titulo="ADI against GDP per capita, 146 countries" />
         </div>
       </section>
 

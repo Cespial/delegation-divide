@@ -46,6 +46,7 @@ export default function Acerca() {
             <li>Code, Python package and MCP server: MIT, on <a href={REPO}>GitHub</a>.</li>
             <li>O*NET 30.2 task statements: U.S. Department of Labor, Employment and Training Administration, CC BY 4.0. ILOSTAT and World Bank data: CC BY 4.0.</li>
             <li>Typefaces: Barlow and JetBrains Mono, SIL Open Font License.</li>
+            <li>Flags: <a href="https://github.com/lipis/flag-icons">flag-icons</a> 7.6.0 by Panayiotis Lipiridis, MIT. Map boundaries: Natural Earth 1:110m, public domain.</li>
           </ul>
 
           <h2 className="titulo-2">Corrections and questions</h2>

@@ -23,7 +23,7 @@ export function GET() {
 #### Pages
 - [Overview](${SITE}/adi): headline, leaderboard by ISCO-08 major group, search
 - [Occupations](${SITE}/adi/occupations): all ${N_OCUP} occupations ranked; one page each at ${SITE}/adi/occupations/<ISCO-08 code>
-- [Countries](${SITE}/adi/countries): map and ranking; one page each at ${SITE}/adi/countries/<ISO3>
+- [Countries](${SITE}/adi/countries): explorer (ADI against GDP per capita or AI use, map, distribution by region or income; state in the URL: ?view=divide|map|distribution&metric=l2|l3|s|fisica|uso|residuo&region=&income=&q=) and ranking; one page each at ${SITE}/adi/countries/<ISO3> with position relative to income, decomposition by ISCO-08 major group, barriers and peers (site calculations, not in the API)
 - [Methodology](${SITE}/adi/methodology): levels, barriers, rubric, aggregation, validation, deviations from the preregistration
 - [Report](${SITE}/adi/report): The Delegation Divide, ADI Report 2026.1
 - [Data](${SITE}/adi/data): downloads, API, Python package, MCP server, citation
