@@ -85,6 +85,7 @@ pre code { font: inherit; color: inherit; }  /* en bloque manda el tamaño del <
 math { font-size: 1em; font-family: "Barlow", "Noto Sans Math", math; }
 math[display="block"] { margin: 6pt 0 8pt; font-family: "Noto Sans Math", math; font-size: 1.04em; }
 .cf { font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.cf[data-cifra$=".nombre"] { white-space: normal; } /* nombres de ocupaciones y países: parten como el resto del texto */
 .cf.falta { color: #b3261e; font-weight: 700; }
 sup { line-height: 0; }
 
@@ -152,7 +153,7 @@ blockquote, .cap pre { font: 400 7.6pt/1.45 var(--mono); background: var(--hueso
 .portada .autores { position: absolute; left: 0.75in; top: 9.6in; display: flex; gap: 0.5in; font: 400 7.8pt/1.35 var(--sans); color: var(--menta); }
 .portada .autores b { display: block; font: 600 9pt var(--sans); color: #fff; }
 .portada .franja { position: absolute; left: 0; right: 0; bottom: 0; height: 0.62in; background: #fff; display: flex; align-items: center; gap: 30pt; padding: 0 0.75in; }
-.portada .franja img, .portada .franja svg { height: 23pt; width: auto; } .portada .franja .inplux { height: 18pt; }
+.portada .franja img { height: 22pt; width: auto; margin-left: -4pt; }
 
 /* ---------- créditos ---------- */
 .creditos { page: frente; break-before: page; font: 400 8.3pt/1.48 var(--sans); color: var(--tinta-2); }
@@ -164,7 +165,7 @@ blockquote, .cap pre { font: 400 7.6pt/1.45 var(--mono); background: var(--hueso
 .creditos .equipo b { color: var(--tinta); font-weight: 600; }
 .creditos .pie-logos { margin-top: 22pt; padding-top: 12pt; border-top: 0.6pt solid var(--filete); }
 .logos { display: flex; align-items: center; gap: 26pt; flex-wrap: wrap; }
-.logos img, .logos svg { height: 28pt; width: auto; } .logos .inplux { height: 21pt; }
+.logos img { height: 24pt; width: auto; margin-left: -4pt; }
 
 /* ---------- contenido visual ---------- */
 .contenido { page: frente; break-before: page; }
@@ -360,7 +361,7 @@ table.reg tbody tr td, table.reg tbody tr th { background: #fff !important; }
 .contra .datos { position: absolute; left: 0.75in; top: 6.2in; width: 7in; font: 400 8.4pt/1.6 var(--sans); color: #d7ece8; display: grid; grid-template-columns: 1.3in 1fr; gap: 3pt 12pt; border-top: 1pt solid rgba(191,227,221,0.4); padding-top: 12pt; }
 .contra .datos b { color: #fff; font: 700 8.6pt var(--cond); text-transform: uppercase; letter-spacing: 0.06em; }
 .contra .franja { position: absolute; left: 0; right: 0; bottom: 0; height: 0.9in; background: #fff; display: flex; align-items: center; gap: 34pt; padding: 0 0.75in; }
-.contra .franja img, .contra .franja svg { height: 28pt; width: auto; } .contra .franja .inplux { height: 23pt; }
+.contra .franja img { height: 27pt; width: auto; margin-left: -5pt; }
 
 /* ---------- marca sintética ---------- */
 body.sintetico .pagedjs_page { position: relative; }

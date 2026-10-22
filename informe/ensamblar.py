@@ -20,10 +20,8 @@ def marca(tonos=("#d9ebe9", "#9ccbc6", "#2f8f86", "#0a4a45"), texto="#22252a"):
     return M(f'<svg viewBox="0 0 74 28" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ADI, Agent Delegability Index">{r}'
              f'<text x="30" y="27.4" font-family="Barlow Condensed" font-weight="800" font-size="35" fill="{texto}">ADI</text></svg>')
 def logos():
-    out = [str(marca())]
-    for f, cls in (("marca/logos/unal-logo.svg", "unal"), ("marca/logos/eafit-logo.svg", "eafit"), ("marca/logos/inplux-logo-horizontal-mono.svg", "inplux")):
-        out.append(f'<img class="{cls}" src="{f}" alt="{cls.upper()}">')
-    return M("".join(out))
+    # por ahora solo INPLUX; los de UNAL y EAFIT siguen en marca/logos/ para cuando haya autorización
+    return M('<img class="inplux" src="marca/logos/inplux-logo-horizontal.svg" alt="INPLUX">')
 def icono(nombre):
     t = leer(f"marca/iconos/{nombre}.svg"); t = re.sub(r"<!--.*?-->\s*", "", t, flags=re.S)
     raiz = re.search(r"<svg[^>]*>", t, re.S)[0]  # solo la etiqueta raíz: los <rect> conservan su width/height
@@ -250,6 +248,15 @@ def cortar(html):
         sale.append(t)
     return "".join(sale)
 html = cortar(html)
+
+
+def espacios(html):
+    """Paged.js borra el nodo de texto que es solo un espacio entre dos etiquetas en línea («.”</span> <em>Revista»
+    salía «.”Revista»). El espacio pasa al final del elemento anterior, o al inicio del siguiente si el anterior cierra otra etiqueta."""
+    INL = "span|em|a|b|i|strong|code|sub|sup|small"
+    html = re.sub(rf"([^>\s])(</(?:{INL})>) +(<(?:{INL})\b)", r"\1 \2\3", html)
+    return re.sub(rf"(</(?:{INL})>) +(<(?:{INL})\b[^>]*>)(?=[^<\s])", r"\1\2 ", html)
+html = espacios(html)
 (INF / "informe.html").write_text(html)
 n = len(re.findall(r'class="cf" data-cifra', html))
 print(f"informe.html: {n} cifras desde cifras.json; {len(faltan)} ids inexistentes{': ' + ', '.join(sorted(set(faltan))) if faltan else ''}")

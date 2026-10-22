@@ -27,7 +27,7 @@ BARRERAS = [("barrera_fisica", "Physical", "#5b6b7c"), ("barrera_responsabilidad
 if INFORME:
     from matplotlib import font_manager
     for f in sorted((RAIZ / "informe/fonts").glob("Barlow-*.ttf")): font_manager.fontManager.addfont(str(f))
-    plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Barlow", "Helvetica Neue", "DejaVu Sans"], "mathtext.fontset": "custom",
+    plt.rcParams.update({"font.family": "sans-serif", "font.sans-serif": ["Barlow", "Helvetica Neue", "DejaVu Sans"], "mathtext.fontset": "custom", "svg.hashsalt": "adi-informe",
                          "mathtext.rm": "Barlow", "mathtext.it": "Barlow:italic", "font.size": 8.6, "svg.fonttype": "none",
                          "axes.edgecolor": "#6b7280", "axes.labelcolor": "#1a1918", "xtick.color": "#6b7280", "ytick.color": "#1a1918",
                          "xtick.labelcolor": "#4b5058", "ytick.labelcolor": "#1a1918", "axes.spines.left": False, "ytick.major.size": 0})
