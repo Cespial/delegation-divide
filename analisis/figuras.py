@@ -45,7 +45,7 @@ SINT = (SAL / "adi_isco.csv").exists() and pd.read_csv(SAL / "adi_isco.csv").sin
 def guardar(fig, nombre):
     if SINT:
         fig.text(0.5, 0.5, "SYNTHETIC", rotation=30, ha="center", va="center", fontsize=54, color="#b22222", alpha=0.18, weight="bold", zorder=100)
-    p = FIG / f"{nombre}.{'svg' if INFORME else 'pdf'}"; fig.savefig(p, transparent=INFORME); plt.close(fig)
+    p = FIG / f"{nombre}.{'svg' if INFORME else 'pdf'}"; fig.savefig(p, transparent=INFORME, **({"metadata": {"Date": None}} if INFORME else {})); plt.close(fig)  # SVG sin fecha: se regenera idéntico
     if not INFORME: registrar(p, "derivado: figuras.py", nota="SINTÉTICO" if SINT else "")  # el informe no ensucia el manifiesto de datos
     lg.info(f"{p.name}")
 
