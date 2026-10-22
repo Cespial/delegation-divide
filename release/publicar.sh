@@ -34,8 +34,9 @@ pypi() {
   echo "✔ pip install adi-index · uvx adi-mcp"
 }
 hf() {
-  hf upload cespial/adi release/v2026.1 . --repo-type dataset --commit-message "ADI $VER"
-  hf upload cespial/adi release/hf/README.md README.md --repo-type dataset
+  HF=$PWD/.venv/bin/hf
+  $HF upload cespial/adi release/v2026.1 . --repo-type dataset --commit-message "ADI $VER"
+  $HF upload cespial/adi release/hf/README.md README.md --repo-type dataset
   echo "✔ https://huggingface.co/datasets/cespial/adi"
 }
 case $paso in github|pages|release|pypi|hf) $paso;; todo) github; pages; release; pypi; hf;; *) echo "paso desconocido"; exit 1;; esac
