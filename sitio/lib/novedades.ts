@@ -38,7 +38,7 @@ export const NOVEDADES: Novedad[] = [
     puntos: [
       `Four hypotheses: the income gradient, the gap with observed AI use, agreement with earlier exposure indices, and task length.`,
       `Deviations from the registered plan are dated and listed in the methodology.`,
-      `The registration is under embargo until 31 January 2027.`,
+      `The registration is public on OSF Registries: doi:${resumen.doi_prerregistro}.`,
     ],
   },
 ];
