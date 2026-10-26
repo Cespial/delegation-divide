@@ -1,0 +1,14 @@
+{
+  "title": "Agent Delegability Index (ADI) v2026.1",
+  "subtitle": "How much work AI agents can take over: 433 occupations, 146 countries",
+  "id": "USUARIO_KAGGLE/agent-delegability-index",
+  "licenses": [{ "name": "CC-BY-4.0" }],
+  "keywords": ["artificial intelligence", "labor", "economics", "employment", "countries"],
+  "description": "See README below.",
+  "resources": [
+    { "path": "adi_isco.csv", "description": "ADI for 433 ISCO-08 unit groups, with 95% bootstrap intervals and barrier shares" },
+    { "path": "adi_pais.csv", "description": "ADI for 146 countries, weighted by ILOSTAT employment" },
+    { "path": "adi_tarea.csv", "description": "Ratings for all 18,796 O*NET 30.2 task statements (levels L0-L3 and four barriers)" },
+    { "path": "DATA_DICTIONARY.md", "description": "Column definitions" }
+  ]
+}
