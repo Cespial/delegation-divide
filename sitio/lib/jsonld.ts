@@ -22,3 +22,10 @@ export function jsonDataset() {
     ],
   };
 }
+
+// The same Dataset when another page points to it (hasPart, about, isBasedOn): Google reads a nested Dataset as an item
+// of its own, so it carries every required field, not just the DOI.
+export function refDataset() {
+  const { "@context": _, ...d } = jsonDataset();
+  return d;
+}

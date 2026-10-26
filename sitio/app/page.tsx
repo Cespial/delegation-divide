@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Buscador, type ItemBusqueda, type Sugerencia } from "@/components/Buscador";
 import { JsonLd } from "@/components/JsonLd";
+import { refDataset } from "@/lib/jsonld";
 import { Leaderboard } from "@/components/Leaderboard";
 import { Marca } from "@/components/Marca";
 import { GG, LAB, N_OCUP, N_PAISES, SITE, cifra, ocupaciones, ordinal, paises, resumen } from "@/lib/datos";
@@ -125,7 +126,7 @@ export default function InicioLab() {
         </div>
       </section>
       <JsonLd datos={{ "@context": "https://schema.org", "@type": "CollectionPage", url: SITE, name: LAB, about: { "@id": `${SITE}/#org` },
-        hasPart: [{ "@type": "Dataset", name: "Agent Delegability Index (ADI) v2026.1", url: `${SITE}/adi`, identifier: `https://doi.org/${resumen.doi_datos}` }] }} />
+        hasPart: [refDataset()] }} />
     </>
   );
 }

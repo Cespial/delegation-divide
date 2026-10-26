@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Nivel } from "@/components/Barra";
 import { JsonLd } from "@/components/JsonLd";
+import { refDataset } from "@/lib/jsonld";
 import { CurvaDuracion } from "@/components/graficas/CurvaDuracion";
 import { NIVELES, SITE, cifra, h4, resumen } from "@/lib/datos";
 
@@ -136,7 +137,7 @@ export default function Metodologia() {
         </article>
       </div>
       <JsonLd datos={{ "@context": "https://schema.org", "@type": "TechArticle", headline: "How the Agent Delegability Index is built", url: `${SITE}/adi/methodology`,
-        isPartOf: { "@type": "WebSite", url: SITE }, about: { "@type": "Dataset", identifier: `https://doi.org/${resumen.doi_datos}` } }} />
+        isPartOf: { "@type": "WebSite", url: SITE }, about: refDataset() }} />
     </section>
   );
 }

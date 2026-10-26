@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Cita } from "@/components/Cita";
 import { JsonLd } from "@/components/JsonLd";
+import { refDataset } from "@/lib/jsonld";
 import { ARXIV, ARXIV_ID, AUTORES, DOI_ARXIV, LAB, PDF_INFORME, REPO, SITE, TITULO_PAPER, cifra, informe, resumen } from "@/lib/datos";
 import { citaInforme, citaPaper } from "@/lib/citar";
 
@@ -122,7 +123,7 @@ export default function Informe() {
         image: `${SITE}/report/cover.webp`, license: "https://creativecommons.org/licenses/by/4.0/", isAccessibleForFree: true,
         author: AUTORES.map((a) => ({ "@type": "Person", name: a.nombre, affiliation: { "@type": "Organization", name: a.afil }, sameAs: `https://orcid.org/${a.orcid}` })),
         publisher: { "@type": "Organization", "@id": `${SITE}/#org`, name: LAB, url: SITE },
-        isBasedOn: { "@type": "Dataset", name: "Agent Delegability Index (ADI) v2026.1", identifier: `https://doi.org/${resumen.doi_datos}` },
+        isBasedOn: refDataset(),
         citation: { "@type": "ScholarlyArticle", name: TITULO_PAPER, url: ARXIV, identifier: `https://doi.org/${DOI_ARXIV}`, sameAs: [ARXIV, `https://doi.org/${DOI_ARXIV}`] },
         ...(resumen.doi_informe ? { identifier: `https://doi.org/${resumen.doi_informe}`, sameAs: `https://doi.org/${resumen.doi_informe}` } : {}),
         ...(informe.pdf ? { encoding: { "@type": "MediaObject", contentUrl: `${SITE}${PDF_INFORME}`, encodingFormat: "application/pdf" } } : {}),
