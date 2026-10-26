@@ -101,6 +101,10 @@ export const PDF_INFORME = "/report/delegation-divide-report-2026.pdf";
 export const informe = informeJson as { paginas: number; pdf: boolean; mb: number | null };
 export const ENLACE_INFORME = informe.pdf ? PDF_INFORME : "/adi/report";
 export const TITULO_PAPER = "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries";
+// The paper on arXiv (econ.GN, cross-listed to cs.AI and cs.CY); the DOI is the one arXiv registers with DataCite.
+export const ARXIV_ID = "2610.30752";
+export const ARXIV = `https://arxiv.org/abs/${ARXIV_ID}`;
+export const DOI_ARXIV = `10.48550/arXiv.${ARXIV_ID}`;
 
 // PyPI packages: until they are published, the site shows the install-from-GitHub command.
 export const PYPI = false;

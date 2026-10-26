@@ -5,7 +5,7 @@ import "./globals.css";
 import { MarcaLab } from "@/components/Marca";
 import { Nav } from "@/components/Nav";
 import { JsonLd } from "@/components/JsonLd";
-import { APOYO, AUTORES, HF, INDEXAR, LAB, REPO, SITE, cifra, resumen } from "@/lib/datos";
+import { APOYO, ARXIV, AUTORES, HF, INDEXAR, LAB, REPO, SITE, cifra, resumen } from "@/lib/datos";
 
 const barlow = localFont({
   variable: "--f-barlow", display: "swap",
@@ -85,7 +85,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
             <div>
               <h2>Cite and reuse</h2>
-              <ul><li><Link href="/adi/report">Report 2026.1</Link></li><li><Link href="/adi/data">Data and API</Link></li>
+              <ul><li><Link href="/adi/report">Report 2026.1</Link></li><li><a href={ARXIV}>Paper on arXiv</a></li><li><Link href="/adi/data">Data and API</Link></li>
                 <li><a href={`https://doi.org/${resumen.doi_datos}`}>Dataset DOI</a></li><li><a href={`https://doi.org/${resumen.doi_prerregistro}`}>Preregistration</a></li></ul>
             </div>
             <div>

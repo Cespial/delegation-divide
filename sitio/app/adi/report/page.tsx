@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Cita } from "@/components/Cita";
 import { JsonLd } from "@/components/JsonLd";
-import { AUTORES, LAB, PDF_INFORME, REPO, SITE, TITULO_PAPER, cifra, informe, resumen } from "@/lib/datos";
-import { citaInforme } from "@/lib/citar";
+import { ARXIV, ARXIV_ID, AUTORES, DOI_ARXIV, LAB, PDF_INFORME, REPO, SITE, TITULO_PAPER, cifra, informe, resumen } from "@/lib/datos";
+import { citaInforme, citaPaper } from "@/lib/citar";
 
 const TITULO = "The Delegation Divide";
 const SUBTITULO = "An Open Index of AI-Agent Delegability across Occupations and Countries";
@@ -72,6 +72,7 @@ export default function Informe() {
               {informe.pdf
                 ? <a className="boton lleno" href={PDF_INFORME} download>Download the PDF · {informe.mb} MB</a>
                 : <span className="boton" aria-disabled="true">PDF on publication</span>}
+              <a className="boton" href={ARXIV}>Paper on arXiv</a>
               <a className="boton" href="#cite">Cite</a>
               <Link className="boton" href="/adi/data">Data and code</Link>
             </div>
@@ -83,7 +84,7 @@ export default function Informe() {
         <div className="envoltura dos-1-2">
           <div><span className="rotulo">Abstract</span></div>
           <div className="prosa"><p className="entrada" style={{ marginTop: 0 }}>{RESUMEN}</p>
-            <p>The report is written for policy and general readers. The peer-review version is the paper, <i>{TITULO_PAPER}</i>, with the same data and numbers;
+            <p>The report is written for policy and general readers. The peer-review version is the paper, <a href={ARXIV}><i>{TITULO_PAPER}</i></a> (arXiv:{ARXIV_ID}), with the same data and numbers;
               every figure in both is drawn from one file of claims checked against the published outputs.</p></div>
         </div>
       </section>
@@ -106,7 +107,8 @@ export default function Informe() {
 
       <section className="seccion" id="cite">
         <div className="envoltura dos">
-          <div><span className="rotulo">How to cite this report</span><div style={{ marginTop: 14 }}><Cita titulo="Text" cita={cita} /></div></div>
+          <div><span className="rotulo">How to cite this report</span><div style={{ marginTop: 14 }}><Cita titulo="Text" cita={cita} /></div>
+            <span className="rotulo" style={{ display: "block", marginTop: 28 }}>How to cite the paper</span><div style={{ marginTop: 14 }}><Cita titulo="Text" cita={citaPaper()} /></div></div>
           <div><span className="rotulo">Licence and sources</span>
             <p style={{ marginTop: 14 }}>Text and figures: CC BY 4.0. Data: CC BY 4.0, doi:<a href={`https://doi.org/${resumen.doi_datos}`}>{resumen.doi_datos}</a>.
               Code: MIT, <a href={REPO}>GitHub</a>. Preregistration: doi:<a href={`https://doi.org/${resumen.doi_prerregistro}`}>{resumen.doi_prerregistro}</a>.</p>
@@ -121,6 +123,7 @@ export default function Informe() {
         author: AUTORES.map((a) => ({ "@type": "Person", name: a.nombre, affiliation: { "@type": "Organization", name: a.afil }, sameAs: `https://orcid.org/${a.orcid}` })),
         publisher: { "@type": "Organization", "@id": `${SITE}/#org`, name: LAB, url: SITE },
         isBasedOn: { "@type": "Dataset", name: "Agent Delegability Index (ADI) v2026.1", identifier: `https://doi.org/${resumen.doi_datos}` },
+        citation: { "@type": "ScholarlyArticle", name: TITULO_PAPER, url: ARXIV, identifier: `https://doi.org/${DOI_ARXIV}`, sameAs: [ARXIV, `https://doi.org/${DOI_ARXIV}`] },
         ...(resumen.doi_informe ? { identifier: `https://doi.org/${resumen.doi_informe}`, sameAs: `https://doi.org/${resumen.doi_informe}` } : {}),
         ...(informe.pdf ? { encoding: { "@type": "MediaObject", contentUrl: `${SITE}${PDF_INFORME}`, encodingFormat: "application/pdf" } } : {}),
       }} />

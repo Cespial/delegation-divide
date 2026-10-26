@@ -1,6 +1,6 @@
 // Citation strings shown on every page. The report keeps its own DOI once reserved (release/zenodo_informe.py);
 // until then it is cited with the repository URL, exactly as the PDF does.
-import { AUTORES, LAB, REPO, TITULO_PAPER, resumen } from "./datos";
+import { ARXIV, ARXIV_ID, AUTORES, DOI_ARXIV, LAB, REPO, TITULO_PAPER, resumen } from "./datos";
 
 const autoresTexto = "Espinal Maya, Cristian, and Santiago Jiménez Londoño";
 const autoresBib = AUTORES.map((a) => a.bib).join(" and ");
@@ -45,15 +45,17 @@ export function citaDatos() {
 
 export function citaPaper() {
   return {
-    texto: `${autoresTexto}. 2026. ${TITULO_PAPER}. arXiv preprint (identifier forthcoming). Preregistration: https://doi.org/${resumen.doi_prerregistro}`,
+    texto: `${autoresTexto}. 2026. ${TITULO_PAPER}. arXiv:${ARXIV_ID} [econ.GN]. https://doi.org/${DOI_ARXIV}`,
     bibtex: [
-      "@article{espinal2026delegation,",
-      `  title   = {${TITULO_PAPER}},`,
-      `  author  = {${autoresBib}},`,
-      "  journal = {arXiv preprint},",
-      "  year    = {2026},",
-      `  url     = {${REPO}},`,
-      `  note    = {Preregistration: doi:${resumen.doi_prerregistro}}`,
+      "@misc{espinal2026delegation,",
+      `  title         = {${TITULO_PAPER}},`,
+      `  author        = {${autoresBib}},`,
+      "  year          = {2026},",
+      `  eprint        = {${ARXIV_ID}},`,
+      "  archivePrefix = {arXiv},",
+      "  primaryClass  = {econ.GN},",
+      `  doi           = {${DOI_ARXIV}},`,
+      `  url           = {${ARXIV}}`,
       "}",
     ].join("\n"),
   };

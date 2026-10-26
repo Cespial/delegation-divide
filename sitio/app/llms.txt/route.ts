@@ -1,4 +1,4 @@
-import { LAB, N_OCUP, N_PAISES, SITE, cifra, resumen } from "@/lib/datos";
+import { ARXIV, ARXIV_ID, DOI_ARXIV, LAB, N_OCUP, N_PAISES, SITE, cifra, resumen } from "@/lib/datos";
 
 export const dynamic = "force-static";
 
@@ -18,7 +18,7 @@ export function GET() {
 > ${cifra("titular.ingreso.alto.l2")}% in high-income vs ${cifra("titular.ingreso.bajo.l2")}% in low-income countries (the "delegation divide": +${cifra("h1.pendiente")} pp per log point of GDP per capita).
 > Four levels per task: L0 no role, L1 augmentation, L2 partial delegation, L3 full delegation. Four barriers: physical presence, accountability, trust and care, access to systems.
 > Rated by Claude Sonnet 5.5 and Claude Haiku 5.5 on ${cifra("cobertura.tareas")} O*NET 30.2 tasks; a blind human rating of ${cifra("n.humano")} tasks, led by a coauthor with student raters, agrees at kappa ${cifra("agree.kappa.humano.modelo")}.
-> Data DOI: https://doi.org/${resumen.doi_datos} · Preregistration: https://doi.org/${resumen.doi_prerregistro}
+> Paper: arXiv:${ARXIV_ID} (${ARXIV}, doi:${DOI_ARXIV}) · Data DOI: https://doi.org/${resumen.doi_datos} · Preregistration: https://doi.org/${resumen.doi_prerregistro}
 
 #### Pages
 - [Overview](${SITE}/adi): headline, leaderboard by ISCO-08 major group, search

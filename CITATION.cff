@@ -35,6 +35,9 @@ authors:
     affiliation: "Universidad EAFIT"
 identifiers:
   - type: doi
+    value: "10.48550/arXiv.2610.30752"
+    description: "Paper (arXiv:2610.30752)"
+  - type: doi
     value: "10.5281/zenodo.23552918"
     description: "Dataset and code, ADI v2026.1 (Zenodo)"
   - type: doi
@@ -61,7 +64,12 @@ preferred-citation:
   title: "The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries"
   journal: "arXiv preprint"
   year: 2026
-  url: "https://github.com/Cespial/delegation-divide"
+  doi: "10.48550/arXiv.2610.30752"
+  url: "https://arxiv.org/abs/2610.30752"
+  identifiers:
+    - type: other
+      value: "arXiv:2610.30752"
+      description: "arXiv identifier (econ.GN; cross-listed cs.AI, cs.CY)"
   notes: "Preregistration: doi:10.17605/OSF.IO/9ZNTF"
   authors:
     - family-names: "Espinal Maya"

@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Leaderboard } from "@/components/Leaderboard";
 import { Pestanas } from "@/components/Pestanas";
 import { jsonDataset } from "@/lib/jsonld";
-import { ENLACE_INFORME, GG, INGRESOS, INSTALAR, LAB, N_OCUP, N_PAISES, REPO, cifra, h4, informe, ocupaciones, ordinal, paises, resumen } from "@/lib/datos";
+import { ARXIV, ARXIV_ID, ENLACE_INFORME, GG, INGRESOS, INSTALAR, LAB, N_OCUP, N_PAISES, REPO, cifra, h4, informe, ocupaciones, ordinal, paises, resumen } from "@/lib/datos";
 
 export const metadata: Metadata = {
   title: { absolute: `Agent Delegability Index (ADI): how much work can AI agents take over? · ${LAB}` },
@@ -166,6 +166,8 @@ export default function Inicio() {
         <div className="envoltura">
           <span className="rotulo">Latest</span>
           <ul className="feed">
+            <li><span className="codigo">22 Oct 2026</span><div><h3 className="titulo-3"><a href={ARXIV}>The Delegation Divide on arXiv</a></h3>
+              <p>The paper: method, the four preregistered hypotheses and their tests. arXiv:{ARXIV_ID} [econ.GN].</p></div><a className="boton" href={ARXIV}>Paper</a></li>
             <li><span className="codigo">22 Oct 2026</span><div><h3 className="titulo-3"><Link href="/adi/report">The Delegation Divide: ADI Report 2026.1</Link></h3>
               <p>The results in {informe.paginas} pages for policy and general readers, with a profile of Colombia by sex, age and formality.</p></div><a className="boton" href={ENLACE_INFORME}>{informe.pdf ? "PDF" : "Report"}</a></li>
             <li><span className="codigo">22 Oct 2026</span><div><h3 className="titulo-3"><a href={`https://doi.org/${resumen.doi_datos}`}>Dataset v2026.1 on Zenodo</a></h3>

@@ -45,7 +45,7 @@ of GDP per capita, 146 countries).
 
 Dataset of the paper *The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries*
 (Espinal Maya & Jiménez Londoño, 2026). Preregistered at OSF: [doi:10.17605/OSF.IO/9ZNTF](https://doi.org/10.17605/OSF.IO/9ZNTF).
-Explore every occupation and country, with charts and citations: **<https://balamlabs.org/adi>** (Balam Labs).
+Explore every occupation and country, with charts and citations: **<https://balamlabs.org/adi>** (Balam Labs). Paper: [arXiv:2610.30752](https://arxiv.org/abs/2610.30752).
 Dataset DOI: [10.5281/zenodo.23552918](https://doi.org/10.5281/zenodo.23552918). Code, rubric, MCP server and full pipeline: <https://github.com/Cespial/delegation-divide>.
 
 ## Configs
@@ -119,13 +119,15 @@ ESCO, ILOSTAT, World Bank, BLS and DANE inputs are used only as derived aggregat
 ## Citation
 
 ```bibtex
-@article{espinal2026delegation,
-  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},
-  author  = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
-  journal = {arXiv preprint},
-  year    = {2026},
-  url     = {https://github.com/Cespial/delegation-divide},
-  note    = {Preregistration: doi:10.17605/OSF.IO/9ZNTF}
+@misc{espinal2026delegation,
+  title         = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},
+  author        = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
+  year          = {2026},
+  eprint        = {2610.30752},
+  archivePrefix = {arXiv},
+  primaryClass  = {econ.GN},
+  doi           = {10.48550/arXiv.2610.30752},
+  url           = {https://arxiv.org/abs/2610.30752}
 }
 
 @misc{espinal2026adidata,

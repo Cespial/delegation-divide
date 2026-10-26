@@ -1,10 +1,19 @@
 // Dated releases of the lab, newest first. The home page shows them twice, as on vals.ai/home: one line each in the
 // strip under the header, and in full (lead sentence and findings) under "Latest reports".
-import { N_OCUP, N_PAISES, cifra, informe, resumen } from "./datos";
+import { ARXIV, ARXIV_ID, N_OCUP, N_PAISES, cifra, informe, resumen } from "./datos";
 
 export type Novedad = { fecha: string; corto: string; titulo: string; href: string; entrada: string; puntos: string[]; producto: string };
 
 export const NOVEDADES: Novedad[] = [
+  {
+    fecha: "2026-10-22", corto: "ADI paper on arXiv", titulo: "The Delegation Divide: the paper on arXiv", href: ARXIV, producto: "ADI",
+    entrada: `The peer-review version of the index, with the same data and numbers as the report.`,
+    puntos: [
+      `${cifra("titular.global.l2")}% of task time in world employment is at least partly delegable to AI agents; only ${cifra("titular.global.l3")}% in full.`,
+      `Four preregistered hypotheses tested on ${cifra("cobertura.tareas")} O*NET tasks, ${N_OCUP} occupations and ${N_PAISES} countries.`,
+      `Cite as arXiv:${ARXIV_ID} [econ.GN], cross-listed to cs.AI and cs.CY.`,
+    ],
+  },
   {
     fecha: "2026-10-22", corto: "ADI Report 2026.1", titulo: "The Delegation Divide: ADI Report 2026.1", href: "/adi/report", producto: "ADI",
     entrada: `About a third of the world’s working time is at least partly delegable to AI agents, and full delegation is rare.`,

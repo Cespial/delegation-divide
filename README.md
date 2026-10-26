@@ -2,16 +2,18 @@
 
 **An open index of AI-agent delegability for 433 ISCO-08 occupations and 146 countries (v2026.1).**
 
-**Explore it at [balamlabs.org/adi](https://balamlabs.org/adi)** · Data: [doi:10.5281/zenodo.23552918](https://doi.org/10.5281/zenodo.23552918) · Published by [Balam Labs](https://balamlabs.org)
+**Explore it at [balamlabs.org/adi](https://balamlabs.org/adi)** · Paper: [arXiv:2610.30752](https://arxiv.org/abs/2610.30752) · Data: [doi:10.5281/zenodo.23552918](https://doi.org/10.5281/zenodo.23552918) · Published by [Balam Labs](https://balamlabs.org)
 
 ```bibtex
-@article{espinal2026delegation,
-  title   = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},
-  author  = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
-  journal = {arXiv preprint},
-  year    = {2026},
-  url     = {https://github.com/Cespial/delegation-divide},
-  note    = {Preregistration: doi:10.17605/OSF.IO/9ZNTF}
+@misc{espinal2026delegation,
+  title         = {The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries},
+  author        = {Espinal Maya, Cristian and Jim{\'e}nez Londo{\~n}o, Santiago},
+  year          = {2026},
+  eprint        = {2610.30752},
+  archivePrefix = {arXiv},
+  primaryClass  = {econ.GN},
+  doi           = {10.48550/arXiv.2610.30752},
+  url           = {https://arxiv.org/abs/2610.30752}
 }
 
 @misc{espinal2026adidata,
@@ -59,7 +61,7 @@ accountability, trust, access), with two language models (Claude Sonnet 5.5 prim
 Tasks are carried to ISCO-08 unit groups through a documented crosswalk and weighted by ILOSTAT employment into a
 country atlas. Cross-listed econ.GN · cs.CY · cs.AI.
 
-- Paper: arXiv (pending) · source in `articulo/`
+- Paper: [arXiv:2610.30752](https://arxiv.org/abs/2610.30752) [econ.GN], [doi:10.48550/arXiv.2610.30752](https://doi.org/10.48550/arXiv.2610.30752) · source in `articulo/`
 - Preregistration: OSF, [doi:10.17605/OSF.IO/9ZNTF](https://doi.org/10.17605/OSF.IO/9ZNTF) (rubric SHA-256 in `docs/RUBRICA_SHA256.txt`)
 - Dataset: `release/v2026.1/` (CSV + Parquet, data dictionary, checksums) · Zenodo [doi:10.5281/zenodo.23552918](https://doi.org/10.5281/zenodo.23552918) (v2026.1; all versions: [doi:10.5281/zenodo.23552917](https://doi.org/10.5281/zenodo.23552917)) · Hugging Face [`Cespial/adi`](https://huggingface.co/datasets/Cespial/adi)
 - Static JSON for agents: `release/v2026.1/api/isco/<code>.json`, `release/v2026.1/api/country/<ISO3>.json`, `release/v2026.1/api/index.json`
