@@ -1,0 +1,53 @@
+% Journal version for Technology in Society (Elsevier, elsarticle). Build from this folder with
+%   TEXINPUTS=..: latexmk -pdf -jobname=manuscript-anon main.tex     (anonymized, default)
+%   TEXINPUTS=..: latexmk -pdf -jobname=manuscript-full -usepretex='\def\modocompleto{1}' main.tex
+% The sections, cifras.tex, tables and figures are the same files as the arXiv version in ../.
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+\journal{Technology in Society}
+\usepackage[T1]{fontenc}\usepackage{lmodern}\usepackage{microtype}
+\usepackage{booktabs,amsmath,siunitx}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{{../}}
+\newif\ifanonimo
+\ifdefined\modocompleto\anonimofalse\else\anonimotrue\fi
+\input{macros}
+\InputIfFileExists{cifras.tex}{}{\newif\ifsintetico
+  \newcommand{\cifra}[1]{\textbf{[##1]}}\newcommand{\cifraopc}[1]{--}\newcommand{\cifraabs}[1]{\textbf{[##1]}}\newcommand{\pval}[1]{\textbf{[##1]}}}
+\ifsintetico\usepackage{draftwatermark}\SetWatermarkText{SYNTHETIC --- NOT RESULTS}\SetWatermarkScale{0.32}\SetWatermarkLightness{0.82}\SetWatermarkAngle{45}\fi
+
+\begin{document}
+\begin{frontmatter}
+\title{The Delegation Divide: An Open Index of AI-Agent Delegability across Occupations and Countries}
+\ifanonimo\else
+\author[unal]{Cristian Espinal Maya\corref{cor}}
+\ead{cespinal@unal.edu.co}
+\cortext[cor]{Corresponding author.}
+\author[eafit]{Santiago Jim\'enez Londo\~no}
+\affiliation[unal]{organization={Universidad Nacional de Colombia, Facultad de Minas}, city={Medell\'in}, country={Colombia}}
+\affiliation[eafit]{organization={Universidad EAFIT}, city={Medell\'in}, country={Colombia}}
+\fi
+\begin{abstract}\input{00_abstract_tis}\end{abstract}
+\input{highlights}
+\begin{keyword}
+AI agents \sep delegation \sep automation \sep occupations \sep ISCO-08 \sep labour markets \sep developing countries
+\end{keyword}
+\end{frontmatter}
+
+\input{secciones/01_intro}
+\input{secciones/02_delegacion}
+\input{secciones/03_datos}
+\input{tablas/tab2_cobertura}
+\input{secciones/04_metodo}
+\input{secciones/05_indice}
+\input{secciones/06_atlas}
+\input{secciones/07_validacion}
+\input{secciones/08_limites}
+\input{secciones/09_conclusion}
+\input{declaraciones}
+\bibliographystyle{elsarticle-harv}\bibliography{referencias}
+\appendix
+\input{secciones/A_rubrica}
+\input{secciones/B_crosswalk}
+\ifanonimo\else\input{secciones/F_citar}\fi
+\end{document}

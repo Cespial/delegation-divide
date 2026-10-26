@@ -2,7 +2,7 @@
 \label{sec:metodo}
 
 Figure~\ref{fig:flujo} summarises the pipeline: tasks are rated by models, consensus is taken across models, consensus is weighted into occupations, occupations are weighted into countries, and every step is validated or bootstrapped.
-The design was preregistered on the Open Science Framework on 21 October 2026, before the first call of the main pass, with an embargo until 31 January 2027 \citep{espinal2026prereg}; the hypotheses, the rater set, the rubric hash and the sample seeds are in the registration (\url{https://osf.io/9zntf}), and the exact rater configuration is in \texttt{docs/MODELOS.md}.
+The design was preregistered on the Open Science Framework on 21 October 2026, before the first call of the main pass, initially under embargo and public since 26 October 2026 \prerregcita; the hypotheses, the rater set, the rubric hash and the sample seeds are in the registration (\osfurl), and the exact rater configuration is in \texttt{docs/MODELOS.md}.
 
 \begin{figure}[t]
   \centering
@@ -66,12 +66,12 @@ The world headline is the employment-weighted mean of $\mathrm{ADI}_c$ over the 
 \subsection{Human and agentic validation}
 \label{sec:validacion_humana}
 
-The registration specifies three human raters who each rate the same 1,500 tasks blind \citep{espinal2026prereg}.
+The registration specifies three human raters who each rate the same 1,500 tasks blind \prerregcita.
 Before any result of the main pass was opened, we replaced that design for reasons of time and cost; the change is dated and justified as deviation D2 in \texttt{docs/DESVIACIONES.md}.
 The validation now has two parts.
 
 \emph{Blind human rating.}
-A subsample of 300 of the 1,500 validation tasks, stratified by ISCO-08 major group with at least 20 tasks per group (seed 20261025; \texttt{validacion/santiago/muestra\_300.csv}), was rated blind by a group led by Santiago Jim\'enez Londo\~no, a coauthor, with the help of student raters.
+A subsample of 300 of the 1,500 validation tasks, stratified by ISCO-08 major group with at least 20 tasks per group (seed 20261025; \texttt{validacion/humana/muestra\_300.csv}), was rated blind by a group led by \liderhumano, with the help of student raters.
 The 1,500-task sample is the registered one, stratified by major group in proportion to world employment (\texttt{validacion/muestra.py}, seed 20261020).
 The raters worked from the frozen rubric and the rater guide, were trained on 20 practice tasks outside the sample, rated in a spreadsheet that contained no model or panel output and no result of the paper, and did not use AI tools while rating.
 Which rater scored which task was not recorded, so the sheet is analysed as one human rating.

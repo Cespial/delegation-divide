@@ -6,6 +6,8 @@
 \usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \graphicspath{{./}}
+\newif\ifanonimo\anonimofalse
+\input{macros}
 % Cifras: solo por \cifra{id}, generadas por generar_cifras.py desde salidas/claims.jsonl (patrón del paper del sismo).
 % cifras.tex define también \ifsintetico; sin él, todo id sale como [id] y no hay marca de agua.
 \InputIfFileExists{cifras.tex}{}{\newif\ifsintetico

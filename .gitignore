@@ -45,3 +45,15 @@ informe/informe.html
 .vercel
 docs/difusion/
 entregas/
+
+# journal build (Technology in Society): generated files
+articulo/tis/*.aux
+articulo/tis/*.log
+articulo/tis/*.bbl
+articulo/tis/*.blg
+articulo/tis/*.out
+articulo/tis/*.fls
+articulo/tis/*.fdb_latexmk
+articulo/tis/*.spl
+articulo/tis/*.pdf
+articulo/tis/limpio/

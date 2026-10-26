@@ -1,0 +1,22 @@
+% Macros that vary between the public manuscript and the anonymized one for double-blind review.
+% Default (arXiv, report): \anonimofalse. The journal build in tis/ sets \anonimotrue before \input{macros}.
+
+\ifanonimo
+  \newcommand{\repourl}{[repository URL withheld for review]}
+  \newcommand{\osfurl}{[registration URL withheld for review]}
+  \newcommand{\prerregcita}{(preregistration withheld for review)}
+  \newcommand{\trabajoprevio}{earlier work}
+  \newcommand{\liderhumano}{a coauthor}
+  \newcommand{\Trabajoprevio}{Earlier work}
+  \newcommand{\citeahc}{(citations withheld for review)}
+  \newcommand{\refcitar}{(appendix on citing and using the index, withheld for review)}
+\else
+  \newcommand{\repourl}{\url{https://github.com/Cespial/delegation-divide}}
+  \newcommand{\osfurl}{\url{https://osf.io/9zntf}}
+  \newcommand{\prerregcita}{\citep{espinal2026prereg}}
+  \newcommand{\trabajoprevio}{the first author's prior work}
+  \newcommand{\liderhumano}{Santiago Jim\'enez Londo\~no, a coauthor}
+  \newcommand{\Trabajoprevio}{The first author's earlier work}
+  \newcommand{\citeahc}{\citep{espinal2026augmented, espinal2026measuring}}
+  \newcommand{\refcitar}{(Appendix~\ref{app:citar})}
+\fi
