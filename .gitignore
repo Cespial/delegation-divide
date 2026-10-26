@@ -57,3 +57,4 @@ articulo/tis/*.fdb_latexmk
 articulo/tis/*.spl
 articulo/tis/*.pdf
 articulo/tis/limpio/
+articulo/tis/*.limpiadoc.err
