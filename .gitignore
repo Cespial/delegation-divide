@@ -58,3 +58,6 @@ articulo/tis/*.spl
 articulo/tis/*.pdf
 articulo/tis/limpio/
 articulo/tis/*.limpiadoc.err
+articulo/tis/envio/*.pdf
+articulo/tis/envio/*.docx
+articulo/tis/envio/limpio/
